@@ -20,7 +20,7 @@ const getSlug = (contentType = 'page', slug = '') => {
 
 /* Return absolute url */
 
-const getPermalink = (slug = '') => {
+const getPermalink = (slug = '', asset = false) => {
   const env = process.env.NODE_ENV
   let url = 'http://localhost:8080'
 
@@ -30,6 +30,10 @@ const getPermalink = (slug = '') => {
 
   if (env === 'preview') {
     url = 'https://preview-the-mindful-pelvis.netlify.app'
+  }
+
+  if (asset && process.env.CONTEXT === 'deploy-preview') {
+    url = '.'
   }
 
   return url + slug

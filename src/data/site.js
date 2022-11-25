@@ -11,5 +11,5 @@ const { getPermalink } = require('../utils/base')
 module.exports = {
   title: 'The Mindful Pelvis',
   themeColor: '#f4eae0',
-  styles: `${getPermalink()}/assets/css/mp.css`
+  styles: `${getPermalink('', true)}/assets/css/mp.css`
 }
