@@ -22,7 +22,7 @@ const getSlug = (contentType = 'page', slug = '') => {
 
 const getPermalink = (slug = '') => {
   const env = process.env.NODE_ENV
-  let url = 'http://localhost:8000'
+  let url = 'http://localhost:8080'
 
   if (env === 'production') {
     url = 'https://the-mindful-pelvis.netlify.app'

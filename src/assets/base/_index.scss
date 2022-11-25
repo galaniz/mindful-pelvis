@@ -18,6 +18,7 @@
   --text-color: var(--foreground-base);
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-base);
+  --underline: 0.09375rem;
 }
 
 html,
@@ -47,7 +48,7 @@ p,
 ul,
 ol,
 blockquote {
-  margin-bottom: var(--xs);
+  margin-bottom: var(--s);
 
   &:last-child {
     margin-bottom: 0;

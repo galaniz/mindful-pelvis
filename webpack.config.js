@@ -5,20 +5,24 @@
 /* Imports */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
 /* Namespace */
 
 const n = 'mp'
 
+/* Folders */
+
+const publicFolder = 'site'
+const sourceFolder = 'src'
+
 /* Output path */
 
-const outputPath = path.resolve(__dirname, 'assets', 'public')
+const outputPath = path.resolve(__dirname, publicFolder, 'assets')
 
 /* Asset paths */
 
-const assetsPath = path.resolve(__dirname, 'assets', 'src')
+const assetsPath = path.resolve(__dirname, sourceFolder, 'assets')
 const formationPath = '@alanizcreative/formation/src'
 
 /* Resolve to root */
@@ -32,8 +36,7 @@ const resolve = {
     '.scss',
     '.css',
     '.js',
-    '.json',
-    '.jsx'
+    '.json'
   ]
 }
 
@@ -161,25 +164,6 @@ const outputCompatEnv = {
   module: false
 }
 
-/* Copy patterns */
-
-const copyPatterns = [
-  {
-    from: '*.svg',
-    context: path.resolve(__dirname, 'assets', 'src', 'svg'),
-    to ({ context, absoluteFilename }) {
-      return path.resolve(__dirname, 'assets/public/svg/[name][ext]')
-    }
-  },
-  {
-    from: '*.*',
-    context: path.resolve(__dirname, 'assets', 'src', 'fonts'),
-    to ({ context, absoluteFilename }) {
-      return path.resolve(__dirname, 'assets/public/fonts/[name][ext]')
-    }
-  }
-]
-
 /* Entries */
 
 let entries = []
@@ -187,15 +171,15 @@ let entries = []
 entries.push({
   name: n,
   paths: [
-    './assets/src/index.scss',
-    './assets/src/index-compat.js'
+    `./${sourceFolder}/assets/index.scss`,
+    `./${sourceFolder}/assets/index-compat.js`
   ]
 })
 
 entries.push({
   name: n,
   paths: [
-    './assets/src/index.js'
+    `./${sourceFolder}/assets/index.js`
   ]
 })
 
@@ -228,9 +212,6 @@ module.exports = [
     plugins: [
       new MiniCssExtractPlugin({
         filename: 'css/[name].css'
-      }),
-      new CopyWebpackPlugin({
-        patterns: copyPatterns
       })
     ]
   },

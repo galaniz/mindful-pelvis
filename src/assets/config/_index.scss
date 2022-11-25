@@ -87,6 +87,7 @@ $padding-vertical: (
     "m": 60px,
     "l": 90px,
     "xl": 120px,
+    "2xl": 600px,
   ),
 
   $padding-top: $padding-vertical,
@@ -97,6 +98,8 @@ $padding-vertical: (
   $containers: (
     "default": 1340px,
   ),
+
+  $max-widths: ("2xl"),
 
   $vars: (
     "logo": (

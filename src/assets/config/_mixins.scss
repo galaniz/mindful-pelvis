@@ -14,7 +14,7 @@
 
   @include mix.fluid-size(
     --h1,
-    func.calc-rem(48px) func.calc-rem(64px),
+    func.calc-rem(40px) func.calc-rem(64px),
     "s" "xl"
   );
 
@@ -22,7 +22,7 @@
 
   @include mix.fluid-size(
     --h2,
-    func.calc-rem(36px) func.calc-rem(48px),
+    func.calc-rem(32px) func.calc-rem(48px),
     "s" "xl"
   );
 
@@ -30,7 +30,7 @@
 
   @include mix.fluid-size(
     --t-l,
-    func.calc-rem(24px) func.calc-rem(36px),
+    func.calc-rem(20px) func.calc-rem(36px),
     "s" "xl"
   );
 }
