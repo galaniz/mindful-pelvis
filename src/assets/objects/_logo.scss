@@ -1,0 +1,21 @@
+/**
+ * Objects: logo
+ */
+
+/* Imports */
+
+@use "sass:map";
+@use "@alanizcreative/formation/src/config" as con;
+
+/* Styles */
+
+$logo: map.get(con.$vars, "logo");
+
+.o-logo {
+  --text: #{map.get($logo, "navy")};
+  --wave: #{map.get($logo, "blue")};
+  --circle: #{map.get($logo, "navy")};
+  --crest: #{map.get($logo, "blue-light")};
+  --greater: #{map.get($logo, "blue-light")};
+  --lesser: #{map.get($logo, "orange-light")};
+}

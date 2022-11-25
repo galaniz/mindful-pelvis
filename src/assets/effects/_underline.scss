@@ -1,0 +1,19 @@
+/**
+ * Effects: underline
+ */
+
+/* Styles */
+
+.e-underline a {
+  --line-width: var(--underline);
+  --color: currentcolor;
+
+  transition: box-shadow 200ms var(--easing);
+  box-shadow: 0 var(--line-width) 0 0 var(--color);
+
+  &:hover,
+  &:active,
+  &:focus {
+    --line-width: 0.1875rem;
+  }
+}
