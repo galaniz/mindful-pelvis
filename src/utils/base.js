@@ -25,7 +25,7 @@ const getPermalink = (slug = '', asset = false) => {
   let url = 'http://localhost:8080'
 
   if (env === 'production') {
-    url = 'https://themindfulpelvis.netlify.app'
+    url = 'https://themindfulpelvis.ca'
   }
 
   if (env === 'preview') {
