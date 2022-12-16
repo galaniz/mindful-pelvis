@@ -11,12 +11,12 @@
 	<meta name="theme-color" content="{{ site.themeColor }}">
 	<meta name="format-detection" content="telephone=no">
   <link rel="stylesheet" href="{{ site.styles }}" media="all">
-  {% if site.context !== 'production' %}
+  {% if site.context === 'production' %}
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="aA41sw1tlgDfzZd9cJwk77dmMeKK2RIT"></script>
   {% endif %}
 </head>
 <body>
-  <div attr="{{ site.test }}"></div>
+  <div attr="{{ site.context }}"></div>
   {{ content | safe }}
 </body>
 </html>
