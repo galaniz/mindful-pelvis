@@ -14,5 +14,6 @@ module.exports = {
   themeColor: '#f4eae0',
   styles: `${getPermalink('', true)}/assets/css/mp.css`,
   env: process.env.NODE_ENV,
-  context: process.env.CONTEXT
+  context: process.env.CONTEXT,
+  test: JSON.stringify(process.env)
 }
