@@ -7,16 +7,20 @@
   {% if site.context !== 'production' %}
     <meta name="robots" content="noindex, nofollow">
   {% endif %}
-  <meta name="description" content="{{ site.description }}">
-	<meta name="theme-color" content="{{ site.themeColor }}">
-	<meta name="format-detection" content="telephone=no">
+  <meta name="description" content="{{ site.metaDescription }}">
   <link rel="stylesheet" href="{{ site.styles }}" media="all">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.assetsLink }}favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.assetsLink }}favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ site.assetsLink }}favicon/favicon-16x16.png">
+  <link rel="manifest" href="{{ site.assetsLink }}favicon/site.webmanifest">
+  <meta name="msapplication-TileColor" content="{{ site.theme.foreground.dark }}">
+  <meta name="theme-color" content="{{ site.theme.background.dark }}">
+  <meta name="format-detection" content="telephone=no">
   {% if site.context === 'production' %}
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="aA41sw1tlgDfzZd9cJwk77dmMeKK2RIT"></script>
   {% endif %}
 </head>
 <body>
-  <div attr="{{ site.context }}"></div>
   {{ content | safe }}
 </body>
 </html>
