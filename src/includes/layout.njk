@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  {% if site.context !== 'production' %}
+    <meta name="robots" content="noindex, nofollow">
+  {% endif %}
+  <meta name="description" content="{{ site.description }}">
 	<meta name="theme-color" content="{{ site.themeColor }}">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone=no">
   <link rel="stylesheet" href="{{ site.styles }}" media="all">
-  <title>{{ site.title }}</title>
-  <meta name="description" content="{{ site.description }}">
-  {% if site.env === 'production' %}
+  {% if site.context !== 'production' %}
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="aA41sw1tlgDfzZd9cJwk77dmMeKK2RIT"></script>
   {% endif %}
 </head>
