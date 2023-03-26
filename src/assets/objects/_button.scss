@@ -1,0 +1,30 @@
+/**
+ * Objects - button
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/config";
+@use "@alanizcreative/formation/src/utils/functions" as func;
+
+/* Styles */
+
+.o-button {
+  --padding: var(--3xs) var(--xs);
+  --size: var(--t-m);
+
+  @extend %u-font-family-primary;
+  @extend %u-font-weight-bold;
+  @extend %u-line-height-130-pc;
+  @extend %u-display-inline-flex;
+  @extend %u-justify-content-center;
+  @extend %u-position-relative;
+
+  padding: var(--padding);
+  font-size: var(--size);
+}
+
+.o-button-large {
+  --padding: var(--2xs) var(--xs);
+  --size: var(--t-r);
+}

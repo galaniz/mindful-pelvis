@@ -21,6 +21,16 @@
   --underline: 0.0938rem;
 }
 
+html {
+  scroll-behavior: smooth;
+
+  @include mixi.fluid-size(
+    --logo-height,
+    func.calc-rem(64px) func.calc-rem(96px),
+    "s" "l"
+  );
+}
+
 html,
 body {
   @extend %u-font-weight-normal;
@@ -28,6 +38,7 @@ body {
 
   color: var(--text-color);
   background: var(--background-dark);
+  min-height: 100vh;
 }
 
 a {

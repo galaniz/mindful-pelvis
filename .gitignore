@@ -1,5 +1,13 @@
 node_modules/
 site/
-assets/public/
+functions/*
+!functions/ajax/
+src/json/slugs.json
+src/json/slug-parents.json
+src/json/archive-ids.json
+src/json/nav-data.json
 package-lock.json
+.dev.vars
+.env
 .DS_Store
+.cache

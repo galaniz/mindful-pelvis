@@ -5,16 +5,46 @@
 /* Vertical padding */
 
 $padding-vertical: (
+  "5xs"
+  "4xs",
+  "3xs",
+  "2xs",
   "xs",
   "s",
   "m",
   "l",
   "xl",
+  "2xl",
+  "3xl",
+);
+
+/* Horizontal padding */
+
+$padding-horizontal: (
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+);
+
+/* Gaps */
+
+$gaps: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
 );
 
 /* Config variables */
 
 @use "@alanizcreative/formation/src/config" with (
+  
+  /* Colors */
 
   $colors: (
     "primary": (
@@ -26,9 +56,14 @@ $padding-vertical: (
       "dark": #333f48,
     ),
     "background": (
-      "base": #e5ebec,
-      "light": #ffffff,
-      "dark": #f4eae0,
+      "base": #f4eae0,
+      "light": #e5ebec,
+    ),
+    "negative": (
+      "dark": #8e5050,
+    ),
+    "positive": (
+      "dark": #536644,
     ),
   ),
 
@@ -39,7 +74,6 @@ $padding-vertical: (
     "foreground-dark",
     "background-base",
     "background-light",
-    "background-dark",
   ),
 
   $background-colors: (
@@ -49,8 +83,9 @@ $padding-vertical: (
     "foreground-dark",
     "background-base",
     "background-light",
-    "background-dark",
   ),
+
+  /* Fonts */
 
   $font-families: (
     "primary": (
@@ -72,34 +107,134 @@ $padding-vertical: (
     "normal": 400,
   ),
 
+  /* Breakpoints */
+
   $breakpoints: (
     "0": 0px,
-    "xs": 400px,
+    "xs": 300px,
     "s": 600px,
     "m": 900px,
-    "l": 1000px,
-    "xl": 1200px,
+    "l": 1200px,
   ),
 
+  /* Spacing */
+
   $spacing: (
-    "xs": 15px,
-    "s": 30px,
+    "5xs": 5px,
+    "4xs": 10px,
+    "3xs": 15px,
+    "2xs": 20px,
+    "xs": 30px,
+    "s": 45px,
     "m": 60px,
-    "l": 90px,
-    "xl": 120px,
-    "2xl": 600px,
+    "l": 75px,
+    "xl": 90px,
+    "2xl": 120px,
+    "3xl": 150px,
   ),
+
+  /* Padding */
 
   $padding-top: $padding-vertical,
   $padding-bottom: $padding-vertical,
-  $padding-vertical-breakpoints: ("l"),
+  $padding-vertical-breakpoints: ("m"),
+
+  $padding-left: $padding-horizontal,
+  $padding-right: $padding-horizontal,
+
+  /* Margin */
+
+  $margin-bottom: $gaps,
+  $margin-bottom-all: $gaps,
+  $margin-vertical-breakpoints: ("m"),
+
+  /* Gaps */
+
+  $gaps: $gaps,
+  $gap-breakpoints: ("s", "m", "l"),
+
+  /* Widths */
+
+  $width-percentage-breakpoints: ("s", "m", "l"),
+
+  $widths: (
+    "3xs",
+    "2xs",
+    "xs",
+    "s",
+    "m",
+    "l",
+    "xl",
+    "2xl",
+  ),
+
+  /* Heights */
+
+  $heights: (
+    "3xs",
+    "2xs",
+    "xs",
+    "s",
+    "m",
+    "l",
+    "xl",
+    "2xl",
+  ),
+
+  /* Containers */
 
   $container-padding: 20px,
   $containers: (
     "default": 1340px,
+    "m": 1200px,
+    "s": 840px,
   ),
 
-  $max-widths: ("2xl"),
+  /* Aspect ratios */
+
+  $aspect-ratio-padding: (
+    "56": 56.25%,
+  ),
+
+  /* Nav icon */
+
+  $nav: (
+    "icon": (
+      "width": 45px,
+      "line-width": 1px,
+      "margin": 8px,
+    )
+  ),
+
+  /* Borders */
+
+  $borders: (
+    "sides": ("all", "bottom", "left"),
+    "colors": (
+      "default": "var(--foreground-base)",
+      "30": "var(--foreground-base-30)",
+      "current": "currentcolor"
+    ),
+    "widths": (
+      "default": 0.0625rem,
+    ),
+  ),
+
+  $border-radius: (
+    "s": 10px,
+    "m": 15px,
+    "l": 45px,
+  ),
+
+  /* Outline */
+
+  $outline: (
+    "width": 0.2rem,
+    "color": "var(--primary-base)",
+    "offset": 0.3rem,
+  ),
+
+  /* Custom variables */
 
   $vars: (
     "logo": (
@@ -109,6 +244,35 @@ $padding-vertical: (
       "blue": #3c6e89,
       "orange-light": #c07759,
       "blue-x-light": #e5ebec,
+    ),
+  ),
+
+  /* Placeholders */
+
+  $placeholders: (
+    (
+      "name": "line-height-160-pc",
+      "prop": (
+        line-height: 1.6
+      ),
+    ),
+    (
+      "name": "line-height-150-pc",
+      "prop": (
+        line-height: 1.4
+      ),
+    ),
+    (
+      "name": "line-height-130-pc",
+      "prop": (
+        line-height: 1.3
+      ),
+    ),
+    (
+      "name": "letter-spacing-1-pc",
+      "prop": (
+        letter-spacing: 0.01em
+      ),
     ),
   ),
 
