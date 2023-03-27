@@ -31,6 +31,7 @@ const column = ({ args = {} }) => {
     widthLarge = 'None', // enumOptions.width
     justify = 'None', // enumOptions.justify
     align = 'None', // enumOptions.align
+    order = 'Default', // enumOptions.order
     classes = '' // Back end option
   } = args
 
@@ -43,6 +44,7 @@ const column = ({ args = {} }) => {
   widthLarge = enumOptions.width[widthLarge]
   justify = enumOptions.justify[justify]
   align = enumOptions.align[align]
+  order = enumOptions.order[order]
 
   /* Classes */
 
@@ -80,6 +82,12 @@ const column = ({ args = {} }) => {
 
   if (align) {
     classes.push(`l-align-${align}`)
+  }
+
+  /* Order */
+
+  if (order) {
+    classes.push(`l-order-${order}`)
   }
 
   /* Output */

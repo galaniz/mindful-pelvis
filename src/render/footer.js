@@ -37,18 +37,18 @@ const footer = (navigations = {}) => {
   /* Output */
 
   return `
-    <footer class="bg-foreground-dark l-margin-top-auto">
+    <footer class="bg-foreground-dark t-light l-margin-top-auto">
       <div class="l-container l-padding-top-m l-padding-bottom-m l-padding-top-xl-m l-padding-bottom-xl-m">
-        <div class="l-flex l-flex-wrap l-align-center">
+        <div class="l-flex l-flex-wrap l-justify-between l-align-center l-gap-margin-s">
           <div>
-            <a class="o-logo-s l-block l-svg js-pt-link" href="${getPermalink()}">
+            <a class="o-logo-s l-block l-svg js-pt-link" href="${getPermalink()}" data-theme="light">
               <span class="a11y-visually-hidden">${enumSite.title} home</span>
               ${logoSvg()}
             </a>
           </div>
           ${navs}
           <div>
-            <span class="t-s">&copy; ${getYear()} ${enumSite.title}. All Rights Reserved.</span>
+            <span class="t-s">&copy; ${getYear()} ${enumSite.title}</span>
           </div>
         </div>
       </div>

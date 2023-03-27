@@ -272,12 +272,12 @@ const _renderItem = async ({
   /* Hero */
 
   const heroOutput = hero({
-    id,
     contentType,
-    index,
+    type: fields.heroType,
     title: fields.heroTitle || fields.title,
     text: fields.heroText,
-    image: fields.heroImage ? fields.heroImage : false
+    image: fields.heroImage ? fields.heroImage : false,
+    callToAction: fields.heroCallToAction
   })
 
   /* Main output */

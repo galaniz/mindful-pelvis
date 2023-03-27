@@ -311,7 +311,7 @@ const richText = (args = {}) => {
   }
 
   if (textStyle && (tag === 'p' || tag === 'ul' || tag === 'ol' || tag === 'blockquote' || tag === 'table')) {
-    classes.push(`t-${textStyle}`)
+    classes.push(textStyle)
   }
 
   if (headingStyle && heading) {

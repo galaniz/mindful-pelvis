@@ -24,6 +24,7 @@ const image = ({ args = {}, parents = [] }) => {
   let {
     image = {},
     aspectRatio = '1:1', // enumOptions.aspectRatio
+    borderRadius = 'None', // enumOptions.borderRadius
     caption = {}
   } = args
 
@@ -40,6 +41,7 @@ const image = ({ args = {}, parents = [] }) => {
   /* Normalize options */
 
   aspectRatio = enumOptions.aspectRatio[aspectRatio]
+  borderRadius = enumOptions.borderRadius[borderRadius]
 
   /* Image */
 
@@ -73,6 +75,10 @@ const image = ({ args = {}, parents = [] }) => {
 
     if (card) {
       classes += ' l-after bg-gradient-0'
+    }
+
+    if (borderRadius) {
+      classes += ` b-radius-${borderRadius}`
     }
 
     imageOutput = `

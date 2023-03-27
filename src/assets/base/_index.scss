@@ -18,6 +18,7 @@
   --text-color: var(--foreground-base);
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-base);
+  --easing-quad: cubic-bezier(0.45, 0, 0.55, 1);
   --underline: 0.0938rem;
 }
 
@@ -37,7 +38,7 @@ body {
   @extend %u-font-family-primary;
 
   color: var(--text-color);
-  background: var(--background-dark);
+  background: var(--background-base);
   min-height: 100vh;
 }
 
@@ -59,7 +60,7 @@ p,
 ul,
 ol,
 blockquote {
-  margin-bottom: var(--s);
+  margin-bottom: var(--xs);
 
   &:last-child {
     margin-bottom: 0;

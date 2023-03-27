@@ -5,177 +5,106 @@
 /* Imports */
 
 const { getImage } = require('../utils')
-const controlSvg = require('./svg/control')
-const arrowSvg = require('./svg/arrow')
+const { enumOptions } = require('../vars/enums')
+const button = require('./button')
 
 /**
  * Function - output hero
  *
  * @param {object} args {
- *  @prop {string} id
  *  @prop {string} contentType
+ *  @prop {string} type
  *  @prop {string} title
  *  @prop {string} text
  *  @prop {object} image
- *  @prop {boolean} index
+ *  @prop {object} callToAction
  * }
  * @return {string} HTML - section
  */
 
-const hero = ({
-  id = '',
-  contentType = 'page',
-  title = '',
-  text = '',
-  image = {},
-  index = false
-}) => {
-  /* Type */
+const hero = (args = {}) => {
+  let {
+    contentType = 'page',
+    type = 'Minimal',
+    title = '',
+    text = '',
+    image = {},
+    callToAction
+  } = args
 
-  let type = 'text'
+  /* Normalize options */
 
-  /* Container */
-
-  let container = 'default'
-
-  /* Full width container */
-
-  let fullWidth = false
-
-  /* Padding */
-
-  let padding = 'l-padding-top-xl l-padding-bottom-2xl l-padding-top-2xl-m l-padding-bottom-3xl-m'
+  type = enumOptions.hero.type[type]
+  overlay = type.includes('overlay')
+  overlayBg = overlay ? enumOptions.hero.background[type] : ''
 
   /* Image */
 
   let imageOutput = ''
 
   if (image?.fields) {
-    type = 'media-text'
-
-    if (!index) {
-      container = 'medium'
-    }
-
-    padding = 'l-padding-top-xl l-padding-bottom-2xl l-padding-top-2xl-m'
-
-    if (container === 'default') {
-      padding += ' l-padding-bottom-4xl-m'
-    }
-
     imageOutput = getImage({
       data: image?.fields,
       classes: 'l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc l-object-cover',
-      returnAspectRatio: true,
       lazy: false,
-      max: container === 'medium' ? 800 : 1200
+      max: 1600
     })
   }
 
-  /* Arrow jump link */
+  /* Call to Action */
 
-  const arrow = index && type === 'media-text'
+  let callToActionOutput = ''
+
+  if (overlay && callToAction) {
+    callToActionOutput = button({
+      args: {
+        theme: 'light',
+        ...callToAction.fields
+      }
+    })
+  }
 
   /* Text */
 
-  let textOutput = `<h1 class="l-margin-0">${title}</h1>`
+  let textOutput = `<h1>${title}</h1>`
 
   if (text) {
-    let textClasses = 'l-margin-0'
-    let preText = ''
+    let textClasses = 't-l'
 
-    if (contentType === 'project') {
-      textClasses += ' t t-weight-medium l-relative l-padding-top-3xs l-padding-top-2xs-m e-underline-reverse'
-      preText = '<span class="a11y-visually-hidden">Types: </span>'
-    } else {
-      textClasses += ' t-m l-padding-top-4xs l-padding-top-3xs-m'
+    if (callToActionOutput) {
+      textClasses += ' l-padding-bottom-2xs l-padding-bottom-xs-m'
     }
 
-    textOutput += `<p class="${textClasses}">${preText}${text}</p>`
-  }
+    textOutput += `<p class="${textClasses}">${text}</p>`
 
-  if (arrow) {
-    textOutput = `
-      <div class="l-margin-auto l-padding-top-2xl-m">
-        ${textOutput}
-      </div>
-      <a href="#main-content" class="l-none l-block-m l-width-m l-padding-top-m" aria-label="Jump to main content">
-        <span class="l-flex l-width-m l-height-m l-svg">
-          ${arrowSvg()}
-        </span>
-      </a>
-    `
-  }
-
-  /* Single track */
-
-  if (contentType === 'track') {
-    padding = 'l-padding-top-xl l-padding-bottom-xl l-padding-top-2xl-m'
-    fullWidth = true
-
-    textOutput = `
-      <div class="l-flex l-flex-column l-flex-row-l l-gap-margin-s l-gap-margin-m-l" id=${id}>
-        <div>
-          <button type="button" id="b-${id}" class="o-play l-width-xl l-height-xl l-width-2xl-m l-height-2xl-m l-svg t-foreground-base bg-background-light b-radius-100-pc" aria-label="Play ${title}" data-state="play">
-            ${controlSvg('play')}
-            ${controlSvg('pause')}
-          </button>
-        </div>
-        <div>
+    if (overlay) {
+      textOutput = `
+        <div class="l-margin-bottom-3xs-all l-margin-bottom-2xs-all-m">
           ${textOutput}
         </div>
-      </div>
-    `
+        ${callToActionOutput}
+      `
+    }
   }
 
-  /* Main output */
+  /* Overlay */
 
-  let output = ''
-
-  if (type === 'media-text') {
-    output = `
-      <div class="l-flex l-flex-wrap l-gap-margin-m l-gap-margin-2xl-l${!arrow ? ' l-align-center' : ''}">
-        <div class="${container === 'medium' ? 'l-width-1-2-s l-width-3-5-m' : 'l-width-1-2-m'}${arrow ? ' l-flex l-flex-column' : ''}">
+  if (overlay) {
+    return `
+      <section class="c-overlay l-container l-flex l-flex-column l-flex-row-l l-padding-bottom-m-l">
+        <div class="c-overlay__text bg-${overlayBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-width-4-5-m l-width-3-5-l l-padding-top-2xs l-padding-left-xs l-padding-right-xs l-padding-bottom-xs l-padding-top-s-m l-padding-left-m-m l-padding-right-m-m l-padding-bottom-m-m">
           ${textOutput}
         </div>
-        <div class="l-width-1-1 ${container === 'medium' ? 'l-width-1-2-s l-width-2-5-m l-order-first-s' : 'l-width-1-2-m l-order-first-m'}">
-          <div class="l-relative l-overflow-hidden" style="padding-top:${imageOutput.aspectRatio * 100}%">
-            ${imageOutput.output}
-          </div>
+        <div class="c-overlay__media l-width-1-1 l-order-first l-relative l-overflow-hidden">
+          ${imageOutput}
         </div>
-      </div>
-    `
-  } else {
-    output = `
-      ${fullWidth ? '' : '<div class="l-width-2-3-m">'}
-        ${textOutput}
-      ${fullWidth ? '' : '</div>'}
+      </section>
     `
   }
 
-  /* Arrow */
+  /* Minimal */
 
-  if (arrow) {
-    output += `
-      <a href="#main-content" class="l-block l-none-m l-width-m l-padding-top-m" aria-label="Jump to main content">
-        <span class="l-flex l-width-m l-height-m l-svg">
-          ${arrowSvg()}
-        </span>
-      </a>
-    `
-  }
-
-  /* Outer classes */
-
-  const classes = `${container === 'medium' ? 'l-container-m' : 'l-container'} ${padding}`
-
-  /* Output */
-
-  return `
-    <section class="${classes}">
-      ${output}
-    </section>
-  `
+  return ''
 }
 
 /* Exports */

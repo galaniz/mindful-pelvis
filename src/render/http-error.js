@@ -7,7 +7,6 @@
 const layout = require('./layout')
 const container = require('./container')
 const button = require('./button')
-const gradients = require('./gradients')
 const header = require('./header')
 const footer = require('./footer')
 const navigations = require('./navigations')
@@ -74,10 +73,6 @@ const httpError = (type = '404') => {
       title: text[type].metaTitle,
       noIndex: true
     },
-    gradients: gradients({
-      from: '#5e2424',
-      bottom: false
-    }),
     content: `
       ${header(navs)}
       <main id="main">

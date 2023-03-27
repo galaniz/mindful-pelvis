@@ -105,7 +105,6 @@ const enumOptions = {
     None: '',
     Auto: 'auto',
     '1/1': '1-1',
-    '5/6': '5-6',
     '4/5': '4-5',
     '3/4': '3-4',
     '2/3': '2-3',
@@ -129,6 +128,17 @@ const enumOptions = {
     Start: 'start',
     Center: 'center',
     End: 'end'
+  },
+  order: {
+    Default: '',
+    First: 'first',
+    'First - Small Screens': 'first-s',
+    'First - Medium Screens': 'first-m',
+    'First - Large Screens': 'first-l',
+    Last: 'last',
+    'Last - Small Screens': 'last-s',
+    'Last - Medium Screens': 'last-m',
+    'Last - Large Screens': 'last-l'
   },
   layout: {
     Column: 'column',
@@ -170,12 +180,16 @@ const enumOptions = {
     '1:1': '100',
     '16:9': '56'
   },
+  borderRadius: {
+    None: '',
+    '100%': '100-pc'
+  },
   content: {
     text: {
-      Default: 'l',
-      Medium: '',
-      Small: 'm',
-      'Extra Small': 's'
+      Default: 't-l',
+      Medium: 't',
+      Small: 't-m',
+      'Extra Small': 't-s'
     },
     heading: {
       Default: '',
@@ -189,6 +203,26 @@ const enumOptions = {
     align: {
       Left: 'left',
       Center: 'center'
+    }
+  },
+  posts: {
+    contentType: {
+      None: ''
+    }
+  },
+  hero: {
+    type: {
+      Minimal: 'minimal',
+      'Overlay - Orange': 'overlay-orange',
+      'Overlay - Blue': 'overlay-blue',
+      'Overlay - Gray': 'overlay-gray',
+      'Overlay - Navy': 'overlay-navy'
+    },
+    background: {
+      'overlay-orange': 'primary-light',
+      'overlay-blue': 'primary-base',
+      'overlay-gray': 'foreground-base',
+      'overlay-navy': 'foreground-dark'
     }
   }
 }

@@ -5,7 +5,7 @@
 /* Vertical padding */
 
 $padding-vertical: (
-  "5xs"
+  "5xs",
   "4xs",
   "3xs",
   "2xs",
@@ -89,7 +89,7 @@ $gaps: (
 
   $font-families: (
     "primary": (
-      "Karla"
+      "Karla",
       Helvetica,
       Arial,
       sans-serif,
@@ -137,10 +137,11 @@ $gaps: (
 
   $padding-top: $padding-vertical,
   $padding-bottom: $padding-vertical,
-  $padding-vertical-breakpoints: ("m"),
+  $padding-vertical-breakpoints: ("m", "l"),
 
   $padding-left: $padding-horizontal,
   $padding-right: $padding-horizontal,
+  $padding-horizontal-breakpoints: ("m"),
 
   /* Margin */
 
@@ -152,6 +153,10 @@ $gaps: (
 
   $gaps: $gaps,
   $gap-breakpoints: ("s", "m", "l"),
+
+  /* Flex */
+
+  $flex-row-breakpoints: ("l"),
 
   /* Widths */
 
@@ -213,7 +218,7 @@ $gaps: (
     "colors": (
       "default": "var(--foreground-base)",
       "30": "var(--foreground-base-30)",
-      "current": "currentcolor"
+      "current": "currentcolor",
     ),
     "widths": (
       "default": 0.0625rem,

@@ -121,7 +121,7 @@ class Navigation {
       children = false
     } = fields
 
-    let id = ''
+    let id = title
     let external = false
 
     const link = getLink(internalLink, externalLink)
@@ -129,7 +129,9 @@ class Navigation {
     if (externalLink) {
       id = externalLink
       external = true
-    } else {
+    }
+
+    if (internalLink) {
       id = internalLink.sys.id
     }
 
@@ -187,22 +189,28 @@ class Navigation {
 
     return items.map(item => {
       const { fields } = item
-      const { externalLink = '' } = fields
+      const {
+        title = '',
+        internalLink = false,
+        externalLink = ''
+      } = fields
 
-      let f = {}
+      let id = title
 
       if (externalLink) {
-        f = item.fields.externalLink
-      } else {
-        f = item.fields.internalLink.sys.id
+        id = item.fields.externalLink
       }
 
-      const obj = this._itemsById[f]
+      if (internalLink) {
+        id = item.fields.internalLink.sys.id
+      }
+
+      const obj = this._itemsById[id]
 
       obj.current = externalLink ? false : obj.link === current
       obj.descendentCurrent = current.includes(obj.link)
 
-      return this._itemsById[f]
+      return this._itemsById[id]
     })
   }
 

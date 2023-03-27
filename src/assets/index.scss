@@ -28,12 +28,13 @@
 
 /* Text */
 
+@use "@alanizcreative/formation/src/text/weight";
+@use "@alanizcreative/formation/src/text/align";
 @use "text/sizes";
 @use "text/list";
 @use "text/line-height";
 @use "text/color" as c;
-@use "@alanizcreative/formation/src/text/weight";
-@use "@alanizcreative/formation/src/text/align";
+@use "text/rich-text";
 
 /* Layouts */
 
@@ -42,7 +43,7 @@
 @use "@alanizcreative/formation/src/layouts/overflow";
 @use "@alanizcreative/formation/src/layouts/container";
 @use "@alanizcreative/formation/src/layouts/display";
-@use "@alanizcreative/formation/src/layouts/flex";
+@use "layouts/flex";
 @use "@alanizcreative/formation/src/layouts/gap-margin";
 @use "@alanizcreative/formation/src/layouts/padding";
 @use "@alanizcreative/formation/src/layouts/margin";
@@ -60,6 +61,7 @@
 
 @use "@alanizcreative/formation/src/components/skip-link";
 @use "components/nav";
+@use "components/overlay";
 
 /* Objects */
 

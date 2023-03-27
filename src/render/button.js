@@ -34,7 +34,8 @@ const button = ({ args = {} }) => {
     size = 'Default', // enumOptions.button.size
     justify = 'None', // enumOptions.justify
     paddingTop = 'None', // enumOptions.padding
-    paddingBottom = 'None' // enumOptions.padding
+    paddingBottom = 'None', // enumOptions.padding
+    theme = 'default' // Back end option
   } = args
 
   /* Link and title required */
@@ -59,12 +60,12 @@ const button = ({ args = {} }) => {
 
   /* Classes */
 
-  let linkClasses = 'o-button b-radius-l'
+  let linkClasses = 'o-button b-radius-l l-overflow-hidden l-relative l-z-index-1 l-before'
 
   if (type === 'main') {
-    linkClasses += ' bg-primary-base t-background-base'
+    linkClasses += ` o-button-main ${theme === 'default' ? 'bg-primary-base t-background-base' : 'bg-background-base t-foreground-dark'}`
   } else if (type === 'secondary') {
-    linkClasses += ' o-button-secondary t-primary-base b-all b-current'
+    linkClasses += ` o-button-secondary b-all b-current ${theme === 'default' ? 't-primary-base' : 't-background-base'}`
   }
 
   if (size === 'large') {
@@ -77,7 +78,7 @@ const button = ({ args = {} }) => {
 
   /* Attributes */
 
-  const linkAttrs = ' data-button'
+  const linkAttrs = ` data-theme="${theme}" data-button`
 
   /* Output */
 

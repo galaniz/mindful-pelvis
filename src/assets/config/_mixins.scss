@@ -15,7 +15,7 @@
   @include mix.fluid-size(
     --h1,
     func.calc-rem(44px) func.calc-rem(60px),
-    "s" "xl"
+    "s" "l"
   );
 
   /* h2-l */
@@ -23,7 +23,7 @@
   @include mix.fluid-size(
     --h2-l,
     func.calc-rem(40px) func.calc-rem(54px),
-    "s" "xl"
+    "s" "l"
   );
 
   /* h2 */
@@ -31,7 +31,7 @@
   @include mix.fluid-size(
     --h2,
     func.calc-rem(36px) func.calc-rem(48px),
-    "s" "xl"
+    "s" "l"
   );
 
   /* h3 */
@@ -39,7 +39,7 @@
   @include mix.fluid-size(
     --h3,
     func.calc-rem(32px) func.calc-rem(36px),
-    "s" "xl"
+    "s" "l"
   );
 
   /* h4 */
@@ -47,7 +47,7 @@
   @include mix.fluid-size(
     --h4,
     func.calc-rem(25px) func.calc-rem(28px),
-    "s" "xl"
+    "s" "l"
   );
 
   /* h + t */
@@ -58,6 +58,7 @@
   --t-r: #{func.calc-rem(19px)};
   --t-m: #{func.calc-rem(18px)};
   --t-s: #{func.calc-rem(16px)};
+  --t-xs: #{func.calc-rem(13px)};
 
   @include mix.breakpoint-min("m") {
     --h5: #{func.calc-rem(24px)};
@@ -78,6 +79,6 @@
   @include mix.fluid-size(
     --t-l,
     func.calc-rem(19px) func.calc-rem(22px),
-    "s" "xl"
+    "s" "l"
   );
 }

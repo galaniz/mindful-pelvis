@@ -36,7 +36,7 @@ module.exports = async (args = {}) => {
           }
         }
 
-        if (envData.dev) {
+        /*if (envData.dev) {
           const middlewareContent = 'import preview from \'../src/serverless/preview\'; const render = async (context) => { return await preview(context); }; export const onRequestGet = [render];'
 
           writeFile('./functions/_middleware.js', middlewareContent, (error) => {
@@ -78,7 +78,7 @@ module.exports = async (args = {}) => {
               })
             })
           }
-        }
+        }*/
 
         if (redirects.length) {
           let redirectsData = ''
