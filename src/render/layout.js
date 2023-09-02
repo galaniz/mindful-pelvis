@@ -5,7 +5,7 @@
 /* Imports */
 
 const { envData } = require('../vars/data')
-const { enumNamespace, enumSite, enumColors } = require('../vars/enums')
+const { enumNamespace, enumSite } = require('../vars/enums')
 const { getPermalink } = require('../utils')
 
 /**
@@ -60,6 +60,14 @@ const layout = ({
     noIndex = true
   }
 
+  /* Preconnect */
+
+  /*
+<link rel="preconnect" href="//images.ctfassets.net">
+        <link rel="dns-prefetch" href="//images.ctfassets.net">
+
+  */
+
   /* Preload font links */
 
   const preloadFonts = `
@@ -97,8 +105,8 @@ const layout = ({
         <link rel="icon" type="image/png" sizes="32x32" href="${assetsLink}favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="${assetsLink}favicon/favicon-16x16.png">
         <link rel="manifest" href="${assetsLink}favicon/site.webmanifest">
-        <meta name="msapplication-TileColor" content="${enumColors.foreground.dark}">
-        <meta name="theme-color" content="${enumColors.background.dark}">
+        <meta name="msapplication-TileColor" content="${config.vars.theme['foreground-dark']}">
+        <meta name="theme-color" content="${config.vars.theme['background-dark']}">
         <meta name="format-detection" content="telephone=no">
       </head>
       <body class="${enumNamespace} no-js l-flex l-flex-column">

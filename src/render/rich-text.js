@@ -132,7 +132,7 @@ const _getLink = (obj) => {
     return `${markTag.start}${value}${markTag.end}`
   })
 
-  return `<a href="${link}" data-inline>${text.join('')}</a>`
+  return `<a href="${link}" data-rich>${text.join('')}</a>`
 }
 
 /**
@@ -158,6 +158,7 @@ const _getContent = ({
       nodeType = 'text',
       value = '',
       marks,
+      data,
       content: con
     } = c
 
@@ -187,13 +188,108 @@ const _getContent = ({
         val = `${markTag.start}${value}${markTag.end}`
       }
 
-      _output += cardLink ? `<a class="l-before" href="${cardLink}" data-inline>${linkText}</a>` : val
+      _output += cardLink ? `<a class="l-before" href="${cardLink}" data-rich>${linkText}</a>` : val
     }
 
     /* Nested content */
 
     if (Array.isArray(con)) {
       const tag = _getTag(nodeType)
+
+      if (nodeType === "embedded-entry-inline") {
+        console.log("ENTRY_INLINE", data, con)
+
+        /*
+          ENTRY_INLINE {
+            target: {
+              metadata: { tags: [] },
+              sys: {
+                space: [Object],
+                type: 'Entry',
+                id: '3S1irMU4fE0MMwOMkOGjCU',
+                contentType: [Object],
+                revision: 1,
+                createdAt: '2023-03-26T21:48:00.855Z',
+                updatedAt: '2023-03-26T21:48:53.572Z',
+                environment: [Object],
+                locale: 'en-US'
+              },
+              fields: {
+                title: 'Pelvic Health',
+                slug: 'pelvic-health',
+                heroTitle: 'Pelvic health physiotherapy',
+                heroText: 'Cras ex eros, sollicitudin vel diam sed, consequat rhoncus erat. Donec sed augue vel elit efficitur viverra.',
+                heroImage: [Object],
+                heroType: 'Minimal'
+              }
+            }
+          }
+        */
+      }
+
+      if (nodeType === "entry-hyperlink") {
+        console.log("ENTRY_HYPERLINK", data, con)
+
+        /*
+
+        ENTRY_HYPERLINK {
+          target: {
+            metadata: { tags: [] },
+            sys: {
+              space: [Object],
+              type: 'Entry',
+              id: '3g8HZs5AsmslyAHfYfRujE',
+              contentType: [Object],
+              revision: 2,
+              createdAt: '2023-03-25T18:16:49.189Z',
+              updatedAt: '2023-03-25T19:19:33.959Z',
+              environment: [Object],
+              locale: 'en-US'
+            },
+            fields: {
+              title: 'Home',
+              slug: 'index',
+              heroTitle: 'New prenatal mama series this spring!',
+              heroText: 'COVID19 Updates: We are seeing patients in-person again! Our virtual services are available to ensure your health & safety.',
+              heroCallToAction: [Object],
+              heroImage: [Object],
+              heroType: 'Overlap - Orange',
+              content: [Array]
+            }
+          }
+        }
+
+        [ { nodeType: 'text', value: 'Donec est dolor', marks: [], data: {} } ]
+
+        */
+      }
+
+      if (nodeType === "asset-hyperlink") {
+        console.log("ASSET_HYPERLINK", data, con)
+
+        /*
+        ASSET_HYPERLINK {
+          target: {
+            metadata: { tags: [] },
+            sys: {
+              space: [Object],
+              type: 'Asset',
+              id: '5wlAhTlHt1lUDDvH7d1dFV',
+              revision: 1,
+              createdAt: '2023-03-25T18:15:12.486Z',
+              updatedAt: '2023-03-25T18:15:44.774Z',
+              environment: [Object],
+              locale: 'en-US'
+            },
+            fields: { title: 'pregnant-mothers-meditation', file: [Object] }
+          }
+        }
+
+        [ { nodeType: 'text', value: 'dapibus ultricies', marks: [], data: {} } ]
+      
+        */
+      }
+
       const inner = _getContent({
         content: con,
         cardLink,
@@ -207,7 +303,7 @@ const _getContent = ({
           const attr = []
 
           if (tag === 'ul' || tag === 'ol' || tag === 'li' || tag === 'blockquote' || tag === 'p') {
-            attr.push('data-inline')
+            attr.push('data-rich')
           }
 
           if (tag === 'th') {
@@ -341,7 +437,7 @@ const richText = (args = {}) => {
   }
 
   if (tag === 'ul' || tag === 'ol' || tag === 'blockquote' || tag === 'p') {
-    attr.push('data-inline')
+    attr.push('data-rich')
   }
 
   if (classes) {
@@ -354,7 +450,7 @@ const richText = (args = {}) => {
 
   if (tag === 'table') {
     output = `
-      <div class="l-overflow-hidden" data-inline-table>
+      <div class="l-overflow-hidden" data-rich-table>
         <div class="l-overflow-x-auto l-width-100-pc b-all o-overflow">
           ${output}
         </div>

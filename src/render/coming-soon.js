@@ -50,7 +50,7 @@ const comingSoon = () => {
           <h1 class="l-padding-top-xl l-padding-bottom-s">New site coming soon!</h1>
           <p>
             In the meantime you can reach me at 
-            <a href="mailto:${enumSite.email}" data-inline>${enumSite.email}</a>
+            <a href="mailto:${enumSite.email}" data-rich>${enumSite.email}</a>
           </p>
         ${output.content.end}
       ${output.container.end}

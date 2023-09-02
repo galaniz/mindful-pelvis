@@ -1,0 +1,53 @@
+/**
+ * Components - hero styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils/functions" as func;
+@use "@alanizcreative/formation/src/utils/mixins" as mix;
+
+/* Styles */
+
+.c-hero {
+  --left-right: calc(var(--container-padding) * -1);
+  --text-top: calc(var(--xl) * -1);
+  --text-bottom: 0;
+  --text-left: auto;
+  --text-right: var(--left-right);
+  --media-left: var(--left-right);
+  --media-right: var(--left-right);
+  --width: 100% + (var(--container-padding) * 2);
+
+  @include mix.breakpoint-min("m") {
+    --text-top: calc(var(--3xl) * -1);
+  }
+
+  @include mix.breakpoint-min("l") {
+    --text-top: auto;
+    --text-left: auto;
+    --text-right: 0;
+    --text-bottom: calc(var(--m) * -1);
+    --media-right: -36%;
+  }
+
+  @include mix.breakpoint-min("container") {
+    --media-left: calc((50vw - (var(--container-no-padding) / 2)) * -1);
+    --width: (50vw - (var(--container-no-padding) / 2)) + (var(--container) * 0.76);
+  }
+}
+
+.c-hero__media {
+  margin: 0 var(--media-right) 0 var(--media-left);
+  width: calc(var(--width));
+
+  @include mix.fluid-size(
+    height,
+    func.calc-rem(400px) func.calc-rem(630px),
+    "s" "l"
+  );
+}
+
+.c-hero__text {
+  margin: var(--text-top) var(--text-right) var(--text-bottom) var(--text-left);
+}

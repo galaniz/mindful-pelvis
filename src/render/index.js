@@ -5,7 +5,7 @@
 /* Imports */
 
 const { enumNamespace, enumOptions, enumContentTypes } = require('../vars/enums')
-const { getAllContentfulData, getSlug, getPermalink, getDurationReverse, getCommaLinks } = require('../utils')
+const { getAllContentfulData, getSlug, getPermalink } = require('../utils')
 const { slugData, envData, navData, archiveData, scriptData, jsonFileData } = require('../vars/data')
 const slugParentsJson = require('../json/slug-parents.json')
 const archiveIdsJson = require('../json/archive-ids.json')
@@ -65,6 +65,39 @@ const _renderContent = async ({
       const richTextNode = c?.nodeType || false
 
       if (richTextNode) {
+        console.log("RICH_TEXT_NODE", richTextNode);
+
+        if (c.nodeType === 'embedded-asset-block') {
+          console.log("ASSET", c.data.target)
+
+          /* Function asset */
+
+          /*
+            ASSET {
+              metadata: { tags: [] },
+              sys: {
+                space: { sys: [Object] },
+                type: 'Asset',
+                id: '5wlAhTlHt1lUDDvH7d1dFV',
+                revision: 1,
+                createdAt: '2023-03-25T18:15:12.486Z',
+                updatedAt: '2023-03-25T18:15:44.774Z',
+                environment: { sys: [Object] },
+                locale: 'en-US'
+              },
+              fields: {
+                title: 'pregnant-mothers-meditation',
+                file: {
+                  url: '//images.ctfassets.net/888plchwx654/5wlAhTlHt1lUDDvH7d1dFV/5f1f0584465c8c2acb6b2e1b0f5ea502/pregnant-mothers-meditation.jpg',
+                  details: [Object],
+                  fileName: 'pregnant-mothers-meditation.jpg',
+                  contentType: 'image/jpeg'
+                }
+              }
+            }
+          */
+        }
+
         if (c.nodeType === 'embedded-entry-block') {
           c = c.data.target
         } else {

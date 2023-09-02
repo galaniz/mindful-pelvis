@@ -17,7 +17,7 @@ const { envData, jsonFileData } = require('./src/vars/data')
 /* Config */
 
 module.exports = (config) => {
-  /* Add env ctfl variables */
+  /* Add env and ctfl variables */
 
   if (process) {
     const env = process.env
@@ -44,7 +44,7 @@ module.exports = (config) => {
 
   /* Process scss and js files */
 
-  config.on('afterBuild', () => {
+  config.on('eleventy.after', () => {
     const entryPoints = {}
     const namespace = 'mp'
 
@@ -97,6 +97,14 @@ module.exports = (config) => {
     }
 
     return content
+  })
+
+  /* Delete render from cache on watch */
+
+  config.on('eleventy.beforeWatch', async () => {
+    const renderPath = './src/render/index.js'
+
+    delete require.cache[require.resolve(renderPath)]
   })
 
   /* Copy static asset folders */
