@@ -5,16 +5,12 @@
 /* Imports */
 
 import { setConfig } from '@alanizcreative/static-site-formation/lib/config'
-import { card } from '../../objects/cards/html'
 import layout from '../../components/layout/html'
 import navigations, { navigation } from '../../components/navigations/html'
 import httpError from '../../render/http-error/html'
 import button from '../../objects/button/html'
 import content from '../../objects/content/html'
 import image from '../../objects/image/html'
-import posts from '../../objects/posts/html'
-import testimonial from '../../objects/testimonial/html'
-import actions from '../../actions/html'
 import filters from '../../filters/html'
 
 /**
@@ -205,11 +201,7 @@ const config: Config = setConfig({
     button,
     content,
     image,
-    posts,
-    testimonial,
-    card
   },
-  actions,
   filters,
   serverless: {
     dir: 'functions',

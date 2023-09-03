@@ -1,14 +1,14 @@
 /**
- * Render - coming soon
+ * Render - coming soon html
  */
 
 /* Imports */
 
-const { enumSite } = require('../vars/enums')
-const layout = require('./layout')
-const container = require('./container')
-const content = require('./content')
-const logoSvg = require('./svg/logo')
+import container from '@alanizcreative/static-site-formation/lib/layouts/container'
+import layout from '../../../components/layout/html'
+import content from '../../../objects/content/html'
+import logo from '../../../objects/logo/html'
+import config from '../../../config/html'
 
 /**
  * Function - output coming soon page
@@ -16,11 +16,16 @@ const logoSvg = require('./svg/logo')
  * @return {string} HTML - html
  */
 
-const comingSoon = () => {
+const comingSoon = async (): Promise<string> => {
+  /* Title and slug */
+
+  const title = 'Coming Soon'
+  const slug = 'coming-soon'
+
   /* Container and content */
 
   const output = {
-    container: container({
+    container: await container({
       args: {
         maxWidth: '650px',
         paddingTop: '80px',
@@ -39,18 +44,28 @@ const comingSoon = () => {
 
   /* Output */
 
-  return layout({
+  return await layout({
+    id: slug,
+    slug,
+    meta: {
+      title,
+      noIndex: false
+    },
+    contentType: 'page',
+    pageData: {
+      id: slug,
+      slug,
+      title
+    },
+    pageContains: [],
     content: `
       ${output.container.start}
         ${output.content.start}
-          <div class="o-logo l-block l-svg">
-            <span class="a11y-visually-hidden">${enumSite.title}</span>
-            ${logoSvg()}
-          </div>
+          ${logo()}
           <h1 class="l-padding-top-xl l-padding-bottom-s">New site coming soon!</h1>
           <p>
             In the meantime you can reach me at 
-            <a href="mailto:${enumSite.email}" data-rich>${enumSite.email}</a>
+            <a href="mailto:${config.vars.email}" data-rich>${config.vars.email}</a>
           </p>
         ${output.content.end}
       ${output.container.end}
@@ -60,4 +75,4 @@ const comingSoon = () => {
 
 /* Exports */
 
-module.exports = comingSoon
+export default comingSoon

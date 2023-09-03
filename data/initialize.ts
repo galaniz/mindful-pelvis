@@ -41,16 +41,18 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     /* Reset style and script paths */
 
     config.actions.renderStart = async (): Promise<void> => {
-      config.vars.global.css.cache = ''
-      config.vars.esbuild = {}
+      config.vars.css.cache = ''
     }
 
     /* Build styles and scripts */
 
     config.actions.renderEnd = async (): Promise<void> => {
-      const entryPoints = { ...config.vars.esbuild }
+      const entryPoints = {
+        ...config.scripts.build,
+        ...config.styles.build
+      }
 
-      const { css, js } = config.vars.global
+      const { css, js } = config.vars
 
       if (css.in !== '' && css.out !== '') {
         entryPoints[css.out] = css.in
@@ -91,16 +93,16 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     /* Inline styles */
 
     config.filters.renderItem = async (output: string): Promise<string> => {
-      if (config.vars.global.css.in === '' || config.vars.global.css.head === '') {
+      if (config.vars.css.in === '' || config.vars.css.head === '') {
         return output
       }
 
       let styles = ''
 
-      if (config.vars.global.css.cache !== '') {
-        styles = config.vars.global.css.cache
+      if (config.vars.css.cache !== '') {
+        styles = config.vars.css.cache
       } else {
-        const sassRes = sass.compile(`./${config.vars.global.css.in}`, {
+        const sassRes = sass.compile(`./${config.vars.css.in}`, {
           loadPaths: ['node_modules', './src'],
           style: 'compressed'
         })
@@ -108,7 +110,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
         if (sassRes.css !== undefined) {
           styles += sassRes.css
 
-          config.vars.global.css.cache = styles
+          config.vars.css.cache = styles
         }
       }
 
@@ -141,7 +143,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
       }
 
       if (styles !== '') {
-        output = output.replace(config.vars.global.css.head, `<style>${styles}</style>`)
+        output = output.replace(config.vars.css.head, `<style>${styles}</style>`)
       }
 
       /* Output */

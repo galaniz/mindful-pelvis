@@ -23,6 +23,7 @@ const column = (props: FRM.ColumnProps): FRM.ColumnProps => {
     widthLarge = 'None',
     justify = 'None',
     align = 'None',
+    order = 'Default',
     classes = ''
   } = args
 
@@ -35,11 +36,18 @@ const column = (props: FRM.ColumnProps): FRM.ColumnProps => {
   widthLarge = config.vars.options.width[widthLarge]
   justify = config.vars.options.justify[justify]
   align = config.vars.options.align[align]
+  order = config.vars.options.order[order]
 
   /* Width */
 
   if (width === '') {
     width = '1-1'
+  }
+
+  /* Order */
+
+  if (order !== '') {
+    classes += `${classes !== '' ? ' ' : ''}l-order-${order}`
   }
 
   /* Output */

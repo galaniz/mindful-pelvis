@@ -26,8 +26,8 @@ interface HeroArgs {
   contentType: string
   type: string
   title: string
-  text: string
-  image: FRM.ImageData
+  text?: string
+  image?: FRM.ImageData
   callToAction?: MP.InternalLink
   pageData?: MP.Item
 }

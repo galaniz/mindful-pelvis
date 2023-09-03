@@ -1,0 +1,18 @@
+/**
+ * Text - rich table styles
+ */
+
+ .t-rich-table {
+  th {
+    line-height: var(--line-height-130-pc);
+    font-weight: var(--font-weight-bold);
+    color: var(--heading-color);
+  }
+
+  th,
+  td {
+    padding: var(--2xs);
+    vertical-align: top;
+    min-width: var(--3xl);
+  }
+}

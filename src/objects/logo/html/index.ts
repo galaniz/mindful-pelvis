@@ -13,19 +13,25 @@ import config from '../../../config/html'
  * Function - output logo
  *
  * @param {object} args
+ * @param {string} args.size
+ * @param {boolean} args.link
+ * @param {string} args.theme
+ * @param {string} args.classes
  * @return {string} HTML - div || a
  */
 
 interface LogoArgs {
   size?: string
   link?: boolean
+  theme?: string
   classes?: string
 }
 
 const logo = (args: LogoArgs = {}): string => {
   const {
     size = '',
-    link = false
+    link = false,
+    theme = 'default',
   } = args
 
   let {
@@ -55,7 +61,7 @@ const logo = (args: LogoArgs = {}): string => {
   /* Output */
 
   return `
-    <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''}>
+    <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''} data-theme="${theme}">
       <span class="a11y-visually-hidden">${config.title}${link ? ' home' : ''}</span>
       ${logoSvg()}
     </${tag}>
