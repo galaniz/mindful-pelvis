@@ -64,10 +64,10 @@ interface Config extends FRM.Config {
         text: ConfigOptions
         heading: ConfigOptions
         align: ConfigOptions
-      },
+      }
       posts: {
         contentType: ConfigOptions
-      },
+      }
       hero: {
         type: ConfigOptions
         background: ConfigOptions
@@ -110,7 +110,7 @@ const config: Config = setConfig({
       eventType: {
         slug: 'event-types',
         title: 'Event Types'
-      },
+      }
     }
   },
   contentTypes: {
@@ -200,7 +200,7 @@ const config: Config = setConfig({
     httpError,
     button,
     content,
-    image,
+    image
   },
   filters,
   serverless: {

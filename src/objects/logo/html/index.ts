@@ -31,7 +31,7 @@ const logo = (args: LogoArgs = {}): string => {
   const {
     size = '',
     link = false,
-    theme = 'default',
+    theme = 'default'
   } = args
 
   let {

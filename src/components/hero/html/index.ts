@@ -7,6 +7,7 @@
 import getProp from '@alanizcreative/static-site-formation/lib/utils/get-prop'
 import getImage from '@alanizcreative/static-site-formation/lib/utils/get-image'
 import addScriptStyle from '@alanizcreative/static-site-formation/lib/utils/add-script-style'
+import button from '../../../objects/button/html'
 import config from '../../../config/html'
 
 /**
@@ -96,10 +97,10 @@ const hero = ({
 
   let textOutput = `<h1>${title}</h1>`
 
-  if (text) {
+  if (text !== '') {
     let textClasses = 't-l'
 
-    if (callToActionOutput) {
+    if (callToActionOutput !== '') {
       textClasses += ' l-padding-bottom-2xs l-padding-bottom-xs-m'
     }
 
@@ -126,11 +127,11 @@ const hero = ({
 
   if (overlap) {
     return `
-      <section class="c-overlap l-container l-flex l-flex-column l-flex-row-l l-padding-bottom-m-l">
-        <div class="c-overlap__text bg-${overlapBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-width-4-5-m l-width-3-5-l l-padding-top-2xs l-padding-left-xs l-padding-right-xs l-padding-bottom-xs l-padding-top-s-m l-padding-left-m-m l-padding-right-m-m l-padding-bottom-m-m">
+      <section class="c-hero l-container l-flex l-flex-column l-flex-row-l l-padding-bottom-m-l">
+        <div class="c-hero__text bg-${overlapBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-width-4-5-m l-width-3-5-l l-padding-top-2xs l-padding-left-xs l-padding-right-xs l-padding-bottom-xs l-padding-top-s-m l-padding-left-m-m l-padding-right-m-m l-padding-bottom-m-m">
           ${textOutput}
         </div>
-        <div class="c-overlap__media l-width-1-1 l-order-first l-relative l-overflow-hidden">
+        <div class="c-hero__media l-width-1-1 l-order-first l-relative l-overflow-hidden">
           ${imageOutput}
         </div>
       </section>

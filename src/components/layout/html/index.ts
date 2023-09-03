@@ -32,7 +32,7 @@ const layout = async ({
   navigations,
   contentType = 'page',
   content = '',
-  pageData,
+  pageData
 }: MP.LayoutArgs): Promise<string> => {
   /* Assets link */
 
@@ -150,7 +150,7 @@ const layout = async ({
 
   /* Content */
 
-  let contentOutput: string = content
+  const contentOutput: string = content
 
   /* Script data */
 
@@ -215,7 +215,7 @@ const layout = async ({
     })
 
     stylesArray.forEach((s) => {
-      styles += `<link rel="stylesheet" href="${assetsLink}${s}" media="all">`
+      styles += `<link rel="stylesheet" href="${assetsLink}${s}.css" media="all">`
     })
   }
 
@@ -251,8 +251,8 @@ const layout = async ({
         <link rel="icon" type="image/png" sizes="32x32" href="${assetsLink}favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="${assetsLink}favicon/favicon-16x16.png">
         <link rel="manifest" href="${assetsLink}favicon/site.webmanifest">
-        <meta name="msapplication-TileColor" content="${config.vars.theme['foreground-dark']}">
-        <meta name="theme-color" content="${config.vars.theme['background-dark']}">
+        <meta name="msapplication-TileColor" content="${theme['foreground-dark']}">
+        <meta name="theme-color" content="${theme['background-dark']}">
         <meta name="format-detection" content="telephone=no">
       </head>
       <body class="${ns} no-js l-flex l-flex-column">

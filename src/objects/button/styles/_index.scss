@@ -6,6 +6,7 @@
 
 @use "sass:color";
 @use "sass:map";
+@forward "../../../config/styles";
 @use "@alanizcreative/formation/src/config" as con;
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/utils/mixins" as mix;

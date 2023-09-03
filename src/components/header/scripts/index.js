@@ -95,7 +95,7 @@ const init = () => {
         links: el.navLinks,
         open: el.navOpen,
         close: el.navClose,
-        overlay: el.navOverlay,
+        overlay: el.navOverlay
       })
     }
 

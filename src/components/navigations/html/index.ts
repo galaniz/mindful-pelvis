@@ -62,7 +62,7 @@ const navigations = ({
         filterBeforeLink: (args: FRM.NavigationArgs, item: FRM.NavigationItem, output: FRM.NavigationOutput) => {
           const { style = 'Text', children } = item
 
-          const dropdownButton = style === 'Button' && children
+          const dropdownButton = style === 'Button' && children !== undefined
 
           args.linkAttr = dropdownButton ? 'aria-expanded="false" aria-controls=""' : ''
           args.linkClass = dropdownButton ? 'o-button o-button-main bg-primary-base b-radius-l l-overflow-hidden l-relative l-z-index-1 l-before' : mainLinkClass

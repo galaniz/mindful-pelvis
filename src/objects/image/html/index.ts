@@ -96,6 +96,10 @@ const image = async (props: ImageProps = { args: {}, parents: [] }): Promise<str
       classes += ' l-after'
     }
 
+    if (borderRadius !== '') {
+      classes += ` b-radius-${borderRadius}`
+    }
+
     const attr: string[] = []
 
     if (aspectRatio === '' && imageObjAspectRatio !== 0) {
