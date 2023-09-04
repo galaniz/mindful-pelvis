@@ -61,9 +61,9 @@ const logo = (args: LogoArgs = {}): string => {
   /* Output */
 
   return `
-    <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''} data-theme="${theme}">
+    <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''}>
       <span class="a11y-visually-hidden">${config.title}${link ? ' home' : ''}</span>
-      ${logoSvg(`o-logo${size !== '' ? `-${size}` : ''}`)}
+      ${logoSvg(`o-logo${size !== '' ? `-${size}` : ''}`, theme)}
     </${tag}>
   `
 }

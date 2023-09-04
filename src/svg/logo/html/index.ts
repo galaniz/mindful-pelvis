@@ -4,20 +4,21 @@
 
 /* Imports */
 
-import config from "../../../config/html"
+import config from '../../../config/html'
 
 /**
  * Function - output svg for logo
  *
  * @param {string} classes
+ * @param {string} theme
  * @return {string} HTML - svg
  */
 
-const logoSvg = (classes: string = ''): string => {
+const logoSvg = (classes: string = '', theme: string = 'default'): string => {
   /* Add to svg sprite */
 
   const viewBox = '0 0 100 32.473'
-  const id = `logo`
+  const id = 'logo'
 
   config.vars.svg[id] = {
     viewBox,
@@ -87,6 +88,7 @@ const logoSvg = (classes: string = ''): string => {
       aria-hidden="true"
       focusable="false"
       role="img"
+      data-theme="${theme}"
       ${classes !== '' ? ` class="${classes}"` : ''}
     >
       <use href="#${id}" />

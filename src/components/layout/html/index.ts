@@ -234,10 +234,8 @@ const layout = async ({
     })
 
     spritesOutput = `
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          ${spritesOutput}
-        </defs>
+      <svg xmlns="http://www.w3.org/2000/svg" class="l-none">
+        ${spritesOutput}
       </svg>
     `
   }

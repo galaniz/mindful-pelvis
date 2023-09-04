@@ -58,13 +58,13 @@ const navigations = ({
       {
         listClass: listClassZero,
         listAttr: 'role="list"',
-        itemClass: itemClass,
+        itemClass,
         itemAttr: 'data-overflow-group="0"',
-        linkClass: linkClass,
+        linkClass,
         internalLinkClass: 'js-pt-link',
         filterBeforeList: ({ args, depth }: FRM.NavigationFilterArgs) => {
           if (depth > 0) {
-            args.listClass = `${listClass} l-flex-column l-padding-top-4xs l-padding-bottom-4xs` 
+            args.listClass = `${listClass} l-flex-column l-padding-top-4xs l-padding-bottom-4xs`
           }
         },
         filterBeforeItem: ({ args, index, item, items, depth }: FRM.NavigationFilterArgs) => {
@@ -76,14 +76,14 @@ const navigations = ({
           let newItemClass = itemClass
 
           if (depth === 0) {
-            newLinkClass += " t-r"
+            newLinkClass += ' t-r'
 
             if (dropdownButton) {
               newLinkClass = 'o-button o-button-main bg-primary-base b-radius-l l-overflow-hidden l-relative l-z-index-1 l-before'
             }
           } else {
-            newLinkClass += " t-s l-padding-top-5xs l-padding-bottom-5xs"
-            newItemClass += " l-padding-top-5xs l-padding-bottom-5xs"
+            newLinkClass += ' t-s l-padding-top-5xs l-padding-bottom-5xs'
+            newItemClass += ' l-padding-top-5xs l-padding-bottom-5xs'
           }
 
           args.itemClass = newItemClass
@@ -140,7 +140,7 @@ const navigations = ({
 
           output.html += '</span>'
 
-          output.html += socialSvg(t, "l-flex l-width-2xs l-height-2xs")
+          output.html += socialSvg(t, 'l-flex l-width-2xs l-height-2xs')
         }
       }
     )
