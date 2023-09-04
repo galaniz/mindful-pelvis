@@ -151,7 +151,7 @@ $gaps: (
 
   $padding-top: $padding-vertical,
   $padding-bottom: $padding-vertical,
-  $padding-vertical-breakpoints: ("m", "l"),
+  $padding-vertical-breakpoints: ("s", "m", "l"),
 
   $padding-left: $padding-horizontal,
   $padding-right: $padding-horizontal,
@@ -170,7 +170,7 @@ $gaps: (
 
   /* Flex */
 
-  $flex-row-breakpoints: ("l"),
+  $flex-row-breakpoints: ("s", "m", "l"),
 
   /* Widths */
 

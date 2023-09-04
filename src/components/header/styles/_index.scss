@@ -16,35 +16,69 @@
 /* Container */
 
 .c-nav {
+  --link-color: var(--foreground-dark);
+
   z-index: map.get(con.$z-index, "nav");
+
+  &[data-overflow="true"] {
+    --link-color: var(--background-base);
+  }
 }
 
 /* Logo */
 
 .c-nav__logo {
-  margin-right: var(--xs);
+  margin-right: calc(var(--gap-margin) * 2);
+
+  [data-overflow="false"] & {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
-/* Toggle buttons */
+/* List */
+
+.c-nav__list[data-depth="1"] {
+  [data-overflow="false"] & {
+    position: absolute;
+  }
+}
+
+/* Item */
+
+.c-nav__item[data-mid] {
+  [data-overflow="false"] & {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+
+    &::before {
+      content: "";
+      width: calc(var(--logo-width) + (var(--gap-margin) * 2));
+      height: var(--logo-height);
+    }
+  }
+}
+
+/* Link */
+
+.c-nav__link {
+  color: var(--link-color);
+}
+
+/* Buttons */
 
 .c-nav__button {
-  color: var(--foreground-dark);
+  --color: var(--foreground-dark);
+
   z-index: 2;
+  color: var(--color);
 
   [data-open="true"] & {
     --outline-color: var(--background-base);
-
-    color: var(--background-base);
-  }
-
-  .c-nav[data-overflow="true"] & {
-    &[data-visible="true"] {
-      display: block;
-    }
-
-    &[data-visible="false"] {
-      display: none;
-    }
+    --color: var(--background-base);
   }
 }
 
@@ -67,7 +101,7 @@
   background: var(--foreground-base-80);
   opacity: var(--opacity);
 
-  .c-nav[data-open="true"] & {
+  [data-open="true"] & {
     --delay: 10ms, 0ms;
     --opacity: 1;
   }

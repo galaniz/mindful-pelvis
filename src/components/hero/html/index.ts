@@ -74,7 +74,7 @@ const hero = ({
     }
 
     imageOutput = `
-      <picture class="l-relative l-block l-overflow-hidden" style="padding-top:${imageObjAspectRatio * 100}%">
+      <picture class="l-relative l-block l-overflow-hidden l-height-100-pc" style="padding-top:${imageObjAspectRatio * 100}%">
         ${imageObjOutput}
       </picture>
     `
@@ -123,7 +123,7 @@ const hero = ({
     style: true
   })
 
-  /* Overlap */
+  /* Overlap  */
 
   if (overlap) {
     return `

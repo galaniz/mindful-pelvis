@@ -2,4 +2,5 @@
  * Components - skip link styles
  */
 
- @use "@alanizcreative/formation/src/components/skip-link";
+@forward "../../../config/styles";
+@use "@alanizcreative/formation/src/components/skip-link";

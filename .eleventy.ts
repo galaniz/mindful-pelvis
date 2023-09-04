@@ -34,7 +34,11 @@ module.exports = (args: any) => {
 
   args.setUseGitIgnore(false)
 
-  /* Delete render from cache on watch */
+  /* Watch style assets */
+
+  args.addWatchTarget('./src/**/*.scss')
+
+  /* Delete files from cache on watch */
 
   args.on('eleventy.beforeWatch', async () => {
     const folders = [
@@ -42,6 +46,7 @@ module.exports = (args: any) => {
       './src/components/',
       './src/config/',
       './src/effects/',
+      './src/filters/',
       './src/global/',
       './src/layouts/',
       './src/objects/',

@@ -34,12 +34,7 @@
 }
 
 .o-logo {
-  @include mix.fluid-size(
-    width,
-    func.calc-rem(200px) func.calc-rem(300px),
-    "s" "l"
-  );
-
+  width: var(--logo-width);
   height: var(--logo-height);
 }
 

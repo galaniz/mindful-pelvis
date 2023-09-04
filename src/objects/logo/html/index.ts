@@ -52,7 +52,7 @@ const logo = (args: LogoArgs = {}): string => {
 
   /* Classes */
 
-  classes = `o-logo${size !== '' ? `-${size}` : ''} l-block l-svg${classes !== '' ? ` ${classes}` : ''}`
+  classes = `l-inline-flex l-relative${classes !== '' ? ` ${classes}` : ''}`
 
   if (link) {
     classes += ' js-pt-link'
@@ -63,7 +63,7 @@ const logo = (args: LogoArgs = {}): string => {
   return `
     <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''} data-theme="${theme}">
       <span class="a11y-visually-hidden">${config.title}${link ? ' home' : ''}</span>
-      ${logoSvg()}
+      ${logoSvg(`o-logo${size !== '' ? `-${size}` : ''}`)}
     </${tag}>
   `
 }

@@ -21,16 +21,12 @@ const footer = (navigations: MP.NavigationsReturn): string => {
   let navs = ''
 
   if (navigations.footer !== '' || navigations.social !== '') {
-    const navFooter = navigations.footer !== '' ? `<nav aria-label="Main">${navigations.footer}</nav>` : ''
-    const navSocial = navigations.social !== '' ? `<nav aria-label="Social">${navigations.social}</nav>` : ''
+    const navFooter = navigations.footer !== '' ? `<nav aria-label="Main" class="l-padding-top-4xs">${navigations.footer}</nav>` : ''
+    const navSocial = navigations.social !== '' ? `<nav aria-label="Social" class="l-padding-top-4xs">${navigations.social}</nav>` : ''
 
     navs = `
-      <div>
-        <div class="l-flex l-flex-wrap l-align-center l-justify-center l-gap-margin-s">
-          ${navFooter}
-          ${navSocial}
-        </div>
-      </div>
+      <div>${navFooter}</div>
+      <div>${navSocial}</div>
     `
   }
 
@@ -39,13 +35,13 @@ const footer = (navigations: MP.NavigationsReturn): string => {
   return `
     <footer class="bg-foreground-dark t-light l-margin-top-auto">
       <div class="l-container l-padding-top-m l-padding-bottom-m l-padding-top-xl-m l-padding-bottom-xl-m">
-        <div class="l-flex l-flex-wrap l-justify-between l-align-center l-gap-margin-s">
+        <div class="l-flex l-flex-column l-flex-row-s l-flex-wrap l-justify-between l-gap-margin-s l-gap-margin-m-s">
           <div>
             ${logo({ size: 's', link: true, theme: 'light' })}
           </div>
           ${navs}
           <div>
-            <span class="t-s">&copy; ${getYear()} ${config.title}</span>
+            <span class="t-s l-padding-top-4xs l-block">&copy; ${getYear()} ${config.title}</span>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const skipLink = (): string => {
   /* Output */
 
   return `
-    <a href="#main" class="c-skip-link t-m t-line-height-130-pc t-weight-bold bg-background-light l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
+    <a href="#main" class="c-skip-link t-m t-height-130-pc t-weight-bold bg-background-light l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
       Skip to main content
     </a>
   `

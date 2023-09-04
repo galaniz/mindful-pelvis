@@ -29,14 +29,13 @@ const header = (navigations: MP.NavigationsReturn): string => {
     addScriptStyle({
       dir: 'components/header',
       priority: 3,
-      style: true,
-      script: true
+      style: true
     })
 
     nav = `
-      <nav class="c-nav l-relative l-padding-top-3xs l-padding-bottom-3xs l-padding-top-xs-m l-padding-bottom-xs-m" aria-label="Main" data-overflow="false" data-overflow-all="false" data-open="false">
+      <nav class="c-nav l-relative l-padding-top-3xs l-padding-bottom-3xs l-padding-top-xs-s l-padding-bottom-xs-s" aria-label="Main" data-overflow="false" data-overflow-all="false" data-open="false">
         <div class="c-nav__overlay l-fixed l-top-0 l-left-0 l-z-index-1 l-width-100-pc l-height-100-pc e-transition"></div>
-        <div class="l-container l-flex l-justify-between l-align-center">
+        <div class="l-container l-flex l-justify-between l-align-center l-relative">
           ${logo({ link: true, classes: 'c-nav__logo' })}
           ${navigations.main}
           <div class="c-nav__hide l-height-s l-width-s">
@@ -46,7 +45,7 @@ const header = (navigations: MP.NavigationsReturn): string => {
                 <span class="c-nav-icon__middle bg-current l-block e-transition"></span>
                 <span class="c-nav-icon__bottom bg-current l-block e-transition"></span>
               </span>
-              <span class="c-nav-icon-label t-xs t-align-center t-line-height-130-pc l-padding-top-5xs l-block e-transition" aria-hidden="true">Menu</span>
+              <span class="c-nav-icon-label t-xs t-align-center t-height-130-pc l-padding-top-5xs l-block e-transition" aria-hidden="true">Menu</span>
             </button>
           </div>
           <div class="c-nav-overflow l-fixed l-right-0 l-bottom-0 l-z-index-1 l-height-100-pc bg-background-light t-light t-link-current e-transition l-width-4-5" role="dialog" aria-modal="true" aria-label="Main menu" id="${id}">

@@ -85,6 +85,20 @@
     "s" "l"
   );
 
+  /* Logo */
+
+  @include mix.fluid-size(
+    --logo-width,
+    func.calc-rem(200px) func.calc-rem(300px),
+    "s" "l"
+  );
+
+  @include mix.fluid-size(
+    --logo-height,
+    func.calc-rem(64px) func.calc-rem(96px),
+    "s" "l"
+  );
+
   /* Colors */
 
   --text-color: var(--foreground-base);

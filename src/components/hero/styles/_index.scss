@@ -4,6 +4,7 @@
 
 /* Imports */
 
+@forward "../../../config/styles";
 @use "@alanizcreative/formation/src/utils/functions" as func;
 @use "@alanizcreative/formation/src/utils/mixins" as mix;
 
@@ -13,7 +14,6 @@
   --left-right: calc(var(--container-padding) * -1);
   --text-top: calc(var(--xl) * -1);
   --text-bottom: 0;
-  --text-left: auto;
   --text-right: var(--left-right);
   --media-left: var(--left-right);
   --media-right: var(--left-right);
@@ -25,7 +25,6 @@
 
   @include mix.breakpoint-min("l") {
     --text-top: auto;
-    --text-left: auto;
     --text-right: 0;
     --text-bottom: calc(var(--m) * -1);
     --media-right: -36%;
@@ -49,5 +48,5 @@
 }
 
 .c-hero__text {
-  margin: var(--text-top) var(--text-right) var(--text-bottom) var(--text-left);
+  margin: var(--text-top) var(--text-right) var(--text-bottom) auto;
 }

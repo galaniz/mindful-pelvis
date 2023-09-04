@@ -2,14 +2,19 @@
  * Svg - social html
  */
 
+/* Imports */
+
+import config from "../../../config/html"
+
 /**
  * Function - output svg for social icons
  *
  * @param {string} type
+ * @param {string} classes
  * @return {string} HTML - svg
  */
 
-const socialSvg = (type: string = 'instagram'): string => {
+const socialSvg = (type: string = 'instagram', classes: string = ''): string => {
   /* Paths by type */
 
   const paths: { [key: string]: string } = {
@@ -32,20 +37,28 @@ const socialSvg = (type: string = 'instagram'): string => {
     return ''
   }
 
+  /* Add to svg sprite */
+
+  const viewBox = '0 0 20 20'
+  const id = `${type}-logo`
+
+  config.vars.svg[id] = {
+    viewBox,
+    output: `<path d="${path}" fill="currentcolor"/>`
+  }
+
   /* Output */
 
   return `
     <svg
       width="20"
       height="20"
-      viewBox="0 0 20 20"
-      fill="none"
       aria-hidden="true"
       focusable="false"
       role="img"
-      xmlns="http://www.w3.org/2000/svg"
+      ${classes !== '' ? ` class="${classes}"` : ''}
     >
-      <path d="${path}" fill="currentcolor"/>
+      <use href="#${id}" />
     </svg>
   `
 }

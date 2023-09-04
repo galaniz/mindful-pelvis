@@ -2,23 +2,26 @@
  * Svg - logo html
  */
 
+/* Imports */
+
+import config from "../../../config/html"
+
 /**
  * Function - output svg for logo
  *
+ * @param {string} classes
  * @return {string} HTML - svg
  */
 
-const logoSvg = (): string => {
-  return `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      height="32.473"
-      viewBox="0 0 100 32.473"
-      aria-hidden="true"
-      focusable="false"
-      role="img"
-    >
+const logoSvg = (classes: string = ''): string => {
+  /* Add to svg sprite */
+
+  const viewBox = '0 0 100 32.473'
+  const id = `logo`
+
+  config.vars.svg[id] = {
+    viewBox,
+    output: `
       <style>
         .mp-text {
           fill: var(--text, #333f48)
@@ -72,6 +75,21 @@ const logoSvg = (): string => {
         d="M66.591,27.671c-1.139,0-1.717-.33-2.275-.649-.555-.317-1.079-.617-2.154-.617s-1.599,.3-2.154,.617c-.558,.319-1.135,.649-2.275,.649s-1.717-.33-2.275-.649c-.555-.317-1.079-.617-2.154-.617s-1.599,.3-2.154,.617c-.558,.319-1.135,.649-2.275,.649s-1.714-.33-2.272-.65c-.552-.316-1.074-.615-2.138-.615h-.021c-1.123,.004-1.643,.306-2.194,.626-.541,.314-1.1,.639-2.232,.639-.067,0-.121-.054-.121-.122s.055-.122,.121-.122c1.067,0,1.574-.294,2.11-.606,.554-.322,1.127-.655,2.315-.659h.021c1.129,0,1.704,.329,2.259,.647,.555,.318,1.079,.618,2.151,.618s1.599-.3,2.154-.617c.558-.319,1.135-.649,2.275-.649s1.717,.33,2.275,.649c.555,.317,1.079,.617,2.154,.617s1.599-.3,2.154-.617c.558-.319,1.135-.649,2.275-.649s1.717,.33,2.275,.649c.555,.317,1.079,.617,2.154,.617,.067,0,.121,.055,.121,.122s-.054,.122-.121,.122h0Z"
         class="mp-wave"
       />
+    `
+  }
+
+  /* Output */
+
+  return `
+    <svg
+      width="100"
+      height="32.473"
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      ${classes !== '' ? ` class="${classes}"` : ''}
+    >
+      <use href="#${id}" />
     </svg>
   `
 }

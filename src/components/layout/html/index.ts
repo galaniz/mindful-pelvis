@@ -219,6 +219,29 @@ const layout = async ({
     })
   }
 
+  /* Svg sprites */
+
+  const svgIds = Object.keys(config.vars.svg)
+
+  let spritesOutput = ''
+
+  if (svgIds.length > 0) {
+    svgIds.forEach((id) => {
+      const svgData = config.vars.svg[id]
+      const { viewBox = '', output = '' } = svgData
+
+      spritesOutput += `<symbol id="${id}" viewBox="${viewBox}">${output}</symbol>`
+    })
+
+    spritesOutput = `
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          ${spritesOutput}
+        </defs>
+      </svg>
+    `
+  }
+
   /* Output */
 
   return `
@@ -256,6 +279,7 @@ const layout = async ({
         <meta name="format-detection" content="telephone=no">
       </head>
       <body class="${ns} no-js l-flex l-flex-column">
+        ${spritesOutput}
         ${headerOutput}
         <main id="main">
           ${heroOutput}

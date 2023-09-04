@@ -26,7 +26,7 @@ import filters from '../../filters/html'
  */
 
 interface ConfigOptions {
-  [char: string]: string
+  [key: string]: string
 }
 
 interface Config extends FRM.Config {
@@ -34,6 +34,12 @@ interface Config extends FRM.Config {
     theme: ConfigOptions
     email: string
     head: string
+    svg: {
+      [key: string]: {
+        viewBox: string
+        output: string
+      }
+    }
     css: {
       in: string
       out: string
@@ -226,6 +232,7 @@ const config: Config = setConfig({
     },
     email: 'hello@themindfulpelvis.ca',
     head: '',
+    svg: {},
     css: {
       in: 'src/global/styles/index.scss',
       out: 'css/global/index',
