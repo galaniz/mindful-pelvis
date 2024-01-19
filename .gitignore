@@ -5,7 +5,7 @@ functions/*
 !functions/ajax/
 data/initialize.js
 src/json/**/*.json
-src/**/html/*.js
+src/**/*Html.js
 !src/assets/
 .DS_Store
 .cache

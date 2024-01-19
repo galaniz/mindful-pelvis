@@ -1,0 +1,219 @@
+/**
+ * Components - Header Styles
+ */
+
+/* Imports */
+
+@use "sass:map";
+@forward "../../config/config";
+@use "@alanizcreative/formation/src/config/config" as con;
+@use "@alanizcreative/formation/src/utils" as util;
+@use "@alanizcreative/formation/src/components/Nav/Nav";
+@use "@alanizcreative/formation/src/components/Nav/Icon";
+@use "@alanizcreative/formation/src/components/Nav/Icon/Seven/Seven";
+
+/* Container */
+
+.c-nav {
+  --nav-half: 0rem;
+  --width-display: block;
+  --cta-bg: var(--primary-base);
+  --cta-color: var(--background-base);
+  --list-opacity: 0;
+  --item-margin: 0;
+  --item-opacity: 0;
+
+  z-index: map.get(con.$z-index, "nav");
+
+  &[data-nav-open="true"] {
+    --cta-bg: var(--background-base);
+    --cta-color: var(--foreground-dark);
+  }
+
+  &[data-nav-show-overflow] {
+    --item-opacity: 1;
+  }
+
+  &[data-nav-overflow="true"] {
+    --width-display: none;
+    --item-margin: var(--4xs);
+  }
+}
+
+/* Main container */
+
+.c-nav__main {
+  min-height: calc(var(--logo-height) + var(--gap-margin));
+}
+
+/* Logo */
+
+.c-nav__logo {
+  margin-right: var(--s);
+
+  .js [data-nav-overflow="false"] & {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* List - row */
+
+.c-nav__list {
+  [data-nav-overflow="false"] &[data-depth="1"] {
+    --prop: visibility, opacity;
+    --h: auto;
+
+    position: absolute;
+    opacity: var(--list-opacity);
+
+    &[data-type="min"] {
+      background: var(--background-tint);
+      border-radius: var(--border-radius-s);
+      padding: var(--4xs) var(--2xs);
+      margin-left: calc(-1 * var(--2xs));
+      border: var(--border-width) solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+  }
+
+  .js &[data-depth="0"] {
+    flex-grow: 1;
+  }
+}
+
+/* List - column */
+
+.c-nav__column {
+
+}
+
+/* Width - trigger overflow in row */
+
+.c-nav__width {
+  display: var(--width-display);
+
+  &::before {
+    height: 0.0625rem;
+    min-width: calc(var(--logo-width) + var(--nav-half) + var(--gap-margin) * 2);
+    z-index: -1;
+  }
+}
+
+/* Item */
+
+.c-nav__item {
+  [data-nav-open="false"] &[data-mid] {
+    margin-left: auto;
+  }
+
+  [data-nav-overflow="true"] &[data-depth="0"] {
+    border-top: var(--border-width) solid #{rgba(util.get-color("background-base"), 0.3)};
+    opacity: var(--item-opacity);
+    padding: var(--3xs) 0;
+
+    &:first-child,
+    &:last-child {
+      --border-width: 0;
+    }
+  }
+
+  &[data-collapsible-expanded="true"] {
+    --list-opacity: 1;
+  }
+
+  &[data-depth="1"]:first-child {
+    margin-top: var(--item-margin);
+  }
+}
+
+/* Link */
+
+.c-nav__link {
+
+}
+
+/* Call to action */
+
+.c-nav__cta,
+.c-nav__list[data-depth="1"][data-type="cta"] {
+  background: var(--cta-bg);
+  color: var(--cta-color);
+}
+
+/* Buttons */
+
+.c-nav__button {
+  --color: var(--foreground-dark);
+
+  z-index: 2;
+  color: var(--color);
+
+  [data-nav-open="true"] & {
+    --outline-color: var(--background-base);
+    --color: var(--background-base);
+  }
+}
+
+.c-nav__close {
+  top: var(--nav-padding);
+  right: var(--container-padding);
+}
+
+.c-nav-icon-label {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Overflow - home link */
+
+.c-nav__home {
+  top: var(--nav-padding);
+  left: var(--container-padding);
+}
+
+/* Overflow */
+
+.c-nav__scroll {
+  margin-top: var(--nav-height);
+  max-height: calc(100% - var(--nav-height));
+}
+
+/* Overlay */
+
+.c-nav__overlay {
+  --prop: visibility, opacity;
+  --duration: 0ms, 400ms;
+  --delay: 400ms, 10ms;
+  --opacity: 0;
+  --scale: 0.5;
+
+  opacity: var(--opacity);
+
+  &::before {
+    background: var(--background-base);
+		opacity: 0.05;
+	}
+
+	&::after {
+		background: inherit;
+    opacity: var(--opacity);
+    border-radius: 100%;
+		width: 200%;
+		height: 200%;
+		top: -100%;
+		left: -100%;
+		transform: scale(var(--scale));
+    transition:
+      transform 400ms var(--easing),
+      opacity 400ms var(--easing);
+	}
+
+  [data-nav-open="true"] & {
+    --delay: 10ms, 0ms;
+    --opacity: 1;
+    --scale: 1;
+  }
+}

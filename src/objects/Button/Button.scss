@@ -1,0 +1,76 @@
+/**
+ * Objects - Button Styles
+ */
+
+/* Imports */
+
+@use "sass:color";
+@use "sass:map";
+@forward "../../config/config";
+@use "@alanizcreative/formation/src/config/config" as con;
+@use "@alanizcreative/formation/src/utils" as util;
+
+/* Styles */
+
+.o-button {
+  --padding: var(--3xs) var(--xs);
+  --size: var(--t-m);
+  --z-index: -1;
+  --opacity: 0.15;
+  --blend-mode: multiply;
+  --background: var(--foreground-dark);
+
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-130-pc);
+  padding: var(--padding);
+  font-size: var(--size);
+  width: 100%;
+
+  &::before {
+    top: 50%;
+		transform: translateY(-50%) scale(0) translateZ(0);
+		transform-origin: 50% 75%;
+    transition: transform 500ms var(--easing-quad);
+    padding-top: 100%;
+    border-radius: 100%;
+		background: var(--background);
+    mix-blend-mode: var(--blend-mode);
+    z-index: var(--z-index);
+    opacity: var(--opacity);
+	}
+
+  &:hover,
+	&:active {
+		&::before {
+			transform: translateY(-50%) scale(1) translateZ(0);
+		}
+	}
+
+  @include util.breakpoint-min("m") {
+    width: auto;
+  }
+}
+
+.o-button-secondary {
+  background: inherit;
+}
+
+.o-button-large {
+  --padding: var(--2xs) var(--xs);
+  --size: var(--t-r);
+}
+
+.o-button-main[data-theme="light"] {
+  --opacity: 1;
+  --blend-mode: screen;
+  --background: var(--background-base);
+}
+
+.o-button-secondary[data-theme="default"] {
+  $brand: map.get(con.$vars, "brand");
+
+  --z-index: 1;
+  --background: #{map.get($brand, "blue-light")};
+  --opacity: 0.125;
+}

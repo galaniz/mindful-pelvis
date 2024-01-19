@@ -1,0 +1,13 @@
+/**
+ * Backgrounds - Color Styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/backgrounds/Color/Color";
+
+/* Styles */
+
+.bg-current {
+  background-color: currentcolor;
+}

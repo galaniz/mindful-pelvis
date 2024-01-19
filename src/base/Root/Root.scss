@@ -1,0 +1,127 @@
+/**
+ * Base - Root Styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/base/Root/Root" as root;
+@use "@alanizcreative/formation/src/utils" as util;
+
+/* Styles */
+
+:root {
+  @include root.set-root;
+  
+  /* Heading one */
+
+  @include util.fluid-size(
+    --h1,
+    util.calc-rem(44px) util.calc-rem(60px),
+    "s" "l"
+  );
+
+  /* Heading two large */
+
+  @include util.fluid-size(
+    --h2-l,
+    util.calc-rem(40px) util.calc-rem(54px),
+    "s" "l"
+  );
+
+  /* Heading two */
+
+  @include util.fluid-size(
+    --h2,
+    util.calc-rem(36px) util.calc-rem(48px),
+    "s" "l"
+  );
+
+  /* Heading three */
+
+  @include util.fluid-size(
+    --h3,
+    util.calc-rem(32px) util.calc-rem(36px),
+    "s" "l"
+  );
+
+  /* Heading four */
+
+  @include util.fluid-size(
+    --h4,
+    util.calc-rem(25px) util.calc-rem(28px),
+    "s" "l"
+  );
+
+  /* Headings and text */
+
+  --h5: #{util.calc-rem(22px)};
+  --h6: #{util.calc-rem(18px)};
+  --t: #{util.calc-rem(18px)};
+  --t-r: #{util.calc-rem(19px)};
+  --t-m: #{util.calc-rem(18px)};
+  --t-s: #{util.calc-rem(16px)};
+  --t-xs: #{util.calc-rem(13px)};
+
+  @include util.breakpoint-min("m") {
+    --h5: #{util.calc-rem(24px)};
+    --h6: #{util.calc-rem(20px)};
+    --t: #{util.calc-rem(20px)};
+  }
+
+  /* Text quote */
+
+  @include util.fluid-size(
+    --t-quote,
+    util.calc-rem(23px) util.calc-rem(26px),
+    "s" "l"
+  );
+
+  /* Text large */
+
+  @include util.fluid-size(
+    --t-l,
+    util.calc-rem(19px) util.calc-rem(22px),
+    "s" "l"
+  );
+
+  /* Logo */
+
+  @include util.fluid-size(
+    --logo-width,
+    util.calc-rem(200px) util.calc-rem(300px),
+    "s" "l"
+  );
+  @include util.fluid-size(
+    --logo-height,
+    util.calc-rem(64px) util.calc-rem(96px),
+    "s" "l"
+  );
+
+  /* Colors */
+
+  --text-color: var(--foreground-base);
+  --heading-color: var(--foreground-dark);
+  --link-color: var(--primary-base);
+  --foreground-base-30: #{rgba(util.get-color("foreground-base"), 0.3)};
+
+  /* Box shadow */
+
+  --shadow: 0 var(--5xs) var(--4xs) 0 #{rgba(util.get-color("foreground-dark"), 0.1)};
+
+  /* Transition */
+
+  --easing-quad: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* Underline */
+
+  --underline: #{util.calc-rem(1px)};
+
+  /* Nav */
+
+  --nav-padding: var(--3xs);
+  --nav-height: calc(var(--logo-height) + (var(--nav-padding) * 2));
+
+  @include util.breakpoint-min("s") {
+    --nav-padding: var(--xs);
+  }
+}

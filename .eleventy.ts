@@ -8,8 +8,8 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import htmlmin from 'html-minifier'
 import { resolve, extname } from 'node:path'
-import { getAllFilePaths } from '@alanizcreative/static-site-formation/lib'
-import config from './src/config/html'
+import { getAllFilePaths } from '@alanizcreative/static-site-formation/lib/utils'
+import { configHtml } from './src/config/configHtml'
 
 /* Config */
 
@@ -19,15 +19,15 @@ module.exports = (args: any) => {
   if (process) {
     const env = process.env
 
-    config.env.cache = env?.USE_11TY_CACHE ? true : false
-    config.env.dev = env.ENVIRONMENT === 'dev'
-    config.env.prod = env.ENVIRONMENT === 'production'
-    config.cms.name = 'contentful'
-    config.cms.space = env.CTFL_SPACE_ID !== undefined ? env.CTFL_SPACE_ID : ''
-    config.cms.previewAccessToken = env.CTFL_CPA_TOKEN !== undefined ? env.CTFL_CPA_TOKEN : ''
-    config.cms.previewHost = 'preview.contentful.com'
-    config.cms.deliveryAccessToken = env.CTFL_CDA_TOKEN !== undefined ? env.CTFL_CDA_TOKEN : ''
-    config.cms.deliveryHost = 'cdn.contentful.com'
+    configHtml.env.cache = env?.USE_11TY_CACHE ? true : false
+    configHtml.env.dev = env.ENVIRONMENT === 'dev'
+    configHtml.env.prod = env.ENVIRONMENT === 'production'
+    configHtml.cms.name = 'contentful'
+    configHtml.cms.space = env.CTFL_SPACE_ID !== undefined ? env.CTFL_SPACE_ID : ''
+    configHtml.cms.previewAccessToken = env.CTFL_CPA_TOKEN !== undefined ? env.CTFL_CPA_TOKEN : ''
+    configHtml.cms.previewHost = 'preview.contentful.com'
+    configHtml.cms.deliveryAccessToken = env.CTFL_CDA_TOKEN !== undefined ? env.CTFL_CDA_TOKEN : ''
+    configHtml.cms.deliveryHost = 'cdn.contentful.com'
   }
 
   /* Ignore gitignore */

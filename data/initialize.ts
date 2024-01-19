@@ -10,13 +10,15 @@ import purgecss from '@fullhuman/postcss-purgecss'
 import autoprefixer from 'autoprefixer'
 import esbuild from 'esbuild'
 import { sassPlugin } from 'esbuild-sass-plugin'
-import render from '@alanizcreative/static-site-formation/lib/render'
-import getAllContentfulData from '@alanizcreative/static-site-formation/lib/utils/get-all-contentful-data'
-import writeStoreFiles from '@alanizcreative/static-site-formation/lib/utils/write-store-files'
-import writeServerlessFiles from '@alanizcreative/static-site-formation/lib/utils/write-serverless-files'
-import writeRedirectsFile from '@alanizcreative/static-site-formation/lib/utils/write-redirects-file'
-import config from '../src/config/html'
-import cache from '../src/utils/cache/html'
+import { Render } from '@alanizcreative/static-site-formation/lib/render/Render'
+import {
+  getAllContentfulData,
+  writeStoreFiles,
+  writeServerlessFiles,
+  writeRedirectsFile
+} from '@alanizcreative/static-site-formation/lib/utils'
+import { configHtml } from '../src/config/configHtml'
+import { cacheHtml } from '../src/utils/cache/cacheHtml'
 
 /* Eleventy init */
 
@@ -35,24 +37,24 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     const mode: string = typeof args?.eleventy?.env?.runMode === 'string' ? args.eleventy.env.runMode : 'serve'
 
     if (mode === 'build') {
-      config.env.build = true
+      configHtml.env.build = true
     }
 
     /* Reset style and script paths */
 
-    config.actions.renderStart = async (): Promise<void> => {
-      config.vars.css.cache = ''
+    configHtml.actions.renderStart = async (): Promise<void> => {
+      configHtml.vars.css.cache = ''
     }
 
     /* Build styles and scripts */
 
-    config.actions.renderEnd = async (): Promise<void> => {
+    configHtml.actions.renderEnd = async (): Promise<void> => {
       const entryPoints = {
-        ...config.scripts.build,
-        ...config.styles.build
+        ...configHtml.scripts.build,
+        ...configHtml.styles.build
       }
 
-      const { css, js } = config.vars
+      const { css, js } = configHtml.vars
 
       if (css.in !== '' && css.out !== '') {
         entryPoints[css.out] = css.in
@@ -92,17 +94,17 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
 
     /* Inline styles */
 
-    config.filters.renderItem = async (output: string): Promise<string> => {
-      if (config.vars.css.in === '' || config.vars.css.head === '') {
+    configHtml.filters.renderItem = async (output: string): Promise<string> => {
+      if (configHtml.vars.css.in === '' || configHtml.vars.css.head === '') {
         return output
       }
 
       let styles = ''
 
-      if (config.vars.css.cache !== '') {
-        styles = config.vars.css.cache
+      if (configHtml.vars.css.cache !== '') {
+        styles = configHtml.vars.css.cache
       } else {
-        const sassRes = sass.compile(`./${config.vars.css.in}`, {
+        const sassRes = sass.compile(`./${configHtml.vars.css.in}`, {
           loadPaths: ['node_modules', './src'],
           style: 'compressed'
         })
@@ -110,11 +112,11 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
         if (sassRes.css !== undefined) {
           styles += sassRes.css
 
-          config.vars.css.cache = styles
+          configHtml.vars.css.cache = styles
         }
       }
 
-      if (styles !== '' && config.env.build) {
+      if (styles !== '' && configHtml.env.build) {
         const postRes = await postcss(
           [
             autoprefixer,
@@ -126,7 +128,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
                 }
               ],
               dynamicAttributes: [
-                'data-no-scroll',
+                'data-stop-scroll',
                 'data-show'
               ]
             })
@@ -143,7 +145,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
       }
 
       if (styles !== '') {
-        output = output.replace(config.vars.css.head, `<style>${styles}</style>`)
+        output = output.replace(configHtml.vars.css.head, `<style>${styles}</style>`)
       }
 
       /* Output */
@@ -153,9 +155,9 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
 
     /* Cache data */
 
-    if (config.env.cache) {
-      config.filters.cacheData = async (cacheData: FRM.AnyObject, { key, type = 'get', data }: FRM.CacheDataFilterArgs): Promise<object> => {
-        const c = await cache(key, type, data)
+    if (configHtml.env.cache) {
+      configHtml.filters.cacheData = async (cacheData: FRM.AnyObject, { key, type = 'get', data }: FRM.CacheDataFilterArgs): Promise<object> => {
+        const c = await cacheHtml(key, type, data)
 
         if (c !== undefined) {
           cacheData = c
@@ -167,7 +169,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
 
     /* Render output */
 
-    const output = await render({
+    const output = await Render({
       allData: await getAllContentfulData()
     })
 
@@ -194,7 +196,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
       output: ''
     }]
   } catch (error) {
-    console.error(config.console.red, '[MP] Error rendering site: ', error)
+    console.error(configHtml.console.red, '[MP] Error rendering site: ', error)
 
     /* Output */
 

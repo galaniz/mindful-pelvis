@@ -1,0 +1,54 @@
+/**
+ * Layouts - Flex
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/src/layouts/Flex/Flex";
+@use "@alanizcreative/formation/src/utils" as util;
+
+/* Styles */
+
+.l-order-first {
+  order: -9999;
+}
+
+.l-order-first-s {
+  @include util.breakpoint-min("s") {
+    order: -9999;
+  }
+}
+
+.l-order-first-m {
+  @include util.breakpoint-min("m") {
+    order: -9999;
+  }
+}
+
+.l-order-first-l {
+  @include util.breakpoint-min("l") {
+    order: -9999;
+  }
+}
+
+.l-order-last {
+  order: 9999;
+}
+
+.l-order-last-s {
+  @include util.breakpoint-min("s") {
+    order: 9999;
+  }
+}
+
+.l-order-last-m {
+  @include util.breakpoint-min("m") {
+    order: 9999;
+  }
+}
+
+.l-order-last-l {
+  @include util.breakpoint-min("l") {
+    order: 9999;
+  }
+}
