@@ -4,15 +4,16 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import type { ContainerPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/container/ContainerTypes'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - callback to filter formation container
  *
- * @see {@link https://github.com/galaniz/static-site-formation|Formation Container}
+ * @type {ContainerPropsFilter}
  */
-
-const ContainerHtml = (props: FRM.ContainerProps): FRM.ContainerProps => {
+const ContainerHtml: ContainerPropsFilter = async (props) => {
   const { args } = props
 
   let {
@@ -29,21 +30,21 @@ const ContainerHtml = (props: FRM.ContainerProps): FRM.ContainerProps => {
     align = 'None',
     classes = '',
     attr = ''
-  } = args
+  } = isObjectStrict(args) ? args : {}
 
   /* Normalize options */
 
-  tag = configHtml.vars.options.tag[tag]
-  layout = configHtml.vars.options.layout[layout]
-  maxWidth = configHtml.vars.options.maxWidth[maxWidth]
-  paddingTop = configHtml.vars.options.padding[paddingTop]
-  paddingTopLarge = configHtml.vars.options.padding[paddingTopLarge]
-  paddingBottom = configHtml.vars.options.padding[paddingBottom]
-  paddingBottomLarge = configHtml.vars.options.padding[paddingBottomLarge]
-  gap = configHtml.vars.options.gap[gap]
-  gapLarge = configHtml.vars.options.gap[gapLarge]
-  justify = configHtml.vars.options.justify[justify]
-  align = configHtml.vars.options.align[align]
+  tag = configHtmlVars.options.tag[tag]
+  layout = configHtmlVars.options.layout[layout]
+  maxWidth = configHtmlVars.options.maxWidth[maxWidth]
+  paddingTop = configHtmlVars.options.padding[paddingTop]
+  paddingTopLarge = configHtmlVars.options.padding[paddingTopLarge]
+  paddingBottom = configHtmlVars.options.padding[paddingBottom]
+  paddingBottomLarge = configHtmlVars.options.padding[paddingBottomLarge]
+  gap = configHtmlVars.options.gap[gap]
+  gapLarge = configHtmlVars.options.gap[gapLarge]
+  justify = configHtmlVars.options.justify[justify]
+  align = configHtmlVars.options.align[align]
 
   /* Classes */
 
@@ -64,7 +65,7 @@ const ContainerHtml = (props: FRM.ContainerProps): FRM.ContainerProps => {
 
   let layoutClasses = ''
 
-  if (layout === 'column' && (justify !== '' || align !== '')) {
+  if (layout === 'column' && (isStringStrict(justify) || isStringStrict(align))) {
     layoutClasses = 'l-flex l-flex-column'
   }
 
@@ -76,37 +77,37 @@ const ContainerHtml = (props: FRM.ContainerProps): FRM.ContainerProps => {
 
   let gapClasses = ''
 
-  if (gap !== '') {
+  if (isStringStrict(gap)) {
     gapClasses = layout === 'row' ? `l-gap-margin-${gap}` : `l-margin-bottom-${gap}-all`
   }
 
   let gapLargeClasses = ''
 
-  if (gapLarge !== '' && gapLarge !== gap) {
+  if (isStringStrict(gapLarge) && gapLarge !== gap) {
     gapLargeClasses = layout === 'row' ? `l-gap-margin-${gapLarge}-l` : `l-margin-bottom-${gapLarge}-all-m`
   }
 
   /* Output */
 
   if (classesArray.length > 0) {
-    classes += `${classes !== '' ? ' ' : ''}${classesArray.join(' ')}`
+    classes += `${isStringStrict(classes) ? ' ' : ''}${classesArray.join(' ')}`
   }
 
   if (attrs.length > 0) {
-    attr += `${attr !== '' ? ' ' : ''}${attrs.join(' ')}`
+    attr += `${isStringStrict(attr) ? ' ' : ''}${attrs.join(' ')}`
   }
 
   args.tag = tag
   args.layout = layoutClasses
-  args.maxWidth = maxWidth !== '' ? `l-${maxWidth}` : ''
-  args.paddingTop = paddingTop !== '' ? `l-padding-top-${paddingTop}` : ''
-  args.paddingTopLarge = paddingTopLarge !== '' ? `l-padding-top-${paddingTopLarge}-m` : ''
-  args.paddingBottom = paddingBottom !== '' ? `l-padding-bottom-${paddingBottom}` : ''
-  args.paddingBottomLarge = paddingBottomLarge !== '' ? `l-padding-bottom-${paddingBottomLarge}-m` : ''
+  args.maxWidth = isStringStrict(maxWidth) ? `l-${maxWidth}` : ''
+  args.paddingTop = isStringStrict(paddingTop) ? `l-padding-top-${paddingTop}` : ''
+  args.paddingTopLarge = isStringStrict(paddingTopLarge) ? `l-padding-top-${paddingTopLarge}-m` : ''
+  args.paddingBottom = isStringStrict(paddingBottom) ? `l-padding-bottom-${paddingBottom}` : ''
+  args.paddingBottomLarge = isStringStrict(paddingBottomLarge) ? `l-padding-bottom-${paddingBottomLarge}-m` : ''
   args.gap = gapClasses
   args.gapLarge = gapLargeClasses
-  args.justify = justify !== '' ? `l-justify-${justify}` : ''
-  args.align = align !== '' ? `l-align-${align}` : ''
+  args.justify = isStringStrict(justify) ? `l-justify-${justify}` : ''
+  args.align = isStringStrict(align) ? `l-align-${align}` : ''
   args.classes = classes
   args.attr = attr
 

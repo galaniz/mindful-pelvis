@@ -4,42 +4,16 @@
 
 /* Imports */
 
+import type { ButtonProps } from './ButtonHtmlTypes'
 import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output link button
  *
- * @param {object} props
- * @param {object} props.args
- * @param {string} props.args.title
- * @param {string} props.args.link - Back end option
- * @param {object} props.args.internalLink
- * @param {string} props.args.externalLink
- * @param {string} props.args.type
- * @param {string} props.args.size
- * @param {string} props.args.justify
- * @param {string} props.args.paddingTop
- * @param {string} props.args.paddingBottom
- * @param {string} props.args.theme - Back end option
+ * @param {ButtonProps} props
  * @return {string} HTML - a || div
  */
-
-interface ButtonProps {
-  args: {
-    title?: string
-    link?: string
-    internalLink?: MP.InternalLink
-    externalLink?: string
-    type?: string
-    size?: string
-    justify?: string
-    paddingTop?: string
-    paddingBottom?: string
-    theme?: string
-  }
-}
-
 const ButtonHtml = (props: ButtonProps = { args: {} }): string => {
   const { args = {} } = props
 
@@ -73,11 +47,11 @@ const ButtonHtml = (props: ButtonProps = { args: {} }): string => {
 
   /* Normalize options */
 
-  type = configHtml.vars.options.button.type[type]
-  size = configHtml.vars.options.button.size[size]
-  justify = configHtml.vars.options.justify[justify]
-  paddingTop = configHtml.vars.options.padding[paddingTop]
-  paddingBottom = configHtml.vars.options.padding[paddingBottom]
+  type = configHtmlVars.options.button.type[type]
+  size = configHtmlVars.options.button.size[size]
+  justify = configHtmlVars.options.justify[justify]
+  paddingTop = configHtmlVars.options.padding[paddingTop]
+  paddingBottom = configHtmlVars.options.padding[paddingBottom]
 
   /* Classes */
 

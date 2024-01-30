@@ -42,11 +42,11 @@ module.exports = (args: any) => {
 
   args.on('eleventy.beforeWatch', async () => {
     const folders = [
+      './src/backgrounds/',
       './src/base/',
       './src/components/',
       './src/config/',
       './src/effects/',
-      './src/filters/',
       './src/global/',
       './src/layouts/',
       './src/objects/',

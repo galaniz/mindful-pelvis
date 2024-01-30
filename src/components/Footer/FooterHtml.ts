@@ -4,6 +4,7 @@
 
 /* Imports */
 
+import type { NavigationsReturn } from '../Navigations/NavigationsHtmlTypes'
 import { getYear } from '@alanizcreative/static-site-formation/lib/utils'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
@@ -11,11 +12,10 @@ import { configHtml } from '../../config/configHtml'
 /**
  * Function - output footer
  *
- * @param {object} navigations
+ * @param {NavigationsReturn} navigations
  * @return {string} HTML - footer
  */
-
-const FooterHtml = (navigations: MP.NavigationsReturn): string => {
+const FooterHtml = (navigations: NavigationsReturn): string => {
   /* Footer and/or social navs */
 
   let navs = ''

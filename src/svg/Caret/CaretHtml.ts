@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output svg for down, left and right caret
@@ -36,7 +36,7 @@ const CaretSvgHtml = (direction: string = 'down', classes: string = ''): string 
   const viewBox = '0 0 20 20'
   const id = `caret-${direction}-icon`
 
-  configHtml.vars.svg[id] = {
+  configHtmlVars.svg[id] = {
     viewBox,
     output: `<path d="${path}" fill="currentcolor" />`
   }

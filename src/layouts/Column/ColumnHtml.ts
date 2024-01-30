@@ -4,15 +4,16 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import type { ColumnPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/column/ColumnTypes'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - callback to filter formation column
  *
- * @see {@link https://github.com/galaniz/static-site-formation|Formation Column}
+ * @type {ColumnPropsFilter}
  */
-
-const ColumnHtml = (props: FRM.ColumnProps): FRM.ColumnProps => {
+const ColumnHtml: ColumnPropsFilter = async (props) => {
   const { args } = props
 
   let {
@@ -25,19 +26,19 @@ const ColumnHtml = (props: FRM.ColumnProps): FRM.ColumnProps => {
     align = 'None',
     order = 'Default',
     classes = ''
-  } = args
+  } = isObjectStrict(args) ? args : {}
 
   /* Normalize options */
 
-  tag = configHtml.vars.options.tag[tag]
-  width = configHtml.vars.options.width[width]
-  widthSmall = configHtml.vars.options.width[widthSmall]
-  widthMedium = configHtml.vars.options.width[widthMedium]
-  widthLarge = configHtml.vars.options.width[widthLarge]
-  justify = configHtml.vars.options.justify[justify]
-  align = configHtml.vars.options.align[align]
+  tag = configHtmlVars.options.tag[tag]
+  width = configHtmlVars.options.width[width]
+  widthSmall = configHtmlVars.options.width[widthSmall]
+  widthMedium = configHtmlVars.options.width[widthMedium]
+  widthLarge = configHtmlVars.options.width[widthLarge]
+  justify = configHtmlVars.options.justify[justify]
+  align = configHtmlVars.options.align[align]
 
-  const ord: string = configHtml.vars.options.order[order]
+  const ord = isStringStrict(order) ? configHtmlVars.options.order[order] : ''
 
   /* Width */
 
@@ -48,18 +49,18 @@ const ColumnHtml = (props: FRM.ColumnProps): FRM.ColumnProps => {
   /* Order */
 
   if (ord !== '') {
-    classes += `${classes !== '' ? ' ' : ''}l-order-${ord}`
+    classes += `${isStringStrict(classes) ? ' ' : ''}l-order-${ord}`
   }
 
   /* Output */
 
   args.tag = tag
-  args.width = width !== '' ? `l-width-${width}` : ''
-  args.widthSmall = widthSmall !== '' ? `l-width-${widthSmall}-s` : ''
-  args.widthMedium = widthMedium !== '' ? `l-width-${widthMedium}-m` : ''
-  args.widthLarge = widthLarge !== '' ? `l-width-${widthLarge}-l` : ''
-  args.justify = justify !== '' ? `l-justify-${justify}` : ''
-  args.align = align !== '' ? `l-align-${align}` : ''
+  args.width = isStringStrict(width) ? `l-width-${width}` : ''
+  args.widthSmall = isStringStrict(widthSmall) ? `l-width-${widthSmall}-s` : ''
+  args.widthMedium = isStringStrict(widthMedium) ? `l-width-${widthMedium}-m` : ''
+  args.widthLarge = isStringStrict(widthLarge) ? `l-width-${widthLarge}-l` : ''
+  args.justify = isStringStrict(justify) ? `l-justify-${justify}` : ''
+  args.align = isStringStrict(align) ? `l-align-${align}` : ''
   args.classes = classes
 
   return props

@@ -84,12 +84,6 @@
   }
 }
 
-/* List - column */
-
-.c-nav__column {
-
-}
-
 /* Width - trigger overflow in row */
 
 .c-nav__width {
@@ -127,12 +121,6 @@
   &[data-depth="1"]:first-child {
     margin-top: var(--item-margin);
   }
-}
-
-/* Link */
-
-.c-nav__link {
-
 }
 
 /* Call to action */

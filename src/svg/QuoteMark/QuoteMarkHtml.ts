@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output svg for quote mark
@@ -19,7 +19,7 @@ const QuoteMarkSvgHtml = (classes: string = ''): string => {
   const viewBox = '0 0 20 16'
   const id = 'quote-mark-icon'
 
-  configHtml.vars.svg[id] = {
+  configHtmlVars.svg[id] = {
     viewBox,
     output: `
       <path

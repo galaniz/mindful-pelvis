@@ -8,14 +8,13 @@ import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Con
 import { LayoutHtml } from '../../components/Layout/LayoutHtml'
 import { ContentHtml } from '../../objects/Content/ContentHtml'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output coming soon page
  *
- * @return {string} HTML - html
+ * @return {Promise<string>} HTML - html
  */
-
 const ComingSoonHtml = async (): Promise<string> => {
   /* Title and slug */
 
@@ -65,7 +64,7 @@ const ComingSoonHtml = async (): Promise<string> => {
           <h1 class="l-padding-top-xl l-padding-bottom-s">New site coming soon!</h1>
           <p>
             In the meantime you can reach me at 
-            <a href="mailto:${configHtml.vars.email}" data-rich>${configHtml.vars.email}</a>
+            <a href="mailto:${configHtmlVars.email}" data-rich>${configHtmlVars.email}</a>
           </p>
         ${output.content.end}
       ${output.container.end}

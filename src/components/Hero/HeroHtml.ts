@@ -4,37 +4,21 @@
 
 /* Imports */
 
+import type { HeroArgs } from './HeroHtmlTypes'
 import {
-  getProp,
   getImage,
-  addScriptStyle
+  addScriptStyle,
+  isString
 } from '@alanizcreative/static-site-formation/lib/utils'
 import { ButtonHtml } from '../../objects/Button/ButtonHtml'
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output hero
  *
- * @param {object} args
- * @param {string} args.contentType
- * @param {string} args.type
- * @param {string} args.title
- * @param {string} args.text
- * @param {object} args.image
- * @param {object} args.callToAction
+ * @param {HeroArgs} args
  * @return {string} HTML - section
  */
-
-interface HeroArgs {
-  contentType: string
-  type: string
-  title: string
-  text?: string
-  image?: FRM.ImageData
-  callToAction?: MP.InternalLink
-  pageData?: MP.Item
-}
-
 const HeroHtml = ({
   contentType = 'page',
   type = 'Minimal',
@@ -45,10 +29,10 @@ const HeroHtml = ({
 }: HeroArgs): string => {
   /* Normalize options */
 
-  type = configHtml.vars.options.hero.type[type]
+  type = configHtmlVars.options.hero.type[type]
 
   const overlap = type.includes('overlap')
-  const overlapBg = overlap ? configHtml.vars.options.hero.background[type] : ''
+  const overlapBg = overlap ? configHtmlVars.options.hero.background[type] : ''
 
   /* Image */
 
@@ -56,8 +40,8 @@ const HeroHtml = ({
 
   if (image !== undefined) {
     const maxWidth = overlap ? 1600 : 2000
-    const imageObj = getImage({
-      data: getProp(image),
+    const imageRes = getImage({
+      data: image,
       classes: 'l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc l-object-cover',
       returnAspectRatio: true,
       lazy: false,
@@ -65,19 +49,19 @@ const HeroHtml = ({
       maxWidth
     })
 
-    let imageObjAspectRatio = 0
-    let imageObjOutput = ''
+    let imageResAspectRatio = 0
+    let imageResOutput = ''
 
-    if (typeof imageObj === 'string') {
-      imageObjOutput = imageObj
+    if (isString(imageRes)) {
+      imageResOutput = imageRes
     } else {
-      imageObjAspectRatio = imageObj.aspectRatio
-      imageObjOutput = imageObj.output
+      imageResAspectRatio = imageRes.aspectRatio
+      imageResOutput = imageRes.output
     }
 
     imageOutput = `
-      <picture class="l-relative l-block l-overflow-hidden l-height-100-pc" style="padding-top:${imageObjAspectRatio * 100}%">
-        ${imageObjOutput}
+      <picture class="l-relative l-block l-overflow-hidden l-height-100-pc" style="padding-top:${imageResAspectRatio * 100}%">
+        ${imageResOutput}
       </picture>
     `
   }

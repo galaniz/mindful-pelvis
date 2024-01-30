@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output svg for calendar icon
@@ -19,7 +19,7 @@ const CalendarSvgHtml = (classes: string = ''): string => {
   const viewBox = '0 0 20 20'
   const id = 'calendar-icon'
 
-  configHtml.vars.svg[id] = {
+  configHtmlVars.svg[id] = {
     viewBox,
     output: `
       <path

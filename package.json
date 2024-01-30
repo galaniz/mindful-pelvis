@@ -7,7 +7,7 @@
     "start": "concurrently \"npx tsc --watch --project tsconfig.json\" \"npx @11ty/eleventy --serve\" \"npx stylelint 'src/**/*.scss'\" \"npx ts-standard\"",
     "build": "npx tsc --project tsconfig.json && npx @11ty/eleventy",
     "debug": "DEBUG=* npx @11ty/eleventy",
-    "lint": "npx ts-standard && npx stylelint 'src/**/*.scss'"
+    "lint": "npx ts-standard 'src/**/*.ts' && npx stylelint 'src/**/*.scss'"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output svg for check mark
@@ -19,7 +19,7 @@ const CheckMarkSvgHtml = (classes: string = ''): string => {
   const viewBox = '0 0 20 20'
   const id = 'check-mark-icon'
 
-  configHtml.vars.svg[id] = {
+  configHtmlVars.svg[id] = {
     viewBox,
     output: `
       <path

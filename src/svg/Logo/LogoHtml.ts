@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output svg for logo
@@ -20,7 +20,7 @@ const LogoSvgHtml = (classes: string = '', theme: string = 'default'): string =>
   const viewBox = '0 0 100 32.473'
   const id = 'logo'
 
-  configHtml.vars.svg[id] = {
+  configHtmlVars.svg[id] = {
     viewBox,
     output: `
       <style>

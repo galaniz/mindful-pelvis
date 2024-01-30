@@ -6,6 +6,7 @@ functions/*
 data/initialize.js
 src/json/**/*.json
 src/**/*Html.js
+src/**/*HtmlTypes.js
 !src/assets/
 .DS_Store
 .cache

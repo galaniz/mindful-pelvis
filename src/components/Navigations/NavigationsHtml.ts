@@ -4,22 +4,27 @@
 
 /* Imports */
 
+import type { NavigationsReturn, NavigationArgs } from './NavigationsHtmlTypes'
+import type {
+  NavigationItem,
+  NavigationProps
+} from '@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes'
 import { v4 as uuid } from 'uuid'
 import { Navigation } from '@alanizcreative/static-site-formation/lib/components/Navigation/Navigation'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - check if text dropdown
  *
  * @private
- * @param {object} item
+ * @param {NavigationItem} item
  * @param {number} depth
  * @return {boolean}
  */
-
-const _isDropdown = (item: FRM.NavigationItem, depth: number): boolean => {
+const _isDropdown = (item: NavigationItem, depth: number): boolean => {
   const { style = 'Text', children } = item
 
   return children !== undefined && depth === 0 && style === 'Text'
@@ -29,12 +34,11 @@ const _isDropdown = (item: FRM.NavigationItem, depth: number): boolean => {
  * Function - check if button dropdown
  *
  * @private
- * @param {object} item
+ * @param {NavigationItem} item
  * @param {number} depth
  * @return {boolean}
  */
-
-const _isButtonDropdown = (item: FRM.NavigationItem, depth: number): boolean => {
+const _isButtonDropdown = (item: NavigationItem, depth: number): boolean => {
   const { style = 'Text', children } = item
 
   return children !== undefined && depth === 0 && style === 'Button'
@@ -44,11 +48,10 @@ const _isButtonDropdown = (item: FRM.NavigationItem, depth: number): boolean => 
  * Function - check if button style
  *
  * @private
- * @param {object} item
+ * @param {NavigationItem} item
  * @return {boolean}
  */
-
-const _isButton = (item: FRM.NavigationItem): boolean => {
+const _isButton = (item: NavigationItem): boolean => {
   const { style = 'Text' } = item
 
   return style === 'Button'
@@ -57,24 +60,14 @@ const _isButton = (item: FRM.NavigationItem): boolean => {
 /**
  * Function - output navigations
  *
- * @param {object} args
- * @param {object[]} args.navigations
- * @param {object[]} args.items
- * @param {string} args.current
- * @return {object}
+ * @param {NavigationProps} args
+ * @return {NavigationsReturn}
  */
-
-interface NavigationsArgs {
-  navigations: FRM.Navigation[]
-  items: FRM.NavigationItem[]
-  current: string
-}
-
 const NavigationsHtml = ({
   navigations = [],
   items = [],
   current = ''
-}: NavigationsArgs): MP.NavigationsReturn => {
+}: NavigationProps): NavigationsReturn => {
   /* Navs and items required */
 
   if (navigations.length === 0 || items.length === 0) {
@@ -91,7 +84,7 @@ const NavigationsHtml = ({
 
   /* Attributes */
 
-  const linkClass = 'c-nav__link t-height-150-pc l-inline-flex'
+  const linkClass = 'c-nav__link t-height-150-pc'
   const itemClass = 'c-nav__item'
   const listAttr = 'role="list"'
   const listClass = 'c-nav__list t-list-style-none t-link-current l-flex'
@@ -120,15 +113,15 @@ const NavigationsHtml = ({
         itemClass,
         linkClass,
         internalLinkClass: 'js-pt-link',
-        filterBeforeList: ({ args, depth }: FRM.NavigationFilterArgs) => {
+        filterBeforeList: ({ args, depth }) => {
           if (depth > 0) {
-            args.listClass = `${listClass} o-collapsible__main e-transition l-flex-column no-js-none`
+            args.listClass = `${listClass} o-collapsible__main e-underline-reverse e-transition l-flex-column no-js-none`
             args.listAttr = `${listAttr} data-type="${listType}" id="${collapsibleId}"`
           } else {
             args.listAttr = listAttr
           }
         },
-        filterBeforeItem: ({ args, index, item, items, depth, output }: FRM.NavigationFilterArgs) => {
+        filterBeforeItem: ({ args, index, item, items, depth, output }) => {
           const newItemAttr: string[] = []
 
           let newListType = listType
@@ -137,15 +130,16 @@ const NavigationsHtml = ({
           let newLinkAttr = ''
 
           if (depth === 0) {
-            newLinkClass += ' t-r'
+            newLinkClass += ' t-r l-inline-flex'
             newItemClass += ' e-transition'
 
             if (index === 0) {
               output.html += '<li role="presentation" class="c-nav__width no-js-none l-padding-0 l-relative l-before"></li>'
             }
           } else {
-            newLinkClass += ' t-s l-padding-top-5xs l-padding-bottom-5xs'
-            newItemClass += ' l-padding-top-5xs l-padding-bottom-5xs'
+            newLinkAttr = 'data-rich'
+            newLinkClass += ' t-s l-before'
+            newItemClass += ' l-padding-top-4xs l-padding-bottom-4xs l-relative'
           }
 
           if (_isButton(item)) {
@@ -195,12 +189,12 @@ const NavigationsHtml = ({
 
           args.itemAttr = newItemAttr.join(' ')
         },
-        filterBeforeLink: ({ item, depth, output }: FRM.NavigationFilterArgs) => {
+        filterBeforeLink: ({ item, depth, output }) => {
           if (_isDropdown(item, depth)) {
             output.html += '<div class="l-flex l-align-center l-justify-between">'
           }
         },
-        filterAfterLink: ({ item, index, depth, output }: FRM.NavigationFilterArgs) => {
+        filterAfterLink: ({ item, index, depth, output }) => {
           const { title = '' } = item
 
           if (depth === 0) {
@@ -228,12 +222,12 @@ const NavigationsHtml = ({
             `
           }
         },
-        filterBeforeLinkText: ({ item, depth, output }: FRM.NavigationFilterArgs) => {
+        filterBeforeLinkText: ({ item, depth, output }) => {
           if (_isButtonDropdown(item, depth)) {
             output.html += '<span class="l-padding-right-4xs">'
           }
         },
-        filterAfterLinkText: ({ item, depth, output }: FRM.NavigationFilterArgs) => {
+        filterAfterLinkText: ({ item, depth, output }) => {
           if (_isButtonDropdown(item, depth)) {
             output.html += `
               </span>
@@ -260,10 +254,10 @@ const NavigationsHtml = ({
         listClass: 'l-flex l-flex-wrap l-gap-margin-2xs t-list-style-none',
         listAttr: 'role="list"',
         linkClass: 'l-flex l-align-center l-justify-center l-relative l-width-s l-height-s b-radius-100-pc b-all',
-        filterBeforeLinkText: ({ output }: FRM.NavigationFilterArgs) => {
+        filterBeforeLinkText: ({ output }) => {
           output.html += '<span class="a-visually-hidden">'
         },
-        filterAfterLinkText: ({ item, output }: FRM.NavigationFilterArgs) => {
+        filterAfterLinkText: ({ item, output }) => {
           const { title = '' } = item
           const t = title.toLowerCase()
 
@@ -284,7 +278,7 @@ const NavigationsHtml = ({
     const firstTotal = firstWidths.reduce((a, b) => a + b, 0)
     const secondTotal = secondWidths.reduce((a, b) => a + b, 0)
 
-    configHtml.vars.navHalf = Math.max(firstTotal, secondTotal)
+    configHtmlVars.navHalf = Math.max(firstTotal, secondTotal)
   }
 
   /* Output */
@@ -295,40 +289,28 @@ const NavigationsHtml = ({
 /**
  * Function - output nav element with contents
  *
- * @param {object} args
- * @param {object} args.navigations
- * @param {object} args.props
+ * @param {NavigationArgs} args
  * @return {string}
  */
-
-interface NavArgs {
-  navigations: {
-    [key: string]: any
-  }
-  props: {
-    location?: string
-    title?: string
-  }
-}
-
-const NavigationHtml = ({ navigations = {}, props = {} }: NavArgs): string => {
-  const { location = '', title = '' } = props
-
-  if (location !== '' && title !== '') {
-    const loc = location.toLowerCase().replace(/ /g, '')
-
-    let nav = ''
-
-    if (loc === 'social') {
-      nav = navigations?.[loc]?.left !== '' ? navigations[loc].left : ''
-    } else {
-      nav = navigations?.[loc] !== '' ? navigations[loc] : ''
-    }
-
-    return `<nav aria-label="${title}">${nav}</nav>`
+const NavigationHtml = ({ navigations, props = {} }: NavigationArgs): string => {
+  if (!isObjectStrict(props)) {
+    return ''
   }
 
-  return ''
+  const {
+    location = 'main',
+    title = ''
+  } = props
+
+  if (!isStringStrict(location) || !isStringStrict(title)) {
+    return ''
+  }
+
+  if (!isStringStrict(navigations[location])) {
+    return ''
+  }
+
+  return `<nav aria-label="${title}">${navigations[location]}</nav>`
 }
 
 /* Exports */

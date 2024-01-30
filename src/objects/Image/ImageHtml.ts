@@ -4,9 +4,12 @@
 
 /* Imports */
 
-import { getProp, getImage } from '@alanizcreative/static-site-formation/lib/utils'
-import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
-import { configHtml } from '../../config/configHtml'
+import type { InternalLink } from '../../global/globalHtmlTypes'
+import type { ParentArgs } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
+import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
+import { getImage } from '@alanizcreative/static-site-formation/lib/utils'
+// import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output image
@@ -23,12 +26,12 @@ import { configHtml } from '../../config/configHtml'
 
 interface ImageProps {
   args: {
-    image?: object
+    image?: PropFile
     aspectRatio?: string
     borderRadius?: string
-    caption?: MP.InternalLink
+    caption?: InternalLink
   }
-  parents?: FRM.ParentArgs[]
+  parents?: ParentArgs[]
 }
 
 const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise<string> => {
@@ -37,8 +40,8 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
   let {
     image,
     aspectRatio = '1:1',
-    borderRadius = 'None',
-    caption
+    borderRadius = 'None'
+    // caption
   } = args
 
   /* Check card parent */
@@ -53,8 +56,8 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
 
   /* Normalize options */
 
-  aspectRatio = configHtml.vars.options.aspectRatio[aspectRatio]
-  borderRadius = configHtml.vars.options.borderRadius[borderRadius]
+  aspectRatio = configHtmlVars.options.aspectRatio[aspectRatio]
+  borderRadius = configHtmlVars.options.borderRadius[borderRadius]
 
   /* Image */
 
@@ -68,7 +71,7 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
     }
 
     const imageObj = getImage({
-      data: getProp(image),
+      data: image,
       classes: imageClasses.join(' '),
       returnAspectRatio: true,
       source: true,
@@ -116,6 +119,7 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
 
   /* Figure caption */
 
+  /*
   if (caption !== undefined) {
     const { content } = caption
 
@@ -137,6 +141,7 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
       `
     }
   }
+  */
 
   /* Output */
 

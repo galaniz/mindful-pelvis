@@ -4,8 +4,9 @@
 
 /* Imports */
 
-import { getProp, getPermalink } from '@alanizcreative/static-site-formation/lib/utils'
-import { configHtml } from '../../config/configHtml'
+import type { LayoutArgs } from './LayoutHtmlTypes'
+import { getPermalink, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { configHtml, configHtmlVars } from '../../config/configHtml'
 import { HeaderHtml } from '../Header/HeaderHtml'
 import { FooterHtml } from '../Footer/FooterHtml'
 import { HeroHtml } from '../Hero/HeroHtml'
@@ -13,18 +14,9 @@ import { HeroHtml } from '../Hero/HeroHtml'
 /**
  * Function - output html
  *
- * @param {object} args
- * @param {string} args.id
- * @param {object} args.meta
- * @param {object} args.navigations
- * @param {string} args.contentType
- * @param {string} args.content
- * @param {string[]} args.pageContains
- * @param {object} args.pageData
- * @param {object} args.serverlessData
- * @return {string} HTML - html
+ * @param {LayoutArgs} args
+ * @return {Promise<string>} HTML - html
  */
-
 const LayoutHtml = async ({
   id = '',
   meta,
@@ -32,7 +24,7 @@ const LayoutHtml = async ({
   contentType = 'page',
   content = '',
   pageData
-}: MP.LayoutArgs): Promise<string> => {
+}: LayoutArgs): Promise<string> => {
   /* Assets link */
 
   const assetsLink = `${getPermalink()}assets/`
@@ -55,14 +47,6 @@ const LayoutHtml = async ({
     noIndex = false
   } = meta
 
-  /* Page data */
-
-  const p: FRM.RenderItem = Object.assign({
-    title: '',
-    heroTitle: '',
-    heroText: ''
-  }, pageData)
-
   /* Title */
 
   if (title === '') {
@@ -79,15 +63,10 @@ const LayoutHtml = async ({
 
   /* Image */
 
-  let imageLink = ''
+  let imageLink = `${assetsLink}${configHtml.meta.image}`
 
-  if (typeof image === 'object') {
-    const imageData: FRM.ImageData = getProp(image, '', {})
-    const imageUrl = typeof imageData?.file?.url === 'string' ? imageData?.file?.url : ''
-
-    imageLink = `https:${imageUrl}`
-  } else {
-    imageLink = `${assetsLink}${configHtml.meta.image}`
+  if (isStringStrict(image)) {
+    imageLink = image
   }
 
   /* Canonical */
@@ -123,7 +102,7 @@ const LayoutHtml = async ({
 
   /* Theme color */
 
-  const theme = configHtml.vars.theme
+  const theme = configHtmlVars.theme
 
   /* Header, breadcrumbs and footer */
 
@@ -137,13 +116,23 @@ const LayoutHtml = async ({
 
   /* Hero */
 
+  let heroTitle = ''
+
+  if (isStringStrict(pageData.pageTitle)) {
+    heroTitle = pageData.pageTitle
+  }
+
+  if (isStringStrict(pageData.heroTitle)) {
+    heroTitle = pageData.heroTitle
+  }
+
   const heroOutput = HeroHtml({
     contentType,
-    type: p.heroType,
-    title: p.heroTitle !== '' ? p.heroTitle : p.title,
-    text: p.heroText,
-    image: p.heroImage,
-    callToAction: p.heroCallToAction,
+    title: heroTitle,
+    type: pageData.heroType,
+    text: pageData.heroText,
+    image: pageData.heroImage,
+    callToAction: pageData.heroCallToAction,
     pageData
   })
 
@@ -177,8 +166,8 @@ const LayoutHtml = async ({
 
   let scripts = ''
 
-  if (configHtml.vars.js.out !== '') {
-    scripts += `<script type="module" src="${assetsLink}${configHtml.vars.js.out}.js"></script>`
+  if (configHtmlVars.js.out !== '') {
+    scripts += `<script type="module" src="${assetsLink}${configHtmlVars.js.out}.js"></script>`
   }
 
   if (scriptsArray.length > 0) {
@@ -201,8 +190,8 @@ const LayoutHtml = async ({
 
   let styles = ''
 
-  if (configHtml.vars.css.out !== '') {
-    configHtml.vars.css.head = `<link rel="stylesheet" href="${assetsLink}${configHtml.vars.css.out}.css" media="all">`
+  if (configHtmlVars.css.out !== '') {
+    configHtmlVars.css.head = `<link rel="stylesheet" href="${assetsLink}${configHtmlVars.css.out}.css" media="all">`
   }
 
   if (stylesArray.length > 0) {
@@ -220,13 +209,13 @@ const LayoutHtml = async ({
 
   /* Svg sprites */
 
-  const svgIds = Object.keys(configHtml.vars.svg)
+  const svgIds = Object.keys(configHtmlVars.svg)
 
   let spritesOutput = ''
 
   if (svgIds.length > 0) {
     svgIds.forEach((id) => {
-      const svgData = configHtml.vars.svg[id]
+      const svgData = configHtmlVars.svg[id]
       const { viewBox = '', output = '' } = svgData
 
       spritesOutput += `<symbol id="${id}" viewBox="${viewBox}">${output}</symbol>`
@@ -264,8 +253,8 @@ const LayoutHtml = async ({
         <meta name="twitter:description" content="${description}">
         <meta name="twitter:image" content="${imageLink}">
         <meta content="summary_large_image" property="twitter:card">
-        ${configHtml.vars.head}
-        ${configHtml.vars.css.head}
+        ${configHtmlVars.head}
+        ${configHtmlVars.css.head}
         ${styles}
         <noscript>
           <style>

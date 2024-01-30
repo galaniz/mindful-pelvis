@@ -115,6 +115,7 @@
   /* Underline */
 
   --underline: #{util.calc-rem(1px)};
+  --underline-offset: #{util.calc-rem(4px)};
 
   /* Nav */
 

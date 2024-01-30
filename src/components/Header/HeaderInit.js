@@ -13,7 +13,6 @@ import { Nav } from '@alanizcreative/formation/src/components/Nav/Nav'
  *
  * @return {void}
  */
-
 const init = () => {
   /* Item selector */
 

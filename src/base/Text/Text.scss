@@ -2,6 +2,12 @@
  * Base - Text Styles
  */
 
+/* Imports */
+
+@use "@alanizcreative/formation/src/utils" as util;
+
+/* Styles */
+
 h1,
 h2,
 h3,
@@ -132,4 +138,9 @@ p,
 
 .t-xs {
   font-size: var(--t-xs);
+}
+
+.t-s,
+.t-xs {
+  --underline-offset: #{util.calc-rem(3px)};
 }

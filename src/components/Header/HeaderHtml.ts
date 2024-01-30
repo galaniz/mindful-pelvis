@@ -4,20 +4,20 @@
 
 /* Imports */
 
+import type { NavigationsReturn } from '../Navigations/NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
 import { addScriptStyle, getPermalink } from '@alanizcreative/static-site-formation/lib/utils'
 import { SkipLinkHtml } from '../SkipLink/SkipLinkHtml'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
-import { configHtml } from '../../config/configHtml'
+import { configHtml, configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output header
  *
- * @param {object} navigations
+ * @param {NavigationsReturn} navigations
  * @return {string} HTML - header
  */
-
-const HeaderHtml = (navigations: MP.NavigationsReturn): string => {
+const HeaderHtml = (navigations: NavigationsReturn): string => {
   /* Id */
 
   const id = `n-${uuid()}`
@@ -26,8 +26,8 @@ const HeaderHtml = (navigations: MP.NavigationsReturn): string => {
 
   let style = ''
 
-  if (!isNaN(configHtml.vars.navHalf)) {
-    style = ` style="--nav-half:${(configHtml.vars.navHalf * 2) / 16}rem"`
+  if (!isNaN(configHtmlVars.navHalf)) {
+    style = ` style="--nav-half:${(configHtmlVars.navHalf * 2) / 16}rem"`
   }
 
   /* Main and/or social navs */

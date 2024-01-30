@@ -2,21 +2,6 @@
  * Effects - Underline Styles
  */
 
-.e-underline a[data-rich],
-.e-underline-reverse a[data-rich] {
-  --color: var(--from);
-  --duration: 200ms;
-
-  transition: box-shadow var(--duration) var(--easing);
-  box-shadow: 0 var(--underline) 0 0 var(--color);
-
-  &:hover,
-  &:active,
-  &:focus {
-    --color: var(--to);
-  }
-}
-
 .e-underline a[data-rich] {
   --from: currentcolor;
   --to: transparent;
@@ -25,4 +10,23 @@
 .e-underline-reverse a[data-rich] {
   --from: transparent;
   --to: currentcolor;
+}
+
+.e-underline a[data-rich],
+.e-underline-reverse a[data-rich] {
+  --color: var(--from);
+  --duration: 200ms;
+
+  text-decoration: underline;
+  text-decoration-thickness: var(--underline);
+  text-underline-offset: var(--underline-offset);
+  text-decoration-color: var(--color);
+  transition: text-decoration-color var(--duration) linear;
+
+  &[data-active="true"],
+  &:hover,
+  &:active,
+  &:focus {
+    --color: var(--to);
+  }
 }

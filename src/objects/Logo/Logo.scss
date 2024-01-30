@@ -11,6 +11,24 @@
 
 /* Styles */
 
+.o-logo {
+  width: var(--logo-width);
+  height: var(--logo-height);
+}
+
+.o-logo-s {
+  @include util.fluid-size(
+    width,
+    util.calc-rem(200px) util.calc-rem(250px),
+    "s" "l"
+  );
+  @include util.fluid-size(
+    height,
+    util.calc-rem(64px) util.calc-rem(80px),
+    "s" "l"
+  );
+}
+
 .o-logo,
 .o-logo-s {
   $brand: map.get(con.$vars, "brand");
@@ -31,22 +49,4 @@
     --greater: #{map.get($brand, "blue-light")};
     --lesser: #{map.get($brand, "orange-light")};
   }
-}
-
-.o-logo {
-  width: var(--logo-width);
-  height: var(--logo-height);
-}
-
-.o-logo-s {
-  @include util.fluid-size(
-    width,
-    util.calc-rem(200px) util.calc-rem(250px),
-    "s" "l"
-  );
-  @include util.fluid-size(
-    height,
-    util.calc-rem(64px) util.calc-rem(80px),
-    "s" "l"
-  );
 }

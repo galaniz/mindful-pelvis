@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output content wrapper
@@ -20,10 +20,28 @@ import { configHtml } from '../../config/configHtml'
  */
 
 interface ContentProps {
-  args: MP.ContentArgs
+  args: {
+    align?: string
+    gap?: string
+    gapLarge?: string
+    textStyle?: string
+    headingStyle?: string
+    richTextStyles?: boolean
+    classes?: string
+  }
 }
 
-const ContentHtml = (props: ContentProps = { args: {} }): FRM.StartEndReturn => {
+/**
+ * @typedef {object} StartEndReturn
+ * @prop {string} start
+ * @prop {string} end
+ */
+interface StartEndReturn {
+  start: string
+  end: string
+}
+
+const ContentHtml = (props: ContentProps = { args: {} }): StartEndReturn => {
   const { args = {} } = props
 
   let {
@@ -39,9 +57,9 @@ const ContentHtml = (props: ContentProps = { args: {} }): FRM.StartEndReturn => 
 
   /* Normalize options */
 
-  align = configHtml.vars.options.content.align[align]
-  gap = configHtml.vars.options.gap[gap]
-  gapLarge = configHtml.vars.options.gap[gapLarge]
+  align = configHtmlVars.options.content.align[align]
+  gap = configHtmlVars.options.gap[gap]
+  gapLarge = configHtmlVars.options.gap[gapLarge]
 
   /* Classes */
 

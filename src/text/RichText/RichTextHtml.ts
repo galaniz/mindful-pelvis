@@ -4,20 +4,47 @@
 
 /* Imports */
 
+import type { InternalLink } from '../../global/globalHtmlTypes'
+import type { RichTextContentFilter, RichTextOutputFilter, RichTextPropsFilter } from '@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes'
 import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
-import { configHtml } from '../../config/configHtml'
+import { configHtmlVars } from '../../config/configHtml'
+
+interface RichTextHtmlFilters {
+  props: RichTextPropsFilter
+  output: RichTextOutputFilter
+  content: RichTextContentFilter
+}
+
+interface CardArgs {
+  gap?: string
+  gapLarge?: string
+  internalLink?: InternalLink
+  externalLink?: string
+  embed?: boolean
+  embedTitle?: string
+  embedText?: string
+  background?: string
+}
+
+interface ContentArgs {
+  align?: string
+  gap?: string
+  gapLarge?: string
+  textStyle?: string
+  headingStyle?: string
+  richTextStyles?: boolean
+  classes?: string
+}
 
 /**
  * Callbacks for rich text filters
  *
- * @type {object}
- * @see {@link https://github.com/galaniz/static-site-formation|Formation Rich Text}
+ * @type {RichTextHtmlFilters}
  */
-
-const RichTextHtml: { props: Function, output: Function, content: Function } = {
+const RichTextHtml: RichTextHtmlFilters = {
   /* Props */
 
-  props (props: FRM.RichTextProps): FRM.RichTextProps {
+  props: async (props) => {
     const { args, parents = [] } = props
 
     let {
@@ -34,7 +61,7 @@ const RichTextHtml: { props: Function, output: Function, content: Function } = {
     const parent = parents[0] !== undefined ? parents[0].renderType : ''
 
     if (parent === 'content') {
-      const contentArgs: MP.ContentArgs = parents[0].args
+      const contentArgs: ContentArgs = parents[0].args
       const heading = type.includes('heading')
 
       let {
@@ -42,8 +69,8 @@ const RichTextHtml: { props: Function, output: Function, content: Function } = {
         headingStyle = 'Default'
       } = contentArgs
 
-      textStyle = configHtml.vars.options.content.text[textStyle]
-      headingStyle = configHtml.vars.options.content.heading[headingStyle]
+      textStyle = configHtmlVars.options.content.text[textStyle]
+      headingStyle = configHtmlVars.options.content.heading[headingStyle]
 
       if (textStyle !== '' && !heading) {
         classesArray.push(`t-${textStyle}`)
@@ -82,7 +109,7 @@ const RichTextHtml: { props: Function, output: Function, content: Function } = {
 
   /* Output */
 
-  output (output: string, props: FRM.RichTextProps): string {
+  output: async (output, props) => {
     const { args } = props
     const { type = '' } = args
 
@@ -112,7 +139,7 @@ const RichTextHtml: { props: Function, output: Function, content: Function } = {
 
   /* Content */
 
-  content (output: string, contentProps: FRM.RichTextContentFilterArgs): string {
+  content: async (output, contentProps) => {
     const { props } = contentProps
     const { args, parents = [] } = props
     const { type = 'paragraph' } = args
@@ -122,7 +149,7 @@ const RichTextHtml: { props: Function, output: Function, content: Function } = {
     const grandParent = parents[1] !== undefined ? parents[1].renderType : ''
 
     if (output !== '' && grandParent === 'card' && type.includes('heading')) {
-      const cardArgs: MP.CardArgs = parents[1].args
+      const cardArgs: CardArgs = parents[1].args
 
       const {
         internalLink,

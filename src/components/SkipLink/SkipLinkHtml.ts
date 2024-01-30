@@ -11,7 +11,6 @@ import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
  *
  * @return {string} HTML - a
  */
-
 const SkipLinkHtml = (): string => {
   /* Add styles */
 

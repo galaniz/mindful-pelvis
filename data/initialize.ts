@@ -4,21 +4,26 @@
 
 /* Imports */
 
+import type { RenderReturn } from '@alanizcreative/static-site-formation/lib/render/RenderTypes'
 import * as sass from 'sass'
 import postcss from 'postcss'
 import purgecss from '@fullhuman/postcss-purgecss'
 import autoprefixer from 'autoprefixer'
 import esbuild from 'esbuild'
 import { sassPlugin } from 'esbuild-sass-plugin'
+// @ts-expect-error
+import { AssetCache } from '@11ty/eleventy-fetch'
+import safeJsonStringify from 'safe-json-stringify'
 import { Render } from '@alanizcreative/static-site-formation/lib/render/Render'
 import {
   getAllContentfulData,
   writeStoreFiles,
   writeServerlessFiles,
-  writeRedirectsFile
+  writeRedirectsFile,
+  isStringStrict,
+  isObject
 } from '@alanizcreative/static-site-formation/lib/utils'
-import { configHtml } from '../src/config/configHtml'
-import { cacheHtml } from '../src/utils/cache/cacheHtml'
+import { configHtml, configHtmlVars } from '../src/config/configHtml'
 
 /* Eleventy init */
 
@@ -30,11 +35,11 @@ interface InitArgs {
   }
 }
 
-module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
+module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
   try {
     /* Build env */
 
-    const mode: string = typeof args?.eleventy?.env?.runMode === 'string' ? args.eleventy.env.runMode : 'serve'
+    const mode: string = isStringStrict(args?.eleventy?.env?.runMode) ? args.eleventy.env.runMode : 'serve'
 
     if (mode === 'build') {
       configHtml.env.build = true
@@ -43,7 +48,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     /* Reset style and script paths */
 
     configHtml.actions.renderStart = async (): Promise<void> => {
-      configHtml.vars.css.cache = ''
+      configHtmlVars.css.cache = ''
     }
 
     /* Build styles and scripts */
@@ -54,7 +59,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
         ...configHtml.styles.build
       }
 
-      const { css, js } = configHtml.vars
+      const { css, js } = configHtmlVars
 
       if (css.in !== '' && css.out !== '') {
         entryPoints[css.out] = css.in
@@ -95,16 +100,16 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     /* Inline styles */
 
     configHtml.filters.renderItem = async (output: string): Promise<string> => {
-      if (configHtml.vars.css.in === '' || configHtml.vars.css.head === '') {
+      if (configHtmlVars.css.in === '' || configHtmlVars.css.head === '') {
         return output
       }
 
       let styles = ''
 
-      if (configHtml.vars.css.cache !== '') {
-        styles = configHtml.vars.css.cache
+      if (configHtmlVars.css.cache !== '') {
+        styles = configHtmlVars.css.cache
       } else {
-        const sassRes = sass.compile(`./${configHtml.vars.css.in}`, {
+        const sassRes = sass.compile(`./${configHtmlVars.css.in}`, {
           loadPaths: ['node_modules', './src'],
           style: 'compressed'
         })
@@ -112,7 +117,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
         if (sassRes.css !== undefined) {
           styles += sassRes.css
 
-          configHtml.vars.css.cache = styles
+          configHtmlVars.css.cache = styles
         }
       }
 
@@ -145,7 +150,7 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
       }
 
       if (styles !== '') {
-        output = output.replace(configHtml.vars.css.head, `<style>${styles}</style>`)
+        output = output.replace(configHtmlVars.css.head, `<style>${styles}</style>`)
       }
 
       /* Output */
@@ -156,11 +161,19 @@ module.exports = async (args: InitArgs): Promise<FRM.RenderReturn[]> => {
     /* Cache data */
 
     if (configHtml.env.cache) {
-      configHtml.filters.cacheData = async (cacheData: FRM.AnyObject, { key, type = 'get', data }: FRM.CacheDataFilterArgs): Promise<object> => {
-        const c = await cacheHtml(key, type, data)
+      configHtml.filters.cacheData = async (cacheData, { key, type = 'get' }) => {
+        const cacheInstance: {
+          isCacheValid: Function
+          getCachedValue: Function
+          save: Function
+        } = new AssetCache(key)
 
-        if (c !== undefined) {
-          cacheData = c
+        if (type === 'get') {
+          cacheData = cacheInstance.isCacheValid('1d') === true ? cacheInstance.getCachedValue() : undefined
+        }
+
+        if (type === 'set' && isObject(cacheData)) {
+          await cacheInstance.save(JSON.parse(safeJsonStringify(cacheData)), 'json')
         }
 
         return cacheData
