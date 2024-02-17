@@ -11,7 +11,7 @@ import type {
 } from '@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes'
 import { v4 as uuid } from 'uuid'
 import { Navigation } from '@alanizcreative/static-site-formation/lib/components/Navigation/Navigation'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 import { configHtmlVars } from '../../config/configHtml'
@@ -84,11 +84,11 @@ const NavigationsHtml = ({
 
   /* Attributes */
 
-  const linkClass = 'c-nav__link t-height-150-pc'
+  const linkClass = 'c-nav__link'
   const itemClass = 'c-nav__item'
   const listAttr = 'role="list"'
   const listClass = 'c-nav__list t-list-style-none t-link-current l-flex'
-  const listClassZero = `${listClass} l-align-center l-gap-margin-xs l-gap-margin-s-s l-overflow-x-auto l-overflow-y-hidden`
+  const listClassZero = `${listClass} l-align-center l-gm-xs l-gm-s-s l-overflow-x-auto l-overflow-y-hidden`
 
   let listType = 'min'
 
@@ -116,7 +116,7 @@ const NavigationsHtml = ({
         filterBeforeList: ({ args, depth }) => {
           if (depth > 0) {
             args.listClass = `${listClass} o-collapsible__main e-underline-reverse e-transition l-flex-column no-js-none`
-            args.listAttr = `${listAttr} data-type="${listType}" id="${collapsibleId}"`
+            args.listAttr = `${listAttr} data-list="${listType}" id="${collapsibleId}"`
           } else {
             args.listAttr = listAttr
           }
@@ -130,27 +130,33 @@ const NavigationsHtml = ({
           let newLinkAttr = ''
 
           if (depth === 0) {
-            newLinkClass += ' t-r l-inline-flex'
+            newLinkClass += ' t-r l-inline-flex l-before l-relative l-my-3xs'
             newItemClass += ' e-transition'
 
             if (index === 0) {
-              output.html += '<li role="presentation" class="c-nav__width no-js-none l-padding-0 l-relative l-before"></li>'
+              output.html += '<li role="presentation" class="c-nav__width no-js-none l-p-0 l-relative l-before"></li>'
             }
           } else {
             newLinkAttr = 'data-rich'
-            newLinkClass += ' t-s l-before'
-            newItemClass += ' l-padding-top-4xs l-padding-bottom-4xs l-relative'
+            newLinkClass += ' t-s t-height-snug'
+
+            if (listType === 'cta') {
+              newItemClass += ' l-py-3xs l-px-2xs b-top'
+            } else {
+              newItemClass += ' l-py-4xs'
+            }
           }
 
           if (_isButton(item)) {
-            newLinkClass = 'c-nav__cta o-button o-button-main b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before'
+            newLinkClass = 'c-nav__cta t-weight-bold t-height-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-width-1-1'
           }
 
           if (_isButtonDropdown(item, depth)) {
             collapsibleId = uuid()
             newLinkAttr = `aria-expanded="false" aria-controls="${collapsibleId}"`
-            newLinkClass += ' o-collapsible__toggle'
+            newLinkClass += ' o-collapsible__toggle e-transition'
             newListType = 'cta'
+            newItemAttr.push('data-cta')
           }
 
           if (_isDropdown(item, depth) || _isButtonDropdown(item, depth)) {
@@ -215,23 +221,33 @@ const NavigationsHtml = ({
             collapsibleId = uuid()
 
             output.html += `
-                <button class="o-collapsible__toggle t-current l-padding-left-4xs l-padding-top-5xs l-padding-bottom-5xs no-js-none" type="button" aria-controls="${collapsibleId}" aria-expanded="false" aria-label="${title} submenu">
-                  ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs')}
+                <button class="o-collapsible__toggle t-current l-pl-4xs l-py-5xs no-js-none" type="button" aria-controls="${collapsibleId}" aria-expanded="false" aria-label="${title} submenu">
+                  ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs e-transition')}
                 </button>
               </div>
             `
           }
         },
         filterBeforeLinkText: ({ item, depth, output }) => {
+          if (depth === 1 && listType === 'cta') {
+            output.html += '<b>'
+          }
+
           if (_isButtonDropdown(item, depth)) {
-            output.html += '<span class="l-padding-right-4xs">'
+            output.html += '<span class="l-pr-4xs">'
           }
         },
         filterAfterLinkText: ({ item, depth, output }) => {
+          const { description } = item
+
+          if (depth === 1 && listType === 'cta') {
+            output.html += `</b>${isStringStrict(description) ? ` <br>${description}` : ''}`
+          }
+
           if (_isButtonDropdown(item, depth)) {
             output.html += `
               </span>
-              ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs no-js-none')}
+              ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs e-transition no-js-none')}
             `
           }
         }
@@ -240,7 +256,7 @@ const NavigationsHtml = ({
     footer: nav.getOutput(
       'footer',
       {
-        listClass: 'l-flex l-flex-column l-gap-margin-3xs t-list-style-none e-underline-reverse',
+        listClass: 'l-flex l-flex-column l-gm-3xs t-list-style-none e-underline-reverse',
         listAttr: 'role="list"',
         linkClass: 't-r',
         internalLinkClass: 'js-pt-link',
@@ -251,9 +267,9 @@ const NavigationsHtml = ({
     social: nav.getOutput(
       'social',
       {
-        listClass: 'l-flex l-flex-wrap l-gap-margin-2xs t-list-style-none',
+        listClass: 'l-flex l-flex-wrap l-gm-2xs t-list-style-none',
         listAttr: 'role="list"',
-        linkClass: 'l-flex l-align-center l-justify-center l-relative l-width-s l-height-s b-radius-100-pc b-all',
+        linkClass: 'l-flex l-align-center l-justify-center l-relative l-width-s l-height-s b-radius-100-pc b-all e-border e-transition',
         filterBeforeLinkText: ({ output }) => {
           output.html += '<span class="a-visually-hidden">'
         },

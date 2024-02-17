@@ -4,3 +4,18 @@
 
 @forward "../../config/config";
 @use "@alanizcreative/formation/src/objects/Collapsible/Collapsible";
+
+/* Styles */
+
+.o-collapsible__toggle {
+  --scale: 1;
+  --duration: 400ms;
+
+  svg {
+    transform: scaleY(var(--scale));
+  }
+
+  &[aria-expanded="true"] {
+    --scale: -1;
+  }
+}

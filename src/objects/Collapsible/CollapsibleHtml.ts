@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
+import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 
 /**
  * Function - output

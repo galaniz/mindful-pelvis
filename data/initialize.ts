@@ -21,9 +21,13 @@ import {
   writeServerlessFiles,
   writeRedirectsFile,
   isStringStrict,
-  isObject
-} from '@alanizcreative/static-site-formation/lib/utils'
+  isObject,
+  setFilters,
+  setActions,
+  setShortcodes
+} from '@alanizcreative/static-site-formation/lib/utils/utilsAll'
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
+import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
 
 /* Eleventy init */
 
@@ -180,23 +184,26 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
       }
     }
 
+    /* Feed build */
+
+    configHtml.shortcodes['instagram-feed'].callback = FeedHtmlBuild
+
     /* Render output */
 
-    const output = await Render({
-      allData: await getAllContentfulData()
-    })
+    setFilters(configHtml.filters)
+    setActions(configHtml.actions)
+    setShortcodes(configHtml.shortcodes)
 
-    /* Data json files */
+    const allData = await getAllContentfulData()
+    const output = await Render({ allData })
 
-    await writeStoreFiles()
+    /* Data json, serverless and redirect files */
 
-    /* Serverless files */
-
-    await writeServerlessFiles()
-
-    /* Redirect file */
-
-    await writeRedirectsFile()
+    if (configHtml.env.build) {
+      await writeStoreFiles()
+      await writeServerlessFiles()
+      await writeRedirectsFile()
+    }
 
     /* Output */
 

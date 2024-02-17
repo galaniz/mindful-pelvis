@@ -14,6 +14,7 @@
 
 .e-underline a[data-rich],
 .e-underline-reverse a[data-rich] {
+  --prop: text-decoration-color;
   --color: var(--from);
   --duration: 200ms;
 
@@ -21,12 +22,14 @@
   text-decoration-thickness: var(--underline);
   text-underline-offset: var(--underline-offset);
   text-decoration-color: var(--color);
-  transition: text-decoration-color var(--duration) linear;
+  transition-property: var(--prop);
+  transition-duration: var(--duration);
+  transition-timing-function: var(--easing);
 
-  &[data-active="true"],
   &:hover,
   &:active,
-  &:focus {
+  &:focus,
+  &[data-current="true"] {
     --color: var(--to);
   }
 }

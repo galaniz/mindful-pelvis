@@ -7,7 +7,7 @@
 import type { InternalLink } from '../../global/globalHtmlTypes'
 import type { ParentArgs } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
 import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
-import { getImage } from '@alanizcreative/static-site-formation/lib/utils'
+import { getImage } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 // import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
@@ -30,6 +30,7 @@ interface ImageProps {
     aspectRatio?: string
     borderRadius?: string
     caption?: InternalLink
+    source?: string
   }
   parents?: ParentArgs[]
 }
@@ -40,7 +41,8 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
   let {
     image,
     aspectRatio = '1:1',
-    borderRadius = 'None'
+    borderRadius = 'None',
+    source = 'cms'
     // caption
   } = args
 
@@ -74,8 +76,9 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
       data: image,
       classes: imageClasses.join(' '),
       returnAspectRatio: true,
-      source: true,
-      maxWidth: card ? 200 : 1200
+      picture: true,
+      maxWidth: card ? 200 : 1200,
+      source
     })
 
     let imageObjAspectRatio = 0
@@ -91,7 +94,7 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
     let classes = 'l-relative l-block l-overflow-hidden'
 
     if (aspectRatio !== '') {
-      classes += ` l-aspect-ratio-${aspectRatio}`
+      classes += ` l-ar-${aspectRatio}`
     }
 
     if (card) {
@@ -128,7 +131,7 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
         type: 'paragraph',
         content: content[0].content,
         textStyle: 'Small',
-        classes: 'l-padding-top-3xs'
+        classes: 'l-pt-3xs'
       }
     })
 

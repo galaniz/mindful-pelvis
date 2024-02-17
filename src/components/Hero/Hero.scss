@@ -9,7 +9,7 @@
 
 /* Styles */
 
-.c-hero {
+.c-hero-overlap {
   --left-right: calc(var(--container-padding) * -1);
   --text-top: calc(var(--xl) * -1);
   --text-bottom: 0;
@@ -35,7 +35,7 @@
   }
 }
 
-.c-hero__media {
+.c-hero-overlap__media {
   margin: 0 var(--media-right) 0 var(--media-left);
   width: calc(var(--width));
 
@@ -46,6 +46,14 @@
   );
 }
 
-.c-hero__text {
+.c-hero-overlap__text {
   margin: var(--text-top) var(--text-right) var(--text-bottom) auto;
+}
+
+.c-hero-min {
+  @include util.fluid-size(
+    height,
+    util.calc-rem(350px) util.calc-rem(500px),
+    "s" "l"
+  );
 }

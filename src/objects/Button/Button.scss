@@ -17,12 +17,11 @@
   --size: var(--t-m);
   --z-index: -1;
   --opacity: 0.15;
-  --blend-mode: multiply;
   --background: var(--foreground-dark);
 
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-130-pc);
+  line-height: var(--line-height-snug);
   padding: var(--padding);
   font-size: var(--size);
   width: 100%;
@@ -35,7 +34,6 @@
     padding-top: 100%;
     border-radius: 100%;
 		background: var(--background);
-    mix-blend-mode: var(--blend-mode);
     z-index: var(--z-index);
     opacity: var(--opacity);
 	}
@@ -63,8 +61,7 @@
 
 .o-button-main[data-theme="light"] {
   --opacity: 1;
-  --blend-mode: screen;
-  --background: var(--background-base);
+  --background: var(--background-tint);
 }
 
 .o-button-secondary[data-theme="default"] {

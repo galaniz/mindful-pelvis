@@ -6,7 +6,7 @@
 
 import type { InternalLink } from '../../global/globalHtmlTypes'
 import type { RichTextContentFilter, RichTextOutputFilter, RichTextPropsFilter } from '@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes'
-import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
+import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 interface RichTextHtmlFilters {
@@ -73,7 +73,7 @@ const RichTextHtml: RichTextHtmlFilters = {
       headingStyle = configHtmlVars.options.content.heading[headingStyle]
 
       if (textStyle !== '' && !heading) {
-        classesArray.push(`t-${textStyle}`)
+        classesArray.push(textStyle)
       }
 
       if (headingStyle !== '' && heading) {

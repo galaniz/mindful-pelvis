@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ColumnPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/column/ColumnTypes'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**

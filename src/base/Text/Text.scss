@@ -38,19 +38,18 @@ h6,
 .t-h4,
 .t-h5,
 .t-h6 {
-  line-height: var(--line-height-130-pc);
+  line-height: var(--line-height-snug);
 }
 
 h5,
 h6,
 .t-h5,
 .t-h6 {
-  letter-spacing: var(--letter-spacing-1-pc);
+  letter-spacing: var(--letter-spacing-open);
 }
 
 p,
-ul[data-rich],
-ol[data-rich],
+li[data-rich],
 .t-l,
 .t-quote,
 .t,
@@ -63,15 +62,14 @@ ol[data-rich],
 }
 
 p,
-ul[data-rich],
-ol[data-rich],
+li[data-rich],
 .t-l,
 .t,
 .t-r,
 .t-m,
 .t-s,
 .t-xs {
-  line-height: var(--line-height-160-pc);
+  line-height: var(--line-height-airy);
 }
 
 h1,
@@ -110,13 +108,14 @@ h6,
 }
 
 .t-quote {
-  line-height: var(--line-height-150-pc);
+  line-height: var(--line-height-open);
   font-size: var(--t-quote);
   font-style: italic;
 }
 
 p,
-.t-l {
+.t-l,
+li[data-rich] {
   font-size: var(--t-l);
 }
 

@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { getPermalink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
+import { getPermalink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { LogoSvgHtml } from '../../svg/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
 

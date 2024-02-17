@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noUnusedLocals": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./"
   },
   "include": [
     "**/*.ts",

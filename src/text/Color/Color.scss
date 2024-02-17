@@ -14,8 +14,8 @@
   --outline-color: var(--background-base);
   --heading-color: var(--background-base);
   --link-color: var(--background-base);
+  --border-color: var(--background-base-50);
   --text-color: #{rgba(util.get-color("background-base"), 0.8)};
-  --border-color: #{rgba(util.get-color("background-base"), 0.5)};
 
   color: var(--text-color);
 }
@@ -26,4 +26,10 @@
 
 .t-current {
   color: currentcolor;
+}
+
+.t-sharp {
+  --text-color: var(--heading-color);
+
+  color: var(--heading-color);
 }

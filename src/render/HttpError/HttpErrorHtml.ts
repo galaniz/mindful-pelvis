@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { getPermalink } from '@alanizcreative/static-site-formation/lib/utils'
+import { getPermalink } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
 import { LayoutHtml } from '../../components/Layout/LayoutHtml'
 import { NavigationsHtml } from '../../components/Navigations/NavigationsHtml'

@@ -61,7 +61,7 @@ const ComingSoonHtml = async (): Promise<string> => {
       ${output.container.start}
         ${output.content.start}
           ${LogoHtml()}
-          <h1 class="l-padding-top-xl l-padding-bottom-s">New site coming soon!</h1>
+          <h1 class="l-pt-xl l-pb-s">New site coming soon!</h1>
           <p>
             In the meantime you can reach me at 
             <a href="mailto:${configHtmlVars.email}" data-rich>${configHtmlVars.email}</a>

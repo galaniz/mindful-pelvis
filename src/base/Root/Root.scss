@@ -103,6 +103,7 @@
   --heading-color: var(--foreground-dark);
   --link-color: var(--primary-base);
   --foreground-base-30: #{rgba(util.get-color("foreground-base"), 0.3)};
+  --background-base-50: #{rgba(util.get-color("background-base"), 0.5)};
 
   /* Box shadow */
 

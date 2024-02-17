@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { LayoutArgs } from './LayoutHtmlTypes'
-import { getPermalink, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { getPermalink, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
 import { HeaderHtml } from '../Header/HeaderHtml'
 import { FooterHtml } from '../Footer/FooterHtml'
@@ -264,11 +264,7 @@ const LayoutHtml = async ({
 
             .no-js-nav {
               flex-wrap: wrap;
-            }
-
-            .no-js-nav__logo {
-              margin-top: var(--4xs);
-              margin-bottom: var(--4xs);
+              overflow: hidden;
             }
           </style>
         </noscript>
@@ -285,22 +281,6 @@ const LayoutHtml = async ({
         ${headerOutput}
         <main id="main">
           ${heroOutput}
-          <div class="l-container">
-            <div class="o-collapsible">
-              <button class="o-collapsible__toggle">YOOOOOOO</button>
-              <div class="o-collapsible__main e-transition">
-                <div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit ac felis vel aliquet. Nunc sit amet convallis tellus. Quisque ex erat, malesuada quis quam eu, iaculis aliquet urna. Integer eu leo leo. Ut purus tellus, sagittis ac lacus quis, tempus faucibus dolor. Donec iaculis lacus id risus cursus tesque vehicula consequat. Ut ullamcorper augue id nulla egestas, ut porttitor elit suscipit. Phasellus urna quam, congue ut lacus at, pharetra sagittis sapien. Integer sit amet neque sit amet mauris egestas consectetur.</p>
-                  <div class="o-collapsible">
-                    <button class="o-collapsible__toggle">HMMMSDFJKSDFJ</button>
-                    <div class="o-collapsible__main e-transition">
-                      <p>Ut posuere ac nulla quis aliquet. Aliquam tincidunt ultrices faucibus. Pellentesque feugiat sollicitudin vestibulum. Vestibulum pretium mollis turpis et aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo turpis lorem, ac tincidunt lacus feugiat eget. Fusce non tellus eu mi posuere faucibus ac nec mi. Suspendisse lacinia purus in felis commodo convallis.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           ${contentOutput}
         </main>
         ${footerOutput}

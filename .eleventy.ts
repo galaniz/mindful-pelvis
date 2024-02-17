@@ -8,7 +8,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import htmlmin from 'html-minifier'
 import { resolve, extname } from 'node:path'
-import { getAllFilePaths } from '@alanizcreative/static-site-formation/lib/utils'
+import { getAllFilePaths, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsAll'
 import { configHtml } from './src/config/configHtml'
 
 /* Config */
@@ -19,14 +19,15 @@ module.exports = (args: any) => {
   if (process) {
     const env = process.env
 
-    configHtml.env.cache = env?.USE_11TY_CACHE ? true : false
+    configHtml.env.cache = env.USE_11TY_CACHE ? true : false
     configHtml.env.dev = env.ENVIRONMENT === 'dev'
     configHtml.env.prod = env.ENVIRONMENT === 'production'
+    configHtml.env.dir = isStringStrict(env.ELEVENTY_ROOT) ? env.ELEVENTY_ROOT : ''
     configHtml.cms.name = 'contentful'
-    configHtml.cms.space = env.CTFL_SPACE_ID !== undefined ? env.CTFL_SPACE_ID : ''
-    configHtml.cms.previewAccessToken = env.CTFL_CPA_TOKEN !== undefined ? env.CTFL_CPA_TOKEN : ''
+    configHtml.cms.space = isStringStrict(env.CTFL_SPACE_ID) ? env.CTFL_SPACE_ID : ''
+    configHtml.cms.previewAccessToken = isStringStrict(env.CTFL_CPA_TOKEN) ? env.CTFL_CPA_TOKEN : ''
     configHtml.cms.previewHost = 'preview.contentful.com'
-    configHtml.cms.deliveryAccessToken = env.CTFL_CDA_TOKEN !== undefined ? env.CTFL_CDA_TOKEN : ''
+    configHtml.cms.deliveryAccessToken = isStringStrict(env.CTFL_CDA_TOKEN) ? env.CTFL_CDA_TOKEN : ''
     configHtml.cms.deliveryHost = 'cdn.contentful.com'
   }
 
@@ -88,15 +89,15 @@ module.exports = (args: any) => {
   /* Copy static asset folders */
 
   args.addPassthroughCopy({
-    'src/fonts': 'assets/fonts'
+    'src/assets/fonts': 'assets/fonts'
   })
 
   args.addPassthroughCopy({
-    'src/img': 'assets/img'
+    'src/assets/img': 'assets/img'
   })
 
   args.addPassthroughCopy({
-    'src/favicon': 'assets/favicon'
+    'src/assets/favicon': 'assets/favicon'
   })
 
   /* Folder structure */

@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ContainerPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/container/ContainerTypes'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -78,13 +78,13 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   let gapClasses = ''
 
   if (isStringStrict(gap)) {
-    gapClasses = layout === 'row' ? `l-gap-margin-${gap}` : `l-margin-bottom-${gap}-all`
+    gapClasses = layout === 'row' ? `l-gm-${gap}` : `l-mb-${gap}-all`
   }
 
   let gapLargeClasses = ''
 
   if (isStringStrict(gapLarge) && gapLarge !== gap) {
-    gapLargeClasses = layout === 'row' ? `l-gap-margin-${gapLarge}-l` : `l-margin-bottom-${gapLarge}-all-m`
+    gapLargeClasses = layout === 'row' ? `l-gm-${gapLarge}-l` : `l-mb-${gapLarge}-all-m`
   }
 
   /* Output */
@@ -100,16 +100,17 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   args.tag = tag
   args.layout = layoutClasses
   args.maxWidth = isStringStrict(maxWidth) ? `l-${maxWidth}` : ''
-  args.paddingTop = isStringStrict(paddingTop) ? `l-padding-top-${paddingTop}` : ''
-  args.paddingTopLarge = isStringStrict(paddingTopLarge) ? `l-padding-top-${paddingTopLarge}-m` : ''
-  args.paddingBottom = isStringStrict(paddingBottom) ? `l-padding-bottom-${paddingBottom}` : ''
-  args.paddingBottomLarge = isStringStrict(paddingBottomLarge) ? `l-padding-bottom-${paddingBottomLarge}-m` : ''
+  args.paddingTop = isStringStrict(paddingTop) ? `l-pt-${paddingTop}` : ''
+  args.paddingTopLarge = isStringStrict(paddingTopLarge) ? `l-pt-${paddingTopLarge}-m` : ''
+  args.paddingBottom = isStringStrict(paddingBottom) ? `l-pb-${paddingBottom}` : ''
+  args.paddingBottomLarge = isStringStrict(paddingBottomLarge) ? `l-pb-${paddingBottomLarge}-m` : ''
   args.gap = gapClasses
   args.gapLarge = gapLargeClasses
   args.justify = isStringStrict(justify) ? `l-justify-${justify}` : ''
   args.align = isStringStrict(align) ? `l-align-${align}` : ''
   args.classes = classes
   args.attr = attr
+  args.nest = true
 
   return props
 }

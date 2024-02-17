@@ -84,11 +84,11 @@ const ContentHtml = (props: ContentProps = { args: {} }): StartEndReturn => {
   /* Gap */
 
   if (gap !== '') {
-    classesArray.push(`l-margin-bottom-${gap}-all`)
+    classesArray.push(`l-mb-${gap}-all`)
   }
 
   if (gapLarge !== '' && gapLarge !== gap) {
-    classesArray.push(`l-margin-bottom-${gapLarge}-all-m`)
+    classesArray.push(`l-mb-${gapLarge}-all-m`)
   }
 
   /* Output */

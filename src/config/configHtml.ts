@@ -12,10 +12,13 @@ import { NavigationHtml, NavigationsHtml } from '../components/Navigations/Navig
 import { HttpErrorHtml } from '../render/HttpError/HttpErrorHtml'
 import { ButtonHtml } from '../objects/Button/ButtonHtml'
 import { ContentHtml } from '../objects/Content/ContentHtml'
+import { AssetHtml } from '../objects/Asset/AssetHtml'
 import { ImageHtml } from '../objects/Image/ImageHtml'
 import { ContainerHtml } from '../layouts/Container/ContainerHtml'
 import { ColumnHtml } from '../layouts/Column/ColumnHtml'
 import { RichTextHtml } from '../text/RichText/RichTextHtml'
+import { PostsHtml } from '../objects/Posts/PostsHtml'
+import { FeedHtml } from '../objects/Feed/FeedHtml'
 
 /**
  * Flexible vars object in main config
@@ -23,6 +26,33 @@ import { RichTextHtml } from '../text/RichText/RichTextHtml'
  * @type {ConfigVars}
  */
 const configHtmlVars: ConfigVars = {
+  instagramFeed: [
+    {
+      url: 'https://www.instagram.com/themindfulpelvis/reel/CpizeIUp889/',
+      src: 'instagram-feed-fallback/post-1',
+      alt: "International Women's Day: model of vulva on sunny window sill and de-stigmatizing vulvas."
+    },
+    {
+      url: 'https://www.instagram.com/themindfulpelvis/reel/CpTj_ujM34A/',
+      src: 'instagram-feed-fallback/post-2',
+      alt: 'Endometriosis awareness month: Toronto park on wintry day sharing my endo story and the latest research about endometriosis.'
+    },
+    {
+      url: 'https://www.instagram.com/themindfulpelvis/p/CpDDaUHu3rk/',
+      src: 'instagram-feed-fallback/post-3',
+      alt: "Research dissemination: cesarean sections don't protect against pelvic floor dysfunction."
+    },
+    {
+      url: 'https://www.instagram.com/themindfulpelvis/reel/Co49vG0rQX4/',
+      src: 'instagram-feed-fallback/post-4',
+      alt: 'Pelvic wand: tool to and prolong in-clinic treatments at home for patients with bladder urgency and/or pelvic pain and expectant mamas for perineal prep.'
+    },
+    {
+      url: 'https://www.instagram.com/themindfulpelvis/reel/Conr8HWrtOF/',
+      src: 'instagram-feed-fallback/post-5',
+      alt: 'Desk with laptop, books, keyboard and cup of coffee to show a glimpse into an academic day as a PhD student.'
+    }
+  ],
   theme: {
     'primary-base': '#3c6e89',
     'primary-light': '#9e5330',
@@ -214,6 +244,7 @@ const configHtml: Config = setConfig({
     image: 'img/mindful-pelvis-meta.jpg'
   },
   slug: {
+    archives: {},
     parents: {},
     bases: {
       page: {
@@ -221,24 +252,16 @@ const configHtml: Config = setConfig({
         title: ''
       },
       post: {
-        slug: '',
-        title: ''
-      },
-      category: {
-        slug: 'categories',
-        title: 'Categories'
+        slug: 'archive',
+        title: 'archive'
       },
       service: {
-        slug: 'services',
-        title: 'Services'
+        slug: 'archive',
+        title: 'archive'
       },
       event: {
-        slug: 'events',
-        title: 'Events'
-      },
-      eventType: {
-        slug: 'event-types',
-        title: 'Event Types'
+        slug: 'archive',
+        title: 'archive'
       }
     }
   },
@@ -251,27 +274,16 @@ const configHtml: Config = setConfig({
     whole: [
       'page',
       'post',
-      'category',
       'service',
-      'event',
-      'eventType'
+      'event'
     ],
     archive: {
       post: {
         singular: 'Post',
-        plural: 'Posts',
+        plural: 'Blog',
         layout: 'card',
         display: 12,
         order: 'date',
-        linkContentType: ['category'],
-        id: {}
-      },
-      category: {
-        singular: 'Category',
-        plural: 'Categories',
-        layout: 'list',
-        display: 12,
-        order: 'order',
         id: {}
       },
       service: {
@@ -288,28 +300,10 @@ const configHtml: Config = setConfig({
         layout: 'date',
         display: 8,
         order: 'date',
-        linkContentType: ['eventType'],
-        id: {}
-      },
-      eventType: {
-        singular: 'Event Type',
-        plural: 'Event Types',
-        layout: 'list',
-        display: 12,
-        order: 'order',
         id: {}
       }
     },
-    taxonomy: {
-      category: {
-        contentTypes: ['post'],
-        props: ['category']
-      },
-      eventType: {
-        contentTypes: ['event'],
-        props: ['eventType']
-      }
-    }
+    taxonomy: {}
   },
   renderTypes: {
     button: 'button',
@@ -317,10 +311,12 @@ const configHtml: Config = setConfig({
     container: 'container',
     content: 'content',
     image: 'image',
+    posts: 'posts',
     navigation: 'navigation',
     navigationItem: 'navigationItem',
     page: 'page',
-    redirect: 'redirect'
+    redirect: 'redirect',
+    Asset: 'asset'
   },
   renderFunctions: {
     layout: LayoutHtml,
@@ -329,7 +325,9 @@ const configHtml: Config = setConfig({
     httpError: HttpErrorHtml,
     button: ButtonHtml,
     content: ContentHtml,
-    image: ImageHtml
+    image: ImageHtml,
+    posts: PostsHtml,
+    asset: AssetHtml
   },
   filters: {
     renderArchiveName: async (archive: string = '') => {
@@ -345,6 +343,16 @@ const configHtml: Config = setConfig({
     richTextOutput: RichTextHtml.output,
     richTextContent: RichTextHtml.content
   },
+  shortcodes: {
+    'instagram-feed': {
+      callback: FeedHtml,
+      attributeTypes: {
+        display: 'number',
+        handle: 'string',
+        'show-handle': 'boolean'
+      }
+    }
+  },
   serverless: {
     dir: 'functions',
     import: 'lib',
@@ -358,6 +366,11 @@ const configHtml: Config = setConfig({
     }
   }
 })
+
+configHtml.store.files.instagramFeed = {
+  data: '',
+  name: 'instagram-feed.json'
+}
 
 /* Exports */
 

@@ -14,10 +14,9 @@ export interface Item extends RenderItem {
   heroCallToAction?: InternalLink
   heroType?: string
   post?: InternalLink[]
-  category?: InternalLink[]
   service?: InternalLink[]
   event?: InternalLink[]
-  eventType?: InternalLink[]
+  term?: InternalLink[]
 }
 
 export interface InternalLink extends InternalLinkBase {

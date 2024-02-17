@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
+import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 
 /**
  * Function - output link to main landmark
@@ -23,7 +23,7 @@ const SkipLinkHtml = (): string => {
   /* Output */
 
   return `
-    <a href="#main" class="c-skip-link t-m t-height-130-pc t-weight-bold bg-background-light l-block l-absolute l-left-0 l-right-0 l-top-0 l-padding-right-2xs l-padding-left-2xs l-padding-top-2xs l-padding-bottom-2xs t-align-center outline-snug">
+    <a href="#main" class="c-skip-link t-m t-height-snug t-weight-bold bg-background-light l-block l-absolute l-left-0 l-right-0 l-top-0 l-pr-2xs l-pl-2xs l-pt-2xs l-pb-2xs t-align-center outline-snug">
       Skip to main content
     </a>
   `

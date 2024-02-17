@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ButtonProps } from './ButtonHtmlTypes'
-import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils'
+import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -93,11 +93,11 @@ const ButtonHtml = (props: ButtonProps = { args: {} }): string => {
     const classes: string[] = []
 
     if (paddingTop !== '') {
-      classes.push(`l-padding-top-${paddingTop}`)
+      classes.push(`l-pt-${paddingTop}`)
     }
 
     if (paddingBottom !== '') {
-      classes.push(`l-padding-top-${paddingBottom}`)
+      classes.push(`l-pt-${paddingBottom}`)
     }
 
     if (justify !== '') {
