@@ -1,0 +1,16 @@
+/**
+ * Effects - Color Styles
+ */
+
+.e-color {
+  --to: var(--heading-color);
+
+  &:hover,
+  &:active,
+  &:focus,
+  &[data-current="true"] {
+    --border-color: var(--to);
+
+    color: var(--to);
+  }
+}

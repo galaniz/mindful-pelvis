@@ -4,19 +4,15 @@
 
 /* Imports */
 
-import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
-import type { ParentArgs } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
+import type { AssetProps } from './AssetHtmlTypes'
 import { ImageHtml } from '../Image/ImageHtml'
 
 /**
  * Function - output asset (image, video or audio)
+ *
+ * @param {AssetProps} props
+ * @return {Promise<string>}
  */
-
-interface AssetProps {
-  args: PropFile['fields']
-  parents?: ParentArgs[]
-}
-
 const AssetHtml = async (props: AssetProps = { args: {}, parents: [] }): Promise<string> => {
   const { args = {} } = props
 

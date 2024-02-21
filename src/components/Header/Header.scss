@@ -25,11 +25,15 @@
   --item-margin: 0;
   --item-opacity: 0;
   --link-1-color: var(--link-color);
+  --btn-color: var(--foreground-dark);
+  --logo-pos: static;
+  --logo-xy: 0, 0;
 
   z-index: map.get(con.$z-index, "nav");
 
   &[data-nav-open="true"] {
     --link-1-color: var(--background-light);
+    --btn-color: var(--background-base);
   }
 
   &[data-nav-show-overflow] {
@@ -44,6 +48,12 @@
     --cta-delay: 250ms;
     --item-margin: var(--2xs);
   }
+
+  &[data-nav-overflow="false"] {
+    --cta-list-left-radius: var(--border-radius-m);
+    --logo-pos: absolute;
+    --logo-xy: -50%, -50%;
+  }
 }
 
 /* Main container */
@@ -56,16 +66,21 @@
 
 .c-nav__logo {
   margin-right: var(--s);
-
-  .js [data-nav-overflow="false"] & {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+  position: var(--logo-pos);
+  transform: translate(var(--logo-xy));
+  left: 50%;
+  top: 50%;
 }
 
 /* List - row */
+
+.c-nav__list[data-depth="1"][data-list="cta"],
+.c-nav__cta {
+  --outline-color: var(--cta-color);
+
+  background: var(--cta-bg);
+  color: var(--cta-color);
+}
 
 .c-nav__list {
   [data-nav-overflow="false"] &[data-depth="1"] {
@@ -92,10 +107,7 @@
   &[data-list="cta"] {
     border-bottom-left-radius: var(--border-radius-m);
     border-bottom-right-radius: var(--border-radius-m);
-
-    [data-nav-overflow="false"] & {
-      border-top-left-radius: var(--border-radius-m);
-    }
+    border-top-left-radius: var(--cta-list-left-radius);
   }
 
   .js &[data-depth="0"] {
@@ -138,12 +150,12 @@
     --list-opacity: 1;
   }
 
-  [data-list="min"] &[data-depth="1"]:last-child {
-    margin-bottom: var(--item-margin);
-  }
-
   [data-list="cta"] &[data-depth="1"] {
     --border-color: var(--cta-border-color);
+  }
+
+  [data-list="min"] &[data-depth="1"]:last-child {
+    margin-bottom: var(--item-margin);
   }
 }
 
@@ -194,31 +206,17 @@
     --delay: 0ms;
     --duration: 100ms;
 
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: var(--border-radius-m);
-    border-top-left-radius: var(--border-radius-m);
+    border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
   }
-}
-
-.c-nav__cta,
-.c-nav__list[data-depth="1"][data-list="cta"] {
-  background: var(--cta-bg);
-  color: var(--cta-color);
 }
 
 /* Buttons */
 
 .c-nav__button {
-  --color: var(--foreground-dark);
+  --outline-color: var(--btn-color);
 
   z-index: 2;
-  color: var(--color);
-
-  [data-nav-open="true"] & {
-    --outline-color: var(--background-base);
-    --color: var(--background-base);
-  }
+  color: var(--btn-color);
 }
 
 .c-nav__close {

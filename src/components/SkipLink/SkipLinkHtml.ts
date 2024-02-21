@@ -23,7 +23,7 @@ const SkipLinkHtml = (): string => {
   /* Output */
 
   return `
-    <a href="#main" class="c-skip-link t-m t-height-snug t-weight-bold bg-background-light l-block l-absolute l-left-0 l-right-0 l-top-0 l-pr-2xs l-pl-2xs l-pt-2xs l-pb-2xs t-align-center outline-snug">
+    <a href="#main" class="c-skip-link t-s t-height-snug t-weight-bold bg-background-base l-block l-absolute l-left-0 l-top-0 l-px-2xs l-py-4xs t-align-center outline-inset">
       Skip to main content
     </a>
   `

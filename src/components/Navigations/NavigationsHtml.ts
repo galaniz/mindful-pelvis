@@ -4,11 +4,7 @@
 
 /* Imports */
 
-import type { NavigationsReturn, NavigationArgs } from './NavigationsHtmlTypes'
-import type {
-  NavigationItem,
-  NavigationProps
-} from '@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes'
+import type { NavigationsHtmlObj, NavigationIs, NavigationArgs } from './NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
 import { Navigation } from '@alanizcreative/static-site-formation/lib/components/Navigation/Navigation'
 import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
@@ -20,11 +16,9 @@ import { configHtmlVars } from '../../config/configHtml'
  * Function - check if text dropdown
  *
  * @private
- * @param {NavigationItem} item
- * @param {number} depth
- * @return {boolean}
+ * @type {import('./NavigationsHtmlTypes').NavigationIs}
  */
-const _isDropdown = (item: NavigationItem, depth: number): boolean => {
+const _isDropdown: NavigationIs = (item, depth) => {
   const { style = 'Text', children } = item
 
   return children !== undefined && depth === 0 && style === 'Text'
@@ -34,11 +28,9 @@ const _isDropdown = (item: NavigationItem, depth: number): boolean => {
  * Function - check if button dropdown
  *
  * @private
- * @param {NavigationItem} item
- * @param {number} depth
- * @return {boolean}
+ * @type {import('./NavigationsHtmlTypes').NavigationIs}
  */
-const _isButtonDropdown = (item: NavigationItem, depth: number): boolean => {
+const _isButtonDropdown: NavigationIs = (item, depth) => {
   const { style = 'Text', children } = item
 
   return children !== undefined && depth === 0 && style === 'Button'
@@ -48,10 +40,9 @@ const _isButtonDropdown = (item: NavigationItem, depth: number): boolean => {
  * Function - check if button style
  *
  * @private
- * @param {NavigationItem} item
- * @return {boolean}
+ * @type {import('./NavigationsHtmlTypes').NavigationIs}
  */
-const _isButton = (item: NavigationItem): boolean => {
+const _isButton: NavigationIs = (item, _depth) => {
   const { style = 'Text' } = item
 
   return style === 'Button'
@@ -60,14 +51,13 @@ const _isButton = (item: NavigationItem): boolean => {
 /**
  * Function - output navigations
  *
- * @param {NavigationProps} args
- * @return {NavigationsReturn}
+ * @type {import('./NavigationsHtmlTypes').NavigationsHtmlObj}
  */
-const NavigationsHtml = ({
+const NavigationsHtml: NavigationsHtmlObj = ({
   navigations = [],
   items = [],
   current = ''
-}: NavigationProps): NavigationsReturn => {
+}) => {
   /* Navs and items required */
 
   if (navigations.length === 0 || items.length === 0) {
@@ -115,7 +105,7 @@ const NavigationsHtml = ({
         internalLinkClass: 'js-pt-link',
         filterBeforeList: ({ args, depth }) => {
           if (depth > 0) {
-            args.listClass = `${listClass} o-collapsible__main e-underline-reverse e-transition l-flex-column no-js-none`
+            args.listClass = `${listClass} o-collapsible__main outline-snug e-underline-reverse e-transition l-flex-column no-js-none`
             args.listAttr = `${listAttr} data-list="${listType}" id="${collapsibleId}"`
           } else {
             args.listAttr = listAttr
@@ -147,8 +137,8 @@ const NavigationsHtml = ({
             }
           }
 
-          if (_isButton(item)) {
-            newLinkClass = 'c-nav__cta t-weight-bold t-height-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-width-1-1'
+          if (_isButton(item, depth)) {
+            newLinkClass = 'c-nav__cta outline-inset t-weight-bold t-height-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-wd-1-1'
           }
 
           if (_isButtonDropdown(item, depth)) {
@@ -222,7 +212,7 @@ const NavigationsHtml = ({
 
             output.html += `
                 <button class="o-collapsible__toggle t-current l-pl-4xs l-py-5xs no-js-none" type="button" aria-controls="${collapsibleId}" aria-expanded="false" aria-label="${title} submenu">
-                  ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs e-transition')}
+                  ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-transition')}
                 </button>
               </div>
             `
@@ -247,7 +237,7 @@ const NavigationsHtml = ({
           if (_isButtonDropdown(item, depth)) {
             output.html += `
               </span>
-              ${CaretSvgHtml('down', 'l-flex l-width-3xs l-height-3xs e-transition no-js-none')}
+              ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-transition no-js-none')}
             `
           }
         }
@@ -269,7 +259,7 @@ const NavigationsHtml = ({
       {
         listClass: 'l-flex l-flex-wrap l-gm-2xs t-list-style-none',
         listAttr: 'role="list"',
-        linkClass: 'l-flex l-align-center l-justify-center l-relative l-width-s l-height-s b-radius-100-pc b-all e-border e-transition',
+        linkClass: 'l-flex l-align-center l-justify-center l-relative l-wd-s l-ht-s b-radius-100-pc b-all e-color e-transition',
         filterBeforeLinkText: ({ output }) => {
           output.html += '<span class="a-visually-hidden">'
         },
@@ -279,7 +269,7 @@ const NavigationsHtml = ({
 
           output.html += '</span>'
 
-          output.html += SocialSvgHtml(t, 'l-flex l-width-2xs l-height-2xs')
+          output.html += SocialSvgHtml(t, 'l-flex l-wd-2xs l-ht-2xs')
         }
       }
     )
@@ -305,7 +295,7 @@ const NavigationsHtml = ({
 /**
  * Function - output nav element with contents
  *
- * @param {NavigationArgs} args
+ * @param {import('./NavigationsHtmlTypes').NavigationArgs} args
  * @return {string}
  */
 const NavigationHtml = ({ navigations, props = {} }: NavigationArgs): string => {

@@ -1,5 +1,5 @@
 /**
- * Layouts - container html
+ * Layouts - Container Html
  */
 
 /* Imports */
@@ -14,7 +14,7 @@ import { configHtmlVars } from '../../config/configHtml'
  * @type {ContainerPropsFilter}
  */
 const ContainerHtml: ContainerPropsFilter = async (props) => {
-  const { args } = props
+  const { args, parents = [] } = props
 
   let {
     tag = 'Div',
@@ -46,9 +46,19 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   justify = configHtmlVars.options.justify[justify]
   align = configHtmlVars.options.align[align]
 
+  /* Nest */
+
+  let nest = false
+
+  if (parents.length > 0) {
+    const parentType = parents[0].renderType
+
+    nest = parentType === 'container' || parentType === 'contentTemplate'
+  }
+
   /* Classes */
 
-  const classesArray: string[] = []
+  const classesArr: string[] = []
 
   /* Attributes */
 
@@ -57,7 +67,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   /* List check */
 
   if (tag === 'ul' || tag === 'ol') {
-    classesArray.push('t-list-style-none')
+    classesArr.push('t-list-style-none')
     attrs.push('role="list"')
   }
 
@@ -89,8 +99,8 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
 
   /* Output */
 
-  if (classesArray.length > 0) {
-    classes += `${isStringStrict(classes) ? ' ' : ''}${classesArray.join(' ')}`
+  if (classesArr.length > 0) {
+    classes += `${isStringStrict(classes) ? ' ' : ''}${classesArr.join(' ')}`
   }
 
   if (attrs.length > 0) {
@@ -110,7 +120,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   args.align = isStringStrict(align) ? `l-align-${align}` : ''
   args.classes = classes
   args.attr = attr
-  args.nest = true
+  args.nest = nest
 
   return props
 }

@@ -1,5 +1,5 @@
 /**
- * Svg - social html
+ * Svg - Social Html
  */
 
 /* Imports */

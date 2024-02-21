@@ -11,3 +11,15 @@
 .bg-current {
   background-color: currentcolor;
 }
+
+.bg-foreground-dark-fade {
+  background: var(--foreground-dark-fade);
+}
+
+.bg-primary-light-fade {
+  background: var(--primary-light-fade);
+}
+
+.bg-primary-base-fade {
+  background: var(--primary-base-fade);
+}

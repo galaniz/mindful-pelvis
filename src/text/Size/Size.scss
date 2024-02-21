@@ -1,5 +1,5 @@
 /**
- * Base - Text Styles
+ * Text - Size Styles
  */
 
 /* Imports */
@@ -24,7 +24,6 @@ h6,
   font-family: var(--font-family-secondary);
   font-weight: var(--font-weight-normal);
   color: var(--heading-color);
-  transform: translateY(5%);
 }
 
 h2,
@@ -50,6 +49,7 @@ h6,
 
 p,
 li[data-rich],
+.t-xl,
 .t-l,
 .t-quote,
 .t,
@@ -63,6 +63,7 @@ li[data-rich],
 
 p,
 li[data-rich],
+.t-xl,
 .t-l,
 .t,
 .t-r,
@@ -111,6 +112,10 @@ h6,
   line-height: var(--line-height-open);
   font-size: var(--t-quote);
   font-style: italic;
+}
+
+.t-xl {
+  font-size: var(--t-xl);
 }
 
 p,

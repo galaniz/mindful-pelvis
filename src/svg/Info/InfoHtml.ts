@@ -1,5 +1,5 @@
 /**
- * Svg - info html
+ * Svg - Info Html
  */
 
 /* Imports */

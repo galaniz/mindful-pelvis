@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import type { NavigationsReturn } from '../Navigations/NavigationsHtmlTypes'
+import type { NavigationHtmlFunc } from '../Navigations/NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
 import { addScriptStyle, getPermalink } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { SkipLinkHtml } from '../SkipLink/SkipLinkHtml'
@@ -14,10 +14,9 @@ import { configHtml, configHtmlVars } from '../../config/configHtml'
 /**
  * Function - output header
  *
- * @param {NavigationsReturn} navigations
- * @return {string} HTML - header
+ * @type {import('../Navigations/NavigationsHtmlTypes').NavigationHtmlFunc}
  */
-const HeaderHtml = (navigations: NavigationsReturn): string => {
+const HeaderHtml: NavigationHtmlFunc = (navigations) => {
   /* Id */
 
   const id = `n-${uuid()}`
@@ -58,7 +57,7 @@ const HeaderHtml = (navigations: NavigationsReturn): string => {
           })}
           ${navigations.main}
           <div class="c-nav__hide">
-            <button class="c-nav__button c-nav__open l-height-s l-width-s l-relative l-pt-5xs" type="button" aria-haspopup="true" aria-controls="${id}" aria-label="Open menu">
+            <button class="c-nav__button c-nav__open l-ht-s l-wd-s l-relative l-pt-5xs" type="button" aria-haspopup="true" aria-controls="${id}" aria-label="Open menu">
               <span class="c-nav-icon l-block l-relative e-transition" data-nav-icon="7">
                 <span class="c-nav-icon__top bg-current l-block e-transition"></span>
                 <span class="c-nav-icon__middle bg-current l-block e-transition"></span>
@@ -67,17 +66,17 @@ const HeaderHtml = (navigations: NavigationsReturn): string => {
               <span class="c-nav-icon-label t-xs t-align-center t-height-tight l-pt-4xs l-block e-transition" aria-hidden="true">Menu</span>
             </button>
           </div>
-          <div class="c-nav__overflow l-fixed l-top-0 l-left-0 l-width-100-pc l-height-100-pc t-light t-sharp t-link-current" role="dialog" aria-modal="true" aria-label="Main menu" id="${id}">
+          <div class="c-nav__overflow l-fixed l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc t-light t-sharp t-link-current" role="dialog" aria-modal="true" aria-label="Main menu" id="${id}">
             <div class="c-nav__hide">
               <a class="c-nav__home o-logo l-inline-flex l-fixed js-pt-link" href="${getPermalink()}" aria-label="${configHtml.title} Home"></a>
             </div>
-            <div class="c-nav__scroll l-height-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-pr-2xs l-pl-2xs l-pb-xs">
+            <div class="c-nav__scroll l-ht-100-pc l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-pr-2xs l-pl-2xs l-pb-xs">
               <ul class="c-nav__column l-flex l-flex-column t-list-style-none" role="list"></ul>
             </div>
             <div class="c-nav__hide">
-              <button class="c-nav__button c-nav__close l-height-m l-width-s l-fixed l-top-0" type="button" aria-label="Close menu"></button>
+              <button class="c-nav__button c-nav__close l-ht-m l-wd-s l-fixed l-top-0" type="button" aria-label="Close menu"></button>
             </div>
-            <div class="c-nav__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-overflow-hidden l-before l-after l-z-index--1 l-width-100-pc l-height-100-pc e-transition"></div>
+            <div class="c-nav__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-overflow-hidden l-before l-after l-z-index--1 l-wd-100-pc l-ht-100-pc e-transition"></div>
           </div>
         </div>
       </nav>

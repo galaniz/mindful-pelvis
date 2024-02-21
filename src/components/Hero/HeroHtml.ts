@@ -22,6 +22,7 @@ import { configHtmlVars } from '../../config/configHtml'
  */
 const HeroHtml = ({
   contentType = 'page',
+  archive = '',
   type = 'Minimal',
   title = '',
   text = '',
@@ -30,10 +31,12 @@ const HeroHtml = ({
 }: HeroArgs): string => {
   /* Normalize options */
 
+  const initType = type
+
   type = configHtmlVars.options.hero.type[type]
 
-  const overlap = type.includes('overlap')
-  const overlapBg = overlap ? configHtmlVars.options.hero.background[type] : ''
+  const overlap = initType.includes('Overlap')
+  const overlapBg = overlap ? configHtmlVars.options.color[type] : ''
 
   /* Image */
 
@@ -43,8 +46,8 @@ const HeroHtml = ({
     const maxWidth = overlap ? 1600 : 2000
     const imageRes = getImage({
       data: image,
-      classes: 'l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc l-object-cover',
-      returnAspectRatio: true,
+      classes: 'l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover',
+      returnDetails: true,
       lazy: false,
       picture: true,
       maxWidth
@@ -64,7 +67,7 @@ const HeroHtml = ({
     let pictureStyle = ''
 
     if (overlap) {
-      pictureClasses += ' l-height-100-pc'
+      pictureClasses += ' l-ht-100-pc'
       pictureStyle = ` style="padding-top:${imageResAspectRatio * 100}%"`
     } else {
       pictureClasses += ' c-hero-min'
@@ -137,10 +140,10 @@ const HeroHtml = ({
   if (overlap) {
     return `
       <section class="c-hero-overlap l-container l-flex l-flex-column l-flex-row-l l-pb-m-l">
-        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-width-4-5-m l-width-3-5-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
+        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-wd-4-5-m l-wd-3-5-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
           ${textOutput}
         </div>
-        <div class="c-hero-overlap__media l-width-1-1 l-order-first l-relative l-overflow-hidden">
+        <div class="c-hero-overlap__media l-wd-1-1 l-order-first l-relative l-overflow-hidden">
           ${imageOutput}
         </div>
       </section>
@@ -149,9 +152,11 @@ const HeroHtml = ({
 
   /* Minimal */
 
+  const center = contentType === 'post' || contentType === 'service' || archive === 'post'
+
   return `
     <section class="l-pt-m l-pt-xl-l">
-      <div class="l-container">
+      <div class="l-container${center ? ' t-align-center' : ''}">
         ${textOutput}
       </div>
       ${imageOutput}

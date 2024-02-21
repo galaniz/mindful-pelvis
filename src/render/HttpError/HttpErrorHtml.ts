@@ -4,6 +4,7 @@
 
 /* Imports */
 
+import type { HttpErrorText } from './HttpErrorHtmlTypes'
 import { getPermalink } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
 import { LayoutHtml } from '../../components/Layout/LayoutHtml'
@@ -17,14 +18,6 @@ import { configHtml } from '../../config/configHtml'
  * @param {number} type - 404 or 500
  * @return {string} HTML - html
  */
-
-interface HttpErrorText {
-  [key: number]: {
-    metaTitle: string
-    heroText: string
-  }
-}
-
 const HttpErrorHtml = async (type: number = 404): Promise<string> => {
   /* Text by type */
 

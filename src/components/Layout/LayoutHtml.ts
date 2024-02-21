@@ -117,6 +117,7 @@ const LayoutHtml = async ({
   /* Hero */
 
   let heroTitle = ''
+  let heroArchive = ''
 
   if (isStringStrict(pageData.pageTitle)) {
     heroTitle = pageData.pageTitle
@@ -126,10 +127,15 @@ const LayoutHtml = async ({
     heroTitle = pageData.heroTitle
   }
 
+  if (isStringStrict(pageData.archive)) {
+    heroArchive = configHtmlVars.options.posts.contentType[pageData.archive]
+  }
+
   const heroOutput = HeroHtml({
     contentType,
     title: heroTitle,
     type: pageData.heroType,
+    archive: heroArchive,
     text: pageData.heroText,
     image: pageData.heroImage,
     callToAction: pageData.heroCallToAction,
@@ -162,7 +168,7 @@ const LayoutHtml = async ({
   /* Scripts */
 
   const scriptFiles = configHtml.scripts.item
-  const scriptsArray = Object.keys(scriptFiles)
+  const scriptsArr = Object.keys(scriptFiles)
 
   let scripts = ''
 
@@ -170,15 +176,15 @@ const LayoutHtml = async ({
     scripts += `<script type="module" src="${assetsLink}${configHtmlVars.js.out}.js"></script>`
   }
 
-  if (scriptsArray.length > 0) {
-    scriptsArray.sort((a, b) => {
+  if (scriptsArr.length > 0) {
+    scriptsArr.sort((a, b) => {
       const aPriority = scriptFiles[a]
       const bPriority = scriptFiles[b]
 
       return aPriority - bPriority
     })
 
-    scriptsArray.forEach((s) => {
+    scriptsArr.forEach((s) => {
       scripts += `<script type="module" src="${assetsLink}${s}.js"></script>`
     })
   }
@@ -186,7 +192,7 @@ const LayoutHtml = async ({
   /* Styles */
 
   const styleFiles = configHtml.styles.item
-  const stylesArray = Object.keys(styleFiles)
+  const stylesArr = Object.keys(styleFiles)
 
   let styles = ''
 
@@ -194,15 +200,15 @@ const LayoutHtml = async ({
     configHtmlVars.css.head = `<link rel="stylesheet" href="${assetsLink}${configHtmlVars.css.out}.css" media="all">`
   }
 
-  if (stylesArray.length > 0) {
-    stylesArray.sort((a, b) => {
+  if (stylesArr.length > 0) {
+    stylesArr.sort((a, b) => {
       const aPriority = styleFiles[a]
       const bPriority = styleFiles[b]
 
       return aPriority - bPriority
     })
 
-    stylesArray.forEach((s) => {
+    stylesArr.forEach((s) => {
       styles += `<link rel="stylesheet" href="${assetsLink}${s}.css" media="all">`
     })
   }
@@ -238,6 +244,8 @@ const LayoutHtml = async ({
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>${title}</title>
         ${preloadFonts}
+        <link rel="preconnect" href="https://images.ctfassets.net">
+        <link rel="dns-prefetch" href="https://images.ctfassets.net">
         ${noIndex ? '<meta name="robots" content="noindex, nofollow">' : ''}
         <meta name="description" content="${description}">
         ${canonical}
@@ -263,6 +271,9 @@ const LayoutHtml = async ({
             }
 
             .no-js-nav {
+              --logo-pos: static;
+              --logo-xy: 0 0;
+
               flex-wrap: wrap;
               overflow: hidden;
             }

@@ -18,6 +18,7 @@ import { ContainerHtml } from '../layouts/Container/ContainerHtml'
 import { ColumnHtml } from '../layouts/Column/ColumnHtml'
 import { RichTextHtml } from '../text/RichText/RichTextHtml'
 import { PostsHtml } from '../objects/Posts/PostsHtml'
+import { CardHtml } from '../objects/Cards/CardsHtml'
 import { FeedHtml } from '../objects/Feed/FeedHtml'
 
 /**
@@ -75,6 +76,21 @@ const configHtmlVars: ConfigVars = {
     out: 'css/global/global.js'
   },
   navHalf: 0,
+  backgrounds: [
+    'Navy',
+    'Blue',
+    'Orange',
+    'Gray',
+    'Navy Light',
+    'Blue Light',
+    'Orange Light'
+  ],
+  shades: {
+    'Navy Light': 'foreground-dark',
+    'Gray Light': 'foreground-base',
+    'Orange Light': 'primary-light',
+    'Blue Light': 'primary-base'
+  },
   options: {
     button: {
       type: {
@@ -101,6 +117,7 @@ const configHtmlVars: ConfigVars = {
       Address: 'address'
     },
     width: {
+      Default: '',
       None: '',
       Auto: 'auto',
       '1/1': '1-1',
@@ -113,7 +130,14 @@ const configHtmlVars: ConfigVars = {
       '1/3': '1-3',
       '1/4': '1-4',
       '1/5': '1-5',
-      '1/6': '1-6'
+      '1/6': '1-6',
+      '100%': '100-pc',
+      '45px': 's',
+      '60px': 'm',
+      '75px': 'l',
+      '90px': 'xl',
+      '120px': '2xl',
+      '150px': '3xl'
     },
     justify: {
       None: '',
@@ -210,22 +234,35 @@ const configHtmlVars: ConfigVars = {
         Post: 'post',
         Service: 'service',
         Event: 'event'
+      },
+      headingLevel: {
+        'Heading Two': 'heading-2',
+        'Heading Three': 'heading-3',
+        'Heading Four': 'heading-4',
+        'Heading Five': 'heading-5',
+        'Heading Six': 'heading-6'
       }
     },
     hero: {
       type: {
         Minimal: 'minimal',
-        'Overlap - Orange': 'overlap-orange',
-        'Overlap - Blue': 'overlap-blue',
-        'Overlap - Gray': 'overlap-gray',
-        'Overlap - Navy': 'overlap-navy'
-      },
-      background: {
-        'overlap-orange': 'primary-light',
-        'overlap-blue': 'primary-base',
-        'overlap-gray': 'foreground-base',
-        'overlap-navy': 'foreground-dark'
+        'Overlap - Orange': 'Orange',
+        'Overlap - Blue': 'Blue',
+        'Overlap - Gray': 'Gray',
+        'Overlap - Navy': 'Navy'
       }
+    },
+    color: {
+      None: '',
+      Default: '',
+      Navy: 'foreground-dark',
+      Gray: 'foreground-base',
+      Orange: 'primary-light',
+      Blue: 'primary-base',
+      'Navy Light': 'foreground-dark-fade',
+      'Gray Light': 'foreground-dark-fade',
+      'Orange Light': 'primary-light-fade',
+      'Blue Light': 'primary-base-fade'
     }
   }
 }
@@ -289,7 +326,7 @@ const configHtml: Config = setConfig({
       service: {
         singular: 'Service',
         plural: 'Services',
-        layout: 'media-text',
+        layout: 'card',
         display: 8,
         order: 'order',
         id: {}
@@ -327,10 +364,11 @@ const configHtml: Config = setConfig({
     content: ContentHtml,
     image: ImageHtml,
     posts: PostsHtml,
-    asset: AssetHtml
+    asset: AssetHtml,
+    card: CardHtml
   },
   filters: {
-    renderArchiveName: async (archive: string = '') => {
+    renderArchiveName: async (archive = '') => {
       if (archive !== '') {
         return configHtmlVars.options.posts.contentType[archive]
       }

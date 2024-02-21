@@ -1,0 +1,17 @@
+/**
+ * Objects - Image Color Styles
+ */
+
+.o-image-color {
+  &::before {
+    background: var(--theme);
+    mask-image: var(--img-url);
+    mask-size: cover;
+    mask-type: alpha;
+    mask-repeat: no-repeat;
+  }
+
+  img {
+    opacity: 0;
+  }
+}

@@ -25,6 +25,7 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
     justify = 'None',
     align = 'None',
     order = 'Default',
+    grow = false,
     classes = ''
   } = isObjectStrict(args) ? args : {}
 
@@ -39,6 +40,16 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
   align = configHtmlVars.options.align[align]
 
   const ord = isStringStrict(order) ? configHtmlVars.options.order[order] : ''
+  const jst = isStringStrict(justify)
+  const aln = isStringStrict(align)
+
+  /* Classes */
+
+  const classesArr: string[] = []
+
+  if (isStringStrict(classes)) {
+    classesArr.push(classes)
+  }
 
   /* Width */
 
@@ -46,22 +57,34 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
     width = '1-1'
   }
 
+  /* Flex */
+
+  if (ord !== '' || jst || aln || grow) {
+    classesArr.push('l-flex l-flex-column')
+  }
+
+  /* Grow */
+
+  if (grow) {
+    classesArr.push('l-flex-grow-1')
+  }
+
   /* Order */
 
   if (ord !== '') {
-    classes += `${isStringStrict(classes) ? ' ' : ''}l-order-${ord}`
+    classesArr.push(`l-order-${ord}`)
   }
 
   /* Output */
 
   args.tag = tag
-  args.width = isStringStrict(width) ? `l-width-${width}` : ''
-  args.widthSmall = isStringStrict(widthSmall) ? `l-width-${widthSmall}-s` : ''
-  args.widthMedium = isStringStrict(widthMedium) ? `l-width-${widthMedium}-m` : ''
-  args.widthLarge = isStringStrict(widthLarge) ? `l-width-${widthLarge}-l` : ''
-  args.justify = isStringStrict(justify) ? `l-justify-${justify}` : ''
-  args.align = isStringStrict(align) ? `l-align-${align}` : ''
-  args.classes = classes
+  args.width = isStringStrict(width) ? `l-wd-${width}` : ''
+  args.widthSmall = isStringStrict(widthSmall) ? `l-wd-${widthSmall}-s` : ''
+  args.widthMedium = isStringStrict(widthMedium) ? `l-wd-${widthMedium}-m` : ''
+  args.widthLarge = isStringStrict(widthLarge) ? `l-wd-${widthLarge}-l` : ''
+  args.justify = jst ? `l-justify-${justify}` : ''
+  args.align = aln ? `l-align-${align}` : ''
+  args.classes = classesArr.join(' ')
 
   return props
 }

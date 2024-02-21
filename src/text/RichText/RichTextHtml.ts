@@ -1,45 +1,19 @@
 /**
- * Text - rich text html
+ * Text - Rich Text Html
  */
 
 /* Imports */
 
-import type { InternalLink } from '../../global/globalHtmlTypes'
-import type { RichTextContentFilter, RichTextOutputFilter, RichTextPropsFilter } from '@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes'
+import type { RichTextHtmlFilters } from './RichTextHtmlTypes'
+import type { ContentProps } from '../../objects/Content/ContentHtmlTypes'
+import type { CardProps } from '../../objects/Cards/CardsHtmlTypes'
 import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
-
-interface RichTextHtmlFilters {
-  props: RichTextPropsFilter
-  output: RichTextOutputFilter
-  content: RichTextContentFilter
-}
-
-interface CardArgs {
-  gap?: string
-  gapLarge?: string
-  internalLink?: InternalLink
-  externalLink?: string
-  embed?: boolean
-  embedTitle?: string
-  embedText?: string
-  background?: string
-}
-
-interface ContentArgs {
-  align?: string
-  gap?: string
-  gapLarge?: string
-  textStyle?: string
-  headingStyle?: string
-  richTextStyles?: boolean
-  classes?: string
-}
 
 /**
  * Callbacks for rich text filters
  *
- * @type {RichTextHtmlFilters}
+ * @type {import('./RichTextHtmlTypes').RichTextHtmlFilters}
  */
 const RichTextHtml: RichTextHtmlFilters = {
   /* Props */
@@ -54,30 +28,40 @@ const RichTextHtml: RichTextHtmlFilters = {
 
     /* Classes */
 
-    const classesArray: string[] = []
+    const classesArr: string[] = []
 
     /* Content ascendant */
 
     const parent = parents[0] !== undefined ? parents[0].renderType : ''
+    const heading = type.includes('heading')
 
     if (parent === 'content') {
-      const contentArgs: ContentArgs = parents[0].args
-      const heading = type.includes('heading')
+      const contentArgs: ContentProps['args'] = parents[0].args
 
       let {
         textStyle = 'Default',
-        headingStyle = 'Default'
+        headingStyle = 'Default',
+        richTextStyles = true
       } = contentArgs
 
       textStyle = configHtmlVars.options.content.text[textStyle]
       headingStyle = configHtmlVars.options.content.heading[headingStyle]
 
       if (textStyle !== '' && !heading) {
-        classesArray.push(textStyle)
+        classesArr.push(textStyle)
       }
 
       if (headingStyle !== '' && heading) {
-        classesArray.push(`t-${headingStyle}`)
+        classesArr.push(`t-${headingStyle}`)
+      }
+
+      /* Add styles */
+
+      if (richTextStyles) {
+        addScriptStyle({
+          dir: 'text/RichText',
+          style: 'RichText'
+        })
       }
     }
 
@@ -85,21 +69,14 @@ const RichTextHtml: RichTextHtmlFilters = {
 
     const grandParent = parents[1] !== undefined ? parents[1].renderType : ''
 
-    if (grandParent === 'card' && type === 'paragraph') {
-      classesArray.push('t-link-current')
+    if (grandParent === 'card' && heading) {
+      classesArr.push('t-link-current t-break')
     }
-
-    /* Add styles */
-
-    addScriptStyle({
-      dir: 'text/RichText',
-      style: 'RichText'
-    })
 
     /* Output */
 
-    if (classesArray.length > 0) {
-      classes += `${classes !== '' ? ' ' : ''}${classesArray.join(' ')}`
+    if (classesArr.length > 0) {
+      classes += `${classes !== '' ? ' ' : ''}${classesArr.join(' ')}`
     }
 
     args.classes = classes
@@ -127,7 +104,7 @@ const RichTextHtml: RichTextHtmlFilters = {
 
       output = `
         <div class="l-overflow-hidden">
-          <div class="l-overflow-x-auto l-width-100-pc t-rich-table o-overflow">
+          <div class="l-overflow-x-auto l-wd-100-pc t-rich-table o-overflow">
             ${output}
           </div>
         </div>
@@ -149,7 +126,7 @@ const RichTextHtml: RichTextHtmlFilters = {
     const grandParent = parents[1] !== undefined ? parents[1].renderType : ''
 
     if (output !== '' && grandParent === 'card' && type.includes('heading')) {
-      const cardArgs: CardArgs = parents[1].args
+      const cardArgs: CardProps['args'] = parents[1].args
 
       const {
         internalLink,

@@ -54,9 +54,9 @@ const FeedHtml: Feed = async (args) => {
 
     columns.push(`
       ${column.start}
-        <a href="${link}" class="l-flex l-align-center t-link-current">
-          <span class="l-flex l-height-s l-width-s bg-foreground-dark t-light b-radius-100-pc l-align-center l-justify-center l-flex-shrink-0">
-            ${SocialSvgHtml('instagram', 'l-height-2xs l-width-2xs')}
+        <a href="${link}" class="l-inline-flex l-align-center t-link-current" rel="noreferrer">
+          <span class="l-flex l-ht-s l-wd-s bg-foreground-dark t-light b-radius-100-pc l-align-center l-justify-center l-flex-shrink-0">
+            ${SocialSvgHtml('instagram', 'l-ht-2xs l-wd-2xs')}
           </span>
           <span class="t l-pl-2xs">Follow @${handle}</span>
         </a>
@@ -99,7 +99,7 @@ const FeedHtml: Feed = async (args) => {
 
     columns.push(`
       ${column.start}
-        <a href="${url}">${imageOutput}</a>
+        <a href="${url}" rel="noreferrer" class="l-block">${imageOutput}</a>
       ${column.end}
     `)
   }

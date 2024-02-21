@@ -4,44 +4,16 @@
 
 /* Imports */
 
+import type { ContentProps, ContentReturn } from './ContentHtmlTypes'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output content wrapper
  *
- * @param {object} props
- * @param {object} props.args
- * @param {string} props.args.align
- * @param {string} props.args.gap
- * @param {string} props.args.gapLarge
- * @param {boolean} props.args.richTextStyles
- * @param {string} props.args.classes - Back end option
- * @return {object}
+ * @param {import('./ContentHtmlTypes').ContentProps} props
+ * @return {Promise<import('./ContentHtmlTypes').ContentReturn>}
  */
-
-interface ContentProps {
-  args: {
-    align?: string
-    gap?: string
-    gapLarge?: string
-    textStyle?: string
-    headingStyle?: string
-    richTextStyles?: boolean
-    classes?: string
-  }
-}
-
-/**
- * @typedef {object} StartEndReturn
- * @prop {string} start
- * @prop {string} end
- */
-interface StartEndReturn {
-  start: string
-  end: string
-}
-
-const ContentHtml = (props: ContentProps = { args: {} }): StartEndReturn => {
+const ContentHtml = async (props: ContentProps = { args: {} }): Promise<ContentReturn> => {
   const { args = {} } = props
 
   let {
@@ -63,38 +35,38 @@ const ContentHtml = (props: ContentProps = { args: {} }): StartEndReturn => {
 
   /* Classes */
 
-  const classesArray: string[] = []
+  const classesArr: string[] = []
 
   if (classes !== '') {
-    classesArray.push(classes)
+    classesArr.push(classes)
   }
 
   /* Rich text styles */
 
   if (richTextStyles) {
-    classesArray.push('t-rich-text e-underline')
+    classesArr.push('t-rich-text e-underline')
   }
 
   /* Align */
 
   if (align === 'center') {
-    classesArray.push('t-align-center')
+    classesArr.push('t-align-center')
   }
 
   /* Gap */
 
   if (gap !== '') {
-    classesArray.push(`l-mb-${gap}-all`)
+    classesArr.push(`l-mb-${gap}-all`)
   }
 
   if (gapLarge !== '' && gapLarge !== gap) {
-    classesArray.push(`l-mb-${gapLarge}-all-m`)
+    classesArr.push(`l-mb-${gapLarge}-all-m`)
   }
 
   /* Output */
 
   return {
-    start: `<div${classesArray.length > 0 ? ` class="${classesArray.join(' ')}"` : ''}>`,
+    start: `<div${classesArr.length > 0 ? ` class="${classesArr.join(' ')}"` : ''}>`,
     end: '</div>'
   }
 }

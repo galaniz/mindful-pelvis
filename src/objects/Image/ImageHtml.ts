@@ -4,44 +4,28 @@
 
 /* Imports */
 
-import type { InternalLink } from '../../global/globalHtmlTypes'
-import type { ParentArgs } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
-import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
-import { getImage } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import type { ImageProps } from './ImageHtmlTypes'
+import { getImage, isString, addScriptStyle, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 // import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Function - output image
  *
- * @param {object} props
- * @param {object} props.args
- * @param {object} props.args.image
- * @param {string} props.args.aspectRatio
- * @param {string} props.args.borderRadius
- * @param {object} props.args.caption
- * @param {object[]} props.parents
- * @return {string} HTML - div
+ * @param {import('./ImageHtmlTypes').ImageProps} props
+ * @return {Promise<string>}
  */
-
-interface ImageProps {
-  args: {
-    image?: PropFile
-    aspectRatio?: string
-    borderRadius?: string
-    caption?: InternalLink
-    source?: string
-  }
-  parents?: ParentArgs[]
-}
-
 const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise<string> => {
   const { args = {}, parents = [] } = props
 
   let {
     image,
     aspectRatio = '1:1',
+    width = 'Default',
     borderRadius = 'None',
+    color = 'Default',
+    invert = false,
+    classes = '',
     source = 'cms'
     // caption
   } = args
@@ -59,62 +43,95 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
   /* Normalize options */
 
   aspectRatio = configHtmlVars.options.aspectRatio[aspectRatio]
+  width = configHtmlVars.options.width[width]
+  color = configHtmlVars.options.color[color]
   borderRadius = configHtmlVars.options.borderRadius[borderRadius]
+
+  const hasColor = isStringStrict(color)
+  const hasAspectRatio = isStringStrict(aspectRatio)
+
+  /* Add styles */
+
+  if (hasColor) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageColor'
+    })
+  }
+
+  if (invert) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageInvert'
+    })
+  }
 
   /* Image */
 
   let imageOutput = ''
 
   if (image !== undefined) {
-    const imageClasses = ['l-absolute l-top-0 l-left-0 l-width-100-pc l-height-100-pc l-object-cover']
+    const imageClasses = ['l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover']
 
-    if (card) {
-      imageClasses.push('e-transition l-object-left-top')
-    }
-
-    const imageObj = getImage({
+    const imageRes = getImage({
       data: image,
       classes: imageClasses.join(' '),
-      returnAspectRatio: true,
+      returnDetails: true,
       picture: true,
-      maxWidth: card ? 200 : 1200,
+      maxWidth: card ? 600 : 1200,
       source
     })
 
-    let imageObjAspectRatio = 0
-    let imageObjOutput = ''
+    let imageResAspectRatio = 0
+    let imageResSrc = ''
+    let imageResOutput = ''
 
-    if (typeof imageObj === 'string') {
-      imageObjOutput = imageObj
+    if (isString(imageRes)) {
+      imageResOutput = imageRes
     } else {
-      imageObjAspectRatio = imageObj.aspectRatio
-      imageObjOutput = imageObj.output
+      imageResAspectRatio = imageRes.aspectRatio
+      imageResSrc = imageRes.src
+      imageResOutput = imageRes.output
     }
 
-    let classes = 'l-relative l-block l-overflow-hidden'
+    let pictureClasses = 'l-relative l-block l-overflow-hidden'
 
-    if (aspectRatio !== '') {
-      classes += ` l-ar-${aspectRatio}`
+    if (hasAspectRatio) {
+      pictureClasses += ` l-ar-${aspectRatio}`
     }
 
-    if (card) {
-      classes += ' l-after'
+    if (isStringStrict(width)) {
+      pictureClasses += ` l-wd-${width}`
     }
 
-    if (borderRadius !== '') {
-      classes += ` b-radius-${borderRadius}`
+    if (isStringStrict(borderRadius)) {
+      pictureClasses += ` b-radius-${borderRadius}`
     }
 
-    const attr: string[] = []
-
-    if (aspectRatio === '' && imageObjAspectRatio !== 0) {
-      attr.push(`style="padding-top:${imageObjAspectRatio * 100}%"`)
+    if (isStringStrict(classes)) {
+      pictureClasses += ` ${classes}`
     }
 
-    if (imageObjOutput !== '') {
+    if (invert) {
+      pictureClasses += ' o-image-invert'
+    }
+
+    const style: string[] = []
+
+    if (hasColor) {
+      pictureClasses += ' l-before o-image-color'
+
+      style.push(`--img-url:url(${imageResSrc})`)
+    }
+
+    if (!hasAspectRatio && imageResAspectRatio !== 0) {
+      style.push(`padding-top:${imageResAspectRatio * 100}%`)
+    }
+
+    if (imageResOutput !== '') {
       imageOutput = `
-        <picture class="${classes}"${attr.length > 0 ? attr.join(' ') : ''}>
-          ${imageObjOutput}
+        <picture class="${pictureClasses}"${style.length > 0 ? ` style="${style.join(';')}"` : ''}>
+          ${imageResOutput}
         </picture>
       `
     }

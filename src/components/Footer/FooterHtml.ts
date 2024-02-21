@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import type { NavigationsReturn } from '../Navigations/NavigationsHtmlTypes'
+import type { NavigationHtmlFunc } from '../Navigations/NavigationsHtmlTypes'
 import { getYear } from '@alanizcreative/static-site-formation/lib/utils/getYear/getYear'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
@@ -12,10 +12,9 @@ import { configHtml } from '../../config/configHtml'
 /**
  * Function - output footer
  *
- * @param {NavigationsReturn} navigations
- * @return {string} HTML - footer
+ * @type {import('../Navigations/NavigationsHtmlTypes').NavigationHtmlFunc}
  */
-const FooterHtml = (navigations: NavigationsReturn): string => {
+const FooterHtml: NavigationHtmlFunc = (navigations) => {
   /* Footer and/or social navs */
 
   let navs = ''

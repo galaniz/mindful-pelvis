@@ -6,7 +6,8 @@
 
 @use "@alanizcreative/formation/src/effects/Transition/Transition";
 @use "./Underline/Underline";
-@use "./Border/Border";
+@use "./Color/Color";
+@use "./ShiftUp/ShiftUp";
 
 /* Remove animations */
 
@@ -24,8 +25,8 @@
 
       transition: none;
       transition-timing-function: linear;
-      transition-duration: 0.001ms;
-      animation-duration: 0.001ms;
+      transition-duration: var(--duration);
+      animation-duration: var(--duration);
       animation-iteration-count: 1;
     }
   }

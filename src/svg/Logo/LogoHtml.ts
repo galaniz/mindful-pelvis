@@ -1,5 +1,5 @@
 /**
- * Svg - logo html
+ * Svg - Logo Html
  */
 
 /* Imports */

@@ -4,6 +4,7 @@
 
 /* Imports */
 
+import type { LogoArgs } from './LogoHtmlTypes'
 import { getPermalink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { LogoSvgHtml } from '../../svg/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
@@ -11,21 +12,9 @@ import { configHtml } from '../../config/configHtml'
 /**
  * Function - output logo
  *
- * @param {object} args
- * @param {string} args.size
- * @param {boolean} args.link
- * @param {string} args.theme
- * @param {string} args.classes
+ * @param {import('./LogoHtmlTypes').LogoArgs} args
  * @return {string} HTML - div || a
  */
-
-interface LogoArgs {
-  size?: string
-  link?: boolean
-  theme?: string
-  classes?: string
-}
-
 const LogoHtml = (args: LogoArgs = {}): string => {
   const {
     size = '',

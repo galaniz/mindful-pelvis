@@ -1,0 +1,10 @@
+/**
+ * Text - Break
+ */
+
+.t-break {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

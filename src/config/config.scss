@@ -147,6 +147,7 @@ $gaps: (
     "xl": 90px,
     "2xl": 120px,
     "3xl": 150px,
+    "4xl": 300px,
   ),
 
   /* Padding */
@@ -157,14 +158,14 @@ $gaps: (
 
   $padding-left: $padding-horizontal,
   $padding-right: $padding-horizontal,
-  $padding-horizontal-breakpoints: ("m"),
+  $padding-horizontal-breakpoints: ("s", "m", "l"),
 
   /* Margin */
 
   $margin-top: ("3xs"),
   $margin-bottom: $gaps,
   $margin-bottom-all: $gaps,
-  $margin-vertical-breakpoints: ("m"),
+  $margin-vertical-breakpoints: ("s", "m", "l"),
 
   /* Gaps */
 
@@ -188,7 +189,10 @@ $gaps: (
     "l",
     "xl",
     "2xl",
+    "3xl",
   ),
+
+  $max-widths: ("4xl"),
 
   /* Heights */
 
@@ -201,6 +205,7 @@ $gaps: (
     "l",
     "xl",
     "2xl",
+    "3xl",
   ),
 
   /* Containers */
@@ -234,10 +239,12 @@ $gaps: (
     "sides": ("all", "bottom", "top", "left"),
     "colors": (
       "default": "var(--foreground-base-30)",
+      "theme": "var(--theme)",
       "current": "currentcolor",
     ),
     "widths": (
       "default": 0.0625rem,
+      "thick": 0.0938rem,
     ),
   ),
 
@@ -259,6 +266,7 @@ $gaps: (
     "offsets": (
       "default": 0.3rem,
       "snug": 0,
+      "inset": -0.4rem,
     ),
   ),
 

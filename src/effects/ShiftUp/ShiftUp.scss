@@ -1,0 +1,13 @@
+/**
+ * Effects - Shift Up Styles
+ */
+
+.e-shift-up {
+  --y: 0;
+
+  transform: translateY(var(--y)) translateZ(0);
+
+  &:hover {
+    --y: -1.67%;
+  }
+}

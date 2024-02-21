@@ -2,12 +2,13 @@
  * Config - Html Types
  */
 
+/* Imports */
+
+import type { GenericStrings } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
+
 /**
- * @typedef {Object.<string, string>} ConfigOptions
+ * @typedef {import('@alanizcreative/static-site-formation/lib/global/globalTypes').GenericStrings} GenericStrings
  */
-export interface ConfigOptions {
-  [key: string]: string
-}
 
 /**
  * @typedef {object} ConfigInsta
@@ -32,9 +33,67 @@ export interface ConfigSvg {
 }
 
 /**
+ * @typedef {object} ConfigOptions
+ * @prop {object} button
+ * @prop {GenericStrings} button.type
+ * @prop {GenericStrings} button.size
+ * @prop {GenericStrings} tag
+ * @prop {GenericStrings} width
+ * @prop {GenericStrings} justify
+ * @prop {GenericStrings} align
+ * @prop {GenericStrings} order
+ * @prop {GenericStrings} layout
+ * @prop {GenericStrings} maxWidth
+ * @prop {GenericStrings} padding
+ * @prop {GenericStrings} gap
+ * @prop {GenericStrings} aspectRatio
+ * @prop {GenericStrings} borderRadius
+ * @prop {object} content
+ * @prop {GenericStrings} content.text
+ * @prop {GenericStrings} content.heading
+ * @prop {GenericStrings} content.align
+ * @prop {object} posts
+ * @prop {GenericStrings} posts.contentType
+ * @prop {GenericStrings} posts.headingLevel
+ * @prop {object} hero
+ * @prop {GenericStrings} hero.type
+ * @prop {GenericStrings} color
+ */
+export interface ConfigOptions {
+  button: {
+    type: GenericStrings
+    size: GenericStrings
+  }
+  tag: GenericStrings
+  width: GenericStrings
+  justify: GenericStrings
+  align: GenericStrings
+  order: GenericStrings
+  layout: GenericStrings
+  maxWidth: GenericStrings
+  padding: GenericStrings
+  gap: GenericStrings
+  aspectRatio: GenericStrings
+  borderRadius: GenericStrings
+  content: {
+    text: GenericStrings
+    heading: GenericStrings
+    align: GenericStrings
+  }
+  posts: {
+    contentType: GenericStrings
+    headingLevel: GenericStrings
+  }
+  hero: {
+    type: GenericStrings
+  }
+  color: GenericStrings
+}
+
+/**
  * @typedef {object} ConfigVars
  * @prop {ConfigInsta[]} instagramFeed
- * @prop {ConfigOptions} theme
+ * @prop {GenericStrings} theme
  * @prop {string} email
  * @prop {string} head
  * @prop {Object.<string, ConfigSvg>} svg
@@ -47,34 +106,13 @@ export interface ConfigSvg {
  * @prop {string} js.in
  * @prop {string} js.out
  * @prop {number} navHalf
- * @prop {object} options
- * @prop {object} options.button
- * @prop {ConfigOptions} options.button.type
- * @prop {ConfigOptions} options.button.size
- * @prop {ConfigOptions} options.tag
- * @prop {ConfigOptions} options.width
- * @prop {ConfigOptions} options.justify
- * @prop {ConfigOptions} options.align
- * @prop {ConfigOptions} options.order
- * @prop {ConfigOptions} options.layout
- * @prop {ConfigOptions} options.maxWidth
- * @prop {ConfigOptions} options.padding
- * @prop {ConfigOptions} options.gap
- * @prop {ConfigOptions} options.aspectRatio
- * @prop {ConfigOptions} options.borderRadius
- * @prop {object} options.content
- * @prop {ConfigOptions} options.content.text
- * @prop {ConfigOptions} options.content.heading
- * @prop {ConfigOptions} options.content.align
- * @prop {object} options.posts
- * @prop {ConfigOptions} options.posts.contentType
- * @prop {object} options.hero
- * @prop {ConfigOptions} options.hero.type
- * @prop {ConfigOptions} options.hero.background
+ * @prop {GenericStrings} shades
+ * @prop {string[]} backgrounds
+ * @prop {ConfigOptions} options
  */
 export interface ConfigVars {
   instagramFeed: ConfigInsta[]
-  theme: ConfigOptions
+  theme: GenericStrings
   email: string
   head: string
   svg: {
@@ -91,33 +129,7 @@ export interface ConfigVars {
     out: string
   }
   navHalf: number
-  options: {
-    button: {
-      type: ConfigOptions
-      size: ConfigOptions
-    }
-    tag: ConfigOptions
-    width: ConfigOptions
-    justify: ConfigOptions
-    align: ConfigOptions
-    order: ConfigOptions
-    layout: ConfigOptions
-    maxWidth: ConfigOptions
-    padding: ConfigOptions
-    gap: ConfigOptions
-    aspectRatio: ConfigOptions
-    borderRadius: ConfigOptions
-    content: {
-      text: ConfigOptions
-      heading: ConfigOptions
-      align: ConfigOptions
-    }
-    posts: {
-      contentType: ConfigOptions
-    }
-    hero: {
-      type: ConfigOptions
-      background: ConfigOptions
-    }
-  }
+  shades: GenericStrings
+  backgrounds: string[]
+  options: ConfigOptions
 }
