@@ -19,8 +19,14 @@ import { ImageHtml } from '../Image/ImageHtml'
  * @type {import('./FeedHtmlTypes').Feed}
  */
 const FeedHtml: Feed = async (args) => {
-  const { attributes } = args // Skip object check as know always object
-  const { handle = '', 'show-handle': showHandle = false } = attributes
+  const { attributes } = args // Skip check as shortcode always passes object
+
+  /* Attributes */
+
+  const {
+    handle = '',
+    'show-handle': showHandle = false
+  } = attributes
 
   /* Handle required */
 
@@ -55,7 +61,7 @@ const FeedHtml: Feed = async (args) => {
     columns.push(`
       ${column.start}
         <a href="${link}" class="l-inline-flex l-align-center t-link-current" rel="noreferrer">
-          <span class="l-flex l-ht-s l-wd-s bg-foreground-dark t-light b-radius-100-pc l-align-center l-justify-center l-flex-shrink-0">
+          <span class="l-flex l-ht-s l-wd-s bg-foreground-base t-light b-radius-100-pc l-align-center l-justify-center l-flex-shrink-0">
             ${SocialSvgHtml('instagram', 'l-ht-2xs l-wd-2xs')}
           </span>
           <span class="t l-pl-2xs">Follow @${handle}</span>

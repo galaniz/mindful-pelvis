@@ -56,6 +56,8 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
     return ''
   }
 
+  /* Props */
+
   const {
     pageData,
     serverlessData
@@ -64,6 +66,8 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
   let { args } = props
 
   args = isObjectStrict(args) ? args : {}
+
+  /* Args */
 
   const {
     // display = 1,
@@ -77,7 +81,7 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
 
   let {
     display = 1,
-    contentType = 'Project',
+    contentType = 'Post',
     headingLevel = 'Heading Three'
   } = args
 
@@ -205,6 +209,10 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
   try {
     const p = await getContentfulData(key, queryArgs)
     const outputArr = []
+
+    if (!isObjectStrict(p)) {
+      throw new Error('Posts not an object')
+    }
 
     if (isArrayStrict(p.items)) {
       const items = p.items

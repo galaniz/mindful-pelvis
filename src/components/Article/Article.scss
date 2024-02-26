@@ -1,0 +1,68 @@
+/**
+ * Components - Article Styles
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/src/utils" as util;
+
+/* Styles */
+
+.c-article {
+  --body-right: 0;
+  --icon-width: var(--xs);
+  --tog-margin: var(--2xs) 0;
+  --brd-width: var(--border-width);
+  --nav-top: 0;
+
+  @include util.breakpoint-min("l") {
+    --body-right: auto;
+    --icon-width: var(--3xs);
+    --tog-padding: 0 0 var(--2xs);
+    --brd-width: 0;
+    --nav-top: var(--m);
+
+    [data-collapsible-source=""] [data-collapsible-main] {
+      --delay: 0ms;
+      --duration: 0ms;
+    }
+  }
+}
+
+.c-article__body {
+  margin-right: var(--body-right);
+}
+
+.c-article__nav {
+  top: var(--nav-top);
+
+  [data-collapsible-main] {
+    --outline-offset: -0.2rem;
+  }
+}
+
+.c-article__toggle {
+  margin: var(--tog-margin);
+}
+
+.c-article__icon {
+  height: var(--icon-width);
+  width: var(--icon-width);
+}
+
+.c-article__nav,
+.c-article__icon {
+  border-width: var(--brd-width);
+}
+
+.c-article__hash {
+  &[data-vis="true"] {
+    font-weight: var(--font-weight-bold);
+    box-shadow: -0.0625rem 0 0 0 var(--foreground-dark);
+  }
+}
+
+.c-article__end {
+  height: 0.0625rem;
+}

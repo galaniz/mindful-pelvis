@@ -19,13 +19,13 @@
   --width-display: block;
   --cta-bg: var(--primary-base);
   --cta-color: var(--background-base);
-  --cta-border-color: var(--background-base-50);
+  --cta-border-color: var(--background-base-fade);
   --cta-delay: 0ms;
   --list-opacity: 0;
   --item-margin: 0;
   --item-opacity: 0;
   --link-1-color: var(--link-color);
-  --btn-color: var(--foreground-dark);
+  --btn-color: var(--foreground-base);
   --logo-pos: static;
   --logo-xy: 0, 0;
 
@@ -42,9 +42,9 @@
 
   &[data-nav-overflow="true"] {
     --width-display: none;
-    --cta-border-color: var(--foreground-base-30);
+    --cta-border-color: var(--foreground-base-fade);
     --cta-bg: var(--background-base);
-    --cta-color: var(--foreground-dark);
+    --cta-color: var(--foreground-base);
     --cta-delay: 250ms;
     --item-margin: var(--2xs);
   }
@@ -91,7 +91,7 @@
     opacity: var(--list-opacity);
 
     &[data-list="min"] {
-      background: var(--background-tint);
+      background: var(--background-light);
       border-radius: var(--border-radius-s);
       padding: var(--4xs) var(--2xs);
       margin-left: calc(-1 * var(--2xs));
@@ -135,7 +135,7 @@
   }
 
   [data-nav-overflow="true"] &[data-depth="0"] {
-    --border-color: #{rgba(util.get-color("background-base"), 0.3)};
+    --border-color: hsla(var(--background-base-hsl), 0.3);
 
     border-top: var(--border-width) solid var(--border-color);
     opacity: var(--item-opacity);

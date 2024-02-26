@@ -13,7 +13,6 @@ import { Collapsible } from '@alanizcreative/formation/src/objects/Collapsible/C
  *
  * @return {void}
  */
-
 const init = () => {
   /* Get DOM elements */
 
@@ -25,11 +24,10 @@ const init = () => {
     }
   ])
 
-  /* Instantiate */
+  /* Breakpoint */
 
-  const collapsible = (args) => {
-    return new Collapsible(args)
-  }
+  const { fontSizeMultiplier } = config
+  const articleBreakpoint = 1200 * fontSizeMultiplier
 
   /* Instantiate all */
 
@@ -44,17 +42,30 @@ const init = () => {
       }
 
       const isNav = context.hasAttribute('data-nav')
+      const isArticle = context.hasAttribute('data-article')
 
       if (isNav) {
         args.doAccordion = config.vars.nav.accordion
         args.doHover = config.vars.nav.hover
       }
 
-      const instance = collapsible(args)
+      const instance = new Collapsible(args)
 
       if (isNav) {
         addAction(config.vars.nav.close, () => {
           instance.toggle(false)
+        })
+      }
+
+      if (isArticle) {
+        if (window.innerWidth >= articleBreakpoint) {
+          instance.toggle(true)
+        }
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth >= articleBreakpoint) {
+            instance.toggle(true)
+          }
         })
       }
     })

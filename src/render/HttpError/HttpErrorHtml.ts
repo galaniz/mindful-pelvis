@@ -86,7 +86,6 @@ const HttpErrorHtml = async (type: number = 404): Promise<string> => {
     },
     contentType: 'page',
     navigations: navs,
-    pageContains: [],
     content: `
       ${output.container.start}
         <h1>${type}</h1>

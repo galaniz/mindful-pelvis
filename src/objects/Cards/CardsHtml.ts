@@ -34,18 +34,22 @@ const _Card = async ({
   background = 'Navy Light',
   columns = 3
 }: CardArgs): Promise<string> => {
-  const fields: Item = getProp.self(item)
+  /* Props must be object */
 
-  if (!isObjectStrict(fields)) {
+  const props: Item = getProp.self(item)
+
+  if (!isObjectStrict(props)) {
     return ''
   }
+
+  /* Props */
 
   const {
     title = '',
     excerpt = '',
     content,
     heroImageMinimal
-  } = fields
+  } = props
 
   /* Title required */
 
@@ -95,13 +99,13 @@ const _Card = async ({
 
     let imageClasses = 'l-wd-100-pc l-z-index--1 l-mw-4xl l-mt-auto'
 
-    const props: ImageProps = {
+    const imageProps: ImageProps = {
       args: {},
       parents: imageParents
     }
 
     if (imageType === 'asset') {
-      props.args = {
+      imageProps.args = {
         image: heroImageMinimal,
         width: '90px'
       }
@@ -116,14 +120,14 @@ const _Card = async ({
         background = `${fields.color} Light`
       }
 
-      props.args = fields
+      imageProps.args = fields
     }
 
-    props.args.invert = !background.includes('Light')
+    imageProps.args.invert = !background.includes('Light')
 
     imageOutput = `
       <div class="${imageClasses}">
-        ${await ImageHtml(props)}
+        ${await ImageHtml(imageProps)}
       </div>
     `
   }
@@ -208,7 +212,7 @@ const _Card = async ({
  * @param {import('./CardsHtmlTypes').CardProps} props
  * @return {Promise<import('./CardsHtmlTypes').CardReturn>}
  */
-const CardHtml = async (props: CardProps = { args: {} }): Promise<CardReturn> => {
+const CardHtml = async (props: CardProps): Promise<CardReturn> => {
   /* Fallback output */
 
   const fallback = {
@@ -222,17 +226,15 @@ const CardHtml = async (props: CardProps = { args: {} }): Promise<CardReturn> =>
     return fallback
   }
 
-  /* Inner props */
+  /* Args */
 
-  let { args } = props
-
-  args = isObjectStrict(args) ? args : {}
+  const { args } = props
 
   let {
     gap = 'None',
     gapLarge = 'None',
     background = 'None'
-  } = args
+  } = isObjectStrict(args) ? args : {}
 
   /* Normalize options */
 

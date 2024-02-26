@@ -17,8 +17,14 @@ import { ConfigInsta } from '../../config/configHtmlTypes'
  * @type {import('./FeedHtmlTypes').Feed}
  */
 const FeedHtmlBuild: Feed = async (args) => {
-  const { attributes } = args // Skip object check as know always object
-  const { display = 5, handle = '' } = attributes
+  const { attributes } = args // Skip check as shortcode always passes object
+
+  /* Attributes */
+
+  const {
+    display = 5,
+    handle = ''
+  } = attributes
 
   /* Handle required */
 

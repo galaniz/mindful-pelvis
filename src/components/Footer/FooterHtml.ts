@@ -14,25 +14,39 @@ import { configHtml } from '../../config/configHtml'
  *
  * @type {import('../Navigations/NavigationsHtmlTypes').NavigationHtmlFunc}
  */
-const FooterHtml: NavigationHtmlFunc = (navigations) => {
-  /* Footer and/or social navs */
+const FooterHtml: NavigationHtmlFunc = (navigations) => { // Skip check as NavigationsHtml always returns object
+  /* Additional navs */
 
   let navs = ''
 
-  if (navigations.footer !== '' || navigations.social !== '') {
-    const navFooter = navigations.footer !== '' ? `<nav aria-label="Main" class="l-pt-4xs">${navigations.footer}</nav>` : ''
-    const navSocial = navigations.social !== '' ? `<nav aria-label="Social" class="l-pt-4xs">${navigations.social}</nav>` : ''
+  /* Footer links */
 
-    navs = `
-      <div>${navFooter}</div>
-      <div>${navSocial}</div>
+  if (navigations.footer !== '') {
+    navs += `
+      <div>
+        <nav aria-label="Main" class="l-pt-4xs">
+          ${navigations.footer}
+        </nav>
+      </div>
+    `
+  }
+
+  /* Social links */
+
+  if (navigations.social !== '') {
+    navs += `
+      <div>
+        <nav aria-label="Social" class="l-pt-4xs">
+          ${navigations.social}
+        </nav>
+      </div>
     `
   }
 
   /* Output */
 
   return `
-    <footer class="bg-foreground-dark t-light l-mt-auto">
+    <footer class="bg-foreground-base t-light l-mt-auto">
       <div class="l-container l-pt-m l-pb-m l-pt-xl-m l-pb-xl-m">
         <div class="l-flex l-flex-column l-flex-row-s l-flex-wrap l-justify-between l-gm-s l-gm-m-s">
           <div>

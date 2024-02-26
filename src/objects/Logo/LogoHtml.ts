@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { LogoArgs } from './LogoHtmlTypes'
-import { getPermalink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { getPermalink, addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { LogoSvgHtml } from '../../svg/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
 
@@ -16,11 +16,13 @@ import { configHtml } from '../../config/configHtml'
  * @return {string} HTML - div || a
  */
 const LogoHtml = (args: LogoArgs = {}): string => {
+  /* Args */
+
   const {
     size = '',
     link = false,
     theme = 'default'
-  } = args
+  } = isObjectStrict(args) ? args : {}
 
   let {
     classes = ''

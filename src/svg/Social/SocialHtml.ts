@@ -13,7 +13,6 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {string} classes
  * @return {string} HTML - svg
  */
-
 const SocialSvgHtml = (type: string = 'instagram', classes: string = ''): string => {
   /* Paths by type */
 

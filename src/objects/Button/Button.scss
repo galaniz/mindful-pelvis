@@ -4,8 +4,6 @@
 
 /* Imports */
 
-@use "sass:color";
-@use "sass:map";
 @forward "../../config/config";
 @use "@alanizcreative/formation/src/config/config" as con;
 @use "@alanizcreative/formation/src/utils" as util;
@@ -15,9 +13,8 @@
 .o-button {
   --padding: var(--3xs) var(--xs);
   --size: var(--t-m);
-  --z-index: -1;
-  --opacity: 0.15;
-  --background: var(--foreground-dark);
+  --opacity: 1;
+  --bg: var(--foreground-dark);
   --scale: 0;
 
   font-family: var(--font-family-primary);
@@ -29,13 +26,13 @@
 
   &::before {
     top: 50%;
-		transform: translateY(-50%) scale(var(--scale));
+		transform: translateY(-50%) scale(var(--scale)) translateZ(0);
 		transform-origin: 50% 75%;
     transition: transform 500ms var(--easing-quad);
     padding-top: 100%;
     border-radius: 100%;
-		background: var(--background);
-    z-index: var(--z-index);
+    z-index: -1;
+		background: var(--bg);
     opacity: var(--opacity);
 	}
 
@@ -50,23 +47,50 @@
 }
 
 .o-button-secondary {
+  --opacity: 0.125;
+  --color: var(--foreground-dark);
+
   background: inherit;
+
+  &:hover,
+	&:active {
+    color: var(--color);
+	}
+}
+
+.o-button-secondary[data-theme="primary"] {
+  --bg: var(--primary-light);
+  --color: var(--primary-dark);
+}
+
+.o-button-secondary[data-theme="secondary"] {
+  --bg: var(--secondary-light);
+  --color: var(--secondary-dark);
+}
+
+.o-button-secondary[data-theme="light"] {
+  --bg: var(--background-light);
+  --color: var(--background-light);
+}
+
+.o-button-secondary[data-theme="dark"],
+.o-button-secondary[data-theme="light"] {
+  --opacity: 0.08;
+}
+
+.o-button-main[data-theme="light"] {
+  --bg: var(--background-light);
+}
+
+.o-button-main[data-theme="primary"] {
+  --bg: var(--primary-dark);
+}
+
+.o-button-main[data-theme="secondary"] {
+  --bg: var(--secondary-dark);
 }
 
 .o-button-large {
   --padding: var(--2xs) var(--xs);
   --size: var(--t-r);
-}
-
-.o-button-main[data-theme="light"] {
-  --opacity: 1;
-  --background: var(--background-tint);
-}
-
-.o-button-secondary[data-theme="default"] {
-  $brand: map.get(con.$vars, "brand");
-
-  --z-index: 1;
-  --background: #{map.get($brand, "blue-light")};
-  --opacity: 0.125;
 }

@@ -4,7 +4,6 @@
 
 /* Imports */
 
-@use "sass:map";
 @use "@alanizcreative/formation/src/config/config" as con;
 @use "@alanizcreative/formation/src/base/Root/Root" as root;
 @use "@alanizcreative/formation/src/utils" as util;
@@ -109,18 +108,21 @@
 
   /* Colors */
 
-  --text-color: var(--foreground-base);
-  --heading-color: var(--foreground-dark);
+  --text-color: var(--foreground-light);
+  --heading-color: var(--foreground-base);
+  --muted-color: hsla(var(--foreground-base-hsl), 0.6);
   --link-color: var(--primary-base);
-  --foreground-base-30: #{rgba(util.get-color("foreground-base"), 0.3)};
-  --background-base-50: #{rgba(util.get-color("background-base"), 0.5)};
-  --foreground-dark-fade: #{rgba(util.get-color("foreground-dark"), 0.125)};
-  --primary-light-fade: #{rgba(map.get(con.$vars, "brand", "orange-light"), 0.25)};
-  --primary-base-fade: #{rgba(map.get(con.$vars, "brand", "blue-light"), 0.3)};
+  --link-color-sharp: var(--primary-dark);
+  --link-color-fade: hsla(var(--primary-light-hsl), 0.2);
+  --foreground-light-fade: hsla(var(--foreground-light-hsl), 0.3);
+  --background-base-fade: hsla(var(--background-base-hsl), 0.5);
+  --foreground-base-fade: hsla(var(--foreground-base-hsl), 0.125);
+  --secondary-base-fade: hsla(var(--secondary-light-hsl), 0.25);
+  --primary-base-fade: hsla(var(--primary-light-hsl), 0.3);
 
   /* Box shadow */
 
-  --shadow: 0 var(--5xs) var(--4xs) 0 #{rgba(util.get-color("foreground-dark"), 0.1)};
+  --shadow: 0 var(--5xs) var(--4xs) 0 hsla(var(--foreground-light-hsl), 0.1);
 
   /* Transition */
 

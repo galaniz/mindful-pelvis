@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ContainerPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/container/ContainerTypes'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { isObjectStrict, isArrayStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -14,7 +14,12 @@ import { configHtmlVars } from '../../config/configHtml'
  * @type {ContainerPropsFilter}
  */
 const ContainerHtml: ContainerPropsFilter = async (props) => {
-  const { args, parents = [] } = props
+  const {
+    args,
+    parents
+  } = props // Skip check as filter always passes object
+
+  /* Args */
 
   let {
     tag = 'Div',
@@ -29,7 +34,8 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
     justify = 'None',
     align = 'None',
     classes = '',
-    attr = ''
+    attr = '',
+    nest = false
   } = isObjectStrict(args) ? args : {}
 
   /* Normalize options */
@@ -48,9 +54,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
 
   /* Nest */
 
-  let nest = false
-
-  if (parents.length > 0) {
+  if (isArrayStrict(parents)) {
     const parentType = parents[0].renderType
 
     nest = parentType === 'container' || parentType === 'contentTemplate'

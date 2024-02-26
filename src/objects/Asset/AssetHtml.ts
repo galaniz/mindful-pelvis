@@ -5,6 +5,7 @@
 /* Imports */
 
 import type { AssetProps } from './AssetHtmlTypes'
+import { isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { ImageHtml } from '../Image/ImageHtml'
 
 /**
@@ -13,8 +14,16 @@ import { ImageHtml } from '../Image/ImageHtml'
  * @param {AssetProps} props
  * @return {Promise<string>}
  */
-const AssetHtml = async (props: AssetProps = { args: {}, parents: [] }): Promise<string> => {
-  const { args = {} } = props
+const AssetHtml = async (props: AssetProps): Promise<string> => {
+  /* Props must be object */
+
+  if (!isObjectStrict(props)) {
+    return ''
+  }
+
+  const { args } = props
+
+  /* Output */
 
   return await ImageHtml({
     args: {

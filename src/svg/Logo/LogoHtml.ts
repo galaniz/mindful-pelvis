@@ -13,7 +13,6 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {string} theme
  * @return {string} HTML - svg
  */
-
 const LogoSvgHtml = (classes: string = '', theme: string = 'default'): string => {
   /* Add to svg sprite */
 

@@ -5,7 +5,14 @@
 /* Imports */
 
 import type { ImageProps } from './ImageHtmlTypes'
-import { getImage, isString, addScriptStyle, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import {
+  getImage,
+  isString,
+  addScriptStyle,
+  isStringStrict,
+  isObjectStrict,
+  isArrayStrict
+} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 // import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
@@ -15,8 +22,20 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {import('./ImageHtmlTypes').ImageProps} props
  * @return {Promise<string>}
  */
-const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise<string> => {
-  const { args = {}, parents = [] } = props
+const ImageHtml = async (props: ImageProps): Promise<string> => {
+  /* Props and args must be object */
+
+  if (!isObjectStrict(props)) {
+    return ''
+  }
+
+  const { args, parents } = props
+
+  if (!isObjectStrict(args)) {
+    return ''
+  }
+
+  /* Args */
 
   let {
     image,
@@ -33,8 +52,11 @@ const ImageHtml = async (props: ImageProps = { args: {}, parents: [] }): Promise
   /* Check card parent */
 
   let card = false
+  let parentType = ''
 
-  const parentType = parents[0] !== undefined ? parents[0].renderType : ''
+  if (isArrayStrict(parents)) {
+    parentType = parents[0].renderType
+  }
 
   if (parentType === 'card') {
     card = true

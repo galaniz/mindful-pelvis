@@ -10,7 +10,7 @@
 
 .c-pag__current {
   &::before {
-    background: var(--foreground-dark);
+    background: var(--foreground-base);
     width: var(--xs);
     border-radius: 100%;
     z-index: -1;

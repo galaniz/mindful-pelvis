@@ -15,6 +15,7 @@ import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/g
  * @prop {string} title
  * @prop {string} [text]
  * @prop {import('@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes').PropFile} [image]
+ * @prop {import('@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes').PropFile} [imageMinimal]
  * @prop {import('../../global/globalHtmlTypes').InternalLink} [callToAction]
  * @prop {import('../../global/globalHtmlTypes').Item} [pageData]
  */
@@ -25,6 +26,7 @@ export interface HeroArgs {
   title: string
   text?: string
   image?: PropFile
+  imageMinimal?: PropFile
   callToAction?: InternalLink
   pageData: Item
 }

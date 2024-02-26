@@ -46,44 +46,50 @@ $gaps: (
 @use "@alanizcreative/formation/src/config/config" with (
   /* Colors */
 
+  $colors-type: "hsla",
   $colors: (
-    "primary": (
-      "base": #3c6e89,
-      "light": #9e5330,
+    "primary": ( // Blue
+      "dark": "201, 39%, 31%",
+      "base": "201, 39%, 39%", // #3c6e89
+      "light": "198, 30%, 55%", // #6899ae
+      "tint": "189, 16%, 91%", // #e5ebec
     ),
-    "foreground": (
-      "base": #4b4f54,
-      "dark": #333f48,
+    "secondary": ( // Orange
+      "dark": "19, 53%, 32%",
+      "base": "19, 53%, 40%", // #9e5330
+      "light": "17, 45%, 55%", // #c07759
+    ),
+    "foreground": ( // Navy + gray
+      "dark": "206, 17%, 16%",
+      "base": "206, 17%, 24%", // #333f48
+      "light": "213, 6%, 31%", // #4b4f54
     ),
     "background": (
-      "base": #f4eae0,
-      "light": #e5ebec,
-      "tint": #f9f5ef,
+      "base": "30, 48%, 92%", // #f4eae0
+      "light": "30, 48%, 98%",
     ),
     "negative": (
-      "dark": #8e5050,
+      "dark": "0, 28%, 44%", // #8e5050
     ),
     "positive": (
-      "dark": #536644,
+      "dark": "94, 20%, 33%", // #536644
     ),
   ),
 
   $text-colors: (
     "primary-base",
-    "primary-light",
+    "secondary-base",
     "foreground-base",
-    "foreground-dark",
+    "foreground-light",
     "background-base",
-    "background-light",
   ),
 
   $background-colors: (
     "primary-base",
-    "primary-light",
+    "secondary-base",
     "foreground-base",
-    "foreground-dark",
+    "foreground-light",
     "background-base",
-    "background-light",
   ),
 
   /* Fonts */
@@ -147,7 +153,7 @@ $gaps: (
     "xl": 90px,
     "2xl": 120px,
     "3xl": 150px,
-    "4xl": 300px,
+    "4xl": 330px,
   ),
 
   /* Padding */
@@ -162,7 +168,7 @@ $gaps: (
 
   /* Margin */
 
-  $margin-top: ("3xs"),
+  $margin-top: $gaps,
   $margin-bottom: $gaps,
   $margin-bottom-all: $gaps,
   $margin-vertical-breakpoints: ("s", "m", "l"),
@@ -175,6 +181,10 @@ $gaps: (
   /* Flex */
 
   $flex-row-breakpoints: ("s", "m", "l"),
+
+  /* Display */
+
+  $block-breakpoints: ("s"),
 
   /* Widths */
 
@@ -238,7 +248,8 @@ $gaps: (
   $borders: (
     "sides": ("all", "bottom", "top", "left"),
     "colors": (
-      "default": "var(--foreground-base-30)",
+      "default": "var(--foreground-light-fade)",
+      "muted": "var(--muted-color)",
       "theme": "var(--theme)",
       "current": "currentcolor",
     ),
@@ -267,19 +278,6 @@ $gaps: (
       "default": 0.3rem,
       "snug": 0,
       "inset": -0.4rem,
-    ),
-  ),
-
-  /* Custom variables */
-
-  $vars: (
-    "brand": (
-      "beige": #f4eae0,
-      "navy": #333f48,
-      "blue-light": #6899ae,
-      "blue": #3c6e89,
-      "orange-light": #c07759,
-      "blue-x-light": #e5ebec,
     ),
   ),
 

@@ -4,7 +4,6 @@
 
 /* Imports */
 
-@use "sass:map";
 @forward "../../config/config";
 @use "@alanizcreative/formation/src/config/config" as con;
 @use "@alanizcreative/formation/src/utils" as util;
@@ -31,22 +30,20 @@
 
 .o-logo,
 .o-logo-s {
-  $brand: map.get(con.$vars, "brand");
-
-  --text: #{map.get($brand, "navy")};
-  --wave: #{map.get($brand, "blue")};
-  --circle: #{map.get($brand, "navy")};
-  --crest: #{map.get($brand, "blue-light")};
-  --greater: #{map.get($brand, "blue-light")};
-  --lesser: #{map.get($brand, "orange-light")};
+  --text: var(--foreground-base);
+  --wave: var(--primary-base);
+  --circle: var(--foreground-base);
+  --crest: var(--primary-light);
+  --greater: var(--primary-light);
+  --lesser: var(--secondary-light);
 
   &[data-theme="light"],
   [data-nav-open="true"] & {
-    --text: #{map.get($brand, "beige")};
-    --wave: #{map.get($brand, "blue-x-light")};
-    --circle: #{map.get($brand, "beige")};
-    --crest: #{map.get($brand, "blue")};
-    --greater: #{map.get($brand, "blue-light")};
-    --lesser: #{map.get($brand, "orange-light")};
+    --text: var(--background-base);
+    --wave: var(--background-base);
+    --circle: var(--background-base);
+    --crest: var(--primary-base);
+    --greater: var(--primary-light);
+    --lesser: var(--secondary-light);
   }
 }

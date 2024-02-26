@@ -16,7 +16,7 @@ import { configHtml, configHtmlVars } from '../../config/configHtml'
  *
  * @type {import('../Navigations/NavigationsHtmlTypes').NavigationHtmlFunc}
  */
-const HeaderHtml: NavigationHtmlFunc = (navigations) => {
+const HeaderHtml: NavigationHtmlFunc = (navigations) => { // Skip check as NavigationsHtml always returns object
   /* Id */
 
   const id = `n-${uuid()}`
@@ -76,7 +76,7 @@ const HeaderHtml: NavigationHtmlFunc = (navigations) => {
             <div class="c-nav__hide">
               <button class="c-nav__button c-nav__close l-ht-m l-wd-s l-fixed l-top-0" type="button" aria-label="Close menu"></button>
             </div>
-            <div class="c-nav__overlay bg-foreground-dark l-fixed l-top-0 l-left-0 l-overflow-hidden l-before l-after l-z-index--1 l-wd-100-pc l-ht-100-pc e-transition"></div>
+            <div class="c-nav__overlay bg-foreground-base l-fixed l-top-0 l-left-0 l-overflow-hidden l-before l-after l-z-index--1 l-wd-100-pc l-ht-100-pc e-transition"></div>
           </div>
         </div>
       </nav>

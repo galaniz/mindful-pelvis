@@ -5,6 +5,6 @@
 .t-break {
   word-break: break-word;
   overflow-wrap: break-word;
-  -webkit-hyphens: auto;
+  -webkit-hyphens: auto; /* stylelint-disable-line property-no-vendor-prefix */
   hyphens: auto;
 }

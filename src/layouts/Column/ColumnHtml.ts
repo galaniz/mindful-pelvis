@@ -14,7 +14,7 @@ import { configHtmlVars } from '../../config/configHtml'
  * @type {ColumnPropsFilter}
  */
 const ColumnHtml: ColumnPropsFilter = async (props) => {
-  const { args } = props
+  const { args } = props // Skip check as filter always passes object
 
   let {
     tag = 'Div',

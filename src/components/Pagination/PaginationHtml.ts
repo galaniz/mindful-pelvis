@@ -16,9 +16,13 @@ import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
  * @return {string} HTML - nav
  */
 const PaginationHtml = (args: PaginationArgs): string => {
+  /* Args must be object */
+
   if (!isObjectStrict(args)) {
     return ''
   }
+
+  /* Args */
 
   const {
     total = 0,

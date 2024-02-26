@@ -12,7 +12,6 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {string} classes
  * @return {string} HTML - svg
  */
-
 const CheckMarkSvgHtml = (classes: string = ''): string => {
   /* Add to svg sprite */
 

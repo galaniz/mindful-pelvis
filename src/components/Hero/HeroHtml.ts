@@ -9,7 +9,8 @@ import {
   getImage,
   addScriptStyle,
   isStringStrict,
-  isString
+  isString,
+  isObjectStrict
 } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { ButtonHtml } from '../../objects/Button/ButtonHtml'
 import { configHtmlVars } from '../../config/configHtml'
@@ -20,15 +21,30 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {HeroArgs} args
  * @return {string} HTML - section
  */
-const HeroHtml = ({
-  contentType = 'page',
-  archive = '',
-  type = 'Minimal',
-  title = '',
-  text = '',
-  image,
-  callToAction
-}: HeroArgs): string => {
+const HeroHtml = (args: HeroArgs): string => {
+  /* Args must be object */
+
+  if (!isObjectStrict(args)) {
+    return ''
+  }
+
+  /* Args */
+
+  const {
+    contentType = 'page',
+    archive = '',
+    title = '',
+    text = '',
+    image,
+    imageMinimal,
+    callToAction,
+    pageData
+  } = args
+
+  let {
+    type = 'Minimal'
+  } = args
+
   /* Normalize options */
 
   const initType = type
@@ -40,12 +56,24 @@ const HeroHtml = ({
 
   /* Image */
 
+  let imageData = image
   let imageOutput = ''
+  let isImageMin = false
 
-  if (image !== undefined) {
-    const maxWidth = overlap ? 1600 : 2000
+  if (imageMinimal !== undefined) {
+    imageData = imageMinimal
+    isImageMin = true
+  }
+
+  if (imageData !== undefined) {
+    let maxWidth = overlap ? 1600 : 2000
+
+    if (isImageMin) {
+      maxWidth = 180
+    }
+
     const imageRes = getImage({
-      data: image,
+      data: imageData,
       classes: 'l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover',
       returnDetails: true,
       lazy: false,
@@ -69,8 +97,12 @@ const HeroHtml = ({
     if (overlap) {
       pictureClasses += ' l-ht-100-pc'
       pictureStyle = ` style="padding-top:${imageResAspectRatio * 100}%"`
-    } else {
-      pictureClasses += ' c-hero-min'
+    }
+
+    pictureClasses += type === 'minimal' && !isImageMin ? ' c-hero-min' : ''
+
+    if (isImageMin) {
+      pictureClasses += ' l-wd-xl l-ht-xl l-mr-auto l-ml-auto'
     }
 
     imageOutput = `
@@ -81,7 +113,7 @@ const HeroHtml = ({
 
     if (type === 'minimal') {
       imageOutput = `
-        <div class="l-pt-s l-pt-m-l">
+        <div class="${isImageMin ? 'l-pb-xs l-pb-s-m' : 'l-pt-s l-pt-m-l'}">
           ${imageOutput}
         </div>
       `
@@ -128,6 +160,40 @@ const HeroHtml = ({
     }
   }
 
+  if (contentType === 'post') {
+    const date = pageData.date
+    const dateMod = pageData.dateModified
+    const dateArgs = {
+      month: 'short' as const, // Workaround no overload matches this call error
+      year: 'numeric' as const,
+      day: '2-digit' as const
+    }
+
+    let dateOutput = ''
+
+    if (isStringStrict(date)) {
+      const pubDate = new Date(date)
+      const formattedDate = pubDate.toLocaleString('en', dateArgs)
+
+      dateOutput += `<time datetime="${date}">${formattedDate}</time>`
+    }
+
+    if (isStringStrict(dateMod)) {
+      const modDate = new Date(dateMod)
+      const formattedDate = modDate.toLocaleString('en', dateArgs)
+
+      dateOutput += '<span class="t-weight-bold l-none l-block-s" aria-hidden="true">&middot;</span>'
+      dateOutput += `<span>Updated <time class="l-inline-block" datetime="${dateMod}">${formattedDate}</time></span>`
+    }
+
+    if (dateOutput !== '') {
+      textOutput += `
+        <p class="t-s t-height-snug l-pt-xs l-pt-s-m l-flex l-flex-column l-flex-row-s l-justify-center l-gm-4xs">
+          ${dateOutput}
+        </p>`
+    }
+  }
+
   /* Add styles */
 
   addScriptStyle({
@@ -155,11 +221,12 @@ const HeroHtml = ({
   const center = contentType === 'post' || contentType === 'service' || archive === 'post'
 
   return `
-    <section class="l-pt-m l-pt-xl-l">
+    <section class="l-pt-m${!isImageMin ? ' l-pt-xl-l' : ''}">
       <div class="l-container${center ? ' t-align-center' : ''}">
+        ${isImageMin ? imageOutput : ''}
         ${textOutput}
       </div>
-      ${imageOutput}
+      ${!isImageMin ? imageOutput : ''}
     </section>
   `
 }

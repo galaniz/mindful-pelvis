@@ -5,11 +5,18 @@
 /* Imports */
 
 import type { LayoutArgs } from './LayoutHtmlTypes'
-import { getPermalink, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import {
+  getPermalink,
+  isStringStrict,
+  isArrayStrict,
+  isObjectStrict
+} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
 import { HeaderHtml } from '../Header/HeaderHtml'
 import { FooterHtml } from '../Footer/FooterHtml'
 import { HeroHtml } from '../Hero/HeroHtml'
+import { ArticleHtml } from '../Article/ArticleHtml'
+import { BackLinkHtml } from '../../objects/BackLink/BackLinkHtml'
 
 /**
  * Function - output html
@@ -17,14 +24,24 @@ import { HeroHtml } from '../Hero/HeroHtml'
  * @param {LayoutArgs} args
  * @return {Promise<string>} HTML - html
  */
-const LayoutHtml = async ({
-  id = '',
-  meta,
-  navigations,
-  contentType = 'page',
-  content = '',
-  pageData
-}: LayoutArgs): Promise<string> => {
+const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
+  /* Args must be object */
+
+  if (!isObjectStrict(args)) {
+    return ''
+  }
+
+  /* Args */
+
+  const {
+    meta,
+    navigations,
+    contentType = 'page',
+    content = '',
+    pageHeadings,
+    pageData
+  } = args
+
   /* Assets link */
 
   const assetsLink = `${getPermalink()}assets/`
@@ -119,8 +136,8 @@ const LayoutHtml = async ({
   let heroTitle = ''
   let heroArchive = ''
 
-  if (isStringStrict(pageData.pageTitle)) {
-    heroTitle = pageData.pageTitle
+  if (isStringStrict(pageData.title)) {
+    heroTitle = pageData.title
   }
 
   if (isStringStrict(pageData.heroTitle)) {
@@ -138,13 +155,32 @@ const LayoutHtml = async ({
     archive: heroArchive,
     text: pageData.heroText,
     image: pageData.heroImage,
+    imageMinimal: pageData.heroImageMinimal,
     callToAction: pageData.heroCallToAction,
     pageData
   })
 
+  /* Back link */
+
+  let backLinkOutput = ''
+
   /* Content */
 
-  const contentOutput: string = content
+  let contentOutput: string = content
+
+  /* Single post */
+
+  if (contentType === 'post' || contentType === 'service') {
+    contentOutput = await ArticleHtml({
+      content,
+      shareLink: url,
+      navItems: isArrayStrict(pageHeadings) ? pageHeadings[0] : [],
+      showNav: true,
+      showSocial: true
+    })
+
+    backLinkOutput = BackLinkHtml(contentType)
+  }
 
   /* Script data */
 
@@ -277,22 +313,29 @@ const LayoutHtml = async ({
               flex-wrap: wrap;
               overflow: hidden;
             }
+
+            .no-js-collapsible {
+              --h: auto;
+              --visibility: visible;
+            }
           </style>
         </noscript>
         <link rel="apple-touch-icon" sizes="180x180" href="${assetsLink}favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="${assetsLink}favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="${assetsLink}favicon/favicon-16x16.png">
         <link rel="manifest" href="${assetsLink}favicon/site.webmanifest">
-        <meta name="msapplication-TileColor" content="${theme['foreground-dark']}">
-        <meta name="theme-color" content="${theme['background-dark']}">
+        <meta name="msapplication-TileColor" content="${theme['foreground-base']}">
+        <meta name="theme-color" content="${theme['background-base']}">
         <meta name="format-detection" content="telephone=no">
       </head>
       <body class="${ns} no-js l-flex l-flex-column">
         ${spritesOutput}
         ${headerOutput}
         <main id="main">
+          ${backLinkOutput}
           ${heroOutput}
           ${contentOutput}
+          ${backLinkOutput}
         </main>
         ${footerOutput}
         ${scriptMeta}

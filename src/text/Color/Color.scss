@@ -4,9 +4,7 @@
 
 /* Imports */
 
-@use "sass:color";
 @use "@alanizcreative/formation/src/text/Color/Color";
-@use "@alanizcreative/formation/src/utils" as util;
 
 /* Styles */
 
@@ -14,8 +12,11 @@
   --outline-color: var(--background-base);
   --heading-color: var(--background-base);
   --link-color: var(--background-base);
-  --border-color: var(--background-base-50);
-  --text-color: #{rgba(util.get-color("background-base"), 0.8)};
+  --link-color-sharp: var(--background-light);
+  --link-color-fade: hsla(var(--background-base-hsl), 0.08);
+  --text-color: hsla(var(--background-base-hsl), 0.8);
+  --border-color: var(--background-base-fade);
+  --muted-color: hsla(var(--background-base-hsl), 0.6);
 
   color: var(--text-color);
 }

@@ -20,6 +20,7 @@ import { RichTextHtml } from '../text/RichText/RichTextHtml'
 import { PostsHtml } from '../objects/Posts/PostsHtml'
 import { CardHtml } from '../objects/Cards/CardsHtml'
 import { FeedHtml } from '../objects/Feed/FeedHtml'
+import { FauxHeadingHtml } from '../text/FauxHeading/FauxHeadingHtml'
 
 /**
  * Flexible vars object in main config
@@ -56,11 +57,10 @@ const configHtmlVars: ConfigVars = {
   ],
   theme: {
     'primary-base': '#3c6e89',
-    'primary-light': '#9e5330',
-    'foreground-base': '#4b4f54',
-    'foreground-dark': '#333f48',
-    'background-base': '#f4eae0',
-    'background-light': '#e5ebec'
+    'secondary-base': '#9e5330',
+    'foreground-light': '#4b4f54',
+    'foreground-base': '#333f48',
+    'background-base': '#f4eae0'
   },
   email: 'hello@themindfulpelvis.ca',
   head: '',
@@ -86,9 +86,9 @@ const configHtmlVars: ConfigVars = {
     'Orange Light'
   ],
   shades: {
-    'Navy Light': 'foreground-dark',
-    'Gray Light': 'foreground-base',
-    'Orange Light': 'primary-light',
+    'Navy Light': 'foreground-base',
+    'Gray Light': 'foreground-light',
+    'Orange Light': 'secondary-base',
     'Blue Light': 'primary-base'
   },
   options: {
@@ -255,13 +255,13 @@ const configHtmlVars: ConfigVars = {
     color: {
       None: '',
       Default: '',
-      Navy: 'foreground-dark',
-      Gray: 'foreground-base',
-      Orange: 'primary-light',
+      Navy: 'foreground-base',
+      Gray: 'foreground-light',
+      Orange: 'secondary-base',
       Blue: 'primary-base',
-      'Navy Light': 'foreground-dark-fade',
-      'Gray Light': 'foreground-dark-fade',
-      'Orange Light': 'primary-light-fade',
+      'Navy Light': 'foreground-base-fade',
+      'Gray Light': 'foreground-base-fade',
+      'Orange Light': 'secondary-base-fade',
       'Blue Light': 'primary-base-fade'
     }
   }
@@ -388,6 +388,12 @@ const configHtml: Config = setConfig({
         display: 'number',
         handle: 'string',
         'show-handle': 'boolean'
+      }
+    },
+    'faux-heading': {
+      callback: FauxHeadingHtml,
+      attributeTypes: {
+        style: 'string'
       }
     }
   },

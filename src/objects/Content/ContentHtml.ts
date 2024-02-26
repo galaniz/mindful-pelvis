@@ -5,6 +5,7 @@
 /* Imports */
 
 import type { ContentProps, ContentReturn } from './ContentHtmlTypes'
+import { isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -13,8 +14,27 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {import('./ContentHtmlTypes').ContentProps} props
  * @return {Promise<import('./ContentHtmlTypes').ContentReturn>}
  */
-const ContentHtml = async (props: ContentProps = { args: {} }): Promise<ContentReturn> => {
-  const { args = {} } = props
+const ContentHtml = async (props: ContentProps): Promise<ContentReturn> => {
+  /* Fallback output */
+
+  const fallback = {
+    start: '',
+    end: ''
+  }
+
+  /* Props and args must be object */
+
+  if (!isObjectStrict(props)) {
+    return fallback
+  }
+
+  const { args } = props
+
+  if (!isObjectStrict(args)) {
+    return fallback
+  }
+
+  /* Args */
 
   let {
     align = 'Left',

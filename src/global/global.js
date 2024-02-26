@@ -11,7 +11,6 @@ import { config, setConfig } from '@alanizcreative/formation/src/config/config'
  *
  * @return {void}
  */
-
 const init = () => {
   /* Init default functionality and props */
 

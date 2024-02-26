@@ -56,7 +56,6 @@ const ComingSoonHtml = async (): Promise<string> => {
       slug,
       title
     },
-    pageContains: [],
     content: `
       ${output.container.start}
         ${output.content.start}

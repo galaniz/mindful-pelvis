@@ -53,8 +53,7 @@ module.exports = (args: any) => {
       './src/objects/',
       './src/render/',
       './src/svg/',
-      './src/text/',
-      './src/utils/',
+      './src/text/'
     ]
 
     for (let i = 0; i < folders.length; i += 1) {

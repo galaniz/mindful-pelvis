@@ -7,7 +7,11 @@
 import type { NavigationsHtmlObj, NavigationIs, NavigationArgs } from './NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
 import { Navigation } from '@alanizcreative/static-site-formation/lib/components/Navigation/Navigation'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import {
+  isObjectStrict,
+  isArrayStrict,
+  isStringStrict
+} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 import { configHtmlVars } from '../../config/configHtml'
@@ -53,14 +57,18 @@ const _isButton: NavigationIs = (item, _depth) => {
  *
  * @type {import('./NavigationsHtmlTypes').NavigationsHtmlObj}
  */
-const NavigationsHtml: NavigationsHtmlObj = ({
-  navigations = [],
-  items = [],
-  current = ''
-}) => {
+const NavigationsHtml: NavigationsHtmlObj = (args) => {
+  /* Args */
+
+  const {
+    navigations = [],
+    items = [],
+    current = ''
+  } = isObjectStrict(args) ? args : {}
+
   /* Navs and items required */
 
-  if (navigations.length === 0 || items.length === 0) {
+  if (!isArrayStrict(navigations) || !isArrayStrict(items)) {
     return {
       main: '',
       footer: '',
@@ -298,15 +306,32 @@ const NavigationsHtml: NavigationsHtmlObj = ({
  * @param {import('./NavigationsHtmlTypes').NavigationArgs} args
  * @return {string}
  */
-const NavigationHtml = ({ navigations, props = {} }: NavigationArgs): string => {
+const NavigationHtml = (args: NavigationArgs): string => {
+  /* Args must be object */
+
+  if (!isObjectStrict(args)) {
+    return ''
+  }
+
+  const {
+    navigations,
+    props
+  } = args
+
+  /* Props must be object */
+
   if (!isObjectStrict(props)) {
     return ''
   }
+
+  /* Props */
 
   const {
     location = 'main',
     title = ''
   } = props
+
+  /* Location, title and navigation required */
 
   if (!isStringStrict(location) || !isStringStrict(title)) {
     return ''
@@ -315,6 +340,8 @@ const NavigationHtml = ({ navigations, props = {} }: NavigationArgs): string => 
   if (!isStringStrict(navigations[location])) {
     return ''
   }
+
+  /* Output */
 
   return `<nav aria-label="${title}">${navigations[location]}</nav>`
 }

@@ -44,51 +44,49 @@ const init = () => {
 
   /* Navigation */
 
-  if (nav) {
-    const {
-      context,
-      list,
-      overflow,
-      overflowList,
-      items,
-      links,
-      open,
-      close,
-      overlay
-    } = n
+  const {
+    context,
+    list,
+    overflow,
+    overflowList,
+    items,
+    links,
+    open,
+    close,
+    overlay
+  } = n
 
-    const args = {
-      nav: context,
-      list,
-      overflow,
-      overflowList,
-      items,
-      itemSelector,
-      links,
-      open,
-      close,
-      overlay,
-      endToggle (open) {
-        if (open) {
-          return
-        }
-
-        doActions(config.vars.nav.close)
-      },
-      onSet () {
-        doActions(config.vars.nav.hover, {
-          state: !this.isOverflowing
-        })
-
-        doActions(config.vars.nav.accordion, {
-          state: !this.isOverflowing,
-          group: 'nav-main'
-        })
+  const args = {
+    nav: context,
+    list,
+    overflow,
+    overflowList,
+    items,
+    itemSelector,
+    links,
+    open,
+    close,
+    overlay,
+    endToggle (open) {
+      if (open) {
+        return
       }
-    }
 
-    nav(args)
+      doActions(config.vars.nav.close)
+    },
+    onSet () {
+      doActions(config.vars.nav.hover, {
+        state: !this.isOverflowing
+      })
+
+      doActions(config.vars.nav.accordion, {
+        state: !this.isOverflowing,
+        group: 'nav-main'
+      })
+    }
   }
+
+  nav(args)
 }
 
 init()
