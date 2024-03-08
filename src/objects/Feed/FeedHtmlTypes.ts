@@ -4,17 +4,17 @@
 
 /* Imports */
 
-import type { ShortcodeData } from '@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes'
+import type { ShortcodeData } from '@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes'
 
 /**
  * @typedef FeedArgs
- * @type {import('@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes').ShortcodeData}
+ * @type {import('@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes').ShortcodeData}
  * @prop {object} attributes
  * @prop {number} attributes.display
  * @prop {string} attributes.handle
  * @prop {boolean} attributes.show-handle
  */
-export interface FeedArgs extends Omit<ShortcodeData, 'attributes'> {
+export interface FeedArgs extends ShortcodeData {
   attributes: {
     display?: number
     handle?: string

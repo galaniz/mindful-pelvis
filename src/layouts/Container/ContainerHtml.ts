@@ -4,8 +4,8 @@
 
 /* Imports */
 
-import type { ContainerPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/container/ContainerTypes'
-import { isObjectStrict, isArrayStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import type { ContainerPropsFilter } from '@alanizcreative/static-site-formation/iop/layouts/Container/ContainerTypes'
+import { isObjectStrict, isArrayStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**

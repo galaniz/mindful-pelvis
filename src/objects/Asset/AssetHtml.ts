@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { AssetProps } from './AssetHtmlTypes'
-import { isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { ImageHtml } from '../Image/ImageHtml'
 
 /**

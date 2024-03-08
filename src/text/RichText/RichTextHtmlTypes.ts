@@ -8,13 +8,13 @@ import type {
   RichTextContentFilter,
   RichTextOutputFilter,
   RichTextPropsFilter
-} from '@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes'
+} from '@alanizcreative/static-site-formation/iop/text/RichText/RichTextTypes'
 
 /**
  * @typedef {object} RichTextHtmlFilters
- * @prop {import('@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes').RichTextPropsFilter} props
- * @prop {import('@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes').RichTextOutputFilter} output
- * @prop {import('@alanizcreative/static-site-formation/lib/text/RichText/RichTextTypes').RichTextContentFilter} content
+ * @prop {import('@alanizcreative/static-site-formation/iop/text/RichText/RichTextTypes').RichTextPropsFilter} props
+ * @prop {import('@alanizcreative/static-site-formation/iop/text/RichText/RichTextTypes').RichTextOutputFilter} output
+ * @prop {import('@alanizcreative/static-site-formation/iop/text/RichText/RichTextTypes').RichTextContentFilter} content
  */
 export interface RichTextHtmlFilters {
   props: RichTextPropsFilter

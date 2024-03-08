@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ButtonProps } from './ButtonHtmlTypes'
-import { getLink, addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { getLink, addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**

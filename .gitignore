@@ -5,9 +5,7 @@ functions/*
 !functions/ajax/
 data/initialize.js
 src/json/**/*.json
-src/**/*Html.js
-src/**/*HtmlTypes.js
-src/**/*HtmlBuild.js
+src/**/*.js
 src/assets/img/instagram-feed/
 .DS_Store
 .cache

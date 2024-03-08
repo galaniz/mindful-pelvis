@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import type { RenderReturn } from '@alanizcreative/static-site-formation/lib/render/RenderTypes'
+import type { RenderReturn } from '@alanizcreative/static-site-formation/iop/render/RenderTypes'
 import * as sass from 'sass'
 import postcss from 'postcss'
 import purgecss from '@fullhuman/postcss-purgecss'
@@ -14,7 +14,7 @@ import { sassPlugin } from 'esbuild-sass-plugin'
 // @ts-expect-error
 import { AssetCache } from '@11ty/eleventy-fetch'
 import safeJsonStringify from 'safe-json-stringify'
-import { Render } from '@alanizcreative/static-site-formation/lib/render/Render'
+import { Render } from '@alanizcreative/static-site-formation/iop/render/Render'
 import {
   getAllContentfulData,
   writeStoreFiles,
@@ -25,9 +25,10 @@ import {
   setFilters,
   setActions,
   setShortcodes
-} from '@alanizcreative/static-site-formation/lib/utils/utilsAll'
+} from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
 import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
+import { HttpErrorHtml } from '../src/render/HttpError/HttpErrorHtml'
 
 /* Eleventy init */
 
@@ -195,6 +196,15 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
     setShortcodes(configHtml.shortcodes)
 
     const allData = await getAllContentfulData()
+
+    if (allData !== undefined) {
+      allData.content.page.push({
+        id: '404',
+        slug: '404.html',
+        output: await HttpErrorHtml(404)
+      })
+    }
+
     const output = await Render({ allData })
 
     /* Data json, serverless and redirect files */

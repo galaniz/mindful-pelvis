@@ -5,14 +5,14 @@
 /* Imports */
 
 import type { ArticleArgs } from './ArticleHtmlTypes'
-import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/lib/layouts/Column/Column'
+import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
+import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
 import {
   addScriptStyle,
   isObjectStrict,
   isStringStrict,
   getShareLinks
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { CollapsibleHtml } from '../../objects/Collapsible/CollapsibleHtml'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 
@@ -78,6 +78,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
     const navColumn = await Column({
       args: {
+        tag: 'Aside',
         widthMedium: '4/5',
         widthLarge: '1/5'
       }
@@ -123,7 +124,12 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
   if (showSocial && isStringStrict(shareLink)) {
     const shareItems = getShareLinks(
       shareLink,
-      ['Facebook', 'X', 'LinkedIn', 'Email'],
+      [
+        'Facebook',
+        'X',
+        'LinkedIn',
+        'Email'
+      ],
       shareTitle
     )
 

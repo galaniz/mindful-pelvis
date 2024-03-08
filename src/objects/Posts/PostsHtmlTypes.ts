@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { Item } from '../../global/globalHtmlTypes'
-import type { RenderServerlessData } from '@alanizcreative/static-site-formation/lib/render/RenderTypes'
+import type { RenderServerlessData } from '@alanizcreative/static-site-formation/iop/render/RenderTypes'
 
 /**
  * @typedef {object} PostsProps
@@ -21,7 +21,7 @@ import type { RenderServerlessData } from '@alanizcreative/static-site-formation
  * @prop {string} [args.termId]
  * @prop {import('../../global/globalHtmlTypes').Item} [pageData]
  * @prop {string[]} [pageContains]
- * @prop {import('@alanizcreative/static-site-formation/lib/render/RenderTypes').RenderServerlessData} [serverlessData]
+ * @prop {import('@alanizcreative/static-site-formation/iop/render/RenderTypes').RenderServerlessData} [serverlessData]
  */
 export interface PostsProps {
   args: {

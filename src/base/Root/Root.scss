@@ -4,9 +4,9 @@
 
 /* Imports */
 
-@use "@alanizcreative/formation/src/config/config" as con;
-@use "@alanizcreative/formation/src/base/Root/Root" as root;
-@use "@alanizcreative/formation/src/utils" as util;
+@use "@alanizcreative/formation/lib/config/config" as con;
+@use "@alanizcreative/formation/lib/base/Root/Root" as root;
+@use "@alanizcreative/formation/lib/utils" as util;
 
 /* Styles */
 
@@ -109,11 +109,12 @@
   /* Colors */
 
   --text-color: var(--foreground-light);
-  --heading-color: var(--foreground-base);
+  --sharp-color-hsl: var(--foreground-base-hsl);
+  --sharp-color: var(--foreground-base);
   --muted-color: hsla(var(--foreground-base-hsl), 0.6);
   --link-color: var(--primary-base);
   --link-color-sharp: var(--primary-dark);
-  --link-color-fade: hsla(var(--primary-light-hsl), 0.2);
+  --link-color-fade: hsla(var(--primary-light-hsl), 0.15);
   --foreground-light-fade: hsla(var(--foreground-light-hsl), 0.3);
   --background-base-fade: hsla(var(--background-base-hsl), 0.5);
   --foreground-base-fade: hsla(var(--foreground-base-hsl), 0.125);
@@ -133,6 +134,10 @@
   --underline: #{util.calc-rem(1px)};
   --underline-offset: #{util.calc-rem(4px)};
 
+  /* Scroll */
+
+  --scroll-margin: var(--s);
+
   /* Nav */
 
   --nav-padding: var(--3xs);
@@ -141,4 +146,8 @@
   @include util.breakpoint-min("s") {
     --nav-padding: var(--xs);
   }
+}
+
+:target {
+  scroll-margin-top: var(--scroll-margin);
 }

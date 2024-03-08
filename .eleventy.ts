@@ -8,7 +8,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import htmlmin from 'html-minifier'
 import { resolve, extname } from 'node:path'
-import { getAllFilePaths, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsAll'
+import { getAllFilePaths, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { configHtml } from './src/config/configHtml'
 
 /* Config */

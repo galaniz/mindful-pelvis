@@ -6,7 +6,7 @@
 
 import type { Collapsible } from './CollapsibleHtmlTypes'
 import { v4 as uuid } from 'uuid'
-import { addScriptStyle, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { addScriptStyle, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 
 /**

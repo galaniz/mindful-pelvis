@@ -4,7 +4,7 @@
 
 /* Imports */
 
-@use "@alanizcreative/formation/src/utils" as util;
+@use "@alanizcreative/formation/lib/utils" as util;
 
 /* Styles */
 
@@ -23,7 +23,7 @@ h6,
 .t-h6 {
   font-family: var(--font-family-secondary);
   font-weight: var(--font-weight-normal);
-  color: var(--heading-color);
+  color: var(--sharp-color);
 }
 
 h2,

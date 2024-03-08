@@ -7,7 +7,7 @@
 import type { RichTextHtmlFilters } from './RichTextHtmlTypes'
 import type { ContentProps } from '../../objects/Content/ContentHtmlTypes'
 import type { CardProps } from '../../objects/Cards/CardsHtmlTypes'
-import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -55,13 +55,13 @@ const RichTextHtml: RichTextHtmlFilters = {
         classesArr.push(`t-${headingStyle}`)
       }
 
-      /* Add styles */
-
       if (richTextStyles) {
         addScriptStyle({
           dir: 'text/RichText',
           style: 'RichText'
         })
+      } else {
+        args.dataAttr = false
       }
     }
 

@@ -5,8 +5,8 @@
 /* Imports */
 
 import type { ConfigVars } from './configHtmlTypes'
-import type { Config } from '@alanizcreative/static-site-formation/lib/config/configTypes'
-import { setConfig } from '@alanizcreative/static-site-formation/lib/config/config'
+import type { Config } from '@alanizcreative/static-site-formation/iop/config/configTypes'
+import { setConfig } from '@alanizcreative/static-site-formation/iop/config/config'
 import { LayoutHtml } from '../components/Layout/LayoutHtml'
 import { NavigationHtml, NavigationsHtml } from '../components/Navigations/NavigationsHtml'
 import { HttpErrorHtml } from '../render/HttpError/HttpErrorHtml'
@@ -21,6 +21,8 @@ import { PostsHtml } from '../objects/Posts/PostsHtml'
 import { CardHtml } from '../objects/Cards/CardsHtml'
 import { FeedHtml } from '../objects/Feed/FeedHtml'
 import { FauxHeadingHtml } from '../text/FauxHeading/FauxHeadingHtml'
+import { ColumnsHtml as TextColumnsHtml } from '../text/Columns/ColumnsHtml'
+import { TabsHtml } from '../objects/Tabs/TabsHtml'
 
 /**
  * Flexible vars object in main config
@@ -139,6 +141,14 @@ const configHtmlVars: ConfigVars = {
       '120px': '2xl',
       '150px': '3xl'
     },
+    width2x: {
+      '45px': 90,
+      '60px': 120,
+      '75px': 150,
+      '90px': 180,
+      '120px': 240,
+      '150px': 300
+    },
     justify: {
       None: '',
       Start: 'start',
@@ -200,6 +210,7 @@ const configHtmlVars: ConfigVars = {
     },
     aspectRatio: {
       None: '',
+      Skip: 'skip', // Back end option
       '1:1': '100',
       '16:9': '56'
     },
@@ -394,6 +405,23 @@ const configHtml: Config = setConfig({
       callback: FauxHeadingHtml,
       attributeTypes: {
         style: 'string'
+      }
+    },
+    'text-columns': {
+      callback: TextColumnsHtml,
+      attributeTypes: {
+        count: 'number',
+        gap: 'string'
+      }
+    },
+    tabs: {
+      callback: TabsHtml,
+      child: {
+        name: 'tab',
+        attributeTypes: {
+          title: 'string',
+          selected: 'boolean'
+        }
       }
     }
   },

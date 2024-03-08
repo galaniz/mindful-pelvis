@@ -4,10 +4,14 @@
 
 /* Imports */
 
-import type { ShortcodeData } from '@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes'
+import type {
+  ShortcodeData,
+  ShortcodeAttrs
+} from '@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes'
 
 /**
  * @typedef {object} CollapsibleAttributes
+ * @type {import('@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes').ShortcodeAttrs}
  * @prop {string} [tag=div]
  * @prop {string} [attr]
  * @prop {string} [classes]
@@ -18,7 +22,7 @@ import type { ShortcodeData } from '@alanizcreative/static-site-formation/lib/ut
  * @prop {string} [iconClasses]
  * @prop {boolean} [expanded]
  */
-export interface CollapsibleAttributes {
+export interface CollapsibleAttributes extends ShortcodeAttrs {
   tag?: string
   attr?: string
   classes?: string
@@ -32,10 +36,10 @@ export interface CollapsibleAttributes {
 
 /**
  * @typedef CollapsibleArgs
- * @type {import('@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes').ShortcodeData}
+ * @type {import('@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes').ShortcodeData}
  * @prop {CollapsibleAttributes} attributes
  */
-export interface CollapsibleArgs extends Omit<ShortcodeData, 'attributes'> {
+export interface CollapsibleArgs extends ShortcodeData {
   attributes: CollapsibleAttributes
 }
 

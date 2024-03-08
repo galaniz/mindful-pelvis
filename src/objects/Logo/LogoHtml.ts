@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { LogoArgs } from './LogoHtmlTypes'
-import { getPermalink, addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { getPermalink, addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { LogoSvgHtml } from '../../svg/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
 

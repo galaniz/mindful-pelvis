@@ -4,10 +4,10 @@
 
 /* Imports */
 
-import type { GenericStrings } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
+import type { GenericStrings } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 
 /**
- * @typedef {import('@alanizcreative/static-site-formation/lib/global/globalTypes').GenericStrings} GenericStrings
+ * @typedef {import('@alanizcreative/static-site-formation/iop/global/globalTypes').GenericStrings} GenericStrings
  */
 
 /**
@@ -39,6 +39,7 @@ export interface ConfigSvg {
  * @prop {GenericStrings} button.size
  * @prop {GenericStrings} tag
  * @prop {GenericStrings} width
+ * @prop {Object.<string, number>} width2x
  * @prop {GenericStrings} justify
  * @prop {GenericStrings} align
  * @prop {GenericStrings} order
@@ -66,6 +67,9 @@ export interface ConfigOptions {
   }
   tag: GenericStrings
   width: GenericStrings
+  width2x: {
+    [key: string]: number
+  }
   justify: GenericStrings
   align: GenericStrings
   order: GenericStrings

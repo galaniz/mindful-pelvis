@@ -6,19 +6,18 @@
 
 import type { CardArgs, CardProps, CardsProps, CardReturn } from './CardsHtmlTypes'
 import type { Item } from '../../global/globalHtmlTypes'
-import type { ImageProps } from '../Image/ImageHtmlTypes'
-import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/lib/layouts/Column/Column'
-import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
+import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
+import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
+import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
 import {
   getProp,
   isObjectStrict,
   isStringStrict,
   getExcerpt
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 import { ContentHtml } from '../Content/ContentHtml'
-import { ImageHtml } from '../Image/ImageHtml'
+import { ImageMinimalHtml } from '../Image/ImageMinimalHtml'
 
 /**
  * Function - output post with card layout
@@ -86,50 +85,25 @@ const _Card = async ({
     cardParent
   ]
 
-  const imageParents = [
-    cardParent
-  ]
-
   /* Image output */
 
-  let imageOutput = ''
+  const imageMinRes = await ImageMinimalHtml({
+    image: heroImageMinimal,
+    containerClasses: 'l-wd-100-pc l-z-index--1 l-mt-auto',
+    imageContainerClasses: 'l-mw-4xl l-mr-auto l-ml-auto',
+    background,
+    parents: [
+      cardParent
+    ]
+  })
 
-  if (heroImageMinimal !== undefined) {
-    const imageType = getProp.type(heroImageMinimal)
+  const {
+    background: imageBackground,
+    output: imageOutput
+  } = imageMinRes
 
-    let imageClasses = 'l-wd-100-pc l-z-index--1 l-mw-4xl l-mt-auto'
-
-    const imageProps: ImageProps = {
-      args: {},
-      parents: imageParents
-    }
-
-    if (imageType === 'asset') {
-      imageProps.args = {
-        image: heroImageMinimal,
-        width: '90px'
-      }
-    }
-
-    if (imageType === 'image') {
-      imageClasses += ' l-mr-auto l-ml-auto'
-
-      const fields = getProp.self(heroImageMinimal)
-
-      if (isStringStrict(fields.color)) {
-        background = `${fields.color} Light`
-      }
-
-      imageProps.args = fields
-    }
-
-    imageProps.args.invert = !background.includes('Light')
-
-    imageOutput = `
-      <div class="${imageClasses}">
-        ${await ImageHtml(imageProps)}
-      </div>
-    `
+  if (imageBackground !== '') {
+    background = imageBackground
   }
 
   /* Text output */
@@ -276,8 +250,6 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
       classes += ' t-light'
     }
   }
-
-  /* Embed */
 
   /* Output */
 

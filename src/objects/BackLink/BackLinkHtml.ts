@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { isStringStrict, getArchiveLink, addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { isStringStrict, getArchiveLink, addScriptStyle } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 
 /**

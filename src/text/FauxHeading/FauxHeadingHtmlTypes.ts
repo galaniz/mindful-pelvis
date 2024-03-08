@@ -4,15 +4,15 @@
 
 /* Imports */
 
-import type { ShortcodeData } from '@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes'
+import type { ShortcodeData } from '@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes'
 
 /**
  * @typedef FauxHeadingArgs
- * @type {import('@alanizcreative/static-site-formation/lib/utils/shortcodes/shortcodesTypes').ShortcodeData}
+ * @type {import('@alanizcreative/static-site-formation/iop/utils/shortcodes/shortcodesTypes').ShortcodeData}
  * @prop {object} attributes
  * @prop {string} attributes.style
  */
-export interface FauxHeadingArgs extends Omit<ShortcodeData, 'attributes'> {
+export interface FauxHeadingArgs extends ShortcodeData {
   attributes: {
     style?: string
   }

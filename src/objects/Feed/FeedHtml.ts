@@ -6,10 +6,10 @@
 
 import type { Feed } from './FeedHtmlTypes'
 import type { ConfigInsta } from '../../config/configHtmlTypes'
-import type { ImagesStore } from '@alanizcreative/static-site-formation/lib/utils/processImages/processImagesTypes'
-import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/lib/layouts/Column/Column'
-import { getJsonFile, getPath } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import type { ImagesStore } from '@alanizcreative/static-site-formation/iop/utils/processImages/processImagesTypes'
+import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
+import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
+import { getJsonFile, getPath } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 import { ImageHtml } from '../Image/ImageHtml'
 

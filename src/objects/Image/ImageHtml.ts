@@ -11,9 +11,10 @@ import {
   addScriptStyle,
   isStringStrict,
   isObjectStrict,
-  isArrayStrict
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
-// import { RichText } from '@alanizcreative/static-site-formation/lib/text/RichText/RichText'
+  isArrayStrict,
+  isNumber
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
+// import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -45,7 +46,9 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     color = 'Default',
     invert = false,
     classes = '',
-    source = 'cms'
+    source = 'cms',
+    lazy = true,
+    maxWidth
     // caption
   } = args
 
@@ -70,7 +73,9 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
   borderRadius = configHtmlVars.options.borderRadius[borderRadius]
 
   const hasColor = isStringStrict(color)
-  const hasAspectRatio = isStringStrict(aspectRatio)
+  const skipAspectRatio = aspectRatio === 'skip'
+  const hasAspectRatio = isStringStrict(aspectRatio) && !skipAspectRatio
+  const width2x = configHtmlVars.options.width2x[width]
 
   /* Add styles */
 
@@ -95,13 +100,24 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
   if (image !== undefined) {
     const imageClasses = ['l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover']
 
+    let imageMaxWidth = maxWidth
+
+    if (imageMaxWidth === undefined) {
+      imageMaxWidth = card ? 600 : 1200
+    }
+
+    if (isNumber(width2x)) {
+      imageMaxWidth = width2x
+    }
+
     const imageRes = getImage({
       data: image,
       classes: imageClasses.join(' '),
       returnDetails: true,
       picture: true,
-      maxWidth: card ? 600 : 1200,
-      source
+      maxWidth: imageMaxWidth,
+      source,
+      lazy
     })
 
     let imageResAspectRatio = 0
@@ -146,7 +162,7 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
       style.push(`--img-url:url(${imageResSrc})`)
     }
 
-    if (!hasAspectRatio && imageResAspectRatio !== 0) {
+    if (!hasAspectRatio && !skipAspectRatio && imageResAspectRatio !== 0) {
       style.push(`padding-top:${imageResAspectRatio * 100}%`)
     }
 

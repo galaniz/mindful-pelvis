@@ -12,10 +12,10 @@ import {
   getProp,
   escape,
   isNumber
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import {
   getContentfulData
-} from '@alanizcreative/static-site-formation/lib/utils/getContentfulData/getContentfulData'
+} from '@alanizcreative/static-site-formation/iop/utils/getContentfulData/getContentfulData'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
 import { PaginationHtml } from '../../components/Pagination/PaginationHtml'
 import { CardsHtml } from '../Cards/CardsHtml'
@@ -70,7 +70,7 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
   /* Args */
 
   const {
-    // display = 1,
+    display = 1,
     pagination = false,
     filters = [],
     linkContentType = '',
@@ -80,12 +80,9 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
   } = args
 
   let {
-    display = 1,
     contentType = 'Post',
     headingLevel = 'Heading Three'
   } = args
-
-  display = 1
 
   /* Normalize options */
 

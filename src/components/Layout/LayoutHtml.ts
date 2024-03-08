@@ -10,7 +10,7 @@ import {
   isStringStrict,
   isArrayStrict,
   isObjectStrict
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
 import { HeaderHtml } from '../Header/HeaderHtml'
 import { FooterHtml } from '../Footer/FooterHtml'
@@ -148,7 +148,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     heroArchive = configHtmlVars.options.posts.contentType[pageData.archive]
   }
 
-  const heroOutput = HeroHtml({
+  const heroOutput = await HeroHtml({
     contentType,
     title: heroTitle,
     type: pageData.heroType,

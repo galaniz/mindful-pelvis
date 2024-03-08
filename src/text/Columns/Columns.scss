@@ -1,0 +1,17 @@
+/**
+ * Text - Columns
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/utils" as util;
+
+/* Styles */
+
+.t-columns {
+  @include util.breakpoint-min("l") {
+    column-count: var(--t-count, 2);
+    column-gap: var(--t-gap, var(--xs));
+  }
+}

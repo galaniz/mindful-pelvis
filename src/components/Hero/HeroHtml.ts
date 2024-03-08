@@ -6,14 +6,14 @@
 
 import type { HeroArgs } from './HeroHtmlTypes'
 import {
-  getImage,
   addScriptStyle,
   isStringStrict,
-  isString,
   isObjectStrict
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { ButtonHtml } from '../../objects/Button/ButtonHtml'
 import { configHtmlVars } from '../../config/configHtml'
+import { ImageHtml } from '../../objects/Image/ImageHtml'
+import { ImageMinimalHtml } from '../../objects/Image/ImageMinimalHtml'
 
 /**
  * Function - output hero
@@ -21,7 +21,7 @@ import { configHtmlVars } from '../../config/configHtml'
  * @param {HeroArgs} args
  * @return {string} HTML - section
  */
-const HeroHtml = (args: HeroArgs): string => {
+const HeroHtml = async (args: HeroArgs): Promise<string> => {
   /* Args must be object */
 
   if (!isObjectStrict(args)) {
@@ -56,67 +56,39 @@ const HeroHtml = (args: HeroArgs): string => {
 
   /* Image */
 
-  let imageData = image
   let imageOutput = ''
+  let imageMinOutput = ''
   let isImageMin = false
 
   if (imageMinimal !== undefined) {
-    imageData = imageMinimal
     isImageMin = true
-  }
 
-  if (imageData !== undefined) {
-    let maxWidth = overlap ? 1600 : 2000
-
-    if (isImageMin) {
-      maxWidth = 180
-    }
-
-    const imageRes = getImage({
-      data: imageData,
-      classes: 'l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover',
-      returnDetails: true,
-      lazy: false,
-      picture: true,
-      maxWidth
+    const imageMinRes = await ImageMinimalHtml({
+      image: imageMinimal,
+      assetClasses: 'l-m-auto',
+      assetContainerClasses: 'l-pb-xs l-pb-s-m',
+      imageContainerClasses: 'l-pb-s l-pb-m-m l-mw-5xl l-m-auto',
+      includeTheme: true
     })
 
-    let imageResAspectRatio = 0
-    let imageResOutput = ''
+    const { output } = imageMinRes
 
-    if (isString(imageRes)) {
-      imageResOutput = imageRes
-    } else {
-      imageResAspectRatio = imageRes.aspectRatio
-      imageResOutput = imageRes.output
-    }
+    imageMinOutput = output
+  }
 
-    let pictureClasses = 'l-relative l-block l-overflow-hidden'
-    let pictureStyle = ''
-
-    if (overlap) {
-      pictureClasses += ' l-ht-100-pc'
-      pictureStyle = ` style="padding-top:${imageResAspectRatio * 100}%"`
-    }
-
-    pictureClasses += type === 'minimal' && !isImageMin ? ' c-hero-min' : ''
-
-    if (isImageMin) {
-      pictureClasses += ' l-wd-xl l-ht-xl l-mr-auto l-ml-auto'
-    }
-
-    imageOutput = `
-      <picture class="${pictureClasses}"${pictureStyle}>
-        ${imageResOutput}
-      </picture>
-    `
+  if (image !== undefined && imageMinOutput === '') {
+    imageOutput = await ImageHtml({
+      args: {
+        image,
+        lazy: false,
+        maxWidth: 1600,
+        classes: overlap ? 'l-ht-100-pc' : 'c-hero-min',
+        aspectRatio: overlap ? 'None' : 'Skip'
+      }
+    })
 
     if (type === 'minimal') {
-      imageOutput = `
-        <div class="${isImageMin ? 'l-pb-xs l-pb-s-m' : 'l-pt-s l-pt-m-l'}">
-          ${imageOutput}
-        </div>
-      `
+      imageOutput = imageOutput !== '' ? `<div class="l-pt-s l-pt-m-l">${imageOutput}</div>` : ''
     }
   }
 
@@ -223,10 +195,10 @@ const HeroHtml = (args: HeroArgs): string => {
   return `
     <section class="l-pt-m${!isImageMin ? ' l-pt-xl-l' : ''}">
       <div class="l-container${center ? ' t-align-center' : ''}">
-        ${isImageMin ? imageOutput : ''}
+        ${imageMinOutput}
         ${textOutput}
       </div>
-      ${!isImageMin ? imageOutput : ''}
+      ${imageOutput}
     </section>
   `
 }

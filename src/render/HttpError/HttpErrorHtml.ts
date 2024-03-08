@@ -5,8 +5,8 @@
 /* Imports */
 
 import type { HttpErrorText } from './HttpErrorHtmlTypes'
-import { getPermalink } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
-import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
+import { getPermalink } from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
 import { LayoutHtml } from '../../components/Layout/LayoutHtml'
 import { NavigationsHtml } from '../../components/Navigations/NavigationsHtml'
 import { ButtonHtml } from '../../objects/Button/ButtonHtml'

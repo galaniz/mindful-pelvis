@@ -4,25 +4,25 @@
 
 /* Imports */
 
-import type { GenericStrings } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
+import type { GenericStrings } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 import type {
   NavigationProps,
   NavigationItem
-} from '@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes'
+} from '@alanizcreative/static-site-formation/iop/components/Navigation/NavigationTypes'
 
 /**
  * @typedef GenericStrings
- * @type {import('@alanizcreative/static-site-formation/lib/global/globalTypes').GenericStrings}
+ * @type {import('@alanizcreative/static-site-formation/iop/global/globalTypes').GenericStrings}
  */
 
 /**
  * @typedef NavigationProps
- * @type {import('@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes').NavigationProps}
+ * @type {import('@alanizcreative/static-site-formation/iop/components/Navigation/NavigationTypes').NavigationProps}
  */
 
 /**
  * @typedef NavigationItem
- * @type {import('@alanizcreative/static-site-formation/lib/components/Navigation/NavigationTypes').NavigationItem}
+ * @type {import('@alanizcreative/static-site-formation/iop/components/Navigation/NavigationTypes').NavigationItem}
  */
 
 /**

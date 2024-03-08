@@ -4,8 +4,8 @@
 
 /* Imports */
 
-import type { ColumnPropsFilter } from '@alanizcreative/static-site-formation/lib/layouts/column/ColumnTypes'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import type { ColumnPropsFilter } from '@alanizcreative/static-site-formation/iop/layouts/Column/ColumnTypes'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**

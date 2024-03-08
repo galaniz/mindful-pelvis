@@ -4,18 +4,19 @@
 
 /* Imports */
 
-import type { Generic, InternalLinkBase } from '@alanizcreative/static-site-formation/lib/global/globalTypes'
-import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
-import type { RenderItem } from '@alanizcreative/static-site-formation/lib/render/RenderTypes'
+import type { InternalLinkBase } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
+import type { PropFile } from '@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes'
+import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/RenderTypes'
+import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
 
 /**
  * @typedef Item
- * @type {import('@alanizcreative/static-site-formation/lib/render/RenderTypes').RenderItem}
+ * @type {import('@alanizcreative/static-site-formation/iop/render/RenderTypes').RenderItem}
  * @prop {boolean} [pagination]
  * @prop {string} [heroTitle]
  * @prop {string} [heroText]
- * @prop {import('@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes').PropFile} [heroImage]
- * @prop {import('@alanizcreative/static-site-formation/lib/global/globalTypes').Generic} [heroImageMinimal]
+ * @prop {import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropFile} [heroImage]
+ * @prop {import('../objects/Image/ImageHtmlTypes').ImageMinimalData} [heroImageMinimal]
  * @prop {InternalLink} [heroCallToAction]
  * @prop {string} [heroType]
  * @prop {InternalLink[]} [post]
@@ -29,7 +30,7 @@ export interface Item extends RenderItem {
   heroTitle?: string
   heroText?: string
   heroImage?: PropFile
-  heroImageMinimal?: Generic
+  heroImageMinimal?: ImageMinimalData
   heroCallToAction?: InternalLink
   heroType?: string
   post?: InternalLink[]
@@ -43,8 +44,8 @@ export interface Item extends RenderItem {
 /**
  * @typedef InternalLink
  * @type {
- * import('@alanizcreative/static-site-formation/lib/global/globalTypes').InternalLinkBase|
- * import('@alanizcreative/static-site-formation/lib/global/globalTypes').Generic
+ * import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLinkBase|
+ * import('@alanizcreative/static-site-formation/iop/global/globalTypes').Generic
  * }
  * @prop {Item} [fields]
  */

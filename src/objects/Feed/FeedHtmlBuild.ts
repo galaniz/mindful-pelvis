@@ -8,7 +8,7 @@ import type { Feed } from './FeedHtmlTypes'
 import puppeteer from 'puppeteer'
 import { FeedHtml } from './FeedHtml'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
-import { processImages, remoteImages } from '@alanizcreative/static-site-formation/lib/utils/utilsAll'
+import { processImages, remoteImages } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { ConfigInsta } from '../../config/configHtmlTypes'
 
 /**

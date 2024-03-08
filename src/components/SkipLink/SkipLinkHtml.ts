@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { addScriptStyle } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { addScriptStyle } from '@alanizcreative/static-site-formation/iop/utils/utils'
 
 /**
  * Function - output link to main landmark

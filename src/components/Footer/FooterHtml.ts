@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { NavigationHtmlFunc } from '../Navigations/NavigationsHtmlTypes'
-import { getYear } from '@alanizcreative/static-site-formation/lib/utils/getYear/getYear'
+import { getYear } from '@alanizcreative/static-site-formation/iop/utils/getYear/getYear'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
 import { configHtml } from '../../config/configHtml'
 

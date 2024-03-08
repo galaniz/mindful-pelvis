@@ -6,12 +6,12 @@
 
 import type { NavigationsHtmlObj, NavigationIs, NavigationArgs } from './NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
-import { Navigation } from '@alanizcreative/static-site-formation/lib/components/Navigation/Navigation'
+import { Navigation } from '@alanizcreative/static-site-formation/iop/components/Navigation/Navigation'
 import {
   isObjectStrict,
   isArrayStrict,
   isStringStrict
-} from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+} from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 import { configHtmlVars } from '../../config/configHtml'

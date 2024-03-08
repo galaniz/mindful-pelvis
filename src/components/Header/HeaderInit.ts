@@ -4,16 +4,16 @@
 
 /* Imports */
 
-import { config } from '@alanizcreative/formation/src/config/config'
-import { doActions, setItems } from '@alanizcreative/formation/src/utils'
-import { Nav } from '@alanizcreative/formation/src/components/Nav/Nav'
+import { doActions, setItems } from '@alanizcreative/formation/lib/utils/utils'
+import { Nav } from '@alanizcreative/formation/lib/components/Nav/Nav'
+import { configVars } from '../../config/config'
 
 /**
  * Function - initialize
  *
- * @return {void}
+ * @return {Nav}
  */
-const init = () => {
+const init = (): Nav => {
   /* Item selector */
 
   const itemSelector = '.c-nav__item[data-depth="0"]'
@@ -35,12 +35,6 @@ const init = () => {
     close: '.c-nav__close',
     overlay: '.c-nav__overlay'
   })
-
-  /* Instantiate */
-
-  const nav = (args) => {
-    return new Nav(args)
-  }
 
   /* Navigation */
 
@@ -67,26 +61,28 @@ const init = () => {
     open,
     close,
     overlay,
-    endToggle (open) {
+    endToggle (open: boolean) {
       if (open) {
         return
       }
 
-      doActions(config.vars.nav.close)
+      doActions(configVars.nav.close)
     },
     onSet () {
-      doActions(config.vars.nav.hover, {
+      doActions(configVars.nav.hover, {
+        // @ts-expect-error
         state: !this.isOverflowing
       })
 
-      doActions(config.vars.nav.accordion, {
+      doActions(configVars.nav.accordion, {
+        // @ts-expect-error
         state: !this.isOverflowing,
         group: 'nav-main'
       })
     }
   }
 
-  nav(args)
+  return new Nav(args)
 }
 
 init()

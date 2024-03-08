@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ContentProps, ContentReturn } from './ContentHtmlTypes'
-import { isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**

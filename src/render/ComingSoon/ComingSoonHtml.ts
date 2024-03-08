@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import { Container } from '@alanizcreative/static-site-formation/lib/layouts/Container/Container'
+import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
 import { LayoutHtml } from '../../components/Layout/LayoutHtml'
 import { ContentHtml } from '../../objects/Content/ContentHtml'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'

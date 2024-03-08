@@ -6,7 +6,7 @@
 
 import type { NavigationHtmlFunc } from '../Navigations/NavigationsHtmlTypes'
 import { v4 as uuid } from 'uuid'
-import { addScriptStyle, getPermalink } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
+import { addScriptStyle, getPermalink } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { SkipLinkHtml } from '../SkipLink/SkipLinkHtml'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
 import { configHtml, configHtmlVars } from '../../config/configHtml'

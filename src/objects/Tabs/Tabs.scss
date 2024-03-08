@@ -1,0 +1,18 @@
+/**
+ * Objects - Tabs Styles
+ */
+
+.o-tab {
+  --alpha: 0.75;
+  --line: 0;
+  --link-color: hsla(var(--sharp-color-hsl), var(--alpha));
+
+  box-shadow:
+    0 var(--line) 0 0 var(--link-color),
+    inset 0 calc(var(--line) * -1) 0 0 var(--link-color);
+
+  &[aria-selected="true"] {
+    --alpha: 1;
+    --line: var(--underline);
+  }
+}

@@ -43,7 +43,7 @@ $gaps: (
 
 /* Config variables */
 
-@use "@alanizcreative/formation/src/config/config" with (
+@use "@alanizcreative/formation/lib/config/config" with (
   /* Colors */
 
   $colors-type: "hsla",
@@ -153,7 +153,8 @@ $gaps: (
     "xl": 90px,
     "2xl": 120px,
     "3xl": 150px,
-    "4xl": 330px,
+    "4xl": 300px,
+    "5xl": 360px
   ),
 
   /* Padding */
@@ -202,7 +203,7 @@ $gaps: (
     "3xl",
   ),
 
-  $max-widths: ("4xl"),
+  $max-widths: ("4xl", "5xl"),
 
   /* Heights */
 

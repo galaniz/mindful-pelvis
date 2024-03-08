@@ -5,8 +5,8 @@
 /* Imports */
 
 import type { PaginationArgs } from './PaginationHtmlTypes'
-import { addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/lib/utils/utilsMin'
-import { Pagination } from '@alanizcreative/static-site-formation/lib/components/Pagination/Pagination'
+import { addScriptStyle, isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { Pagination } from '@alanizcreative/static-site-formation/iop/components/Pagination/Pagination'
 import { CaretSvgHtml } from '../../svg/Caret/CaretHtml'
 
 /**

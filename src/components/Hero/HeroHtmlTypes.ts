@@ -5,7 +5,8 @@
 /* Imports */
 
 import type { InternalLink, Item } from '../../global/globalHtmlTypes'
-import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes'
+import type { PropFile } from '@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes'
+import type { ImageMinimalData } from '../../objects/Image/ImageHtmlTypes'
 
 /**
  * @typedef {object} HeroArgs
@@ -14,8 +15,8 @@ import type { PropFile } from '@alanizcreative/static-site-formation/lib/utils/g
  * @prop {string} [type]
  * @prop {string} title
  * @prop {string} [text]
- * @prop {import('@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes').PropFile} [image]
- * @prop {import('@alanizcreative/static-site-formation/lib/utils/getProp/getPropTypes').PropFile} [imageMinimal]
+ * @prop {import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropFile} [image]
+ * @prop {import(''../../objects/Image/ImageHtmlTypes'').ImageMinimalData} [imageMinimal]
  * @prop {import('../../global/globalHtmlTypes').InternalLink} [callToAction]
  * @prop {import('../../global/globalHtmlTypes').Item} [pageData]
  */
@@ -26,7 +27,7 @@ export interface HeroArgs {
   title: string
   text?: string
   image?: PropFile
-  imageMinimal?: PropFile
+  imageMinimal?: ImageMinimalData
   callToAction?: InternalLink
   pageData: Item
 }
