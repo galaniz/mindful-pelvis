@@ -29,6 +29,7 @@ import {
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
 import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
 import { HttpErrorHtml } from '../src/render/HttpError/HttpErrorHtml'
+import { ComingSoonHtml } from '../src/render/ComingSoon/ComingSoonHtml'
 
 /* Eleventy init */
 
@@ -163,6 +164,13 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
       return output
     }
 
+    if (configHtml.env.prod) {
+      return [{
+        slug: '/',
+        output: await ComingSoonHtml()
+      }]
+    }
+
     /* Cache data */
 
     if (configHtml.env.cache) {
@@ -200,7 +208,7 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
     if (allData !== undefined) {
       allData.content.page.push({
         id: '404',
-        slug: '404.html',
+        slug: '/404/',
         output: await HttpErrorHtml(404)
       })
     }

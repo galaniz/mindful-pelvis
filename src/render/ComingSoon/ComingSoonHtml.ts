@@ -19,7 +19,8 @@ const ComingSoonHtml = async (): Promise<string> => {
   /* Title and slug */
 
   const title = 'Coming Soon'
-  const slug = 'coming-soon'
+  const id = 'coming-soon'
+  const slug = 'index'
 
   /* Container and content */
 
@@ -44,7 +45,7 @@ const ComingSoonHtml = async (): Promise<string> => {
   /* Output */
 
   return await LayoutHtml({
-    id: slug,
+    id,
     slug,
     meta: {
       title,
@@ -52,7 +53,7 @@ const ComingSoonHtml = async (): Promise<string> => {
     },
     contentType: 'page',
     pageData: {
-      id: slug,
+      id,
       slug,
       title
     },
