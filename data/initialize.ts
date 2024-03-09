@@ -219,8 +219,11 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
 
     if (configHtml.env.build) {
       await writeStoreFiles()
-      await writeServerlessFiles()
       await writeRedirectsFile()
+      await writeServerlessFiles({
+        configName: 'configHtml',
+        configFile: 'src/config/configHtml.js'
+      })
     }
 
     /* Output */

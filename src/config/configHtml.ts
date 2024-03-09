@@ -427,7 +427,6 @@ const configHtml: Config = setConfig({
   },
   serverless: {
     dir: 'functions',
-    import: 'lib',
     files: {
       ajax: 'ajax/index.js',
       preview: '_middleware.js',
