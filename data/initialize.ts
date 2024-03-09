@@ -68,11 +68,11 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
       const { css, js } = configHtmlVars
 
       if (css.in !== '' && css.out !== '') {
-        entryPoints[css.out] = css.in
+        entryPoints[css.out] = `${css.in}.scss`
       }
 
       if (js.in !== '' && js.out !== '') {
-        entryPoints[js.out] = js.in
+        entryPoints[js.out] = `${js.in}.js`
       }
 
       await esbuild.build({
@@ -115,7 +115,7 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
       if (configHtmlVars.css.cache !== '') {
         styles = configHtmlVars.css.cache
       } else {
-        const sassRes = sass.compile(`./${configHtmlVars.css.in}`, {
+        const sassRes = sass.compile(`./${configHtmlVars.css.in}.scss`, {
           loadPaths: ['node_modules', './src'],
           style: 'compressed'
         })

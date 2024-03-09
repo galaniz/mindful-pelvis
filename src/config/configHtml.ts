@@ -68,14 +68,14 @@ const configHtmlVars: ConfigVars = {
   head: '',
   svg: {},
   css: {
-    in: 'src/global/global.scss',
-    out: 'css/global/global.css',
+    in: 'src/global/global',
+    out: 'css/global/global',
     head: '',
     cache: ''
   },
   js: {
-    in: 'src/global/global.js',
-    out: 'css/global/global.js'
+    in: 'src/global/global',
+    out: 'js/global/global'
   },
   navHalf: 0,
   backgrounds: [
