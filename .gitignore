@@ -1,8 +1,7 @@
 node_modules/
 package-lock.json
 site/
-functions/*
-!functions/ajax/
+functions/
 data/initialize.js
 src/json/**/*.json
 src/**/*.js
