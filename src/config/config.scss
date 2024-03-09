@@ -1,0 +1,285 @@
+/**
+ * Config - Styles
+ */
+
+/* Vertical padding */
+
+$padding-vertical: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+  "l",
+  "xl",
+  "2xl",
+  "3xl",
+);
+
+/* Horizontal padding */
+
+$padding-horizontal: (
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+);
+
+/* Gaps */
+
+$gaps: (
+  "5xs",
+  "4xs",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+);
+
+/* Config variables */
+
+@use "@alanizcreative/formation/lib/config/config" with (
+  /* Colors */
+
+  $colors-type: "hsla",
+  $colors: (
+    "primary": ( // Blue
+      "dark": "201, 39%, 31%",
+      "base": "201, 39%, 39%", // #3c6e89
+      "light": "198, 30%, 55%", // #6899ae
+      "tint": "189, 16%, 91%", // #e5ebec
+    ),
+    "secondary": ( // Orange
+      "dark": "19, 53%, 32%",
+      "base": "19, 53%, 40%", // #9e5330
+      "light": "17, 45%, 55%", // #c07759
+    ),
+    "foreground": ( // Navy + gray
+      "dark": "206, 17%, 16%",
+      "base": "206, 17%, 24%", // #333f48
+      "light": "213, 6%, 31%", // #4b4f54
+    ),
+    "background": (
+      "base": "30, 48%, 92%", // #f4eae0
+      "light": "30, 48%, 98%",
+    ),
+    "negative": (
+      "dark": "0, 28%, 44%", // #8e5050
+    ),
+    "positive": (
+      "dark": "94, 20%, 33%", // #536644
+    ),
+  ),
+
+  $text-colors: (
+    "primary-base",
+    "secondary-base",
+    "foreground-base",
+    "foreground-light",
+    "background-base",
+  ),
+
+  $background-colors: (
+    "primary-base",
+    "secondary-base",
+    "foreground-base",
+    "foreground-light",
+    "background-base",
+  ),
+
+  /* Fonts */
+
+  $font-families: (
+    "primary": (
+      "Karla",
+      Helvetica,
+      Arial,
+      sans-serif,
+    ),
+    "secondary": (
+      "Celine",
+      Georgia,
+      Times,
+      serif,
+    ),
+  ),
+
+  $font-weights: (
+    "bold": 700,
+    "normal": 400,
+  ),
+
+  /* Line heights */
+
+  $line-heights: (
+    "tight": 1,
+    "snug": 1.3,
+    "open": 1.5,
+    "airy": 1.6,
+  ),
+
+  /* Letter spacing */
+
+  $letter-spacing: (
+    "open": 0.01em,
+  ),
+
+  /* Breakpoints */
+
+  $breakpoints: (
+    "0": 0px,
+    "xs": 300px,
+    "s": 600px,
+    "m": 900px,
+    "l": 1200px,
+  ),
+
+  /* Spacing */
+
+  $spacing: (
+    "5xs": 5px,
+    "4xs": 10px,
+    "3xs": 15px,
+    "2xs": 20px,
+    "xs": 30px,
+    "s": 45px,
+    "m": 60px,
+    "l": 75px,
+    "xl": 90px,
+    "2xl": 120px,
+    "3xl": 150px,
+    "4xl": 300px,
+    "5xl": 360px
+  ),
+
+  /* Padding */
+
+  $padding-top: $padding-vertical,
+  $padding-bottom: $padding-vertical,
+  $padding-vertical-breakpoints: ("s", "m", "l"),
+
+  $padding-left: $padding-horizontal,
+  $padding-right: $padding-horizontal,
+  $padding-horizontal-breakpoints: ("s", "m", "l"),
+
+  /* Margin */
+
+  $margin-top: $gaps,
+  $margin-bottom: $gaps,
+  $margin-bottom-all: $gaps,
+  $margin-vertical-breakpoints: ("s", "m", "l"),
+
+  /* Gaps */
+
+  $gaps: $gaps,
+  $gap-breakpoints: ("s", "m", "l"),
+
+  /* Flex */
+
+  $flex-row-breakpoints: ("s", "m", "l"),
+
+  /* Display */
+
+  $block-breakpoints: ("s"),
+
+  /* Widths */
+
+  $width-percentage-breakpoints: ("s", "m", "l"),
+
+  $widths: (
+    "3xs",
+    "2xs",
+    "xs",
+    "s",
+    "m",
+    "l",
+    "xl",
+    "2xl",
+    "3xl",
+  ),
+
+  $max-widths: ("4xl", "5xl"),
+
+  /* Heights */
+
+  $heights: (
+    "3xs",
+    "2xs",
+    "xs",
+    "s",
+    "m",
+    "l",
+    "xl",
+    "2xl",
+    "3xl",
+  ),
+
+  /* Containers */
+
+  $container-padding: 20px,
+  $containers: (
+    "default": 1340px,
+    "m": 1200px,
+    "s": 840px,
+  ),
+
+  /* Aspect ratios */
+
+  $aspect-ratio-padding: (
+    "56": 56.25%,
+  ),
+
+  /* Nav icon */
+
+  $nav: (
+    "icon": (
+      "width": 45px,
+      "line-width": 1px,
+      "margin": 8px,
+    )
+  ),
+
+  /* Borders */
+
+  $borders: (
+    "sides": ("all", "bottom", "top", "left"),
+    "colors": (
+      "default": "var(--foreground-light-fade)",
+      "muted": "var(--muted-color)",
+      "theme": "var(--theme)",
+      "current": "currentcolor",
+    ),
+    "widths": (
+      "default": 0.0625rem,
+      "thick": 0.0938rem,
+    ),
+  ),
+
+  $border-radius: (
+    "s": 10px,
+    "m": 15px,
+    "l": 45px,
+  ),
+
+  /* Outline */
+
+  $outline: (
+    "widths": (
+      "default": 0.2rem,
+    ),
+    "colors": (
+      "default": "var(--primary-base)",
+    ),
+    "offsets": (
+      "default": 0.3rem,
+      "snug": 0,
+      "inset": -0.4rem,
+    ),
+  ),
+
+);

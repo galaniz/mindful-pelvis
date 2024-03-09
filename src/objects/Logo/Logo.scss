@@ -1,0 +1,49 @@
+/**
+ * Objects - Logo Styles
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/config/config" as con;
+@use "@alanizcreative/formation/lib/utils" as util;
+
+/* Styles */
+
+.o-logo {
+  width: var(--logo-width);
+  height: var(--logo-height);
+}
+
+.o-logo-s {
+  @include util.fluid-size(
+    width,
+    util.calc-rem(200px) util.calc-rem(250px),
+    "s" "l"
+  );
+  @include util.fluid-size(
+    height,
+    util.calc-rem(64px) util.calc-rem(80px),
+    "s" "l"
+  );
+}
+
+.o-logo,
+.o-logo-s {
+  --text: var(--foreground-base);
+  --wave: var(--primary-base);
+  --circle: var(--foreground-base);
+  --crest: var(--primary-light);
+  --greater: var(--primary-light);
+  --lesser: var(--secondary-light);
+
+  &[data-theme="light"],
+  [data-nav-open="true"] & {
+    --text: var(--background-base);
+    --wave: var(--background-base);
+    --circle: var(--background-base);
+    --crest: var(--primary-base);
+    --greater: var(--primary-light);
+    --lesser: var(--secondary-light);
+  }
+}

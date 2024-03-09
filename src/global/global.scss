@@ -1,0 +1,39 @@
+/**
+ * Global - Styles
+ */
+
+/* Normalize */
+
+@use "normalize.css/normalize.css";
+
+/* Config */
+
+@forward "../config/config";
+
+/* Base */
+
+@use "../base";
+
+/* A11y */
+
+@use "@alanizcreative/formation/lib/a11y";
+
+/* Backgrounds */
+
+@use "../backgrounds";
+
+/* Text */
+
+@use "../text";
+
+/* Layouts */
+
+@use "../layouts";
+
+/* Borders */
+
+@use "@alanizcreative/formation/lib/borders";
+
+/* Effects */
+
+@use "../effects";

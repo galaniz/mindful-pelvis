@@ -1,5 +1,14 @@
 node_modules/
-site/
-assets/public/
 package-lock.json
+site/
+functions/*
+!functions/ajax/
+data/initialize.js
+src/json/**/*.json
+src/**/*.js
+src/assets/img/instagram-feed/
 .DS_Store
+.cache
+.dev.vars
+.env
+.eleventy.js

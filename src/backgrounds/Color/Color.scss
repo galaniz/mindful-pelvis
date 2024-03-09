@@ -1,0 +1,25 @@
+/**
+ * Backgrounds - Color Styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/lib/backgrounds/Color/Color";
+
+/* Styles */
+
+.bg-current {
+  background-color: currentcolor;
+}
+
+.bg-foreground-base-fade {
+  background: var(--foreground-base-fade);
+}
+
+.bg-secondary-base-fade {
+  background: var(--secondary-base-fade);
+}
+
+.bg-primary-base-fade {
+  background: var(--primary-base-fade);
+}
