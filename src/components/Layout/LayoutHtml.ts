@@ -209,7 +209,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
   let scripts = ''
 
   if (configHtmlVars.js.out !== '') {
-    scripts += `<script type="module" src="${assetsLink}${configHtmlVars.js.out}"></script>`
+    scripts += `<script type="module" src="${assetsLink}${configHtmlVars.js.out}.js"></script>`
   }
 
   if (scriptsArr.length > 0) {
@@ -233,7 +233,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
   let styles = ''
 
   if (configHtmlVars.css.out !== '') {
-    configHtmlVars.css.head = `<link rel="stylesheet" href="${assetsLink}${configHtmlVars.css.out}" media="all">`
+    configHtmlVars.css.head = `<link rel="stylesheet" href="${assetsLink}${configHtmlVars.css.out}.css" media="all">`
   }
 
   if (stylesArr.length > 0) {
