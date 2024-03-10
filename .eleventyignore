@@ -1,0 +1,10 @@
+README.md
+node_modules/
+package-lock.json
+site/
+src/json/**/*.json
+src/assets/img/instagram-feed/
+.DS_Store
+.cache
+.dev.vars
+.env

@@ -1,0 +1,65 @@
+/**
+ * Text - Rich Text Styles
+ */
+
+.t-rich-text {
+  --list-left: var(--xs);
+
+  h2[data-rich],
+  h3[data-rich],
+  h4[data-rich],
+  h5[data-rich],
+  h6[data-rich] {
+    padding-top: var(--5xs);
+  }
+
+  h2[data-rich] {
+    margin: var(--s) 0 var(--2xs);
+  }
+
+  h3[data-rich],
+  h4[data-rich],
+  h5[data-rich],
+  h6[data-rich] {
+    margin: var(--3xs) 0 var(--2xs);
+  }
+
+  p[data-rich] {
+    margin-bottom: var(--xs);
+  }
+
+  ul[data-rich] {
+    --list-left: 1.5625rem;
+
+    list-style-type: "\2014  ";
+  }
+
+  ul[data-rich],
+  ol[data-rich] {
+    margin: var(--xs) 0 var(--xs) clamp(var(--2xs), 5%, var(--list-left));
+  }
+
+  li[data-rich] {
+    margin: var(--5xs) 0;
+    padding-inline-start: var(--5xs);
+  }
+
+  a[data-button] {
+    margin-top: var(--4xs);
+  }
+
+  > picture,
+  > div {
+    margin: var(--s) 0;
+  }
+
+  [data-rich]:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  [data-rich]:last-child,
+  :last-child {
+    margin-bottom: 0;
+  }
+}

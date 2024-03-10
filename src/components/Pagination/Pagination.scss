@@ -1,0 +1,25 @@
+/**
+ * Components - Pagination Styles
+ */
+
+.c-pag {
+  [data-prev="text"] {
+    opacity: 0.3;
+  }
+}
+
+.c-pag__current {
+  &::before {
+    background: var(--foreground-base);
+    width: var(--xs);
+    border-radius: 100%;
+    z-index: -1;
+    transform: translateX(-50%) scale(1.05);
+    left: 50%;
+  }
+}
+
+.c-pag__link {
+  --border-color: transparent;
+  --to: var(--primary-base);
+}

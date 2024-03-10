@@ -1,0 +1,54 @@
+/**
+ * Effects - Underline Styles
+ */
+
+%e-underline {
+  --prop: text-decoration-color;
+  --color: var(--from);
+  --duration: 200ms;
+
+  text-decoration: underline;
+  text-decoration-thickness: var(--underline);
+  text-underline-offset: var(--underline-offset);
+  text-decoration-color: var(--color, currentcolor);
+  transition-property: var(--prop);
+  transition-duration: var(--duration);
+  transition-timing-function: var(--easing);
+
+  &:hover,
+  &:active,
+  &:focus,
+  &[data-current="true"] {
+    --color: var(--to);
+  }
+}
+
+.e-underline a[data-rich] {
+  --from: currentcolor;
+  --to: transparent;
+
+  @extend %e-underline;
+}
+
+.e-underline-reverse a[data-rich] {
+  --from: transparent;
+  --to: currentcolor;
+
+  @extend %e-underline;
+}
+
+.e-underline-y a[data-rich] {
+  --to: var(--link-color-sharp);
+  --prop: box-shadow, color;
+  --y: 0;
+
+  @extend %e-underline;
+
+  box-shadow: inset 0 var(--y) 0 0 var(--link-color-fade);
+
+  &:hover,
+  &:active {
+    --y: calc(var(--xs) * -1);
+    --link-color: var(--to);
+  }
+}

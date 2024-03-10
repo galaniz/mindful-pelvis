@@ -1,0 +1,12 @@
+/**
+ * Objects - Back Link Styles
+ */
+
+.o-back-link {
+  background: hsla(var(--foreground-light-hsl), 0.075);
+
+  svg {
+    margin-right: var(--5xs);
+    padding: 0.0625rem;
+  }
+}
