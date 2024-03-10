@@ -5,11 +5,11 @@
 /* Imports */
 
 import type { Feed } from './FeedHtmlTypes'
-import puppeteer from 'puppeteer'
+// import puppeteer from 'puppeteer'
 import { FeedHtml } from './FeedHtml'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
-import { processImages, remoteImages } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
-import { ConfigInsta } from '../../config/configHtmlTypes'
+import { processImages } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
+// import { ConfigInsta } from '../../config/configHtmlTypes'
 
 /**
  * Function - on build output instagram feed as row of clickable images
@@ -22,7 +22,7 @@ const FeedHtmlBuild: Feed = async (args) => {
   /* Attributes */
 
   const {
-    display = 5,
+    // display = 5,
     handle = ''
   } = attributes
 
@@ -38,6 +38,7 @@ const FeedHtmlBuild: Feed = async (args) => {
     try {
       /* Scrape profile page */
 
+      /*
       const link = `https://www.instagram.com/${handle}/`
       const selector = 'article'
       const browser = await puppeteer.launch()
@@ -79,9 +80,11 @@ const FeedHtmlBuild: Feed = async (args) => {
       }
 
       await browser.close()
+      */
 
       /* Download images */
 
+      /*
       const res = await remoteImages(data.map((d, i) => {
         const { src } = d
 
@@ -93,12 +96,16 @@ const FeedHtmlBuild: Feed = async (args) => {
           url: src
         }
       }))
+      */
 
-      const fail = res.length === 0 || res.some(({ status }: { status: string }) => status !== 'fulfilled')
+      // const fail = true // res.length === 0 || res.some(({ status }: { status: string }) => status !== 'fulfilled')
       const fallback = configHtmlVars.instagramFeed
 
-      configHtmlVars.instagramFeed = fail ? fallback : data
-      configHtml.store.files.instagramFeed.data = JSON.stringify(fail ? fallback : data)
+      configHtmlVars.instagramFeed = fallback
+      configHtml.store.files.instagramFeed.data = JSON.stringify(fallback)
+
+      // configHtmlVars.instagramFeed = fail ? fallback : data
+      // configHtml.store.files.instagramFeed.data = JSON.stringify(fail ? fallback : data)
 
       await processImages()
     } catch (error) {
