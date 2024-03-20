@@ -48,7 +48,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
   /* Rich text classes */
 
-  const richTextClasses = 't-rich-text e-underline-y'
+  const richTextClasses = 't-rich-text e-line-y'
 
   /* Nav output */
 
@@ -94,11 +94,11 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
         attr: 'aria-label="Article" data-article',
         headingLevel: 'h2',
         label: 'In This Article',
-        labelClasses: 'c-article__toggle t-m t-weight-bold t-height-snug t-sharp',
+        labelClasses: 'c-article__toggle t-m t-wt-bold t-ht-snug t-sharp',
         iconClasses: 'c-article__icon no-js-none'
       },
       content: `
-        <ul class="t-list-style-none t-s t-height-snug t-link-current b-left e-underline-reverse l-mb-xs l-mb-3xs-all" role="list">
+        <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-rev l-mb-xs l-mb-3xs-all" role="list">
           ${navItemsOutput.join('')}
         </ul>
       `
@@ -143,7 +143,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
         return `
           <li>
-            <a href="${link}" class="l-wd-s l-ht-s b-radius-100-pc b-all b-muted t-sharp l-flex l-justify-center l-align-center e-color e-transition" aria-label="Share on ${type} (opens new window)" target="_blank" rel="noreferrer">
+            <a href="${link}" class="l-wd-s l-ht-s b-radius-full b-all b-muted t-sharp l-flex l-justify-center l-align-center e-color e-trans" aria-label="Share on ${type} (opens new window)" target="_blank" rel="noreferrer">
               ${SocialSvgHtml(type.toLowerCase(), 'l-wd-2xs l-ht-2xs')}
             </a>
           </li>
@@ -152,8 +152,8 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
       socialOutput = `
         <div class="b-top l-pt-s l-mt-s">
-          <h2 class="t-s t-height-snug t-weight-bold l-mb-2xs">Share</h2>
-          <ul class="t-list-style-none l-flex l-flex-wrap l-gm-2xs" role="list">
+          <h2 class="t-s t-ht-snug t-wt-bold l-mb-2xs">Share</h2>
+          <ul class="t-ls-none l-flex l-flex-wrap l-gm-2xs" role="list">
             ${shareItemsOutput.join('')}
           </ul>
         </div>

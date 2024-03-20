@@ -4,12 +4,50 @@
 
 /* Imports */
 
-import type { Feed } from './FeedHtmlTypes'
-// import puppeteer from 'puppeteer'
+import type { Feed, FeedRemoteData, FeedData } from './FeedHtmlTypes'
+import { writeFile } from 'node:fs'
+import { mkdir } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { FeedHtml } from './FeedHtml'
 import { configHtml, configHtmlVars } from '../../config/configHtml'
-import { processImages } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
-// import { ConfigInsta } from '../../config/configHtmlTypes'
+import { processImages, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
+
+/**
+ * Extensions by image mime type
+ *
+ * @private
+ * @type {Object.<string, string>}
+ */
+const _mimeToExt: Record<string, string> = {
+  'image/apng': 'apng',
+  'image/avif': 'avif',
+  'image/bmp': 'bmp',
+  'image/gif': 'gif',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/tiff': 'tif',
+  'image/webp': 'webp'
+}
+
+/**
+ * Function - promisify write function
+ *
+ * @private
+ * @param {string} path
+ * @param {string} data
+ * @return {Promise<void>}
+ */
+const _writeBase64 = async (path: string, data: string): Promise<void> => {
+  return await new Promise((resolve, reject) => {
+    writeFile(path, data, { encoding: 'base64' }, (error) => {
+      if (error !== null && error !== undefined) {
+        reject(error)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
 
 /**
  * Function - on build output instagram feed as row of clickable images
@@ -17,105 +55,89 @@ import { processImages } from '@alanizcreative/static-site-formation/iop/utils/u
  * @type {import('./FeedHtmlTypes').Feed}
  */
 const FeedHtmlBuild: Feed = async (args) => {
-  const { attributes } = args // Skip check as shortcode always passes object
+  /* Store feed data */
 
-  /* Attributes */
+  const feedData: FeedData[] = []
 
-  const {
-    // display = 5,
-    handle = ''
-  } = attributes
+  try {
+    /* Fetch data from Cloudflare KV */
 
-  /* Handle required */
+    const {
+      namespaceId,
+      accountId,
+      token,
+      apiEmail,
+      apiKey
+    } = configHtmlVars.cloudflare
 
-  if (handle === '') {
-    return ''
-  }
+    const emptyCredentials =
+      !isStringStrict(namespaceId) || !isStringStrict(accountId) || !isStringStrict(token) ||
+      !isStringStrict(apiEmail) || !isStringStrict(apiKey)
 
-  /* Fetch and download feed */
-
-  if (configHtml.env.build) {
-    try {
-      /* Scrape profile page */
-
-      /*
-      const link = `https://www.instagram.com/${handle}/`
-      const selector = 'article'
-      const browser = await puppeteer.launch()
-      const page = await browser.newPage()
-
-      let data: ConfigInsta[] = []
-
-      await page.goto(link)
-      await page.setViewport({ width: 1280, height: 1080 })
-      await page.waitForSelector(selector)
-
-      const linksHandle = await page.$(selector)
-
-      if (linksHandle !== null) {
-        data = await linksHandle.$$eval('a', (nodes) => {
-          return nodes.flatMap((node) => {
-            const url = node.href
-            const img = node.querySelector('img')
-            const src = img !== null ? img.src : ''
-            const alt = img !== null ? img.alt : ''
-
-            if (url === '' || src === '') {
-              return []
-            }
-
-            return [{
-              url,
-              src,
-              alt
-            }]
-          })
-        })
-
-        if (data.length > display) {
-          data = data.splice(0, display)
-        }
-
-        await linksHandle.dispose()
-      }
-
-      await browser.close()
-      */
-
-      /* Download images */
-
-      /*
-      const res = await remoteImages(data.map((d, i) => {
-        const { src } = d
-
-        const localSrc = `instagram-feed/post-${i + 1}`
-        data[i].src = localSrc
-
-        return {
-          path: localSrc,
-          url: src
-        }
-      }))
-      */
-
-      // const fail = true // res.length === 0 || res.some(({ status }: { status: string }) => status !== 'fulfilled')
-      const fallback = configHtmlVars.instagramFeed
-
-      configHtmlVars.instagramFeed = fallback
-      configHtml.store.files.instagramFeed.data = JSON.stringify(fallback)
-
-      // configHtmlVars.instagramFeed = fail ? fallback : data
-      // configHtml.store.files.instagramFeed.data = JSON.stringify(fail ? fallback : data)
-
-      await processImages()
-    } catch (error) {
-      console.error(configHtml.console.red, '[MP] Error fetching instagram feed: ', error)
+    if (emptyCredentials) {
+      throw new Error('No Cloudflare credentials')
     }
+
+    const cfUrl =
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/instagramFeed`
+
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'X-Auth-Email': apiEmail,
+        'X-Auth-Key': apiKey,
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await fetch(cfUrl, options)
+
+    if (!res.ok) {
+      throw new Error('Cloudflare fetch failed')
+    }
+
+    const data: FeedRemoteData[] = await res.json()
+
+    /* Add instagram folder to img folder */
+
+    const inputDir = configHtml.static.image.inputDir
+    const folder = 'instagram-feed'
+
+    await mkdir(resolve(`${inputDir}/${folder}`), { recursive: true })
+
+    /* Add base64 images to instagram folder and data to store */
+
+    const feedData: FeedData[] = []
+
+    await Promise.allSettled(
+      data.map(async (d, i) => {
+        const { url, alt, base64 } = d
+        const { mime, data } = base64
+
+        const ext = _mimeToExt[mime]
+        const path = `${folder}/post-${i + 1}`
+
+        feedData[i] = {
+          url,
+          alt,
+          src: path
+        }
+
+        return await _writeBase64(`${inputDir}/${path}.${ext}`, data)
+      })
+    )
+
+    configHtml.store.files.instagramFeed.data = JSON.stringify(feedData)
+
+    await processImages()
+  } catch (error) {
+    console.error(configHtml.console.red, '[MP] Error fetching instagram feed data: ', error)
   }
 
   /* Output */
 
-  return await FeedHtml(args)
+  return await FeedHtml(args, feedData)
 }
 
 /* Exports */

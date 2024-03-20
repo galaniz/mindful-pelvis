@@ -29,7 +29,7 @@ const CollapsibleHtml: Collapsible = async (args) => {
     label = '',
     labelClasses = 'l-my-2xs',
     headingLevel = 'h3',
-    headingClasses = 't-xl t-weight-bold',
+    headingClasses = 't-xl t-wt-bold',
     iconClasses = 'l-ht-xs l-wd-xs',
     expanded = false
   } = attributes
@@ -66,7 +66,7 @@ const CollapsibleHtml: Collapsible = async (args) => {
 
   /* Button attributes */
 
-  let buttonClasses = 'o-collapsible__toggle l-wd-100-pc l-flex l-justify-between l-align-center'
+  let buttonClasses = 'o-collapsible__toggle l-wd-full l-flex l-justify-between l-align-center'
 
   if (labelClasses !== '') {
     buttonClasses += ` ${labelClasses}`
@@ -81,12 +81,12 @@ const CollapsibleHtml: Collapsible = async (args) => {
       <${headingLevel} class="l-m-0${headingClasses !== '' ? ` ${headingClasses}` : ''}">
         <button ${buttonAttrs}>
           <span class="l-flex l-pr-2xs">${label}</span>
-          <span class="l-flex-shrink-0 l-flex l-justify-center l-align-center b-all b-radius-100-pc b-muted${iconClasses !== '' ? ` ${iconClasses}` : ''}">
-            ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-transition')}
+          <span class="l-flex l-shrink-0 l-justify-center l-align-center b-all b-radius-full b-muted${iconClasses !== '' ? ` ${iconClasses}` : ''}">
+            ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-trans')}
           </span>
         </button>
       </${headingLevel}>
-      <div id="${id}" class="o-collapsible__main outline-snug e-transition no-js-collapsible" data-collapsible-main>
+      <div id="${id}" class="o-collapsible__main outline-snug e-trans no-js-collapsible" data-collapsible-main>
         ${content}
       </div>
     </${tag}>

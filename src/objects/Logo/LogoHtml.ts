@@ -52,7 +52,7 @@ const LogoHtml = (args: LogoArgs = {}): string => {
 
   return `
     <${tag} class="${classes}"${link ? ` href="${getPermalink()}"` : ''}>
-      <span class="a-visually-hidden">${configHtml.title}${link ? ' home' : ''}</span>
+      <span class="a-hide-vis">${configHtml.title}${link ? ' home' : ''}</span>
       ${LogoSvgHtml(`o-logo${size !== '' ? `-${size}` : ''}`, theme)}
     </${tag}>
   `

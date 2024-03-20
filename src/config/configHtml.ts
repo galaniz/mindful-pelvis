@@ -7,6 +7,7 @@
 import type { ConfigVars } from './configHtmlTypes'
 import type { Config } from '@alanizcreative/static-site-formation/iop/config/configTypes'
 import { setConfig } from '@alanizcreative/static-site-formation/iop/config/config'
+import { isString } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { LayoutHtml } from '../components/Layout/LayoutHtml'
 import { NavigationHtml, NavigationsHtml } from '../components/Navigations/NavigationsHtml'
 import { HttpErrorHtml } from '../render/HttpError/HttpErrorHtml'
@@ -30,33 +31,15 @@ import { TabsHtml } from '../objects/Tabs/TabsHtml'
  * @type {ConfigVars}
  */
 const configHtmlVars: ConfigVars = {
-  instagramFeed: [
-    {
-      url: 'https://www.instagram.com/themindfulpelvis/reel/CpizeIUp889/',
-      src: 'instagram-feed-fallback/post-1',
-      alt: "International Women's Day: model of vulva on sunny window sill and de-stigmatizing vulvas."
-    },
-    {
-      url: 'https://www.instagram.com/themindfulpelvis/reel/CpTj_ujM34A/',
-      src: 'instagram-feed-fallback/post-2',
-      alt: 'Endometriosis awareness month: Toronto park on wintry day sharing my endo story and the latest research about endometriosis.'
-    },
-    {
-      url: 'https://www.instagram.com/themindfulpelvis/p/CpDDaUHu3rk/',
-      src: 'instagram-feed-fallback/post-3',
-      alt: "Research dissemination: cesarean sections don't protect against pelvic floor dysfunction."
-    },
-    {
-      url: 'https://www.instagram.com/themindfulpelvis/reel/Co49vG0rQX4/',
-      src: 'instagram-feed-fallback/post-4',
-      alt: 'Pelvic wand: tool to and prolong in-clinic treatments at home for patients with bladder urgency and/or pelvic pain and expectant mamas for perineal prep.'
-    },
-    {
-      url: 'https://www.instagram.com/themindfulpelvis/reel/Conr8HWrtOF/',
-      src: 'instagram-feed-fallback/post-5',
-      alt: 'Desk with laptop, books, keyboard and cup of coffee to show a glimpse into an academic day as a PhD student.'
-    }
-  ],
+  email: 'hello@themindfulpelvis.ca',
+  instagram: 'themindfulpelvis',
+  cloudflare: {
+    namespaceId: '',
+    accountId: '',
+    token: '',
+    apiEmail: '',
+    apiKey: ''
+  },
   theme: {
     'primary-base': '#3c6e89',
     'secondary-base': '#9e5330',
@@ -64,7 +47,6 @@ const configHtmlVars: ConfigVars = {
     'foreground-base': '#333f48',
     'background-base': '#f4eae0'
   },
-  email: 'hello@themindfulpelvis.ca',
   head: '',
   svg: {},
   css: {
@@ -133,7 +115,7 @@ const configHtmlVars: ConfigVars = {
       '1/4': '1-4',
       '1/5': '1-5',
       '1/6': '1-6',
-      '100%': '100-pc',
+      '100%': 'full',
       '45px': 's',
       '60px': 'm',
       '75px': 'l',
@@ -216,7 +198,7 @@ const configHtmlVars: ConfigVars = {
     },
     borderRadius: {
       None: '',
-      '100%': '100-pc'
+      '100%': 'full'
     },
     content: {
       text: {
@@ -378,6 +360,29 @@ const configHtml: Config = setConfig({
     asset: AssetHtml,
     card: CardHtml
   },
+  filter: async (config, env) => {
+    configHtmlVars.cloudflare = {
+      namespaceId: isString(env.CF_KV_NAMESPACE) ? env.CF_KV_NAMESPACE : '',
+      accountId: isString(env.CF_ACCOUNT_ID) ? env.CF_ACCOUNT_ID : '',
+      token: isString(env.CF_TOKEN) ? env.CF_TOKEN : '',
+      apiEmail: isString(env.CF_API_EMAIL) ? env.CF_API_EMAIL : '',
+      apiKey: isString(env.CF_API_KEY) ? env.CF_API_KEY : ''
+    }
+
+    config.env.cache = env.USE_11TY_CACHE === 'true'
+    config.env.dev = env.ENVIRONMENT === 'dev'
+    config.env.prod = env.ENVIRONMENT === 'production'
+    config.env.dir = isString(env.ELEVENTY_ROOT) ? env.ELEVENTY_ROOT : ''
+    config.cms.name = 'contentful'
+    config.cms.space = isString(env.CTFL_SPACE_ID) ? env.CTFL_SPACE_ID : ''
+    config.cms.previewAccessToken = isString(env.CTFL_CPA_TOKEN) ? env.CTFL_CPA_TOKEN : ''
+    config.cms.previewHost = 'preview.contentful.com'
+    config.cms.deliveryAccessToken = isString(env.CTFL_CDA_TOKEN) ? env.CTFL_CDA_TOKEN : ''
+    config.cms.deliveryHost = 'cdn.contentful.com'
+    config.apiKeys.smtp2go = isString(env.SMPT2GO_API_KEY) ? env.SMPT2GO_API_KEY : ''
+
+    return config
+  },
   filters: {
     renderArchiveName: async (archive = '') => {
       if (archive !== '') {
@@ -397,7 +402,6 @@ const configHtml: Config = setConfig({
       callback: FeedHtml,
       attributeTypes: {
         display: 'number',
-        handle: 'string',
         'show-handle': 'boolean'
       }
     },
@@ -439,8 +443,8 @@ const configHtml: Config = setConfig({
 })
 
 configHtml.store.files.instagramFeed = {
-  data: '',
-  name: 'instagram-feed.json'
+  name: 'instagram-feed.json',
+  data: ''
 }
 
 /* Exports */

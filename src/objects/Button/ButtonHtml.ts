@@ -90,7 +90,7 @@ const ButtonHtml = (props: ButtonProps): string => {
   }
 
   if (type === 'secondary') {
-    linkClasses += ' o-button-secondary b-all b-current e-transition'
+    linkClasses += ' o-button-secondary b-all b-current e-trans'
 
     if (theme === 'primary') {
       linkClasses += ' t-primary-base'

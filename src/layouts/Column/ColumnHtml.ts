@@ -60,7 +60,7 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
   /* Flex */
 
   if (ord !== '' || jst || aln || grow) {
-    classesArr.push('l-flex l-flex-column')
+    classesArr.push('l-flex l-flex-col')
   }
 
   /* Grow */

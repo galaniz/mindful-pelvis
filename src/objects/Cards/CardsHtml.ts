@@ -89,7 +89,7 @@ const _Card = async ({
 
   const imageMinRes = await ImageMinimalHtml({
     image: heroImageMinimal,
-    containerClasses: 'l-wd-100-pc l-z-index--1 l-mt-auto',
+    containerClasses: 'l-wd-full l-z-index--1 l-mt-auto',
     imageContainerClasses: 'l-mw-4xl l-mr-auto l-ml-auto',
     background,
     parents: [
@@ -224,7 +224,7 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
 
   /* Classes */
 
-  let classes = 'l-relative l-z-index-1 l-flex l-flex-column l-flex-grow-1 e-transition e-shift-up'
+  let classes = 'l-relative l-z-index-1 l-flex l-flex-col l-flex-grow-1 e-trans e-shift-up'
 
   /* Gap */
 
@@ -244,7 +244,7 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
     classes += ` bg-${background} l-px-xs l-py-s l-px-s-l`
 
     if (isLight) {
-      classes += ' b-bottom b-theme b-width-thick'
+      classes += ' b-bottom b-theme b-wd-thick'
       attr = ` style="--theme:var(--${shade})"`
     } else {
       classes += ' t-light'

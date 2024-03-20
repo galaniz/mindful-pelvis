@@ -48,7 +48,7 @@ const FooterHtml: NavigationHtmlFunc = (navigations) => { // Skip check as Navig
   return `
     <footer class="bg-foreground-base t-light l-mt-auto">
       <div class="l-container l-pt-m l-pb-m l-pt-xl-m l-pb-xl-m">
-        <div class="l-flex l-flex-column l-flex-row-s l-flex-wrap l-justify-between l-gm-s l-gm-m-s">
+        <div class="l-flex l-flex-col l-flex-row-s l-flex-wrap l-justify-between l-gm-s l-gm-m-s">
           <div>
             ${LogoHtml({ size: 's', link: true, theme: 'light' })}
           </div>

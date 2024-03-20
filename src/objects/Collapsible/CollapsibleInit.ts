@@ -30,8 +30,6 @@ const init = (): void => {
   const { fontSizeMultiplier } = config
   const articleBreakpoint = 1200 * fontSizeMultiplier
 
-  console.log('BK', articleBreakpoint)
-
   /* Instantiate */
 
   if (collapsibles.length > 0) {

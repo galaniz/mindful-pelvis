@@ -32,7 +32,7 @@ const ComingSoonHtml = async (): Promise<string> => {
         paddingTopLarge: '120px',
         paddingBottom: '80px',
         paddingBottomLarge: '120px',
-        classes: 'l-mh-100-vh l-flex l-align-center'
+        classes: 'l-mh-full-vh l-flex l-align-center'
       }
     }),
     content: await ContentHtml({

@@ -5,12 +5,12 @@
 /* Imports */
 
 import type { Feed } from './FeedHtmlTypes'
-import type { ConfigInsta } from '../../config/configHtmlTypes'
 import type { ImagesStore } from '@alanizcreative/static-site-formation/iop/utils/processImages/processImagesTypes'
 import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
 import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
 import { getJsonFile, getPath } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { SocialSvgHtml } from '../../svg/Social/SocialHtml'
+import { configHtmlVars } from '../../config/configHtml'
 import { ImageHtml } from '../Image/ImageHtml'
 
 /**
@@ -18,23 +18,16 @@ import { ImageHtml } from '../Image/ImageHtml'
  *
  * @type {import('./FeedHtmlTypes').Feed}
  */
-const FeedHtml: Feed = async (args) => {
+const FeedHtml: Feed = async (args, data) => {
   const { attributes } = args // Skip check as shortcode always passes object
 
   /* Attributes */
 
   const {
-    handle = '',
     'show-handle': showHandle = false
   } = attributes
 
-  /* Handle required */
-
-  if (handle === '') {
-    return ''
-  }
-
-  /* Images... */
+  /* Images data */
 
   const imagesData: ImagesStore | undefined = await getJsonFile(getPath('image', 'data'))
 
@@ -49,6 +42,7 @@ const FeedHtml: Feed = async (args) => {
   /* Show handle link */
 
   if (showHandle) {
+    const handle = configHtmlVars.instagram
     const link = `https://www.instagram.com/${handle}/`
 
     const column = await Column({
@@ -61,7 +55,7 @@ const FeedHtml: Feed = async (args) => {
     columns.push(`
       ${column.start}
         <a href="${link}" class="l-inline-flex l-align-center t-link-current" rel="noreferrer">
-          <span class="l-flex l-ht-s l-wd-s bg-foreground-base t-light b-radius-100-pc l-align-center l-justify-center l-flex-shrink-0">
+          <span class="l-flex l-ht-s l-wd-s bg-foreground-base t-light b-radius-full l-align-center l-justify-center l-shrink-0">
             ${SocialSvgHtml('instagram', 'l-ht-2xs l-wd-2xs')}
           </span>
           <span class="t l-pl-2xs">Follow @${handle}</span>
@@ -72,18 +66,17 @@ const FeedHtml: Feed = async (args) => {
 
   /* Feed posts */
 
-  const feedData: ConfigInsta[] | undefined = await getJsonFile(getPath('instagramFeed', 'store'))
+  data = data === undefined ? await getJsonFile(getPath('instagramFeed', 'store')) : data
 
-  if (feedData === undefined) {
+  if (data === undefined) {
     return ''
   }
 
-  const feedLen = feedData.length
-  const widthLarge = `1/${feedLen}`
+  const dataLen = data.length
+  const widthLarge = `1/${dataLen}`
 
-  for (let i = 0; i < feedLen; i += 1) {
-    const post = feedData[i]
-    const { url, src } = post
+  for (let i = 0; i < dataLen; i += 1) {
+    const { url, src } = data[i]
 
     const column = await Column({
       args: {

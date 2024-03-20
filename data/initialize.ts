@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import type { RenderReturn } from '@alanizcreative/static-site-formation/iop/render/RenderTypes'
+import type { RenderReturn } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 import * as sass from 'sass'
 import postcss from 'postcss'
 import purgecss from '@fullhuman/postcss-purgecss'
@@ -14,7 +14,7 @@ import { sassPlugin } from 'esbuild-sass-plugin'
 // @ts-expect-error
 import { AssetCache } from '@11ty/eleventy-fetch'
 import safeJsonStringify from 'safe-json-stringify'
-import { Render } from '@alanizcreative/static-site-formation/iop/render/Render'
+import { render } from '@alanizcreative/static-site-formation/iop/render/render'
 import {
   getAllContentfulData,
   writeStoreFiles,
@@ -24,7 +24,8 @@ import {
   isObject,
   setFilters,
   setActions,
-  setShortcodes
+  setShortcodes,
+  setConfigFilter
 } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
 import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
@@ -33,33 +34,30 @@ import { ComingSoonHtml } from '../src/render/ComingSoon/ComingSoonHtml'
 
 /* Eleventy init */
 
-interface InitArgs {
-  eleventy?: {
-    env?: {
-      runMode?: string
-    }
-  }
-}
-
-module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
+module.exports = async (args: any): Promise<RenderReturn[]> => {
   try {
-    /* Build env */
+    /* Set config env */
+
+    if (process !== undefined) {
+      await setConfigFilter(process.env)
+    }
 
     const mode: string = isStringStrict(args?.eleventy?.env?.runMode) ? args.eleventy.env.runMode : 'serve'
+    const isBuild = mode === 'build'
 
-    if (mode === 'build') {
+    if (isBuild) {
       configHtml.env.build = true
     }
 
     /* Reset style and script paths */
 
-    configHtml.actions.renderStart = async (): Promise<void> => {
+    configHtml.actions.renderStart = async () => {
       configHtmlVars.css.cache = ''
     }
 
     /* Build styles and scripts */
 
-    configHtml.actions.renderEnd = async (): Promise<void> => {
+    configHtml.actions.renderEnd = async () => {
       const entryPoints = {
         ...configHtml.scripts.build,
         ...configHtml.styles.build
@@ -105,7 +103,7 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
 
     /* Inline styles */
 
-    configHtml.filters.renderItem = async (output: string): Promise<string> => {
+    configHtml.filters.renderItem = async (output) => {
       if (configHtmlVars.css.in === '' || configHtmlVars.css.head === '') {
         return output
       }
@@ -164,6 +162,8 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
       return output
     }
 
+    /* Coming soon */
+
     if (configHtml.env.prod) {
       return [{
         slug: '/',
@@ -173,7 +173,7 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
 
     /* Cache data */
 
-    if (configHtml.env.cache) {
+    if (configHtml.env.cache && !isBuild) {
       configHtml.filters.cacheData = async (cacheData, { key, type = 'get' }) => {
         const cacheInstance: {
           isCacheValid: Function
@@ -195,7 +195,9 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
 
     /* Feed build */
 
-    configHtml.shortcodes['instagram-feed'].callback = FeedHtmlBuild
+    if (isBuild) {
+      configHtml.shortcodes['instagram-feed'].callback = FeedHtmlBuild
+    }
 
     /* Render output */
 
@@ -204,20 +206,11 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
     setShortcodes(configHtml.shortcodes)
 
     const allData = await getAllContentfulData()
-
-    if (allData !== undefined) {
-      allData.content.page.push({
-        id: '404',
-        slug: '/404/',
-        output: await HttpErrorHtml(404)
-      })
-    }
-
-    const output = await Render({ allData })
+    const output = await render({ allData })
 
     /* Data json, serverless and redirect files */
 
-    if (configHtml.env.build) {
+    if (isBuild) {
       await writeStoreFiles()
       await writeRedirectsFile()
       await writeServerlessFiles({
@@ -229,6 +222,13 @@ module.exports = async (args: InitArgs): Promise<RenderReturn[]> => {
     /* Output */
 
     if (Array.isArray(output)) {
+      if (isBuild) {
+        output.push({
+          slug: '404.html',
+          output: await HttpErrorHtml(404)
+        })
+      }
+
       return output
     }
 

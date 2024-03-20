@@ -98,7 +98,7 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
   let imageOutput = ''
 
   if (image !== undefined) {
-    const imageClasses = ['l-absolute l-top-0 l-left-0 l-wd-100-pc l-ht-100-pc l-object-cover']
+    const imageClasses = ['l-absolute l-top-0 l-left-0 l-wd-full l-ht-full l-object-cover']
 
     let imageMaxWidth = maxWidth
 
