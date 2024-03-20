@@ -35,7 +35,7 @@ const PaginationHtml = (args: PaginationArgs): string => {
 
   const commonClasses = 'l-wd-2xs l-ht-xs l-flex l-align-center l-justify-center t-xl'
   const spanClasses = 'l-flex l-align-center'
-  const linkClasses = `c-pag__link b-bottom b-width-thick b-current e-transition e-color ${commonClasses} js-pt-link`
+  const linkClasses = `c-pag__link b-bottom b-wd-thick b-current e-trans e-color ${commonClasses} js-pt-link`
 
   /* Output and data */
 
@@ -50,7 +50,7 @@ const PaginationHtml = (args: PaginationArgs): string => {
     prev: CaretSvgHtml('left', 'l-flex l-wd-2xs l-ht-2xs'),
     next: CaretSvgHtml('right', 'l-flex l-wd-2xs l-ht-2xs'),
     args: {
-      listClass: 't-list-style-none l-flex l-justify-center l-gm-2xs l-gm-xs-s',
+      listClass: 't-ls-none l-flex l-justify-center l-gm-2xs l-gm-xs-s',
       listAttr: 'role="list"',
       itemClass: 'l-flex l-relative',
       itemMaxWidth: true,

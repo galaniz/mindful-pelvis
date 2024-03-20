@@ -328,7 +328,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
         <meta name="theme-color" content="${theme['background-base']}">
         <meta name="format-detection" content="telephone=no">
       </head>
-      <body class="${ns} no-js l-flex l-flex-column">
+      <body class="${ns} no-js l-flex l-flex-col">
         ${spritesOutput}
         ${headerOutput}
         <main id="main">

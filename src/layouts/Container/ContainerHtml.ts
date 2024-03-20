@@ -71,7 +71,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   /* List check */
 
   if (tag === 'ul' || tag === 'ol') {
-    classesArr.push('t-list-style-none')
+    classesArr.push('t-ls-none')
     attrs.push('role="list"')
   }
 
@@ -80,7 +80,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   let layoutClasses = ''
 
   if (layout === 'column' && (isStringStrict(justify) || isStringStrict(align))) {
-    layoutClasses = 'l-flex l-flex-column'
+    layoutClasses = 'l-flex l-flex-col'
   }
 
   if (layout === 'row') {

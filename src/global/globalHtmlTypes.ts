@@ -6,12 +6,12 @@
 
 import type { InternalLinkBase } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 import type { PropFile } from '@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes'
-import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/RenderTypes'
+import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
 
 /**
  * @typedef Item
- * @type {import('@alanizcreative/static-site-formation/iop/render/RenderTypes').RenderItem}
+ * @type {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderItem}
  * @prop {boolean} [pagination]
  * @prop {string} [heroTitle]
  * @prop {string} [heroText]

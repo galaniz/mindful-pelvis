@@ -94,7 +94,7 @@ $gaps: (
 
   /* Fonts */
 
-  $font-families: (
+  $fonts: (
     "primary": (
       "Karla",
       Helvetica,
@@ -261,9 +261,9 @@ $gaps: (
   ),
 
   $border-radius: (
-    "s": 10px,
-    "m": 15px,
-    "l": 45px,
+    "s": "var(--4xs)",
+    "m": "var(--3xs)",
+    "l": "var(--s)",
   ),
 
   /* Outline */

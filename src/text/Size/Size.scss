@@ -4,7 +4,7 @@
 
 /* Imports */
 
-@use "@alanizcreative/formation/lib/utils" as util;
+@use "@alanizcreative/formation/lib/utils/utils" as util;
 
 /* Styles */
 
@@ -21,7 +21,7 @@ h6,
 .t-h4,
 .t-h5,
 .t-h6 {
-  font-family: var(--font-family-secondary);
+  font-family: var(--font-secondary);
   font-weight: var(--font-weight-normal);
   color: var(--sharp-color);
 }
@@ -65,7 +65,7 @@ li[data-rich],
 .t-m,
 .t-s,
 .t-xs {
-  font-family: var(--font-family-primary);
+  font-family: var(--font-primary);
   font-weight: var(--font-weight-normal);
 }
 

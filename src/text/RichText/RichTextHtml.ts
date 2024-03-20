@@ -104,7 +104,7 @@ const RichTextHtml: RichTextHtmlFilters = {
 
       output = `
         <div class="l-overflow-hidden">
-          <div class="l-overflow-x-auto l-wd-100-pc t-rich-table o-overflow">
+          <div class="l-overflow-x-auto l-wd-full t-rich-table o-overflow">
             ${output}
           </div>
         </div>

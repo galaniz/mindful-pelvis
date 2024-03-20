@@ -6,7 +6,7 @@
 
 @forward "../../config/config";
 @use "@alanizcreative/formation/lib/config/config" as con;
-@use "@alanizcreative/formation/lib/utils" as util;
+@use "@alanizcreative/formation/lib/utils/utils" as util;
 
 /* Styles */
 
@@ -17,7 +17,7 @@
   --bg: var(--foreground-dark);
   --scale: 0;
 
-  font-family: var(--font-family-primary);
+  font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-snug);
   padding: var(--padding);

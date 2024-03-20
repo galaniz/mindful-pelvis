@@ -82,7 +82,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
         image,
         lazy: false,
         maxWidth: 1600,
-        classes: overlap ? 'l-ht-100-pc' : 'c-hero-min',
+        classes: overlap ? 'l-ht-full' : 'c-hero-min',
         aspectRatio: overlap ? 'None' : 'Skip'
       }
     })
@@ -154,13 +154,13 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
       const modDate = new Date(dateMod)
       const formattedDate = modDate.toLocaleString('en', dateArgs)
 
-      dateOutput += '<span class="t-weight-bold l-none l-block-s" aria-hidden="true">&middot;</span>'
+      dateOutput += '<span class="t-wt-bold l-none l-block-s" aria-hidden="true">&middot;</span>'
       dateOutput += `<span>Updated <time class="l-inline-block" datetime="${dateMod}">${formattedDate}</time></span>`
     }
 
     if (dateOutput !== '') {
       textOutput += `
-        <p class="t-s t-height-snug l-pt-xs l-pt-s-m l-flex l-flex-column l-flex-row-s l-justify-center l-gm-4xs">
+        <p class="t-s t-ht-snug l-pt-xs l-pt-s-m l-flex l-flex-col l-flex-row-s l-justify-center l-gm-4xs">
           ${dateOutput}
         </p>`
     }
@@ -177,8 +177,8 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
 
   if (overlap) {
     return `
-      <section class="c-hero-overlap l-container l-flex l-flex-column l-flex-row-l l-pb-m-l">
-        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-flex-shrink-0 l-relative l-z-index-1 l-wd-4-5-m l-wd-3-5-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
+      <section class="c-hero-overlap l-container l-flex l-flex-col l-flex-row-l l-pb-m-l">
+        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-shrink-0 l-relative l-z-index-1 l-wd-4-5-m l-wd-3-5-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
           ${textOutput}
         </div>
         <div class="c-hero-overlap__media l-wd-1-1 l-order-first l-relative l-overflow-hidden">

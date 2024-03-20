@@ -12,28 +12,28 @@
 
 /* Base */
 
-@use "../base";
+@use "../base/base";
 
 /* A11y */
 
-@use "@alanizcreative/formation/lib/a11y";
+@use "@alanizcreative/formation/lib/a11y/a11y";
 
 /* Backgrounds */
 
-@use "../backgrounds";
+@use "../backgrounds/backgrounds";
 
 /* Text */
 
-@use "../text";
+@use "../text/text";
 
 /* Layouts */
 
-@use "../layouts";
+@use "../layouts/layouts";
 
 /* Borders */
 
-@use "@alanizcreative/formation/lib/borders";
+@use "@alanizcreative/formation/lib/borders/borders";
 
 /* Effects */
 
-@use "../effects";
+@use "../effects/effects";

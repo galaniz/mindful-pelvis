@@ -11,15 +11,19 @@ import type { GenericStrings } from '@alanizcreative/static-site-formation/iop/g
  */
 
 /**
- * @typedef {object} ConfigInsta
- * @prop {string} url
- * @prop {string} src
- * @prop {string} alt
+ * @typedef {object} ConfigCloudflare
+ * @prop {string} namespaceId
+ * @prop {string} accountId
+ * @prop {string} token
+ * @prop {string} apiEmail
+ * @prop {string} apiKey
  */
-export interface ConfigInsta {
-  url: string
-  src: string
-  alt: string
+export interface ConfigCloudflare {
+  namespaceId: string
+  accountId: string
+  token: string
+  apiEmail: string
+  apiKey: string
 }
 
 /**
@@ -96,9 +100,10 @@ export interface ConfigOptions {
 
 /**
  * @typedef {object} ConfigVars
- * @prop {ConfigInsta[]} instagramFeed
- * @prop {GenericStrings} theme
  * @prop {string} email
+ * @prop {string} instagram
+ * @prop {ConfigCloudflare} cloudflare
+ * @prop {GenericStrings} theme
  * @prop {string} head
  * @prop {Object.<string, ConfigSvg>} svg
  * @prop {object} css
@@ -115,9 +120,10 @@ export interface ConfigOptions {
  * @prop {ConfigOptions} options
  */
 export interface ConfigVars {
-  instagramFeed: ConfigInsta[]
-  theme: GenericStrings
   email: string
+  instagram: string
+  cloudflare: ConfigCloudflare
+  theme: GenericStrings
   head: string
   svg: {
     [key: string]: ConfigSvg

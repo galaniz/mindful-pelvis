@@ -95,7 +95,7 @@ const TabsHtml: Tabs = async (args) => {
 
   return `
     <div class="js-tabs">
-      <ul class="t-list-style-none t-m t-height-snug t-weight-bold l-flex b-bottom l-mb-xs l-mb-s-m" role="tablist">
+      <ul class="t-ls-none t-m t-ht-snug t-wt-bold l-flex b-bottom l-mb-xs l-mb-s-m" role="tablist">
         ${list.join('')}
       </ul>
       ${panels.join('')}

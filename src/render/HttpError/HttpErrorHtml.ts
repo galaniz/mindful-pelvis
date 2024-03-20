@@ -35,7 +35,7 @@ const HttpErrorHtml = async (type: number = 404): Promise<string> => {
   const title: string = text[type].metaTitle
   const heroText: string = text[type].heroText
   const slug = `${type}`
-  const id = 'http-error'
+  const id = `http-error-${type}`
 
   /* Navigations */
 

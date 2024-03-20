@@ -85,7 +85,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
   const linkClass = 'c-nav__link'
   const itemClass = 'c-nav__item'
   const listAttr = 'role="list"'
-  const listClass = 'c-nav__list t-list-style-none t-link-current l-flex'
+  const listClass = 'c-nav__list t-ls-none t-link-current l-flex'
   const listClassZero = `${listClass} l-align-center l-gm-xs l-gm-s-s l-overflow-x-auto l-overflow-y-hidden`
 
   let listType = 'min'
@@ -113,7 +113,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
         internalLinkClass: 'js-pt-link',
         filterBeforeList: ({ args, depth }) => {
           if (depth > 0) {
-            args.listClass = `${listClass} o-collapsible__main outline-snug e-underline-reverse e-transition l-flex-column no-js-none`
+            args.listClass = `${listClass} o-collapsible__main outline-snug e-line-rev e-trans l-flex-col no-js-none`
             args.listAttr = `${listAttr} data-list="${listType}" id="${collapsibleId}"`
           } else {
             args.listAttr = listAttr
@@ -129,14 +129,14 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
 
           if (depth === 0) {
             newLinkClass += ' t-r l-inline-flex l-before l-relative l-my-3xs'
-            newItemClass += ' e-transition'
+            newItemClass += ' e-trans'
 
             if (index === 0) {
               output.html += '<li role="presentation" class="c-nav__width no-js-none l-p-0 l-relative l-before"></li>'
             }
           } else {
             newLinkAttr = 'data-rich'
-            newLinkClass += ' t-s t-height-snug'
+            newLinkClass += ' t-s t-ht-snug'
 
             if (listType === 'cta') {
               newItemClass += ' l-py-3xs l-px-2xs b-top'
@@ -146,13 +146,13 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
           }
 
           if (_isButton(item, depth)) {
-            newLinkClass = 'c-nav__cta outline-inset t-weight-bold t-height-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-wd-1-1'
+            newLinkClass = 'c-nav__cta outline-inset t-wt-bold t-ht-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-wd-1-1'
           }
 
           if (_isButtonDropdown(item, depth)) {
             collapsibleId = uuid()
             newLinkAttr = `aria-expanded="false" aria-controls="${collapsibleId}"`
-            newLinkClass += ' o-collapsible__toggle e-transition'
+            newLinkClass += ' o-collapsible__toggle e-trans'
             newListType = 'cta'
             newItemAttr.push('data-cta')
           }
@@ -220,7 +220,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
 
             output.html += `
                 <button class="o-collapsible__toggle t-current l-pl-4xs l-py-5xs no-js-none" type="button" aria-controls="${collapsibleId}" aria-expanded="false" aria-label="${title} submenu">
-                  ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-transition')}
+                  ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-trans')}
                 </button>
               </div>
             `
@@ -245,7 +245,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
           if (_isButtonDropdown(item, depth)) {
             output.html += `
               </span>
-              ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-transition no-js-none')}
+              ${CaretSvgHtml('down', 'l-flex l-wd-3xs l-ht-3xs e-trans no-js-none')}
             `
           }
         }
@@ -254,7 +254,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
     footer: nav.getOutput(
       'footer',
       {
-        listClass: 'l-flex l-flex-column l-gm-3xs t-list-style-none e-underline-reverse',
+        listClass: 'l-flex l-flex-col l-gm-3xs t-ls-none e-line-rev',
         listAttr: 'role="list"',
         linkClass: 't-r',
         internalLinkClass: 'js-pt-link',
@@ -265,11 +265,11 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
     social: nav.getOutput(
       'social',
       {
-        listClass: 'l-flex l-flex-wrap l-gm-2xs t-list-style-none',
+        listClass: 'l-flex l-flex-wrap l-gm-2xs t-ls-none',
         listAttr: 'role="list"',
-        linkClass: 'l-flex l-align-center l-justify-center l-relative l-wd-s l-ht-s b-radius-100-pc b-all e-color e-transition',
+        linkClass: 'l-flex l-align-center l-justify-center l-relative l-wd-s l-ht-s b-radius-full b-all e-color e-trans',
         filterBeforeLinkText: ({ output }) => {
-          output.html += '<span class="a-visually-hidden">'
+          output.html += '<span class="a-hide-vis">'
         },
         filterAfterLinkText: ({ item, output }) => {
           const { title = '' } = item
