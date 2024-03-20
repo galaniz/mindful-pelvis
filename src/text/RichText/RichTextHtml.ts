@@ -134,9 +134,9 @@ const RichTextHtml: RichTextHtmlFilters = {
         embed = false
       } = cardArgs
 
-      if (!embed) {
-        const cardLink = getLink(internalLink, externalLink)
+      const cardLink = getLink(internalLink, externalLink)
 
+      if (!embed && cardLink !== '') {
         output = `
           <a class="l-before" href="${cardLink}">
             ${output}
