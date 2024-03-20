@@ -85,6 +85,7 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
 
   if (layout === 'row') {
     layoutClasses = 'l-flex l-flex-wrap'
+    nest = true
   }
 
   /* Gap */

@@ -24,6 +24,7 @@ import { FeedHtml } from '../objects/Feed/FeedHtml'
 import { FauxHeadingHtml } from '../text/FauxHeading/FauxHeadingHtml'
 import { ColumnsHtml as TextColumnsHtml } from '../text/Columns/ColumnsHtml'
 import { TabsHtml } from '../objects/Tabs/TabsHtml'
+import { SlotHtml } from '../text/Slot/SlotHtml'
 
 /**
  * Flexible vars object in main config
@@ -426,6 +427,13 @@ const configHtml: Config = setConfig({
           title: 'string',
           selected: 'boolean'
         }
+      }
+    },
+    slot: {
+      callback: SlotHtml,
+      attributeTypes: {
+        type: 'string',
+        size: 'string'
       }
     }
   },
