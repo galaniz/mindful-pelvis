@@ -99,8 +99,6 @@ const FeedHtmlBuild: Feed = async (args) => {
 
     const data: FeedRemoteData[] = await res.json()
 
-    console.log('DATA', data)
-
     /* Add instagram folder to img folder */
 
     const inputDir = configHtml.static.image.inputDir
@@ -109,8 +107,6 @@ const FeedHtmlBuild: Feed = async (args) => {
     await mkdir(resolve(`${inputDir}/${folder}`), { recursive: true })
 
     /* Add base64 images to instagram folder and data to store */
-
-    const feedData: FeedData[] = []
 
     await Promise.allSettled(
       data.map(async (d, i) => {
@@ -129,8 +125,6 @@ const FeedHtmlBuild: Feed = async (args) => {
         return await _writeBase64(`${inputDir}/${path}.${ext}`, data)
       })
     )
-
-    console.log('FEED_DATA', feedData)
 
     configHtml.store.files.instagramFeed.data = JSON.stringify(feedData)
 
