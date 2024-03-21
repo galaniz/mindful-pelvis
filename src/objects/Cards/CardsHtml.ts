@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { CardArgs, CardProps, CardsProps, CardReturn } from './CardsHtmlTypes'
-import type { Item } from '../../global/globalHtmlTypes'
+import type { Item, InternalLink } from '../../global/globalHtmlTypes'
 import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
 import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
 import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
@@ -157,7 +157,8 @@ const _Card = async ({
     card: await CardHtml({
       args: {
         gap: '45px',
-        background
+        background,
+        internalLink: item as InternalLink
       }
     }),
     content: await ContentHtml({
@@ -207,7 +208,9 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
   let {
     gap = 'None',
     gapLarge = 'None',
-    background = 'None'
+    background = 'None',
+    internalLink = undefined,
+    externalLink = ''
   } = isObjectStrict(args) ? args : {}
 
   /* Normalize options */
@@ -224,7 +227,11 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
 
   /* Classes */
 
-  let classes = 'l-relative l-z-index-1 l-flex l-flex-col l-flex-grow-1 e-trans e-shift-up'
+  let classes = 'l-relative l-z-index-1 l-flex l-flex-col l-flex-grow-1'
+
+  if (internalLink !== undefined || externalLink !== '') {
+    classes += ' e-trans e-shift-up'
+  }
 
   /* Gap */
 

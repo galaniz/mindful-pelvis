@@ -82,8 +82,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
         image,
         lazy: false,
         maxWidth: 1600,
-        classes: overlap ? 'l-ht-full' : 'c-hero-min',
-        aspectRatio: overlap ? 'None' : 'Skip'
+        classes: overlap ? 'l-ht-full' : 'c-hero-min'
       }
     })
 

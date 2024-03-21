@@ -73,8 +73,6 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
   borderRadius = configHtmlVars.options.borderRadius[borderRadius]
 
   const hasColor = isStringStrict(color)
-  const skipAspectRatio = aspectRatio === 'skip'
-  const hasAspectRatio = isStringStrict(aspectRatio) && !skipAspectRatio
   const width2x = configHtmlVars.options.width2x[width]
 
   /* Add styles */
@@ -132,11 +130,7 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
       imageResOutput = imageRes.output
     }
 
-    let pictureClasses = 'l-relative l-block l-overflow-hidden'
-
-    if (hasAspectRatio) {
-      pictureClasses += ` l-ar-${aspectRatio}`
-    }
+    let pictureClasses = `l-relative l-block l-overflow-hidden l-ar-${aspectRatio}`
 
     if (isStringStrict(width)) {
       pictureClasses += ` l-wd-${width}`
@@ -157,13 +151,13 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     const style: string[] = []
 
     if (hasColor) {
-      pictureClasses += ' l-before o-image-color'
+      pictureClasses += ' l-after o-image-color'
 
       style.push(`--img-url:url(${imageResSrc})`)
     }
 
-    if (!hasAspectRatio && !skipAspectRatio && imageResAspectRatio !== 0) {
-      style.push(`padding-top:${imageResAspectRatio * 100}%`)
+    if (imageResAspectRatio !== 0) {
+      style.push(`--aspect-ratio-padding:${imageResAspectRatio * 100}%`)
     }
 
     if (imageResOutput !== '') {

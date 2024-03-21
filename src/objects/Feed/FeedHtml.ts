@@ -47,8 +47,8 @@ const FeedHtml: Feed = async (args, data) => {
 
     const column = await Column({
       args: {
-        width: '1/1',
-        tag: 'li'
+        tag: 'List Item',
+        width: '1/1'
       }
     })
 
@@ -80,11 +80,11 @@ const FeedHtml: Feed = async (args, data) => {
 
     const column = await Column({
       args: {
+        tag: 'List Item',
         width: '1/2',
         widthSmall: '1/3',
         widthMedium: '1/4',
-        widthLarge,
-        tag: 'li'
+        widthLarge
       }
     })
 
@@ -107,7 +107,7 @@ const FeedHtml: Feed = async (args, data) => {
 
   const container = await Container({
     args: {
-      tag: 'ul',
+      tag: 'Unordered List',
       layout: 'Row',
       gap: '30px'
     }
