@@ -3,7 +3,7 @@
  */
 
 .o-image-color {
-  &::before {
+  &::after {
     background: var(--theme);
     mask-image: var(--img-url);
     mask-size: cover;

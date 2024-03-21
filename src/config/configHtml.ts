@@ -192,8 +192,7 @@ const configHtmlVars: ConfigVars = {
       '60px': 'm'
     },
     aspectRatio: {
-      None: '',
-      Skip: 'skip', // Back end option
+      None: '100',
       '1:1': '100',
       '16:9': '56'
     },
