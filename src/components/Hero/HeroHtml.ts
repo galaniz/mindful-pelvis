@@ -63,17 +63,13 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
   if (imageMinimal !== undefined) {
     isImageMin = true
 
-    const imageMinRes = await ImageMinimalHtml({
+    imageMinOutput = await ImageMinimalHtml({
       image: imageMinimal,
       assetClasses: 'l-m-auto',
       assetContainerClasses: 'l-pb-xs l-pb-s-m',
       imageContainerClasses: 'l-pb-s l-pb-m-m l-mw-5xl l-m-auto',
       includeTheme: true
     })
-
-    const { output } = imageMinRes
-
-    imageMinOutput = output
   }
 
   if (image !== undefined && imageMinOutput === '') {
@@ -99,7 +95,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
     callToActionOutput = ButtonHtml({
       args: {
         theme: 'light',
-        ...callToAction.fields
+        ...callToAction
       }
     })
   }

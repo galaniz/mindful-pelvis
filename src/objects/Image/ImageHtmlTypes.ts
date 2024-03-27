@@ -4,21 +4,20 @@
 
 /* Imports */
 
-import type { InternalLink } from '../../global/globalHtmlTypes'
 import type { ParentArgs } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
-import type { PropFile, PropType } from '@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes'
+import type { RenderFile, RenderRichText } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 
 /**
  * @typedef {object} ImageProps
  * @prop {object} args
- * @prop {import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropFile} [args.image]
+ * @prop {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderFile} [args.image]
  * @prop {string} [args.aspectRatio]
  * @prop {string} [args.width]
  * @prop {string} [args.borderRadius]
  * @prop {string} [args.color]
  * @prop {string} [args.classes]
  * @prop {boolean} [args.invert]
- * @prop {import('../../global/globalHtmlTypes').InternalLink} [args.caption]
+ * @prop {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderRichText[]} [args.caption]
  * @prop {string} [args.source]
  * @prop {boolean} [args.lazy]
  * @prop {number} [args.maxWidth]
@@ -26,14 +25,14 @@ import type { PropFile, PropType } from '@alanizcreative/static-site-formation/i
  */
 export interface ImageProps {
   args: {
-    image?: PropFile
+    image?: RenderFile
     aspectRatio?: string
     width?: string
     borderRadius?: string
     color?: string
     classes?: string
     invert?: boolean
-    caption?: InternalLink
+    caption?: RenderRichText[]
     source?: string
     lazy?: boolean
     maxWidth?: number
@@ -43,12 +42,11 @@ export interface ImageProps {
 
 /**
  * @typedef {
- * import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropFile|
- * import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropType|
+ * import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderFile|
  * ImageProps['args']
  * } ImageMinimalData
  */
-export type ImageMinimalData = PropFile & ImageProps['args'] & PropType
+export type ImageMinimalData = RenderFile & ImageProps['args'] & { renderType: string }
 
 /**
  * @typedef {object} ImageMinimalArgs
@@ -77,22 +75,8 @@ export interface ImageMinimalArgs {
 }
 
 /**
- * @typedef {object} ImageMinimalReturn
- * @prop {string} color
- * @prop {string} background
- * @prop {string} output
- * @prop {string} type
- */
-export interface ImageMinimalReturn {
-  color: string
-  background: string
-  output: string
-  type: string
-}
-
-/**
  * @typedef {function} ImageMinimal
  * @param {ImageMinimalArgs} args
- * @return {Promise<ImageMinimalReturn>}
+ * @return {Promise<string>}
  */
-export type ImageMinimal = (args: ImageMinimalArgs) => Promise<ImageMinimalReturn>
+export type ImageMinimal = (args: ImageMinimalArgs) => Promise<string>

@@ -5,18 +5,15 @@
 /* Imports */
 
 import type { CardArgs, CardProps, CardsProps, CardReturn } from './CardsHtmlTypes'
-import type { Item, InternalLink } from '../../global/globalHtmlTypes'
-import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
-import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
+import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
+import { renderInlineContent } from '@alanizcreative/static-site-formation/iop/render/renderInline'
 import {
-  getProp,
   isObjectStrict,
   isStringStrict,
-  getExcerpt
+  getExcerpt,
+  isObject
 } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
-import { ContentHtml } from '../Content/ContentHtml'
 import { ImageMinimalHtml } from '../Image/ImageMinimalHtml'
 
 /**
@@ -33,11 +30,9 @@ const _Card = async ({
   background = 'Navy Light',
   columns = 3
 }: CardArgs): Promise<string> => {
-  /* Props must be object */
+  /* Item must be object */
 
-  const props: Item = getProp.self(item)
-
-  if (!isObjectStrict(props)) {
+  if (!isObjectStrict(item)) {
     return ''
   }
 
@@ -48,7 +43,7 @@ const _Card = async ({
     excerpt = '',
     content,
     heroImageMinimal
-  } = props
+  } = item
 
   /* Title required */
 
@@ -56,129 +51,81 @@ const _Card = async ({
     return ''
   }
 
-  /* Content args */
+  /* Background */
 
-  const contentArgs = {
-    gap: '15px',
-    richTextStyles: false,
-    headingStyle: 'Heading Three',
-    textStyle: 'Extra Small',
-    classes: 't-sharp'
+  const imageColor =
+    isStringStrict(heroImageMinimal?.color) && heroImageMinimal.renderType === 'image' ? heroImageMinimal.color : ''
+
+  if (imageColor !== '') {
+    background = `${imageColor} Light`
   }
 
-  /* Parents */
+  /* Text content */
 
-  const contentParent = {
-    renderType: 'content',
-    args: contentArgs
-  }
-
-  const cardParent = {
-    renderType: 'card',
-    args: {
-      internalLink: item
-    }
-  }
-
-  const contentParents = [
-    contentParent,
-    cardParent
-  ]
-
-  /* Image output */
-
-  const imageMinRes = await ImageMinimalHtml({
-    image: heroImageMinimal,
-    containerClasses: 'l-wd-full l-z-index--1 l-mt-auto',
-    imageContainerClasses: 'l-mw-4xl l-mr-auto l-ml-auto',
-    background,
-    parents: [
-      cardParent
-    ]
-  })
-
-  const {
-    background: imageBackground,
-    output: imageOutput
-  } = imageMinRes
-
-  if (imageBackground !== '') {
-    background = imageBackground
-  }
-
-  /* Text output */
-
-  const headingOutput = await RichText({
-    args: {
-      type: headingLevel,
+  const textContent: RenderItem[] = [
+    {
+      renderType: 'richText',
+      tag: headingLevel,
       content: [
         {
-          nodeType: 'text',
-          value: title
+          content: title
         }
       ]
-    },
-    parents: contentParents
-  })
+    }
+  ]
 
-  let textOutput = ''
-
-  if (showExcerpt) {
-    textOutput = await RichText({
-      args: {
-        type: 'paragraph',
-        content: [
-          {
-            nodeType: 'text',
-            value: getExcerpt({
-              excerpt,
-              content,
-              limitExcerpt: true
-            })
-          }
-        ]
-      },
-      parents: contentParents
-    })
-  }
-
-  /* Containers */
-
-  const containers = {
-    column: await Column({
-      args: {
-        tag: 'List Item',
-        widthSmall: '1/2',
-        widthMedium: '1/3',
-        widthLarge: `1/${columns}`,
-        classes: 'l-flex'
-      }
-    }),
-    card: await CardHtml({
-      args: {
-        gap: '45px',
-        background,
-        internalLink: item as InternalLink
-      }
-    }),
-    content: await ContentHtml({
-      args: contentArgs
+  if (showExcerpt && isObject(content)) {
+    textContent.push({
+      renderType: 'richText',
+      tag: 'p',
+      content: getExcerpt({
+        excerpt,
+        content,
+        limitExcerpt: true
+      })
     })
   }
 
   /* Output */
 
-  return (
-    containers.column.start +
-    containers.card.start +
-    containers.content.start +
-    headingOutput +
-    textOutput +
-    containers.content.end +
-    imageOutput +
-    containers.card.end +
-    containers.column.end
-  )
+  return await renderInlineContent([
+    {
+      renderType: 'column',
+      tag: 'List Item',
+      widthSmall: '1/2',
+      widthMedium: '1/3',
+      widthLarge: `1/${columns}`,
+      classes: 'l-flex',
+      content: [
+        {
+          renderType: 'card',
+          gap: '45px',
+          background,
+          internalLink: item as any,
+          content: [
+            {
+              renderType: 'content',
+              gap: '15px',
+              richTextStyles: false,
+              headingStyle: 'Heading Three',
+              textStyle: 'Extra Small',
+              classes: 't-sharp',
+              content: textContent
+            },
+            {
+              renderType: 'fragment',
+              content: await ImageMinimalHtml({
+                image: heroImageMinimal,
+                containerClasses: 'l-wd-full l-z-index--1 l-mt-auto',
+                imageContainerClasses: 'l-mw-4xl l-mr-auto l-ml-auto',
+                background
+              })
+            }
+          ]
+        }
+      ]
+    }
+  ])
 }
 
 /**
@@ -273,20 +220,11 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
  */
 const CardsHtml: CardsProps = {
   async render (content) {
-    const cardsContainer = await Container({
-      args: {
-        tag: 'Unordered List',
-        layout: 'Row',
-        gap: '30px',
-        gapLarge: '45px'
-      }
-    })
-
-    return (
-      cardsContainer.start +
-      content +
-      cardsContainer.end
-    )
+    return `
+      <ul class="l-flex l-flex-wrap l-gm-xs l-gm-s-l t-ls-none" role="list">
+        ${content}
+      </ul>
+    `
   },
   async renderCard (args) {
     return await _Card(args)

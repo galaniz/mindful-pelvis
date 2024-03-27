@@ -14,7 +14,6 @@ import {
   isArrayStrict,
   isNumber
 } from '@alanizcreative/static-site-formation/iop/utils/utils'
-// import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -48,8 +47,8 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     classes = '',
     source = 'cms',
     lazy = true,
-    maxWidth
-    // caption
+    maxWidth,
+    caption
   } = args
 
   /* Check card parent */
@@ -171,29 +170,20 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
 
   /* Figure caption */
 
-  /*
-  if (caption !== undefined) {
-    const { content } = caption
+  if (isArrayStrict(caption)) {
+    const captionContent = caption[0]?.content
 
-    const captionContent = await RichText({
-      args: {
-        type: 'paragraph',
-        content: content[0].content,
-        textStyle: 'Small',
-        classes: 'l-pt-3xs'
-      }
-    })
-
-    if (captionContent !== '') {
+    if (isStringStrict(captionContent)) {
       imageOutput = `
         <figure>
           ${imageOutput}
-          <figcaption data-rich>${captionContent}</figcaption>
+          <figcaption data-rich="figcaption">
+            ${captionContent}
+          </figcaption>
         </figure>
       `
     }
   }
-  */
 
   /* Output */
 

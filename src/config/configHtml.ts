@@ -10,7 +10,7 @@ import { setConfig } from '@alanizcreative/static-site-formation/iop/config/conf
 import { isString } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { LayoutHtml } from '../components/Layout/LayoutHtml'
 import { NavigationHtml, NavigationsHtml } from '../components/Navigations/NavigationsHtml'
-import { HttpErrorHtml } from '../render/HttpError/HttpErrorHtml'
+import { HttpErrorHtml } from '../pages/HttpError/HttpErrorHtml'
 import { ButtonHtml } from '../objects/Button/ButtonHtml'
 import { ContentHtml } from '../objects/Content/ContentHtml'
 import { AssetHtml } from '../objects/Asset/AssetHtml'
@@ -24,6 +24,7 @@ import { FeedHtml } from '../objects/Feed/FeedHtml'
 import { FauxHeadingHtml } from '../text/FauxHeading/FauxHeadingHtml'
 import { ColumnsHtml as TextColumnsHtml } from '../text/Columns/ColumnsHtml'
 import { TabsHtml } from '../objects/Tabs/TabsHtml'
+import { FragmentHtml } from '../objects/Fragment/FragmentHtml'
 import { SlotHtml } from '../text/Slot/SlotHtml'
 
 /**
@@ -229,11 +230,11 @@ const configHtmlVars: ConfigVars = {
         Event: 'event'
       },
       headingLevel: {
-        'Heading Two': 'heading-2',
-        'Heading Three': 'heading-3',
-        'Heading Four': 'heading-4',
-        'Heading Five': 'heading-5',
-        'Heading Six': 'heading-6'
+        'Heading Two': 'h2',
+        'Heading Three': 'h3',
+        'Heading Four': 'h4',
+        'Heading Five': 'h5',
+        'Heading Six': 'h6'
       }
     },
     hero: {
@@ -337,6 +338,7 @@ const configHtml: Config = setConfig({
   },
   renderTypes: {
     button: 'button',
+    card: 'card',
     column: 'column',
     container: 'container',
     content: 'content',
@@ -358,7 +360,8 @@ const configHtml: Config = setConfig({
     image: ImageHtml,
     posts: PostsHtml,
     asset: AssetHtml,
-    card: CardHtml
+    card: CardHtml,
+    fragment: FragmentHtml
   },
   filter: async (config, env) => {
     configHtmlVars.cloudflare = {

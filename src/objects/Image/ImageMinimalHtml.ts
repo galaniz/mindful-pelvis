@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ImageMinimal, ImageProps } from '../Image/ImageHtmlTypes'
-import { getProp, isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 import { ImageHtml } from './ImageHtml'
 
@@ -15,19 +15,10 @@ import { ImageHtml } from './ImageHtml'
  * @type {import('../Image/ImageHtmlTypes').ImageMinimal}
  */
 const ImageMinimalHtml: ImageMinimal = async (args) => {
-  /* Fallback output */
-
-  const fallback = {
-    color: '',
-    background: '',
-    output: '',
-    type: ''
-  }
-
   /* Args must be object */
 
   if (!isObjectStrict(args)) {
-    return fallback
+    return ''
   }
 
   /* Args */
@@ -51,15 +42,15 @@ const ImageMinimalHtml: ImageMinimal = async (args) => {
   /* Image required */
 
   if (image === undefined) {
-    return fallback
+    return ''
   }
 
   /* Type required */
 
-  const imageType = getProp.type(image)
+  const imageType = image.renderType
 
   if (imageType === '') {
-    return fallback
+    return ''
   }
 
   /* Classes */
@@ -114,8 +105,7 @@ const ImageMinimalHtml: ImageMinimal = async (args) => {
       outerClasses.push(imageContainerClasses)
     }
 
-    const imageProps = getProp.self(image)
-    const imageColor = imageProps.color
+    const imageColor = image.color
 
     if (isStringStrict(imageColor)) {
       color = imageColor
@@ -123,15 +113,13 @@ const ImageMinimalHtml: ImageMinimal = async (args) => {
       background = `${color} Light`
     }
 
-    props.args = imageProps
+    props.args = image
   }
 
   /* Invert */
 
   if (isStringStrict(background)) {
     props.args.invert = !background.includes('Light')
-  } else {
-    background = ''
   }
 
   /* Classes */
@@ -152,12 +140,7 @@ const ImageMinimalHtml: ImageMinimal = async (args) => {
     output = `<div${divClasses !== '' ? ` class="${divClasses}"` : ''}${themeStyle}>${output}</div>`
   }
 
-  return {
-    color,
-    background,
-    type: imageType,
-    output
-  }
+  return output
 }
 
 /* Exports */

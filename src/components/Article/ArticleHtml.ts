@@ -5,8 +5,6 @@
 /* Imports */
 
 import type { ArticleArgs } from './ArticleHtmlTypes'
-import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
 import {
   addScriptStyle,
   isObjectStrict,
@@ -71,43 +69,35 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
       return `
         <li>
-          <a href="#${id}" class="c-article__hash l-pl-3xs l-inline-flex" data-rich>${title}</a>
+          <a href="#${id}" class="c-article__hash l-pl-3xs l-inline-flex" data-rich>
+            ${title}
+          </a>
         </li>
       `
     })
 
-    const navColumn = await Column({
-      args: {
-        tag: 'Aside',
-        widthMedium: '4/5',
-        widthLarge: '1/5'
-      }
-    })
-
-    const navContent = await CollapsibleHtml({
-      name: 'collapsible',
-      replaceContent: '',
-      children: [],
-      attributes: {
-        tag: 'nav',
-        classes: 'c-article__nav b-top l-sticky',
-        attr: 'aria-label="Article" data-article',
-        headingLevel: 'h2',
-        label: 'In This Article',
-        labelClasses: 'c-article__toggle t-m t-wt-bold t-ht-snug t-sharp',
-        iconClasses: 'c-article__icon no-js-none'
-      },
-      content: `
-        <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-rev l-mb-xs l-mb-3xs-all" role="list">
-          ${navItemsOutput.join('')}
-        </ul>
-      `
-    })
-
     navOutput = `
-      ${navColumn.start}
-      ${navContent}
-      ${navColumn.end} 
+      <aside class="l-wd-1-1 l-wd-4-5-m l-wd-1-5-l">
+        ${await CollapsibleHtml({
+          name: 'collapsible',
+          replaceContent: '',
+          children: [],
+          attributes: {
+            tag: 'nav',
+            classes: 'c-article__nav b-top l-sticky',
+            attr: 'aria-label="Article" data-article',
+            headingLevel: 'h2',
+            label: 'In This Article',
+            labelClasses: 'c-article__toggle t-m t-wt-bold t-ht-snug t-sharp',
+            iconClasses: 'c-article__icon no-js-none'
+          },
+          content: `
+            <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-rev l-mb-xs l-mb-3xs-all" role="list">
+              ${navItemsOutput.join('')}
+            </ul>
+          `
+        })}
+      </aside>
     `
 
     addScriptStyle({
@@ -173,49 +163,35 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
   let contentOutput = content
 
   if (hasNav) {
-    const column = await Column({
-      args: {
-        tag: 'Article',
-        widthMedium: '4/5',
-        widthLarge: '3/5',
-        classes: 'c-article__body'
-      }
-    })
-
-    contentOutput = (
-      column.start +
-      `<div class="${richTextClasses}">${content}</div>` +
-      '<div class="c-article__end"></div>' +
-      socialOutput +
-      column.end
-    )
+    contentOutput = `
+      <article class="c-article__body l-wd-1-1 l-wd-4-5-m l-wd-3-5-l">
+        <div class="${richTextClasses}">${content}</div>
+        <div class="c-article__end"></div>
+        ${socialOutput}
+      </article>
+    `
   }
-
-  const container = await Container({
-    args: {
-      tag: hasNav ? 'Section' : 'Article',
-      maxWidth: hasNav ? '1300px' : '800px',
-      justify: hasNav ? 'Center' : 'Default',
-      layout: hasNav ? 'Row' : 'Default',
-      gap: hasNav ? '45px' : '',
-      gapLarge: hasNav ? '60px' : '',
-      paddingTop: '45px',
-      paddingTopLarge: '60px',
-      paddingBottom: '90px',
-      paddingBottomLarge: '120px',
-      classes: `c-article${!hasNav ? ` ${richTextClasses}` : ''}`,
-      nest: true
-    }
-  })
 
   /* Output */
 
-  return (
-    container.start +
-    navOutput +
-    contentOutput +
-    container.end
-  )
+  const output = navOutput + contentOutput
+  const classes = 'c-article l-pt-s l-pt-m-m l-pb-xl l-pb-2xl-m'
+
+  if (hasNav) {
+    return `
+      <section class="${classes} l-container">
+        <div class="l-flex l-flex-wrap l-justify-center l-gm-s l-gm-m-l">
+          ${output}
+        </div>
+      </section>
+    `
+  }
+
+  return `
+    <article class="${classes} ${richTextClasses} l-container-s">
+      ${output}
+    </article>
+  `
 }
 
 /* Exports */
