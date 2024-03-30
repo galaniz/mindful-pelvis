@@ -85,7 +85,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
   const linkClass = 'c-nav__link'
   const itemClass = 'c-nav__item'
   const listAttr = 'role="list"'
-  const listClass = 'c-nav__list t-ls-none t-link-current l-flex'
+  const listClass = 'c-nav__list t-ls-none t-link-current l-flex l-wd-full'
   const listClassZero = `${listClass} l-align-center l-gm-xs l-gm-s-s l-overflow-x-auto l-overflow-y-hidden`
 
   let listType = 'min'
