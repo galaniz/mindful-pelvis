@@ -192,12 +192,23 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
 
     /* Render output */
 
+    const comingSoon = configHtml.env.prod
+
     setFilters(configHtml.filters)
     setActions(configHtml.actions)
     setShortcodes(configHtml.shortcodes)
 
     const allData = await getAllContentfulData()
-    const output = configHtml.env.prod ? [{ slug: '/', output: await ComingSoonHtml() }] : await render({ allData })
+
+    if (comingSoon && allData !== undefined) {
+      allData.content = {
+        page: [
+          ComingSoonHtml()
+        ]
+      }
+    }
+
+    const output = await render({ allData })
 
     /* Data json, serverless and redirect files */
 
