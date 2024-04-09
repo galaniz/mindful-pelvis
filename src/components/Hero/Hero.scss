@@ -1,0 +1,59 @@
+/**
+ * Components - Hero Styles
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+
+/* Styles */
+
+.c-hero-overlap {
+  --left-right: calc(var(--container-padding) * -1);
+  --text-top: calc(var(--xl) * -1);
+  --text-bottom: 0;
+  --text-right: var(--left-right);
+  --media-left: var(--left-right);
+  --media-right: var(--left-right);
+  --width: 100% + (var(--container-padding) * 2);
+
+  @include util.breakpoint-min("m") {
+    --text-top: calc(var(--3xl) * -1);
+  }
+
+  @include util.breakpoint-min("l") {
+    --text-top: auto;
+    --text-right: 0;
+    --text-bottom: calc(var(--m) * -1);
+    --media-right: -36%;
+  }
+
+  @include util.breakpoint-min("container") {
+    --media-left: calc((50vw - (var(--container-no-padding) / 2)) * -1);
+    --width: (50vw - (var(--container-no-padding) / 2)) + (var(--container) * 0.76);
+  }
+}
+
+.c-hero-overlap__media {
+  margin: 0 var(--media-right) 0 var(--media-left);
+  width: calc(var(--width));
+
+  @include util.fluid-size(
+    height,
+    util.calc-rem(400px) util.calc-rem(630px),
+    "s" "l"
+  );
+}
+
+.c-hero-overlap__text {
+  margin: var(--text-top) var(--text-right) var(--text-bottom) auto;
+}
+
+.c-hero-min {
+  @include util.fluid-size(
+    height,
+    util.calc-rem(350px) util.calc-rem(500px),
+    "s" "l"
+  );
+}

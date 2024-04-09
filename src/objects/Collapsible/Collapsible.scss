@@ -1,0 +1,21 @@
+/**
+ * Objects - Collapsible Styles
+ */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/objects/Collapsible/Collapsible";
+
+/* Styles */
+
+.o-collapsible__toggle {
+  --scale: 1;
+  --duration: 400ms;
+
+  svg {
+    transform: scaleY(var(--scale));
+  }
+
+  &[aria-expanded="true"] {
+    --scale: -1;
+  }
+}

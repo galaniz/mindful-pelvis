@@ -1,0 +1,37 @@
+/**
+ * Text - Color
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/lib/text/Color/Color";
+
+/* Styles */
+
+.t-light {
+  --outline-color: var(--background-base);
+  --sharp-color-hsl: var(--background-base-hsl);
+  --sharp-color: var(--background-base);
+  --link-color: var(--background-base);
+  --link-color-sharp: var(--background-light);
+  --link-color-fade: hsla(var(--background-base-hsl), 0.08);
+  --text-color: hsla(var(--background-base-hsl), 0.8);
+  --border-color: var(--background-base-fade);
+  --muted-color: hsla(var(--background-base-hsl), 0.6);
+
+  color: var(--text-color);
+}
+
+.t-link-current {
+  --link-color: currentcolor;
+}
+
+.t-current {
+  color: currentcolor;
+}
+
+.t-sharp {
+  --text-color: var(--sharp-color);
+
+  color: var(--sharp-color);
+}

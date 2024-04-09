@@ -1,0 +1,15 @@
+/**
+ * Objects - Image Invert Styles
+ */
+
+.o-image-invert {
+  filter: invert(1) brightness(115%);
+}
+
+@supports not (filter: invert(1)) {
+  .o-image-invert {
+    background: var(--background-base);
+    border-radius: var(--border-radius-s);
+    border: var(--4xs) solid;
+  }
+}

@@ -1,0 +1,281 @@
+/**
+ * Components - Header Styles
+ */
+
+/* Imports */
+
+@use "sass:map";
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/config/config" as con;
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+@use "@alanizcreative/formation/lib/components/Nav/Nav";
+@use "@alanizcreative/formation/lib/components/NavIcon/NavIcon";
+@use "@alanizcreative/formation/lib/components/NavIcon/NavIconSeven";
+
+/* Container */
+
+.c-nav {
+  --nav-half: 0rem;
+  --width-display: block;
+  --cta-bg: var(--primary-base);
+  --cta-color: var(--background-base);
+  --cta-border-color: var(--background-base-fade);
+  --cta-delay: 0ms;
+  --list-opacity: 0;
+  --item-margin: 0;
+  --item-opacity: 0;
+  --link-1-color: var(--link-color);
+  --btn-color: var(--foreground-base);
+  --logo-pos: static;
+  --logo-xy: 0, 0;
+
+  z-index: map.get(con.$z-index, "nav");
+
+  &[data-nav-open="true"] {
+    --link-1-color: var(--background-light);
+    --btn-color: var(--background-base);
+  }
+
+  &[data-nav-show-overflow] {
+    --item-opacity: 1;
+  }
+
+  &[data-nav-overflow="true"] {
+    --width-display: none;
+    --cta-border-color: var(--foreground-base-fade);
+    --cta-bg: var(--background-base);
+    --cta-color: var(--foreground-base);
+    --cta-delay: 250ms;
+    --item-margin: var(--2xs);
+  }
+
+  &[data-nav-overflow="false"] {
+    --cta-list-left-radius: var(--border-radius-m);
+    --logo-pos: absolute;
+    --logo-xy: -50%, -50%;
+  }
+}
+
+/* Main container */
+
+.c-nav__main {
+  min-height: calc(var(--logo-height) + var(--gap-margin));
+}
+
+/* Logo */
+
+.c-nav__logo {
+  margin-right: var(--s);
+  position: var(--logo-pos);
+  transform: translate(var(--logo-xy));
+  left: 50%;
+  top: 50%;
+}
+
+/* List - row */
+
+.c-nav__list[data-depth="1"][data-list="cta"],
+.c-nav__cta {
+  --outline-color: var(--cta-color);
+
+  background: var(--cta-bg);
+  color: var(--cta-color);
+}
+
+.c-nav__list {
+  [data-nav-overflow="false"] &[data-depth="1"] {
+    --prop: visibility, opacity;
+    --h: auto;
+
+    position: absolute;
+    opacity: var(--list-opacity);
+
+    &[data-list="min"] {
+      background: var(--background-light);
+      border-radius: var(--border-radius-s);
+      padding: var(--4xs) var(--2xs);
+      margin-left: calc(-1 * var(--2xs));
+      border: var(--border-width) solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    &[data-list="cta"] {
+      right: 0;
+    }
+  }
+
+  &[data-list="cta"] {
+    border-bottom-left-radius: var(--border-radius-m);
+    border-bottom-right-radius: var(--border-radius-m);
+    border-top-left-radius: var(--cta-list-left-radius);
+  }
+
+  .js &[data-depth="0"] {
+    flex-grow: 1;
+  }
+}
+
+/* Width - trigger overflow in row */
+
+.c-nav__width {
+  display: var(--width-display);
+
+  &::before {
+    height: 0.0625rem;
+    min-width: calc(var(--logo-width) + var(--nav-half) + var(--gap-margin) * 2);
+    z-index: -1;
+  }
+}
+
+/* Item */
+
+.c-nav__item {
+  [data-nav-open="false"] &[data-mid] {
+    margin-left: auto;
+  }
+
+  [data-nav-overflow="true"] &[data-depth="0"] {
+    --border-color: hsla(var(--background-base-hsl), 0.3);
+
+    border-top: var(--border-width) solid var(--border-color);
+    opacity: var(--item-opacity);
+
+    &[data-cta]:last-child,
+    &:first-child {
+      --border-color: transparent;
+    }
+  }
+
+  &[data-collapsible-expanded="true"] {
+    --list-opacity: 1;
+  }
+
+  [data-list="cta"] &[data-depth="1"] {
+    --border-color: var(--cta-border-color);
+  }
+
+  [data-list="min"] &[data-depth="1"]:last-child {
+    margin-bottom: var(--item-margin);
+  }
+}
+
+/* Link */
+
+.c-nav__link {
+  &[data-depth="0"] {
+    --scale: 0;
+    --origin: 100% 100%;
+  
+    &::before {
+      top: auto;
+      background: currentcolor;
+      height: var(--underline);
+      transform-origin: var(--origin);
+      transform: scaleX(var(--scale));
+      transition: transform var(--duration) var(--easing);
+    }
+  
+    &:hover,
+    &[data-current="true"],
+    &[data-descendent-current="true"],
+    [data-collapsible-expanded="true"] & {
+      --scale: 1;
+      --origin: 0 0;
+    }
+  }
+
+  [data-list="min"] &[data-depth="1"] {
+    --prop: text-decoration-color, color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--link-1-color);
+    }
+  }
+}
+
+/* Call to action */
+
+.c-nav__cta {
+  --delay: var(--cta-delay);
+  --duration: 200ms;
+  --prop: border-radius;
+
+  [data-collapsible-expanded="true"] & {
+    --delay: 0ms;
+    --duration: 100ms;
+
+    border-radius: var(--border-radius-m) var(--border-radius-m) 0 0;
+  }
+}
+
+/* Buttons */
+
+.c-nav__button {
+  --outline-color: var(--btn-color);
+
+  z-index: 2;
+  color: var(--btn-color);
+}
+
+.c-nav__close {
+  top: var(--nav-padding);
+  right: var(--container-padding);
+}
+
+.c-nav-icon-label {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Overflow - home link */
+
+.c-nav__home {
+  top: var(--nav-padding);
+  left: var(--container-padding);
+}
+
+/* Overflow */
+
+.c-nav__scroll {
+  margin-top: var(--nav-height);
+  max-height: calc(100% - var(--nav-height));
+}
+
+/* Overlay */
+
+.c-nav__overlay {
+  --prop: visibility, opacity;
+  --duration: 0ms, 400ms;
+  --delay: 400ms, 10ms;
+  --opacity: 0;
+  --scale: 0.5;
+
+  opacity: var(--opacity);
+
+  &::before {
+    background: var(--background-base);
+		opacity: 0.05;
+	}
+
+	&::after {
+		background: inherit;
+    opacity: var(--opacity);
+    border-radius: 100%;
+		width: 200%;
+		height: 200%;
+		top: -100%;
+		left: -100%;
+		transform: scale(var(--scale));
+    transition:
+      transform 400ms var(--easing),
+      opacity 400ms var(--easing);
+	}
+
+  [data-nav-open="true"] & {
+    --delay: 10ms, 0ms;
+    --opacity: 1;
+    --scale: 1;
+  }
+}

@@ -1,0 +1,70 @@
+/**
+ * Components - Article Styles
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+
+/* Styles */
+
+.c-article {
+  --body-right: 0;
+  --icon-width: var(--xs);
+  --line-width: var(--border-width);
+  --tog-margin: var(--2xs) 0;
+  --nav-top: 0;
+
+  @include util.breakpoint-min("l") {
+    --body-right: auto;
+    --icon-width: var(--3xs);
+    --line-width: 0;
+    --tog-padding: 0 0 var(--2xs);
+    --nav-top: var(--m);
+
+    [data-collapsible-source=""] [data-collapsible-main] {
+      --delay: 0ms;
+      --duration: 0ms;
+    }
+  }
+}
+
+.c-article__body {
+  margin-right: var(--body-right);
+}
+
+.c-article__nav {
+  top: var(--nav-top);
+
+  [data-collapsible-main] {
+    --outline-offset: -0.2rem;
+  }
+}
+
+.c-article__toggle {
+  margin: var(--tog-margin);
+}
+
+.c-article__icon {
+  height: var(--icon-width);
+  width: var(--icon-width);
+}
+
+.c-article__nav,
+.c-article__icon {
+  border-width: var(--line-width);
+}
+
+.c-article__hash {
+  &[aria-current="true"] {
+    font-weight: var(--font-weight-bold);
+    box-shadow:
+      calc(var(--underline) * -1) 0 0 0 var(--sharp-color),
+      inset var(--underline) 0 0 0 var(--sharp-color);
+  }
+}
+
+.c-article__end {
+  height: 0.0625rem;
+}
