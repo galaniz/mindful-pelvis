@@ -4,16 +4,16 @@
 
 /* Imports */
 
-import { renderInlineItem } from '@alanizcreative/static-site-formation/iop/render/renderInline'
+import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 import { configHtmlVars } from '../../config/configHtml'
 import { LogoHtml } from '../../objects/Logo/LogoHtml'
 
 /**
  * Function - output coming soon page
  *
- * @return {Promise<string>} HTML - html
+ * @return {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderItem} HTML - html
  */
-const ComingSoonHtml = async (): Promise<string> => {
+const ComingSoonHtml = (): RenderItem => {
   /* Title and slug */
 
   const title = 'Coming Soon'
@@ -22,7 +22,7 @@ const ComingSoonHtml = async (): Promise<string> => {
 
   /* Output */
 
-  return await renderInlineItem({
+  return {
     id,
     slug,
     meta: {
@@ -40,38 +40,49 @@ const ComingSoonHtml = async (): Promise<string> => {
         paddingTopLarge: '120px',
         paddingBottom: '90px',
         paddingBottomLarge: '120px',
-        classes: 'l-mh-full-vh l-flex l-align-center',
+        align: 'Center',
+        justify: 'Center',
+        classes: 'l-mh-full-vh',
         content: [
           {
             renderType: 'container',
-            paddingBottom: '90px',
             content: [
               {
-                renderType: 'fragment',
-                content: LogoHtml()
-              }
-            ]
-          },
-          {
-            renderType: 'content',
-            richTextStyles: true,
-            content: [
-              {
-                renderType: 'richText',
-                tag: 'h1',
-                content: 'New site coming soon!'
-              },
-              {
-                renderType: 'richText',
-                tag: 'p',
+                renderType: 'container',
+                align: 'Center',
+                justify: 'Center',
+                paddingBottom: '90px',
                 content: [
                   {
-                    content: 'In the meantime you can reach me at '
+                    renderType: 'fragment',
+                    content: LogoHtml()
+                  }
+                ]
+              },
+              {
+                renderType: 'content',
+                richTextStyles: true,
+                align: 'Center',
+                content: [
+                  {
+                    renderType: 'richText',
+                    tag: 'h1',
+                    content: 'New site coming soon!',
+                    classes: 'l-pb-2xs'
                   },
                   {
-                    tag: 'a',
-                    link: `mailto:${configHtmlVars.email}`,
-                    content: configHtmlVars.email
+                    renderType: 'richText',
+                    tag: 'p',
+                    content: [
+                      {
+                        content: 'In the meantime you can reach me at '
+                      },
+                      {
+                        tag: 'a',
+                        link: `mailto:${configHtmlVars.email}`,
+                        content: configHtmlVars.email
+                      }
+                    ]
                   }
                 ]
               }
@@ -80,7 +91,7 @@ const ComingSoonHtml = async (): Promise<string> => {
         ]
       }
     ]
-  })
+  }
 }
 
 /* Exports */
