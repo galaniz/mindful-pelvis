@@ -136,7 +136,6 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
                   extension: 'html'
                 }
               ],
-              variables: true,
               dynamicAttributes: [
                 'data-stop-scroll',
                 'data-show'
@@ -161,15 +160,6 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
       /* Output */
 
       return output
-    }
-
-    /* Coming soon */
-
-    if (configHtml.env.prod) {
-      return [{
-        slug: '/',
-        output: await ComingSoonHtml()
-      }]
     }
 
     /* Cache data */
@@ -207,7 +197,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
     setShortcodes(configHtml.shortcodes)
 
     const allData = await getAllContentfulData()
-    const output = await render({ allData })
+    const output = configHtml.env.prod ? [{ slug: '/', output: await ComingSoonHtml() }] : await render({ allData })
 
     /* Data json, serverless and redirect files */
 

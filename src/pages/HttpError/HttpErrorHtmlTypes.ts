@@ -1,5 +1,5 @@
 /**
- * Render - Http Error Html Types
+ * Pages - Http Error Html Types
  */
 
 /**
