@@ -1,5 +1,5 @@
 /**
- * Render - Coming Soon Html
+ * Pages - Coming Soon Html
  */
 
 /* Imports */
@@ -29,6 +29,9 @@ const ComingSoonHtml = async (): Promise<string> => {
       title
     },
     contentType: 'page',
+    showFooter: false,
+    showHeader: false,
+    showHero: false,
     content: [
       {
         renderType: 'container',
