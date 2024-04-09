@@ -74,22 +74,6 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
   const hasColor = isStringStrict(color)
   const width2x = configHtmlVars.options.width2x[width]
 
-  /* Add styles */
-
-  if (hasColor) {
-    addScriptStyle({
-      dir: 'objects/Image',
-      style: 'ImageColor'
-    })
-  }
-
-  if (invert) {
-    addScriptStyle({
-      dir: 'objects/Image',
-      style: 'ImageInvert'
-    })
-  }
-
   /* Image */
 
   let imageOutput = ''
@@ -118,14 +102,12 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     })
 
     let imageResAspectRatio = 0
-    let imageResSrc = ''
     let imageResOutput = ''
 
     if (isString(imageRes)) {
       imageResOutput = imageRes
     } else {
       imageResAspectRatio = imageRes.aspectRatio
-      imageResSrc = imageRes.src
       imageResOutput = imageRes.output
     }
 
@@ -151,8 +133,6 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
 
     if (hasColor) {
       pictureClasses += ' l-after o-image-color'
-
-      style.push(`--img-url:url(${imageResSrc})`)
     }
 
     if (imageResAspectRatio !== 0) {
@@ -166,6 +146,29 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
         </picture>
       `
     }
+  }
+
+  /* Output early */
+
+  if (imageOutput === '') {
+    return ''
+  }
+
+  /* Add styles */
+
+  if (hasColor) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageColor',
+      script: 'ImageColorInit'
+    })
+  }
+
+  if (invert) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageInvert'
+    })
   }
 
   /* Figure caption */

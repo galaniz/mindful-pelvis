@@ -54,19 +54,19 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
   /* Width */
 
   if (width === '') {
-    width = '1-1'
+    width = '12'
   }
 
   /* Flex */
 
   if (ord !== '' || jst || aln || grow) {
-    classesArr.push('l-flex l-flex-col')
+    classesArr.push('l-flex l-col')
   }
 
   /* Grow */
 
   if (grow) {
-    classesArr.push('l-flex-grow-1')
+    classesArr.push('l-grow-1')
   }
 
   /* Order */
@@ -78,10 +78,10 @@ const ColumnHtml: ColumnPropsFilter = async (props) => {
   /* Output */
 
   args.tag = tag
-  args.width = isStringStrict(width) ? `l-wd-${width}` : ''
-  args.widthSmall = isStringStrict(widthSmall) ? `l-wd-${widthSmall}-s` : ''
-  args.widthMedium = isStringStrict(widthMedium) ? `l-wd-${widthMedium}-m` : ''
-  args.widthLarge = isStringStrict(widthLarge) ? `l-wd-${widthLarge}-l` : ''
+  args.width = isStringStrict(width) ? `l-col-${width}` : ''
+  args.widthSmall = isStringStrict(widthSmall) ? `l-col-${widthSmall}-s` : ''
+  args.widthMedium = isStringStrict(widthMedium) ? `l-col-${widthMedium}-m` : ''
+  args.widthLarge = isStringStrict(widthLarge) ? `l-col-${widthLarge}-l` : ''
   args.justify = jst ? `l-justify-${justify}` : ''
   args.align = aln ? `l-align-${align}` : ''
   args.classes = classesArr.join(' ')

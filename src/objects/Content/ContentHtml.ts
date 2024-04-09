@@ -64,7 +64,7 @@ const ContentHtml = async (props: ContentProps): Promise<ContentReturn> => {
   /* Rich text styles */
 
   if (richTextStyles) {
-    classesArr.push('t-rich-text e-line')
+    classesArr.push('t-rich-text e-line-y')
   }
 
   /* Align */

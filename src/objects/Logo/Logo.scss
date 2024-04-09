@@ -10,11 +10,6 @@
 
 /* Styles */
 
-.o-logo {
-  width: var(--logo-width);
-  height: var(--logo-height);
-}
-
 .o-logo-s {
   @include util.fluid-size(
     width,
@@ -47,3 +42,5 @@
     --lesser: var(--secondary-light);
   }
 }
+
+@include util.breakpoint-batch;

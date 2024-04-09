@@ -2,10 +2,10 @@
  * Objects - Image Color Styles
  */
 
-.o-image-color {
+.o-image-color[data-loaded="true"] {
   &::after {
     background: var(--theme);
-    mask-image: var(--img-url);
+    mask-image: var(--src);
     mask-size: cover;
     mask-type: alpha;
     mask-repeat: no-repeat;

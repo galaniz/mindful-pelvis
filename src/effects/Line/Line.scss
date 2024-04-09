@@ -23,14 +23,7 @@
   }
 }
 
-.e-line a[data-rich] {
-  --from: currentcolor;
-  --to: transparent;
-
-  @extend %e-line;
-}
-
-.e-line-rev a[data-rich] {
+.e-line-r a[data-rich] {
   --from: transparent;
   --to: currentcolor;
 

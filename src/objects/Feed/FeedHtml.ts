@@ -44,7 +44,7 @@ const FeedHtml: Feed = async (args, data) => {
     const link = `https://www.instagram.com/${handle}/`
 
     columns.push(`
-      <li class="l-wd-1-1">
+      <li class="l-col-12">
         <a href="${link}" class="l-inline-flex l-align-center t-link-current" rel="noreferrer">
           <span class="l-flex l-ht-s l-wd-s bg-foreground-base t-light t-sharp b-radius-full l-align-center l-justify-center l-shrink-0">
             ${SocialSvgHtml('instagram', 'l-ht-2xs l-wd-2xs')}
@@ -64,13 +64,12 @@ const FeedHtml: Feed = async (args, data) => {
   }
 
   const dataLen = data.length
-  const widthLarge = `1-${dataLen}`
 
   for (let i = 0; i < dataLen; i += 1) {
     const { url, src } = data[i]
 
     columns.push(`
-      <li class="l-wd-1-2 l-wd-1-3-s l-wd-1-4-m l-wd-${widthLarge}-l">
+      <li class="l-col-6 l-col-4-s l-col-3-m l-col-${12 / dataLen}-l">
         <a href="${url}" rel="noreferrer" class="l-block">
           ${await ImageHtml({
             args: {
@@ -87,7 +86,7 @@ const FeedHtml: Feed = async (args, data) => {
   /* Output */
 
   return `
-    <ul class="l-flex l-flex-wrap l-gm-xs t-ls-none" role="list">
+    <ul class="l-flex l-wrap l-gap-xs t-ls-none" role="list">
       ${columns.join('')}
     </ul>
   `

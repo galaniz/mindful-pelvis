@@ -5,11 +5,7 @@
 /* Imports */
 
 import type { HeroArgs } from './HeroHtmlTypes'
-import {
-  addScriptStyle,
-  isStringStrict,
-  isObjectStrict
-} from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { isStringStrict, isObjectStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { ButtonHtml } from '../../objects/Button/ButtonHtml'
 import { configHtmlVars } from '../../config/configHtml'
 import { ImageHtml } from '../../objects/Image/ImageHtml'
@@ -78,7 +74,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
         image,
         lazy: false,
         maxWidth: 1600,
-        classes: overlap ? 'l-ht-full' : 'c-hero-min'
+        classes: overlap ? 'l-ht-full' : 'c-hero-minimal'
       }
     })
 
@@ -155,28 +151,21 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
 
     if (dateOutput !== '') {
       textOutput += `
-        <p class="t-s t-ht-snug l-pt-xs l-pt-s-m l-flex l-flex-col l-flex-row-s l-justify-center l-gm-4xs">
+        <p class="t-s t-ht-snug l-pt-xs l-pt-s-m l-flex l-col l-row-s l-justify-center l-gap-4xs">
           ${dateOutput}
         </p>`
     }
   }
 
-  /* Add styles */
-
-  addScriptStyle({
-    dir: 'components/Hero',
-    style: 'Hero'
-  })
-
-  /* Overlap  */
+  /* Overlap and styles */
 
   if (overlap) {
     return `
-      <section class="c-hero-overlap l-container l-flex l-flex-col l-flex-row-l l-pb-m-l">
-        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-shrink-0 l-relative l-z-index-1 l-wd-4-5-m l-wd-3-5-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
+      <section class="c-hero-overlap l-container l-flex l-col l-row-l l-pb-m-l">
+        <div class="c-hero-overlap__text bg-${overlapBg} t-light l-shrink-0 l-relative l-z-index-1 l-col-12 l-col-10-m l-col-7-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
           ${textOutput}
         </div>
-        <div class="c-hero-overlap__media l-wd-1-1 l-order-first l-relative l-overflow-hidden">
+        <div class="c-hero-overlap__media l-col-12 l-order-first l-relative l-overflow-hidden">
           ${imageOutput}
         </div>
       </section>

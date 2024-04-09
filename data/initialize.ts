@@ -136,6 +136,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
                   extension: 'html'
                 }
               ],
+              variables: true,
               dynamicAttributes: [
                 'data-stop-scroll',
                 'data-show'

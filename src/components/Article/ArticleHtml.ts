@@ -77,7 +77,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
     })
 
     navOutput = `
-      <aside class="l-wd-1-1 l-wd-4-5-m l-wd-1-5-l">
+      <aside class="l-col-10 l-col-8-m l-col-2-l">
         ${await CollapsibleHtml({
           name: 'collapsible',
           replaceContent: '',
@@ -92,19 +92,13 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
             iconClasses: 'c-article__icon no-js-none'
           },
           content: `
-            <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-rev l-mb-xs l-mb-3xs-all" role="list">
+            <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-r l-mb-xs l-mb-3xs-all" role="list">
               ${navItemsOutput.join('')}
             </ul>
           `
         })}
       </aside>
     `
-
-    addScriptStyle({
-      dir: 'components/Article',
-      style: 'Article',
-      script: 'ArticleInit'
-    })
   }
 
   /* Social output */
@@ -143,7 +137,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
       socialOutput = `
         <div class="b-top l-pt-s l-mt-s">
           <h2 class="t-s t-ht-snug t-wt-bold l-mb-2xs">Share</h2>
-          <ul class="t-ls-none l-flex l-flex-wrap l-gm-2xs" role="list">
+          <ul class="t-ls-none l-flex l-wrap l-gap-2xs" role="list">
             ${shareItemsOutput.join('')}
           </ul>
         </div>
@@ -164,23 +158,29 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
   if (hasNav) {
     contentOutput = `
-      <article class="c-article__body l-wd-1-1 l-wd-4-5-m l-wd-3-5-l">
-        <div class="${richTextClasses}">${content}</div>
+      <article class="c-article__body l-col-10 l-col-8-m l-col-6-l">
+        <div class="c-article__main ${richTextClasses}">${content}</div>
         <div class="c-article__end"></div>
         ${socialOutput}
       </article>
     `
+
+    addScriptStyle({
+      dir: 'components/Article',
+      style: 'Article',
+      script: 'ArticleInit'
+    })
   }
 
   /* Output */
 
   const output = navOutput + contentOutput
-  const classes = 'c-article l-pt-s l-pt-m-m l-pb-xl l-pb-2xl-m'
+  const classes = 'l-pt-s l-pt-m-m l-pb-xl l-pb-2xl-m'
 
   if (hasNav) {
     return `
-      <section class="${classes} l-container">
-        <div class="l-flex l-flex-wrap l-justify-center l-gm-s l-gm-m-l">
+      <section class="c-article ${classes} l-container">
+        <div class="l-flex l-wrap l-justify-center l-gap-s l-gap-m-l">
           ${output}
         </div>
       </section>

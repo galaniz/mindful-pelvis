@@ -79,13 +79,12 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
 
   let layoutClasses = ''
 
-  if (layout === 'column' && (isStringStrict(justify) || isStringStrict(align))) {
-    layoutClasses = 'l-flex l-flex-col'
+  if (layout === 'column') {
+    layoutClasses = 'l-flex l-col'
   }
 
   if (layout === 'row') {
-    layoutClasses = 'l-flex l-flex-wrap'
-    nest = true
+    layoutClasses = 'l-flex l-wrap'
   }
 
   /* Gap */
@@ -93,13 +92,13 @@ const ContainerHtml: ContainerPropsFilter = async (props) => {
   let gapClasses = ''
 
   if (isStringStrict(gap)) {
-    gapClasses = layout === 'row' ? `l-gm-${gap}` : `l-mb-${gap}-all`
+    gapClasses = `l-gap-${gap}`
   }
 
   let gapLargeClasses = ''
 
   if (isStringStrict(gapLarge) && gapLarge !== gap) {
-    gapLargeClasses = layout === 'row' ? `l-gm-${gapLarge}-l` : `l-mb-${gapLarge}-all-m`
+    gapLargeClasses = layout === 'row' ? `l-gap-${gapLarge}-l` : `l-gap-${gapLarge}-m`
   }
 
   /* Output */

@@ -174,7 +174,7 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
 
   /* Classes */
 
-  let classes = 'l-relative l-z-index-1 l-flex l-flex-col l-flex-grow-1'
+  let classes = 'l-relative l-z-index-1 l-flex l-col l-grow-1'
 
   if (internalLink !== undefined || externalLink !== '') {
     classes += ' e-trans e-shift-up'
@@ -183,11 +183,11 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
   /* Gap */
 
   if (isStringStrict(gap)) {
-    classes += ` l-mb-${gap}-all`
+    classes += ` l-gap-${gap}`
   }
 
   if (isStringStrict(gapLarge) && gapLarge !== gap) {
-    classes += ` l-mb-${gapLarge}-all-l`
+    classes += ` l-gap-${gapLarge}-l`
   }
 
   /* Background */
@@ -221,7 +221,7 @@ const CardHtml = async (props: CardProps): Promise<CardReturn> => {
 const CardsHtml: CardsProps = {
   async render (content) {
     return `
-      <ul class="l-flex l-flex-wrap l-gm-xs l-gm-s-l t-ls-none" role="list">
+      <ul class="l-flex l-wrap l-gap-xs l-gap-s-l t-ls-none" role="list">
         ${content}
       </ul>
     `

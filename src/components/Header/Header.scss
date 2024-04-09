@@ -7,16 +7,12 @@
 @use "sass:map";
 @forward "../../config/config";
 @use "@alanizcreative/formation/lib/config/config" as con;
-@use "@alanizcreative/formation/lib/utils/utils" as util;
-@use "@alanizcreative/formation/lib/components/Nav/Nav";
 @use "@alanizcreative/formation/lib/components/NavIcon/NavIcon";
 @use "@alanizcreative/formation/lib/components/NavIcon/NavIconSeven";
 
 /* Container */
 
 .c-nav {
-  --nav-half: 0rem;
-  --width-display: block;
   --cta-bg: var(--primary-base);
   --cta-color: var(--background-base);
   --cta-border-color: var(--background-base-fade);
@@ -26,8 +22,6 @@
   --item-opacity: 0;
   --link-1-color: var(--link-color);
   --btn-color: var(--foreground-base);
-  --logo-pos: static;
-  --logo-xy: 0, 0;
 
   z-index: map.get(con.$z-index, "nav");
 
@@ -41,7 +35,6 @@
   }
 
   &[data-nav-overflow="true"] {
-    --width-display: none;
     --cta-border-color: var(--foreground-base-fade);
     --cta-bg: var(--background-base);
     --cta-color: var(--foreground-base);
@@ -51,25 +44,7 @@
 
   &[data-nav-overflow="false"] {
     --cta-list-left-radius: var(--border-radius-m);
-    --logo-pos: absolute;
-    --logo-xy: -50%, -50%;
   }
-}
-
-/* Main container */
-
-.c-nav__main {
-  min-height: calc(var(--logo-height) + var(--gap-margin));
-}
-
-/* Logo */
-
-.c-nav__logo {
-  margin-right: var(--s);
-  position: var(--logo-pos);
-  transform: translate(var(--logo-xy));
-  left: 50%;
-  top: 50%;
 }
 
 /* List - row */
@@ -109,31 +84,11 @@
     border-bottom-right-radius: var(--border-radius-m);
     border-top-left-radius: var(--cta-list-left-radius);
   }
-
-  .js &[data-depth="0"] {
-    flex-grow: 1;
-  }
-}
-
-/* Width - trigger overflow in row */
-
-.c-nav__width {
-  display: var(--width-display);
-
-  &::before {
-    height: 0.0625rem;
-    min-width: calc(var(--logo-width) + var(--nav-half) + var(--gap-margin) * 2);
-    z-index: -1;
-  }
 }
 
 /* Item */
 
 .c-nav__item {
-  [data-nav-open="false"] &[data-mid] {
-    margin-left: auto;
-  }
-
   [data-nav-overflow="true"] &[data-depth="0"] {
     --border-color: hsla(var(--background-base-hsl), 0.3);
 
@@ -220,7 +175,7 @@
 }
 
 .c-nav__close {
-  top: var(--nav-padding);
+  top: var(--padding);
   right: var(--container-padding);
 }
 
@@ -232,15 +187,15 @@
 /* Overflow - home link */
 
 .c-nav__home {
-  top: var(--nav-padding);
+  top: var(--padding);
   left: var(--container-padding);
 }
 
 /* Overflow */
 
 .c-nav__scroll {
-  margin-top: var(--nav-height);
-  max-height: calc(100% - var(--nav-height));
+  margin-top: var(--height);
+  max-height: calc(100% - var(--height));
 }
 
 /* Overlay */

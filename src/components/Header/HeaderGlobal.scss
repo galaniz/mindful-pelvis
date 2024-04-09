@@ -1,0 +1,77 @@
+/**
+ * Components - Header Global Styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+@use "@alanizcreative/formation/lib/components/Nav/Nav";
+
+/* Container */
+
+.c-nav {
+  --half: 0rem;
+  --padding: var(--3xs);
+  --height: calc(var(--logo-height) + (var(--padding) * 2));
+  --logo-pos: static;
+  --logo-xy: 0, 0;
+  --flow: block;
+  --grow: 1;
+  --mid: 0;
+
+  &[data-nav-overflow="true"] {
+    --flow: none;
+  }
+
+  &[data-nav-overflow="false"] {
+    --mid: auto;
+    --logo-pos: absolute;
+    --logo-xy: -50%, -50%;
+  }
+}
+
+/* Height */
+
+.c-nav,
+.c-nav__height {
+  height: var(--height);
+
+  @include util.breakpoint-batch-add("s", (
+    --padding: var(--xs)
+  ));
+}
+
+/* Logo */
+
+.c-nav__logo {
+  margin-right: var(--s);
+  position: var(--logo-pos);
+  transform: translate(var(--logo-xy));
+  left: 50%;
+  top: 50%;
+}
+
+/* List */
+
+.c-nav__list {
+  &[data-depth="0"] {
+    flex-grow: var(--grow);
+  }
+}
+
+/* Flow - trigger overflow in row */
+
+.c-nav__flow::before {
+  height: 0.0625rem;
+  display: var(--flow);
+  min-width: calc(var(--logo-width) + var(--half) + var(--gap) * 2);
+  z-index: -1;
+}
+
+/* Item */
+
+.c-nav__item {
+  &[data-mid] {
+    margin-left: var(--mid);
+  }
+}
