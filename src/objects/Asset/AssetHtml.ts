@@ -28,9 +28,7 @@ const AssetHtml = async (props: AssetProps): Promise<string> => {
   return await ImageHtml({
     args: {
       aspectRatio: 'None',
-      image: {
-        fields: args
-      }
+      image: args
     }
   })
 }

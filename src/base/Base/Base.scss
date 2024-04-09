@@ -22,3 +22,7 @@ a {
 p {
   color: var(--text-color);
 }
+
+main :target {
+  scroll-margin-top: var(--scroll-margin);
+}

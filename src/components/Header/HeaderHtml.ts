@@ -26,7 +26,7 @@ const HeaderHtml: NavigationHtmlFunc = (navigations) => { // Skip check as Navig
   let style = ''
 
   if (!isNaN(configHtmlVars.navHalf)) {
-    style = ` style="--nav-half:${(configHtmlVars.navHalf * 2) / 16}rem"`
+    style = ` style="--half:${(configHtmlVars.navHalf * 2) / 16}rem"`
   }
 
   /* Main and/or social navs */
@@ -49,8 +49,8 @@ const HeaderHtml: NavigationHtmlFunc = (navigations) => { // Skip check as Navig
     })
 
     nav = `
-      <nav class="c-nav l-container l-relative l-py-3xs l-py-xs-s t-sharp" aria-label="Main" data-nav-overflow="false" data-nav-overflow-all="false" data-nav-open="false"${style}>
-        <div class="c-nav__main l-flex l-justify-between l-align-center l-relative no-js-nav">
+      <nav class="c-nav l-container l-relative t-sharp" aria-label="Main" data-nav-overflow="false" data-nav-overflow-all="false" data-nav-open="false"${style}>
+        <div class="l-flex l-justify-between l-align-center l-relative no-js-nav">
           ${LogoHtml({
             link: true,
             classes: 'c-nav__logo l-z-index-1'
@@ -71,7 +71,7 @@ const HeaderHtml: NavigationHtmlFunc = (navigations) => { // Skip check as Navig
               <a class="c-nav__home o-logo l-inline-flex l-fixed js-pt-link" href="${getPermalink()}" aria-label="${configHtml.title} Home"></a>
             </div>
             <div class="c-nav__scroll l-ht-full l-overflow-y-auto l-overscroll-none l-overflow-x-hidden l-pr-2xs l-pl-2xs l-pb-xs">
-              <ul class="c-nav__column l-flex l-flex-col t-ls-none" role="list"></ul>
+              <ul class="c-nav__column l-flex l-col t-ls-none" role="list"></ul>
             </div>
             <div class="c-nav__hide">
               <button class="c-nav__button c-nav__close l-ht-m l-wd-s l-fixed l-top-0" type="button" aria-label="Close menu"></button>

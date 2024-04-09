@@ -9,7 +9,6 @@ import {
   isArrayStrict,
   isStringStrict,
   isObjectStrict,
-  getProp,
   escape,
   isNumber
 } from '@alanizcreative/static-site-formation/iop/utils/utils'
@@ -129,7 +128,7 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
 
   /* Query prep */
 
-  const id: string = getProp.id(pageData)
+  const id: string = isStringStrict(pageData.id) ? pageData.id : ''
 
   let key = `posts_${id}_${queryContentType}_${display}`
 
@@ -219,7 +218,7 @@ const PostsHtml = async (props: PostsProps): Promise<string> => {
       const bg = configHtmlVars.backgrounds
       const backgrounds =
         Array(items.length)
-          .fill(pagination ? [..._shuffle(bg)] : [...bg])
+          .fill(pagination ? _shuffle([...bg]) : [...bg])
           .flat()
 
       for (let i = 0; i < items.length; i += 1) {

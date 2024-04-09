@@ -10,6 +10,7 @@
 /* Styles */
 
 .c-article {
+  --columns: 10;
   --body-right: 0;
   --icon-width: var(--xs);
   --line-width: var(--border-width);
@@ -32,6 +33,10 @@
 
 .c-article__body {
   margin-right: var(--body-right);
+}
+
+.c-article__main {
+  --columns: 12;
 }
 
 .c-article__nav {

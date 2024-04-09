@@ -86,7 +86,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
   const itemClass = 'c-nav__item'
   const listAttr = 'role="list"'
   const listClass = 'c-nav__list t-ls-none t-link-current l-flex'
-  const listClassZero = `${listClass} l-align-center l-gm-xs l-gm-s-s l-overflow-x-auto l-overflow-y-hidden`
+  const listClassZero = `${listClass} c-nav__height l-align-center l-gap-xs l-gap-s-s l-overflow-x-auto l-overflow-y-hidden`
 
   let listType = 'min'
 
@@ -113,7 +113,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
         internalLinkClass: 'js-pt-link',
         filterBeforeList: ({ args, depth }) => {
           if (depth > 0) {
-            args.listClass = `${listClass} o-collapsible__main outline-snug e-line-rev e-trans l-flex-col no-js-none`
+            args.listClass = `${listClass} o-collapsible__main outline-snug e-line-r e-trans l-col no-js-none`
             args.listAttr = `${listAttr} data-list="${listType}" id="${collapsibleId}"`
           } else {
             args.listAttr = listAttr
@@ -132,7 +132,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
             newItemClass += ' e-trans'
 
             if (index === 0) {
-              output.html += '<li role="presentation" class="c-nav__width no-js-none l-p-0 l-relative l-before"></li>'
+              newItemClass += ' c-nav__flow l-before l-relative'
             }
           } else {
             newLinkAttr = 'data-rich'
@@ -146,7 +146,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
           }
 
           if (_isButton(item, depth)) {
-            newLinkClass = 'c-nav__cta outline-inset t-wt-bold t-ht-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-wd-1-1'
+            newLinkClass = 'c-nav__cta outline-inset t-wt-bold t-ht-snug t-m l-px-2xs l-py-3xs b-radius-l l-flex l-align-center l-justify-between l-overflow-hidden l-relative l-z-index-1 l-before l-wd-full'
           }
 
           if (_isButtonDropdown(item, depth)) {
@@ -254,7 +254,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
     footer: nav.getOutput(
       'footer',
       {
-        listClass: 'l-flex l-flex-col l-gm-3xs t-ls-none e-line-rev',
+        listClass: 'l-flex l-col l-gap-3xs t-ls-none e-line-r',
         listAttr: 'role="list"',
         linkClass: 't-r',
         internalLinkClass: 'js-pt-link',
@@ -265,7 +265,7 @@ const NavigationsHtml: NavigationsHtmlObj = (args) => {
     social: nav.getOutput(
       'social',
       {
-        listClass: 'l-flex l-flex-wrap l-gm-2xs t-ls-none',
+        listClass: 'l-flex l-wrap l-gap-2xs t-ls-none',
         listAttr: 'role="list"',
         linkClass: 'l-flex l-align-center l-justify-center l-relative l-wd-s l-ht-s b-radius-full b-all e-color e-trans',
         filterBeforeLinkText: ({ output }) => {

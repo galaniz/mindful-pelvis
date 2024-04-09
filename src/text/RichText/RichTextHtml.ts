@@ -7,7 +7,7 @@
 import type { RichTextHtmlFilters } from './RichTextHtmlTypes'
 import type { ContentProps } from '../../objects/Content/ContentHtmlTypes'
 import type { CardProps } from '../../objects/Cards/CardsHtmlTypes'
-import { getLink, addScriptStyle } from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { getLink, addScriptStyle, isHeading } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -22,7 +22,7 @@ const RichTextHtml: RichTextHtmlFilters = {
     const { args, parents = [] } = props
 
     let {
-      type = 'paragraph',
+      tag = '',
       classes = ''
     } = args
 
@@ -33,7 +33,7 @@ const RichTextHtml: RichTextHtmlFilters = {
     /* Content ascendant */
 
     const parent = parents[0] !== undefined ? parents[0].renderType : ''
-    const heading = type.includes('heading')
+    const isSectionHeading = isHeading(tag)
 
     if (parent === 'content') {
       const contentArgs: ContentProps['args'] = parents[0].args
@@ -47,11 +47,11 @@ const RichTextHtml: RichTextHtmlFilters = {
       textStyle = configHtmlVars.options.content.text[textStyle]
       headingStyle = configHtmlVars.options.content.heading[headingStyle]
 
-      if (textStyle !== '' && !heading) {
+      if (textStyle !== '' && !isSectionHeading) {
         classesArr.push(textStyle)
       }
 
-      if (headingStyle !== '' && heading) {
+      if (headingStyle !== '' && isSectionHeading) {
         classesArr.push(`t-${headingStyle}`)
       }
 
@@ -69,7 +69,7 @@ const RichTextHtml: RichTextHtmlFilters = {
 
     const grandParent = parents[1] !== undefined ? parents[1].renderType : ''
 
-    if (grandParent === 'card' && heading) {
+    if (grandParent === 'card' && isSectionHeading) {
       classesArr.push('t-link-current t-break')
     }
 
@@ -88,9 +88,9 @@ const RichTextHtml: RichTextHtmlFilters = {
 
   output: async (output, props) => {
     const { args } = props
-    const { type = '' } = args
+    const { tag = '' } = args
 
-    if (type === 'table') {
+    if (tag === 'table') {
       addScriptStyle({
         dir: 'text/RichTable',
         style: 'RichTable'
@@ -119,13 +119,14 @@ const RichTextHtml: RichTextHtmlFilters = {
   content: async (output, contentProps) => {
     const { props } = contentProps
     const { args, parents = [] } = props
-    const { type = 'paragraph' } = args
+    const { tag = '' } = args
 
     /* Card ascendant */
 
     const grandParent = parents[1] !== undefined ? parents[1].renderType : ''
+    const isSectionHeading = isHeading(tag)
 
-    if (output !== '' && grandParent === 'card' && type.includes('heading')) {
+    if (output !== '' && grandParent === 'card' && isSectionHeading) {
       const cardArgs: CardProps['args'] = parents[1].args
 
       const {

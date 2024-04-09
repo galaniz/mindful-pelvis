@@ -5,8 +5,6 @@
 /* Imports */
 
 import type { ArticleArgs } from './ArticleHtmlTypes'
-import { Container } from '@alanizcreative/static-site-formation/iop/layouts/Container/Container'
-import { Column } from '@alanizcreative/static-site-formation/iop/layouts/Column/Column'
 import {
   addScriptStyle,
   isObjectStrict,
@@ -71,50 +69,36 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
 
       return `
         <li>
-          <a href="#${id}" class="c-article__hash l-pl-3xs l-inline-flex" data-rich>${title}</a>
+          <a href="#${id}" class="c-article__hash l-pl-3xs l-inline-flex" data-rich>
+            ${title}
+          </a>
         </li>
       `
     })
 
-    const navColumn = await Column({
-      args: {
-        tag: 'Aside',
-        widthMedium: '4/5',
-        widthLarge: '1/5'
-      }
-    })
-
-    const navContent = await CollapsibleHtml({
-      name: 'collapsible',
-      replaceContent: '',
-      children: [],
-      attributes: {
-        tag: 'nav',
-        classes: 'c-article__nav b-top l-sticky',
-        attr: 'aria-label="Article" data-article',
-        headingLevel: 'h2',
-        label: 'In This Article',
-        labelClasses: 'c-article__toggle t-m t-wt-bold t-ht-snug t-sharp',
-        iconClasses: 'c-article__icon no-js-none'
-      },
-      content: `
-        <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-rev l-mb-xs l-mb-3xs-all" role="list">
-          ${navItemsOutput.join('')}
-        </ul>
-      `
-    })
-
     navOutput = `
-      ${navColumn.start}
-      ${navContent}
-      ${navColumn.end} 
+      <aside class="l-col-10 l-col-8-m l-col-2-l">
+        ${await CollapsibleHtml({
+          name: 'collapsible',
+          replaceContent: '',
+          children: [],
+          attributes: {
+            tag: 'nav',
+            classes: 'c-article__nav b-top l-sticky',
+            attr: 'aria-label="Article" data-article',
+            headingLevel: 'h2',
+            label: 'In This Article',
+            labelClasses: 'c-article__toggle t-m t-wt-bold t-ht-snug t-sharp',
+            iconClasses: 'c-article__icon no-js-none'
+          },
+          content: `
+            <ul class="t-ls-none t-s t-ht-snug t-link-current b-left e-line-r l-mb-xs l-mb-3xs-all" role="list">
+              ${navItemsOutput.join('')}
+            </ul>
+          `
+        })}
+      </aside>
     `
-
-    addScriptStyle({
-      dir: 'components/Article',
-      style: 'Article',
-      script: 'ArticleInit'
-    })
   }
 
   /* Social output */
@@ -153,7 +137,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
       socialOutput = `
         <div class="b-top l-pt-s l-mt-s">
           <h2 class="t-s t-ht-snug t-wt-bold l-mb-2xs">Share</h2>
-          <ul class="t-ls-none l-flex l-flex-wrap l-gm-2xs" role="list">
+          <ul class="t-ls-none l-flex l-wrap l-gap-2xs" role="list">
             ${shareItemsOutput.join('')}
           </ul>
         </div>
@@ -173,49 +157,41 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
   let contentOutput = content
 
   if (hasNav) {
-    const column = await Column({
-      args: {
-        tag: 'Article',
-        widthMedium: '4/5',
-        widthLarge: '3/5',
-        classes: 'c-article__body'
-      }
+    contentOutput = `
+      <article class="c-article__body l-col-10 l-col-8-m l-col-6-l">
+        <div class="c-article__main ${richTextClasses}">${content}</div>
+        <div class="c-article__end"></div>
+        ${socialOutput}
+      </article>
+    `
+
+    addScriptStyle({
+      dir: 'components/Article',
+      style: 'Article',
+      script: 'ArticleInit'
     })
-
-    contentOutput = (
-      column.start +
-      `<div class="${richTextClasses}">${content}</div>` +
-      '<div class="c-article__end"></div>' +
-      socialOutput +
-      column.end
-    )
   }
-
-  const container = await Container({
-    args: {
-      tag: hasNav ? 'Section' : 'Article',
-      maxWidth: hasNav ? '1300px' : '800px',
-      justify: hasNav ? 'Center' : 'Default',
-      layout: hasNav ? 'Row' : 'Default',
-      gap: hasNav ? '45px' : '',
-      gapLarge: hasNav ? '60px' : '',
-      paddingTop: '45px',
-      paddingTopLarge: '60px',
-      paddingBottom: '90px',
-      paddingBottomLarge: '120px',
-      classes: `c-article${!hasNav ? ` ${richTextClasses}` : ''}`,
-      nest: true
-    }
-  })
 
   /* Output */
 
-  return (
-    container.start +
-    navOutput +
-    contentOutput +
-    container.end
-  )
+  const output = navOutput + contentOutput
+  const classes = 'l-pt-s l-pt-m-m l-pb-xl l-pb-2xl-m'
+
+  if (hasNav) {
+    return `
+      <section class="c-article ${classes} l-container">
+        <div class="l-flex l-wrap l-justify-center l-gap-s l-gap-m-l">
+          ${output}
+        </div>
+      </section>
+    `
+  }
+
+  return `
+    <article class="${classes} ${richTextClasses} l-container-s">
+      ${output}
+    </article>
+  `
 }
 
 /* Exports */

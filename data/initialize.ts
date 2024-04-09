@@ -29,8 +29,8 @@ import {
 } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
 import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
-import { HttpErrorHtml } from '../src/render/HttpError/HttpErrorHtml'
-import { ComingSoonHtml } from '../src/render/ComingSoon/ComingSoonHtml'
+import { HttpErrorHtml } from '../src/pages/HttpError/HttpErrorHtml'
+import { ComingSoonHtml } from '../src/pages/ComingSoon/ComingSoonHtml'
 
 /* Eleventy init */
 
@@ -136,6 +136,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
                   extension: 'html'
                 }
               ],
+              variables: true,
               dynamicAttributes: [
                 'data-stop-scroll',
                 'data-show'
@@ -214,6 +215,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
       await writeStoreFiles()
       await writeRedirectsFile()
       await writeServerlessFiles({
+        packageDir: 'iop',
         configName: 'configHtml',
         configFile: 'src/config/configHtml.js'
       })

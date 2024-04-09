@@ -34,6 +34,22 @@
 
 @use "@alanizcreative/formation/lib/borders/borders";
 
+/* Logo */
+
+@use "../objects/Logo/LogoGlobal";
+
+/* Header */
+
+@use "../components/Header/HeaderGlobal";
+
+/* Hero */
+
+@use "../components/Hero/HeroGlobal";
+
 /* Effects */
 
 @use "../effects/effects";
+
+/* Breakpoints */
+
+@use "./globalBreakpoints";

@@ -4,9 +4,8 @@
 
 /* Imports */
 
-import type { InternalLinkBase } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
-import type { PropFile } from '@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes'
-import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
+import type { InternalLink } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
+import type { RenderFile, RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
 
 /**
@@ -15,21 +14,21 @@ import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
  * @prop {boolean} [pagination]
  * @prop {string} [heroTitle]
  * @prop {string} [heroText]
- * @prop {import('@alanizcreative/static-site-formation/iop/utils/getProp/getPropTypes').PropFile} [heroImage]
+ * @prop {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderFile} [heroImage]
  * @prop {import('../objects/Image/ImageHtmlTypes').ImageMinimalData} [heroImageMinimal]
  * @prop {InternalLink} [heroCallToAction]
  * @prop {string} [heroType]
- * @prop {InternalLink[]} [post]
- * @prop {InternalLink[]} [service]
- * @prop {InternalLink[]} [event]
- * @prop {InternalLink[]} [term]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink[]} [post]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink[]} [service]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink[]} [event]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink[]} [term]
  * @prop {string} [excerpt]
  * @prop {string} [archive]
  */
 export interface Item extends RenderItem {
   heroTitle?: string
   heroText?: string
-  heroImage?: PropFile
+  heroImage?: RenderFile
   heroImageMinimal?: ImageMinimalData
   heroCallToAction?: InternalLink
   heroType?: string
@@ -38,18 +37,4 @@ export interface Item extends RenderItem {
   event?: InternalLink[]
   term?: InternalLink[]
   excerpt?: string
-  archive?: string
-}
-
-/**
- * @typedef InternalLink
- * @type {
- * import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLinkBase|
- * import('@alanizcreative/static-site-formation/iop/global/globalTypes').Generic
- * }
- * @prop {Item} [fields]
- */
-export interface InternalLink extends InternalLinkBase {
-  fields?: Item
-  [key: string]: unknown
 }

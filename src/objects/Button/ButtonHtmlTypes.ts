@@ -4,14 +4,14 @@
 
 /* Imports */
 
-import type { InternalLink } from '../../global/globalHtmlTypes'
+import type { InternalLink } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 
 /**
  * @typedef {object} ButtonProps
  * @prop {object} args
  * @prop {string} [args.title]
  * @prop {string} [args.link]
- * @prop {import('../../global/globalHtmlTypes').InternalLink} [args.internalLink]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink} [args.internalLink]
  * @prop {string} [args.externalLink]
  * @prop {string} [args.type]
  * @prop {string} [args.size]

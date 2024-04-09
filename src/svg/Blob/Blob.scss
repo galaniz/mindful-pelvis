@@ -1,0 +1,86 @@
+/**
+ * Svg - Blob Styles
+ */
+
+/* Imports */
+
+@forward "../../config/config";
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+
+/* Styles */
+
+.s-blob {
+  --size: #{util.calc-rem(900px)};
+  --color: var(--primary-light-hsl);
+  --opacity: 0.15;
+  --flip: 1;
+  --x-add: #{util.calc-rem(90px)};
+  --x-add-small: #{util.calc-rem(90px)};
+  --x-add-large: #{util.calc-rem(90px)};
+  --x-add-dir: 1; 
+  --x: -100%;
+
+  width: var(--size);
+  height: var(--size);
+  color: hsla(var(--color), var(--opacity));
+  transform: scaleX(var(--flip)) translateX(calc(var(--x) + (var(--x-add) * var(--x-add-dir))));
+  transform-origin: 0 0;
+
+  &[data-flip="true"] {
+    --flip: -1;
+    --x-add-dir: -1;
+    --x: 0rem;
+  }
+
+  &[data-dir="right"] {
+    --x-add-dir: -1;
+    --x: 100vw;
+  }
+
+  &[data-dir="right"][data-flip="true"] {
+    --x-add-dir: 1;
+    --x: (-100vw - 100%);
+  }
+
+  &[data-theme="secondary"] {
+    --color: var(--secondary-light-hsl);
+  }
+
+  &[data-theme="foreground"] {
+    --color: var(--foreground-light-hsl);
+    --opacity: 0.08;
+  }
+
+  @include util.breakpoint-min("s") {
+    --x-add: #{util.calc-rem(120px)};
+    --x-add-small: #{util.calc-rem(120px)};
+    --x-add-large: #{util.calc-rem(120px)};
+  }
+
+  @include util.breakpoint-min("m") {
+    --x-add: #{util.calc-rem(150px)};
+    --x-add-small: #{util.calc-rem(150px)};
+    --x-add-large: #{util.calc-rem(150px)};
+  }
+
+  @include util.breakpoint-min("l") {
+    --x-add: #{util.calc-rem(180px)};
+    --x-add-small: #{util.calc-rem(300px)};
+    --x-add-large: #{util.calc-rem(240px)};
+
+    &[data-flip="true"][data-dir="left"],
+    &[data-flip="false"][data-dir="right"] {
+      --x-add-small: #{util.calc-rem(180px)};
+    }
+  }
+}
+
+.s-blob-small {
+  --size: #{util.calc-rem(600px)};
+  --x-add: var(--x-add-small);
+}
+
+.s-blob-large {
+  --size: #{util.calc-rem(1200px)};
+  --x-add: var(--x-add-large);
+}
