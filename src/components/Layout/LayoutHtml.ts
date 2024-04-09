@@ -48,7 +48,12 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
   const {
     showHeader = true,
     showFooter = true,
-    showHero = true
+    showHero = true,
+    heroType,
+    heroText,
+    heroImage,
+    heroImageMinimal,
+    heroCallToAction
   } = pageData
 
   /* Assets link */
@@ -162,12 +167,12 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     heroOutput = await HeroHtml({
       contentType,
       title: heroTitle,
-      type: pageData.heroType,
+      type: heroType,
       archive: heroArchive,
-      text: pageData.heroText,
-      image: pageData.heroImage,
-      imageMinimal: pageData.heroImageMinimal,
-      callToAction: pageData.heroCallToAction,
+      text: heroText,
+      image: heroImage,
+      imageMinimal: heroImageMinimal,
+      callToAction: heroCallToAction,
       pageData
     })
   }
