@@ -1,0 +1,53 @@
+/**
+ * Layouts - Order Styles
+ */
+
+/* Imports */
+
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+
+/* Styles */
+
+.l-order-first {
+  order: -9999;
+}
+
+.l-order-first-s {
+  @include util.breakpoint-batch-add("s", (
+    order: -9999
+  ));
+}
+
+.l-order-first-m {
+  @include util.breakpoint-batch-add("m", (
+    order: -9999
+  ));
+}
+
+.l-order-first-l {
+  @include util.breakpoint-batch-add("l", (
+    order: -9999
+  ));
+}
+
+.l-order-last {
+  order: 9999;
+}
+
+.l-order-last-s {
+  @include util.breakpoint-batch-add("s", (
+    order: 9999
+  ));
+}
+
+.l-order-last-m {
+  @include util.breakpoint-batch-add("m", (
+    order: 9999
+  ));
+}
+
+.l-order-last-l {
+  @include util.breakpoint-batch-add("l", (
+    order: 9999
+  ));
+}

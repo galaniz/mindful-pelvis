@@ -17,6 +17,7 @@ import { FooterHtml } from '../Footer/FooterHtml'
 import { HeroHtml } from '../Hero/HeroHtml'
 import { ArticleHtml } from '../Article/ArticleHtml'
 import { BackLinkHtml } from '../../objects/BackLink/BackLinkHtml'
+import { BlobsHtml } from '../Blobs/BlobsHtml'
 
 /**
  * Function - output html
@@ -182,6 +183,10 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     backLinkOutput = BackLinkHtml(contentType)
   }
 
+  /* Blobs */
+
+  const blobsOutput = BlobsHtml()
+
   /* Script data */
 
   let scriptMeta = ''
@@ -309,9 +314,9 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
             .no-js-nav {
               --logo-pos: static;
               --logo-xy: 0 0;
-
-              flex-wrap: wrap;
-              overflow: hidden;
+              --flow: none;
+              --grow: 0;
+              --mid: 0;
             }
 
             .no-js-collapsible {
@@ -328,14 +333,17 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
         <meta name="theme-color" content="${theme['background-base']}">
         <meta name="format-detection" content="telephone=no">
       </head>
-      <body class="${ns} no-js l-flex l-flex-col">
+      <body class="${ns} no-js l-flex l-col">
         ${spritesOutput}
         ${headerOutput}
         <main id="main">
           ${backLinkOutput}
           ${heroOutput}
+          ${blobsOutput !== '' ? '<div class="l-relative l-z-index-1">' : ''}
+          ${blobsOutput}
           ${contentOutput}
           ${backLinkOutput}
+          ${blobsOutput !== '' ? '</div>' : ''}
         </main>
         ${footerOutput}
         ${scriptMeta}

@@ -50,7 +50,7 @@ const PaginationHtml = (args: PaginationArgs): string => {
     prev: CaretSvgHtml('left', 'l-flex l-wd-2xs l-ht-2xs'),
     next: CaretSvgHtml('right', 'l-flex l-wd-2xs l-ht-2xs'),
     args: {
-      listClass: 't-ls-none l-flex l-justify-center l-gm-2xs l-gm-xs-s',
+      listClass: 't-ls-none l-flex l-justify-center l-gap-2xs l-gap-xs-s',
       listAttr: 'role="list"',
       itemClass: 'l-flex l-relative',
       itemMaxWidth: true,

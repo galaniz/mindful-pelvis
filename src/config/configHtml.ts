@@ -10,7 +10,7 @@ import { setConfig } from '@alanizcreative/static-site-formation/iop/config/conf
 import { isString } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { LayoutHtml } from '../components/Layout/LayoutHtml'
 import { NavigationHtml, NavigationsHtml } from '../components/Navigations/NavigationsHtml'
-import { HttpErrorHtml } from '../render/HttpError/HttpErrorHtml'
+import { HttpErrorHtml } from '../pages/HttpError/HttpErrorHtml'
 import { ButtonHtml } from '../objects/Button/ButtonHtml'
 import { ContentHtml } from '../objects/Content/ContentHtml'
 import { AssetHtml } from '../objects/Asset/AssetHtml'
@@ -24,6 +24,7 @@ import { FeedHtml } from '../objects/Feed/FeedHtml'
 import { FauxHeadingHtml } from '../text/FauxHeading/FauxHeadingHtml'
 import { ColumnsHtml as TextColumnsHtml } from '../text/Columns/ColumnsHtml'
 import { TabsHtml } from '../objects/Tabs/TabsHtml'
+import { FragmentHtml } from '../objects/Fragment/FragmentHtml'
 import { SlotHtml } from '../text/Slot/SlotHtml'
 
 /**
@@ -104,18 +105,16 @@ const configHtmlVars: ConfigVars = {
     width: {
       Default: '',
       None: '',
-      Auto: 'auto',
-      '1/1': '1-1',
-      '4/5': '4-5',
-      '3/4': '3-4',
-      '2/3': '2-3',
-      '3/5': '3-5',
-      '1/2': '1-2',
-      '2/5': '2-5',
-      '1/3': '1-3',
-      '1/4': '1-4',
-      '1/5': '1-5',
-      '1/6': '1-6',
+      '1/1': '12',
+      '5/6': '10',
+      '3/4': '9',
+      '2/3': '8',
+      '3/5': '7',
+      '1/2': '6',
+      '2/5': '5',
+      '1/3': '4',
+      '1/4': '3',
+      '1/6': '2',
       '100%': 'full',
       '45px': 's',
       '60px': 'm',
@@ -192,9 +191,9 @@ const configHtmlVars: ConfigVars = {
       '60px': 'm'
     },
     aspectRatio: {
-      None: '100',
-      '1:1': '100',
-      '16:9': '56'
+      None: '1-1',
+      '1:1': '1-1',
+      '16:9': '16-9'
     },
     borderRadius: {
       None: '',
@@ -229,11 +228,11 @@ const configHtmlVars: ConfigVars = {
         Event: 'event'
       },
       headingLevel: {
-        'Heading Two': 'heading-2',
-        'Heading Three': 'heading-3',
-        'Heading Four': 'heading-4',
-        'Heading Five': 'heading-5',
-        'Heading Six': 'heading-6'
+        'Heading Two': 'h2',
+        'Heading Three': 'h3',
+        'Heading Four': 'h4',
+        'Heading Five': 'h5',
+        'Heading Six': 'h6'
       }
     },
     hero: {
@@ -337,6 +336,7 @@ const configHtml: Config = setConfig({
   },
   renderTypes: {
     button: 'button',
+    card: 'card',
     column: 'column',
     container: 'container',
     content: 'content',
@@ -358,7 +358,8 @@ const configHtml: Config = setConfig({
     image: ImageHtml,
     posts: PostsHtml,
     asset: AssetHtml,
-    card: CardHtml
+    card: CardHtml,
+    fragment: FragmentHtml
   },
   filter: async (config, env) => {
     configHtmlVars.cloudflare = {

@@ -63,11 +63,11 @@
   --t-s: #{util.calc-rem(16px)};
   --t-xs: #{util.calc-rem(13px)};
 
-  @include util.breakpoint-min("m") {
-    --h5: #{util.calc-rem(24px)};
-    --h6: #{util.calc-rem(20px)};
-    --t: #{util.calc-rem(20px)};
-  }
+  @include util.breakpoint-batch-add("m", (
+    --h5: #{util.calc-rem(24px)},
+    --h6: #{util.calc-rem(20px)},
+    --t: #{util.calc-rem(20px)},
+  ));
 
   /* Text quote */
 
@@ -93,13 +93,16 @@
     "s" "l"
   );
 
-  /* Logo */
+  /* Logo width */
 
   @include util.fluid-size(
     --logo-width,
     util.calc-rem(200px) util.calc-rem(300px),
     "s" "l"
   );
+
+  /* Logo height */
+
   @include util.fluid-size(
     --logo-height,
     util.calc-rem(64px) util.calc-rem(96px),
@@ -137,17 +140,4 @@
   /* Scroll */
 
   --scroll-margin: var(--s);
-
-  /* Nav */
-
-  --nav-padding: var(--3xs);
-  --nav-height: calc(var(--logo-height) + (var(--nav-padding) * 2));
-
-  @include util.breakpoint-min("s") {
-    --nav-padding: var(--xs);
-  }
-}
-
-main :target {
-  scroll-margin-top: var(--scroll-margin);
 }

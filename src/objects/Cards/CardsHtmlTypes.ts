@@ -4,7 +4,8 @@
 
 /* Imports */
 
-import type { Item, InternalLink } from '../../global/globalHtmlTypes'
+import type { Item } from '../../global/globalHtmlTypes'
+import type { InternalLink } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 
 /**
  * @typedef {object} CardArgs
@@ -29,7 +30,7 @@ export interface CardArgs {
  * @prop {object} args
  * @prop {string} [args.gap]
  * @prop {string} [args.gapLarge]
- * @prop {import('../../global/globalHtmlTypes').InternalLink} [args.internalLink]
+ * @prop {import('@alanizcreative/static-site-formation/iop/global/globalTypes').InternalLink} [args.internalLink]
  * @prop {string} [args.externalLink]
  * @prop {boolean} [args.embed]
  * @prop {string} [args.embedTitle]
@@ -76,7 +77,7 @@ export type CardsPropsRenderCard = (args: CardArgs) => Promise<string>
 /**
  * @typedef {object} CardsProps
  * @prop {CardsPropsRender} render
- * @prop {} renderCard
+ * @prop {CardsPropsRenderCard} renderCard
  */
 export interface CardsProps {
   render: CardsPropsRender

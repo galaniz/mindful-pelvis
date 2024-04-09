@@ -9,7 +9,7 @@
 
 /* Styles */
 
-.t-columns {
+.t-cols {
   @include util.breakpoint-min("l") {
     column-count: var(--t-count, 2);
     column-gap: var(--t-gap, var(--xs));

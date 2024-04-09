@@ -39,7 +39,7 @@ const BackLinkHtml = (contentType: string = 'post'): string => {
 
   return `
     <div class="o-back-link l-py-4xs">
-      <div class="l-container e-line-rev">
+      <div class="l-container e-line-r">
         <a href="${link}" class="t-s t-ht-snug t-link-current l-inline-flex l-align-center" data-rich>
           ${CaretSvgHtml('left', 'l-wd-3xs l-ht-3xs l-flex')}
           ${title}

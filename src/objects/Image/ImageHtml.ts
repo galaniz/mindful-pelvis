@@ -14,7 +14,6 @@ import {
   isArrayStrict,
   isNumber
 } from '@alanizcreative/static-site-formation/iop/utils/utils'
-// import { RichText } from '@alanizcreative/static-site-formation/iop/text/RichText/RichText'
 import { configHtmlVars } from '../../config/configHtml'
 
 /**
@@ -48,8 +47,8 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     classes = '',
     source = 'cms',
     lazy = true,
-    maxWidth
-    // caption
+    maxWidth,
+    caption
   } = args
 
   /* Check card parent */
@@ -74,22 +73,6 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
 
   const hasColor = isStringStrict(color)
   const width2x = configHtmlVars.options.width2x[width]
-
-  /* Add styles */
-
-  if (hasColor) {
-    addScriptStyle({
-      dir: 'objects/Image',
-      style: 'ImageColor'
-    })
-  }
-
-  if (invert) {
-    addScriptStyle({
-      dir: 'objects/Image',
-      style: 'ImageInvert'
-    })
-  }
 
   /* Image */
 
@@ -119,14 +102,12 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     })
 
     let imageResAspectRatio = 0
-    let imageResSrc = ''
     let imageResOutput = ''
 
     if (isString(imageRes)) {
       imageResOutput = imageRes
     } else {
       imageResAspectRatio = imageRes.aspectRatio
-      imageResSrc = imageRes.src
       imageResOutput = imageRes.output
     }
 
@@ -152,8 +133,6 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
 
     if (hasColor) {
       pictureClasses += ' l-after o-image-color'
-
-      style.push(`--img-url:url(${imageResSrc})`)
     }
 
     if (imageResAspectRatio !== 0) {
@@ -169,31 +148,45 @@ const ImageHtml = async (props: ImageProps): Promise<string> => {
     }
   }
 
+  /* Output early */
+
+  if (imageOutput === '') {
+    return ''
+  }
+
+  /* Add styles */
+
+  if (hasColor) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageColor',
+      script: 'ImageColorInit'
+    })
+  }
+
+  if (invert) {
+    addScriptStyle({
+      dir: 'objects/Image',
+      style: 'ImageInvert'
+    })
+  }
+
   /* Figure caption */
 
-  /*
-  if (caption !== undefined) {
-    const { content } = caption
+  if (isArrayStrict(caption)) {
+    const captionContent = caption[0]?.content
 
-    const captionContent = await RichText({
-      args: {
-        type: 'paragraph',
-        content: content[0].content,
-        textStyle: 'Small',
-        classes: 'l-pt-3xs'
-      }
-    })
-
-    if (captionContent !== '') {
+    if (isStringStrict(captionContent)) {
       imageOutput = `
         <figure>
           ${imageOutput}
-          <figcaption data-rich>${captionContent}</figcaption>
+          <figcaption data-rich="figcaption">
+            ${captionContent}
+          </figcaption>
         </figure>
       `
     }
   }
-  */
 
   /* Output */
 

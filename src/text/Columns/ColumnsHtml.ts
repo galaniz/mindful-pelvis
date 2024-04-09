@@ -52,7 +52,7 @@ const ColumnsHtml: Columns = async (args) => {
   /* Output */
 
   return `
-    <div class="t-columns"${style}>
+    <div class="t-cols"${style}>
       ${content}
     </div>
   `

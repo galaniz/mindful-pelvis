@@ -187,9 +187,12 @@ $gaps: (
 
   $block-breakpoints: ("s"),
 
-  /* Widths */
+  /* Columns */
 
-  $width-percentage-breakpoints: ("s", "m", "l"),
+  $columns: 12,
+  $columns-breakpoints: ("s", "m", "l"),
+
+  /* Widths */
 
   $widths: (
     "3xs",
@@ -231,7 +234,7 @@ $gaps: (
   /* Aspect ratios */
 
   $aspect-ratio-padding: (
-    "56": 56.25%,
+    "16-9": 56.25%,
   ),
 
   /* Nav icon */
@@ -247,7 +250,12 @@ $gaps: (
   /* Borders */
 
   $borders: (
-    "sides": ("all", "bottom", "top", "left"),
+    "sides": (
+      "all",
+      "bottom",
+      "top",
+      "left"
+    ),
     "colors": (
       "default": "var(--foreground-light-fade)",
       "muted": "var(--muted-color)",
@@ -255,8 +263,8 @@ $gaps: (
       "current": "currentcolor",
     ),
     "widths": (
-      "default": 0.0625rem,
-      "thick": 0.0938rem,
+      "default": 1px,
+      "thick": 1.5px,
     ),
   ),
 
@@ -270,16 +278,15 @@ $gaps: (
 
   $outline: (
     "widths": (
-      "default": 0.2rem,
+      "default": 3.2px,
     ),
     "colors": (
       "default": "var(--primary-base)",
     ),
     "offsets": (
-      "default": 0.3rem,
-      "snug": 0,
-      "inset": -0.4rem,
+      "default": 4.8px,
+      "snug": 0px,
+      "inset": -6.4px,
     ),
   ),
-
 );
