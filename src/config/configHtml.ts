@@ -374,6 +374,8 @@ const configHtml: Config = setConfig({
     config.env.dev = env.ENVIRONMENT === 'dev'
     config.env.prod = env.ENVIRONMENT === 'production'
     config.env.dir = isString(env.ELEVENTY_ROOT) ? env.ELEVENTY_ROOT : ''
+    config.env.urls.dev = '/'
+    config.env.urls.prod = 'https://themindfulpelvis.ca'
     config.cms.name = 'contentful'
     config.cms.space = isString(env.CTFL_SPACE_ID) ? env.CTFL_SPACE_ID : ''
     config.cms.previewAccessToken = isString(env.CTFL_CPA_TOKEN) ? env.CTFL_CPA_TOKEN : ''
