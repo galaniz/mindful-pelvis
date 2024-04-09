@@ -22,7 +22,7 @@ import { BlobsHtml } from '../Blobs/BlobsHtml'
 /**
  * Function - output html
  *
- * @param {LayoutArgs} args
+ * @param {import('./LayoutHtmlTypes').LayoutArgs} args
  * @return {Promise<string>} HTML - html
  */
 const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
@@ -42,6 +42,14 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     pageHeadings,
     pageData
   } = args
+
+  /* Page data */
+
+  const {
+    showHeader = true,
+    showFooter = true,
+    showHero = true
+  } = pageData
 
   /* Assets link */
 
@@ -128,14 +136,15 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
   let footerOutput = ''
 
   if (navigations !== undefined) {
-    headerOutput = HeaderHtml(navigations)
-    footerOutput = FooterHtml(navigations)
+    headerOutput = showHeader ? HeaderHtml(navigations) : ''
+    footerOutput = showFooter ? FooterHtml(navigations) : ''
   }
 
   /* Hero */
 
   let heroTitle = ''
   let heroArchive = ''
+  let heroOutput = ''
 
   if (isStringStrict(pageData.title)) {
     heroTitle = pageData.title
@@ -149,17 +158,19 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     heroArchive = configHtmlVars.options.posts.contentType[pageData.archive]
   }
 
-  const heroOutput = await HeroHtml({
-    contentType,
-    title: heroTitle,
-    type: pageData.heroType,
-    archive: heroArchive,
-    text: pageData.heroText,
-    image: pageData.heroImage,
-    imageMinimal: pageData.heroImageMinimal,
-    callToAction: pageData.heroCallToAction,
-    pageData
-  })
+  if (showHero) {
+    heroOutput = await HeroHtml({
+      contentType,
+      title: heroTitle,
+      type: pageData.heroType,
+      archive: heroArchive,
+      text: pageData.heroText,
+      image: pageData.heroImage,
+      imageMinimal: pageData.heroImageMinimal,
+      callToAction: pageData.heroCallToAction,
+      pageData
+    })
+  }
 
   /* Back link */
 
@@ -185,7 +196,9 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
 
   /* Blobs */
 
-  const blobsOutput = BlobsHtml()
+  let blobsOutput = BlobsHtml()
+
+  blobsOutput = ''
 
   /* Script data */
 

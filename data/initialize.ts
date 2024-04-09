@@ -163,15 +163,6 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
       return output
     }
 
-    /* Coming soon */
-
-    if (configHtml.env.prod) {
-      return [{
-        slug: '/',
-        output: await ComingSoonHtml()
-      }]
-    }
-
     /* Cache data */
 
     if (configHtml.env.cache && !isBuild) {
@@ -207,7 +198,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
     setShortcodes(configHtml.shortcodes)
 
     const allData = await getAllContentfulData()
-    const output = await render({ allData })
+    const output = configHtml.env.prod ? [{ slug: '/', output: await ComingSoonHtml() }] : await render({ allData })
 
     /* Data json, serverless and redirect files */
 
