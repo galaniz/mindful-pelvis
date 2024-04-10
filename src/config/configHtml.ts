@@ -255,6 +255,14 @@ const configHtmlVars: ConfigVars = {
       'Gray Light': 'foreground-base-fade',
       'Orange Light': 'secondary-base-fade',
       'Blue Light': 'primary-base-fade'
+    },
+    blobs: {
+      None: 999,
+      'Preset One': 0,
+      'Preset Two': 1,
+      'Preset Three': 2,
+      'Preset Four': 3,
+      'Preset Five': 4
     }
   }
 }

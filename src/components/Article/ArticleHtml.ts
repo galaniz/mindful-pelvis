@@ -175,7 +175,7 @@ const ArticleHtml = async (args: ArticleArgs): Promise<string> => {
   /* Output */
 
   const output = navOutput + contentOutput
-  const classes = 'l-pt-s l-pt-m-m l-pb-xl l-pb-2xl-m'
+  const classes = 'l-pb-xl l-pb-2xl-m'
 
   if (hasNav) {
     return `

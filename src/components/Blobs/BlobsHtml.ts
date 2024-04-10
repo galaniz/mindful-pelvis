@@ -6,6 +6,7 @@
 
 import type { BlobArgs } from '../../svg/Blob/BlobHtmlTypes'
 import { BlobSvgHtml } from '../../svg/Blob/BlobHtml'
+import { configHtmlVars } from '../../config/configHtml'
 
 /**
  * Blob presets
@@ -108,13 +109,14 @@ const _blobPresets: BlobArgs[][] = [
 /**
  * Function - output blobs
  *
- * @param {number} [preset=0]
+ * @param {string} [preset=None]
  * @return {string}
  */
-const BlobsHtml = (preset: number = 0): string => {
+const BlobsHtml = (preset: string = 'None'): string => {
   /* Preset */
 
-  const blobs = _blobPresets[preset]
+  const presetIndex = configHtmlVars.options.blobs[preset]
+  const blobs = _blobPresets[presetIndex]
 
   if (blobs === undefined) {
     return ''

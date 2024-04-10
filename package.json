@@ -5,6 +5,7 @@
   "main": "index.njk",
   "scripts": {
     "start": "concurrently \"npx tsc --watch --project tsconfig.json\" \"npx @11ty/eleventy --serve\" \"npx stylelint 'src/**/*.scss'\" \"npx ts-standard\"",
+    "serve": "serve ./site/",
     "build": "npx tsc --project tsconfig.json && npx @11ty/eleventy",
     "debug": "DEBUG=* npx @11ty/eleventy",
     "lint": "npx ts-standard 'src/**/*.ts' && npx stylelint 'src/**/*.scss'"
@@ -26,7 +27,7 @@
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.1",
     "@alanizcreative/formation": "^5.1.0-beta.6",
-    "@alanizcreative/static-site-formation": "^1.3.0-beta.8",
+    "@alanizcreative/static-site-formation": "^1.3.0-beta.9",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@miniflare/tre": "^3.0.0-next.14",
     "@types/html-minifier": "^4.0.5",
@@ -42,9 +43,9 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.35",
     "postcss-modules": "^6.0.0",
-    "puppeteer": "^22.4.1",
     "safe-json-stringify": "^1.2.0",
     "sass": "^1.71.1",
+    "serve": "^14.2.1",
     "stylelint": "^16.2.1",
     "stylelint-config-standard-scss": "^13.0.0",
     "ts-standard": "^12.0.2",

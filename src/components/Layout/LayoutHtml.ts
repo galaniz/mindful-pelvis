@@ -17,7 +17,7 @@ import { FooterHtml } from '../Footer/FooterHtml'
 import { HeroHtml } from '../Hero/HeroHtml'
 import { ArticleHtml } from '../Article/ArticleHtml'
 import { BackLinkHtml } from '../../objects/BackLink/BackLinkHtml'
-// import { BlobsHtml } from '../Blobs/BlobsHtml'
+import { BlobsHtml } from '../Blobs/BlobsHtml'
 
 /**
  * Function - output html
@@ -49,6 +49,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
     showHeader = true,
     showFooter = true,
     showHero = true,
+    blobs,
     heroType,
     heroText,
     heroImage,
@@ -201,9 +202,7 @@ const LayoutHtml = async (args: LayoutArgs): Promise<string> => {
 
   /* Blobs */
 
-  // let blobsOutput = BlobsHtml()
-
-  const blobsOutput = ''
+  const blobsOutput = BlobsHtml(blobs)
 
   /* Script data */
 

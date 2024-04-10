@@ -5,16 +5,18 @@
 /* Imports */
 
 import type { HttpErrorText } from './HttpErrorHtmlTypes'
+import type { RenderItem } from '@alanizcreative/static-site-formation/iop/render/renderTypes'
 import { renderInlineItem } from '@alanizcreative/static-site-formation/iop/render/renderInline'
 import { getPermalink } from '@alanizcreative/static-site-formation/iop/utils/utils'
 
 /**
  * Function - output http error page (404 or 500)
  *
- * @param {number} type - 404 or 500
- * @return {string} HTML - html
+ * @param {number} [type] - 404 or 500
+ * @param {boolean} [returnData]
+ * @return {Promise<import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderItem|string>} HTML - html
  */
-const HttpErrorHtml = async (type: number = 404): Promise<string> => {
+const HttpErrorHtml = async (type: number = 404, returnData: boolean = false): Promise<RenderItem | string> => {
   /* Text by type */
 
   const text: HttpErrorText = {
@@ -30,12 +32,12 @@ const HttpErrorHtml = async (type: number = 404): Promise<string> => {
 
   const title: string = text[type].metaTitle
   const heroText: string = text[type].heroText
-  const slug = `${type}`
+  const slug = `${type}${type === 404 ? '.html' : ''}`
   const id = `http-error-${type}`
 
-  /* Output */
+  /* Data */
 
-  return await renderInlineItem({
+  const data = {
     id,
     slug,
     meta: {
@@ -43,6 +45,7 @@ const HttpErrorHtml = async (type: number = 404): Promise<string> => {
       noIndex: true
     },
     contentType: 'page',
+    showHeader: false,
     content: [
       {
         renderType: 'container',
@@ -76,7 +79,15 @@ const HttpErrorHtml = async (type: number = 404): Promise<string> => {
         ]
       }
     ]
-  })
+  }
+
+  /* Output */
+
+  if (returnData) {
+    return data
+  }
+
+  return await renderInlineItem(data)
 }
 
 /* Exports */

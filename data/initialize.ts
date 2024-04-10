@@ -22,6 +22,7 @@ import {
   writeRedirectsFile,
   isStringStrict,
   isObject,
+  isArray,
   setFilters,
   setActions,
   setShortcodes,
@@ -29,8 +30,7 @@ import {
 } from '@alanizcreative/static-site-formation/iop/utils/utilsAll'
 import { configHtml, configHtmlVars } from '../src/config/configHtml'
 import { FeedHtmlBuild } from '../src/objects/Feed/FeedHtmlBuild'
-import { HttpErrorHtml } from '../src/pages/HttpError/HttpErrorHtml'
-import { ComingSoonHtml } from '../src/pages/ComingSoon/ComingSoonHtml'
+import { pagesHtml } from '../src/pages/pagesHtml'
 
 /* Eleventy init */
 
@@ -192,23 +192,12 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
 
     /* Render output */
 
-    const comingSoon = configHtml.env.prod
-
     setFilters(configHtml.filters)
     setActions(configHtml.actions)
     setShortcodes(configHtml.shortcodes)
 
-    const allData = await getAllContentfulData()
-
-    if (comingSoon && allData !== undefined) {
-      allData.content = {
-        page: [
-          ComingSoonHtml()
-        ]
-      }
-    }
-
-    const output = await render({ allData })
+    const cmsOutput = configHtml.env.prod ? [] : await render({ allData: await getAllContentfulData() })
+    const staticOutput = await pagesHtml()
 
     /* Data json, serverless and redirect files */
 
@@ -224,15 +213,11 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
 
     /* Output */
 
-    if (Array.isArray(output)) {
-      if (isBuild) {
-        output.push({
-          slug: '404.html',
-          output: await HttpErrorHtml(404)
-        })
-      }
-
-      return output
+    if (isArray(cmsOutput) && isArray(staticOutput)) {
+      return [
+        ...cmsOutput,
+        ...staticOutput
+      ]
     }
 
     return [{

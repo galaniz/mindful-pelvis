@@ -4,7 +4,7 @@
 
 /* Imports */
 
-import type { GenericStrings } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
+import type { GenericNumbers, GenericStrings } from '@alanizcreative/static-site-formation/iop/global/globalTypes'
 
 /**
  * @typedef {import('@alanizcreative/static-site-formation/iop/global/globalTypes').GenericStrings} GenericStrings
@@ -96,6 +96,7 @@ export interface ConfigOptions {
     type: GenericStrings
   }
   color: GenericStrings
+  blobs: GenericNumbers
 }
 
 /**

@@ -161,7 +161,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
 
   if (overlap) {
     return `
-      <section class="c-hero-overlap l-container l-flex l-col l-row-l l-pb-m-l">
+      <section class="c-hero-overlap l-container l-flex l-col l-row-l l-pb-m-l l-mb-m l-mb-l-l">
         <div class="c-hero-overlap__text bg-${overlapBg} t-light l-shrink-0 l-relative l-z-index-1 l-col-12 l-col-10-m l-col-7-l l-pt-2xs l-px-xs l-pb-xs l-pt-s-m l-px-m-m l-pb-m-m">
           ${textOutput}
         </div>
@@ -177,7 +177,7 @@ const HeroHtml = async (args: HeroArgs): Promise<string> => {
   const center = contentType === 'post' || contentType === 'service' || archive === 'post'
 
   return `
-    <section class="l-pt-m${!isImageMin ? ' l-pt-xl-l' : ''}">
+    <section class="l-py-m l-pb-l-l${!isImageMin ? ' l-pt-xl-l' : ''}">
       <div class="l-container${center ? ' t-align-center' : ''}">
         ${imageMinOutput}
         ${textOutput}

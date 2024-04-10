@@ -11,7 +11,10 @@ import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
 /**
  * @typedef Item
  * @type {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderItem}
- * @prop {boolean} [pagination]
+ * @prop {boolean} [showHeader]
+ * @prop {boolean} [showFooter]
+ * @prop {boolean} [showHero]
+ * @prop {string} [blobs]
  * @prop {string} [heroTitle]
  * @prop {string} [heroText]
  * @prop {import('@alanizcreative/static-site-formation/iop/render/renderTypes').RenderFile} [heroImage]
@@ -26,6 +29,10 @@ import type { ImageMinimalData } from '../objects/Image/ImageHtmlTypes'
  * @prop {string} [archive]
  */
 export interface Item extends RenderItem {
+  showHeader?: boolean
+  showFooter?: boolean
+  showHero?: boolean
+  blobs?: string
   heroTitle?: string
   heroText?: string
   heroImage?: RenderFile
