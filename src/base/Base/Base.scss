@@ -4,14 +4,14 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-html,
-body {
+  background: var(--background-base);
   font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-snug);
   font-family: var(--font-primary);
   color: var(--text-color);
-  background: var(--background-base);
+}
+
+body {
   min-height: 100vh;
 }
 

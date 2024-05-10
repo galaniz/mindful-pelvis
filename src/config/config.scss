@@ -39,6 +39,9 @@ $gaps: (
   "xs",
   "s",
   "m",
+  "l",
+  "xl",
+  "2xl",
 );
 
 /* Config variables */
@@ -69,10 +72,10 @@ $gaps: (
       "light": "30, 48%, 98%",
     ),
     "negative": (
-      "dark": "0, 28%, 44%", // #8e5050
+      "base": "0, 28%, 44%", // #8e5050
     ),
     "positive": (
-      "dark": "94, 20%, 33%", // #536644
+      "base": "94, 20%, 33%", // #536644
     ),
   ),
 
@@ -153,8 +156,8 @@ $gaps: (
     "xl": 90px,
     "2xl": 120px,
     "3xl": 150px,
-    "4xl": 300px,
-    "5xl": 360px
+    "4xl": 210px,
+    "5xl": 300px,
   ),
 
   /* Padding */
@@ -206,7 +209,7 @@ $gaps: (
     "3xl",
   ),
 
-  $max-widths: ("4xl", "5xl"),
+  $max-widths: ("5xl"),
 
   /* Heights */
 
@@ -220,7 +223,10 @@ $gaps: (
     "xl",
     "2xl",
     "3xl",
+    "4xl",
   ),
+
+  $height-breakpoints: ("s"),
 
   /* Containers */
 

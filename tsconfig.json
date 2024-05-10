@@ -1,18 +1,9 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "strict": true
-  },
-  "include": [
-    "**/*.ts",
-    ".eleventy.ts"
-  ],
-  "exclude": [
-    "./site",
-    "node_modules"
-  ]
+  }
 }

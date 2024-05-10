@@ -16,6 +16,7 @@
   --line-width: var(--border-width);
   --tog-margin: var(--2xs) 0;
   --nav-top: 0;
+  --nav-bottom: var(--xs);
 
   @include util.breakpoint-min("l") {
     --body-right: auto;
@@ -23,6 +24,7 @@
     --line-width: 0;
     --tog-padding: 0 0 var(--2xs);
     --nav-top: var(--m);
+    --nav-bottom: 0;
 
     [data-collapsible-source=""] [data-collapsible-main] {
       --delay: 0ms;
@@ -44,6 +46,10 @@
 
   [data-collapsible-main] {
     --outline-offset: -0.2rem;
+  }
+
+  ul {
+    margin-bottom: var(--nav-bottom);
   }
 }
 
@@ -71,5 +77,5 @@
 }
 
 .c-article__end {
-  height: 0.0625rem;
+  height: 0.063rem;
 }

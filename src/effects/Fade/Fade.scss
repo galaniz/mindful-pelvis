@@ -1,0 +1,13 @@
+/**
+ * Effects - Fade Styles
+ */
+
+.e-fade {
+  --opacity: 1;
+
+  opacity: var(--opacity);
+
+  &:hover {
+    --opacity: 0.75;
+  }
+}

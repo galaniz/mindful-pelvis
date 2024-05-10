@@ -17,6 +17,7 @@
   --bg: var(--foreground-dark);
   --scale: 0;
 
+  text-decoration: none;
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-snug);
@@ -68,11 +69,17 @@
   --color: var(--secondary-dark);
 }
 
+.o-button-secondary[data-theme="tertiary"] {
+  --bg: var(--foreground-light);
+  --color: var(--foreground-base);
+}
+
 .o-button-secondary[data-theme="light"] {
   --bg: var(--background-light);
   --color: var(--background-light);
 }
 
+.o-button-secondary[data-theme="tertiary"],
 .o-button-secondary[data-theme="dark"],
 .o-button-secondary[data-theme="light"] {
   --opacity: 0.08;
@@ -88,6 +95,10 @@
 
 .o-button-main[data-theme="secondary"] {
   --bg: var(--secondary-dark);
+}
+
+.o-button-main[data-theme="tertiary"] {
+  --bg: var(--foreground-light);
 }
 
 .o-button-large {
