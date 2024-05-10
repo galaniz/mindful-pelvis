@@ -35,7 +35,7 @@
   }
 
   &[data-nav-overflow="true"] {
-    --cta-border-color: var(--foreground-base-fade);
+    --cta-border-color: var(--foreground-light-fade);
     --cta-bg: var(--background-base);
     --cta-color: var(--foreground-base);
     --cta-delay: 250ms;
@@ -95,6 +95,10 @@
     border-top: var(--border-width) solid var(--border-color);
     opacity: var(--item-opacity);
 
+    &[data-cta] {
+      margin: var(--4xs) 0;
+    }
+
     &[data-cta]:last-child,
     &:first-child {
       --border-color: transparent;
@@ -132,6 +136,7 @@
   
     &:hover,
     &[data-current="true"],
+    &[data-archive-current="true"],
     &[data-descendent-current="true"],
     [data-collapsible-expanded="true"] & {
       --scale: 1;
@@ -170,7 +175,6 @@
 .c-nav__button {
   --outline-color: var(--btn-color);
 
-  z-index: 2;
   color: var(--btn-color);
 }
 
@@ -182,6 +186,11 @@
 .c-nav-icon-label {
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+[data-tf-tabindex] {
+  pointer-events: none;
+  user-select: none;
 }
 
 /* Overflow - home link */

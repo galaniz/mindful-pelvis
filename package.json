@@ -4,8 +4,9 @@
   "description": "Static site for The Mindful Pelvis",
   "main": "index.njk",
   "scripts": {
-    "start": "concurrently \"npx tsc --watch --project tsconfig.json\" \"npx @11ty/eleventy --serve\" \"npx stylelint 'src/**/*.scss'\" \"npx ts-standard\"",
-    "build": "npx tsc --project tsconfig.json && npx @11ty/eleventy",
+    "start": "concurrently \"npx tsc --watch --project tsconfig.browser.json\" \"npx tsc --watch --project tsconfig.node.json\" \"npx @11ty/eleventy --serve\" \"npx stylelint 'src/**/*.scss'\" \"npx ts-standard\"",
+    "serve": "serve ./site/",
+    "build": "npx tsc --project tsconfig.browser.json && npx tsc --project tsconfig.node.json && npx @11ty/eleventy",
     "debug": "DEBUG=* npx @11ty/eleventy",
     "lint": "npx ts-standard 'src/**/*.ts' && npx stylelint 'src/**/*.scss'"
   },
@@ -25,8 +26,8 @@
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.1",
-    "@alanizcreative/formation": "^5.1.0-beta.6",
-    "@alanizcreative/static-site-formation": "^1.3.0-beta.8",
+    "@alanizcreative/formation": "^5.1.0-beta.7",
+    "@alanizcreative/static-site-formation": "^1.3.0-beta.10",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@miniflare/tre": "^3.0.0-next.14",
     "@types/html-minifier": "^4.0.5",
@@ -39,12 +40,11 @@
     "esbuild": "^0.20.1",
     "esbuild-sass-plugin": "^3.1.0",
     "html-minifier": "^4.0.0",
-    "normalize.css": "^8.0.1",
     "postcss": "^8.4.35",
     "postcss-modules": "^6.0.0",
-    "puppeteer": "^22.4.1",
     "safe-json-stringify": "^1.2.0",
     "sass": "^1.71.1",
+    "serve": "^14.2.1",
     "stylelint": "^16.2.1",
     "stylelint-config-standard-scss": "^13.0.0",
     "ts-standard": "^12.0.2",
@@ -52,6 +52,6 @@
     "wrangler": "^3.32.0"
   },
   "browserslist": [
-    "edge 16"
+    "> 0.5%"
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "strict": true
+  },
+  "include": [
+    "**/*Browser.ts",
+    "**/*BrowserTypes.ts"
+  ],
+  "exclude": [
+    "./site",
+    "node_modules"
+  ]
+}

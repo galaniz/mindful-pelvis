@@ -1,0 +1,15 @@
+/**
+ * Objects - Form Select Styles
+ */
+
+.o-form__select {
+  select {
+    padding-right: var(--s);
+  }
+
+  [data-select-icon] {
+    position: absolute;
+    right: var(--input-x);
+    bottom: 1.1rem;
+  }
+}

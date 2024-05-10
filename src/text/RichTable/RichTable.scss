@@ -2,17 +2,66 @@
  * Text - Rich Table Styles
  */
 
+/* Imports */
+
+@use "@alanizcreative/formation/lib/utils/utils" as util;
+
+/* Styles */
+
 .t-rich-table {
+  --border: var(--underline) solid var(--border-color);
+  --border-right: var(--border);
+  --border-bottom: var(--border);
+  --padding: var(--3xs);
+  --opacity: 0.05;
+
+  p {
+    margin-bottom: var(--4xs);
+    line-height: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
   th {
-    line-height: var(--line-height-snug);
+    font-size: var(--t-r);
     font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
     color: var(--sharp-color);
+    text-align: left;
+  }
+
+  td {
+    font-size: var(--t-m);
+    line-height: var(--line-height-open);
   }
 
   th,
   td {
-    padding: var(--2xs);
+    padding: var(--padding);
     vertical-align: top;
     min-width: var(--3xl);
+    border-right: var(--border-right);
+    border-bottom: var(--border-bottom);
+
+    &:last-child {
+      --border-right: none;
+    }
+  }
+
+  tr {
+    background: hsla(var(--foreground-light-hsl), var(--opacity));
+
+    &:nth-child(even) {
+      --opacity: 0.1;
+    }
+
+    &:last-child {
+      --border-bottom: none;
+    }
+  }
+
+  @include util.breakpoint-min("m") {
+    --padding: var(--2xs);
   }
 }

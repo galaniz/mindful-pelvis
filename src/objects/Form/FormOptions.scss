@@ -1,0 +1,69 @@
+/**
+ * Objects - Form Options Styles
+ */
+
+.o-form__options {
+  --border-radius: var(--5xs);
+  --input-background: transparent;
+  --control-color: transparent;
+
+  &[data-type="radio"] {
+    --border-radius: 100%;
+  }
+
+  [data-option-field] {
+    margin-bottom: var(--4xs);
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  [data-option] {
+    display: flex;
+  }
+
+  [data-label] {
+    margin: var(--5xs) var(--4xs) 0;
+  }
+
+  [data-error-text] {
+    margin-top: var(--5xs);
+  }
+
+  [data-control] {
+    width: var(--xs);
+    height: var(--xs);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: var(--input-background);
+    display: flex;
+    order: -1;
+
+    svg {
+      color: var(--control-color);
+      padding: 0.125rem;
+    }
+
+    &[data-type="radio"]::after {
+      content: "";
+      width: var(--4xs);
+      height: var(--4xs);
+      background: var(--background);
+      border-radius: 100%;
+      margin: auto;
+    }
+  }
+
+  input:checked ~ label {
+    --input-background: var(--outline-color);
+    --border-color: var(--outline-color);
+    --control-color: var(--background);
+  }
+
+  input:focus ~ label [data-control] {
+    box-shadow:
+      inset 0 0 0 0.09rem var(--outline-color),
+      inset 0 0 0 0.21rem var(--background);
+  }
+}

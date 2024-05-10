@@ -53,6 +53,7 @@
 
 .c-hero-overlap__text {
   margin: var(--text-top) var(--text-right) var(--text-bottom) auto;
+  width: calc(var(--col-width) + var(--container-padding));
 }
 
 /* Minimal */
@@ -63,4 +64,10 @@
     util.calc-rem(350px) util.calc-rem(500px),
     "s" "l"
   );
+}
+
+/* Figure */
+
+.c-hero-figure {
+  max-width: util.calc-rem(360px);
 }

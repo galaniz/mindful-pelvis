@@ -62,7 +62,7 @@
 /* Flow - trigger overflow in row */
 
 .c-nav__flow::before {
-  height: 0.0625rem;
+  height: 0.063rem;
   display: var(--flow);
   min-width: calc(var(--logo-width) + var(--half) + var(--gap) * 2);
   z-index: -1;

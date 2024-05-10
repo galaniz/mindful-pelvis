@@ -2,7 +2,7 @@ node_modules/
 package-lock.json
 site/
 functions/
-data/initialize.js
+data/*.js
 src/json/**/*.json
 src/**/*.js
 src/assets/img/instagram-feed/
