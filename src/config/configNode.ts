@@ -410,7 +410,40 @@ const configNode: Config = setConfig({
     richTextProps: RichTextNode,
     richTextOutput: RichTextOutputNode,
     richTextContentItem: RichTextContentItemNode,
-    richTextContent: RichTextContentNode
+    richTextContent: RichTextContentNode,
+    storeData: async (data, type) => {
+      if (type === 'archiveMeta') {
+        const { default: archiveMeta } = await import('../../store/archive-meta.json')
+        return archiveMeta
+      }
+
+      if (type === 'formMeta') {
+        const { default: formMeta } = await import('../../store/form-meta.json')
+        return formMeta
+      }
+
+      if (type === 'navigationItems') {
+        const { default: navigationItems } = await import('../../store/navigation-items.json')
+        return navigationItems
+      }
+
+      if (type === 'navigations') {
+        const { default: navigations } = await import('../../store/navigations.json')
+        return navigations
+      }
+
+      if (type === 'parents') {
+        const { default: parents } = await import('../../store/parents.json')
+        return parents
+      }
+
+      if (type === 'slugs') {
+        const { default: slugs } = await import('../../store/slugs.json')
+        return slugs
+      }
+
+      return data
+    }
   },
   actions: {
     renderItemStart: async ({ pageData }) => {

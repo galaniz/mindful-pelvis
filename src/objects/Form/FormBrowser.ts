@@ -143,6 +143,7 @@ const FormBrowser = (): void => {
         inputs,
         submit,
         loaders,
+        encode: 'json',
         groupClass: 'js-group',
         fieldClass: 'js-field',
         labelClass: 'js-label',
