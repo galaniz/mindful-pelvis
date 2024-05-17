@@ -65,6 +65,7 @@ export type ImageMinimalData = RenderFile & ImageProps['args'] & { renderType: s
  * @prop {string} [imageContainerClasses]
  * @prop {string} [background]
  * @prop {boolean} [includeTheme=false]
+ * @prop {number} [maxWidth]
  */
 export interface ImageMinimalArgs {
   image?: ImageMinimalData
@@ -77,6 +78,7 @@ export interface ImageMinimalArgs {
   imageContainerClasses?: string
   background?: string
   includeTheme?: boolean
+  maxWidth?: number
 }
 
 /**

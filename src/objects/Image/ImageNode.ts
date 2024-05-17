@@ -7,6 +7,8 @@
 import type { ImageProps } from './ImageNodeTypes'
 import {
   getImage,
+  getImageClosestSize,
+  getImageMaxWidth,
   isString,
   addScriptStyle,
   isStringStrict,
@@ -30,7 +32,7 @@ const ImageNode = async (props: ImageProps): Promise<string> => {
     return ''
   }
 
-  const { args } = props
+  const { args, parents } = props
 
   if (!isObjectStrict(args)) {
     return ''
@@ -71,14 +73,45 @@ const ImageNode = async (props: ImageProps): Promise<string> => {
   if (image !== undefined) {
     const imageClasses = ['l-absolute l-top-0 l-left-0 l-wd-full l-ht-full l-object-cover']
 
-    let imageMaxWidth = maxWidth
+    let imageMaxWidth = isNumber(maxWidth) ? maxWidth : 0
 
-    if (imageMaxWidth === undefined) {
+    if (parents !== undefined) {
+      imageMaxWidth = getImageMaxWidth({
+        parents,
+        source,
+        widths: {
+          None: 0,
+          '1/1': 1,
+          '5/6': 0.8333,
+          '3/4': 0.75,
+          '2/3': 0.6667,
+          '3/5': 0.6,
+          '1/2': 0.5,
+          '2/5': 0.4,
+          '1/3': 0.3333,
+          '1/4': 0.25,
+          '1/6': 0.1666
+        },
+        maxWidths: {
+          None: 0,
+          '1300px': 1300,
+          '1160px': 1160,
+          '800px': 800
+        },
+        breakpoints: [0, 600, 900, 1200]
+      })
+    }
+
+    if (imageMaxWidth === 0) {
       imageMaxWidth = 1600
     }
 
     if (isNumber(width2x)) {
       imageMaxWidth = width2x
+    }
+
+    if (source === 'static' && imageMaxWidth > 0) {
+      imageMaxWidth = getImageClosestSize(imageMaxWidth)
     }
 
     const imageRes = getImage({

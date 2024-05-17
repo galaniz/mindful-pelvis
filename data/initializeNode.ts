@@ -53,6 +53,7 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
 
     configNode.actions.renderStart = async () => {
       configNodeVars.css.cache = ''
+      configNodeVars.css.safelist = []
     }
 
     /* Build styles and scripts */
@@ -140,7 +141,8 @@ module.exports = async (args: any): Promise<RenderReturn[]> => {
               ],
               safelist: [
                 ':focus',
-                ':focus-visible'
+                ':focus-visible',
+                ...configNodeVars.css.safelist
               ],
               dynamicAttributes: [
                 'data-stop-scroll'

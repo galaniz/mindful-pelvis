@@ -27,7 +27,7 @@ const FeedNode: Feed = async (args, data) => {
 
   /* Images data */
 
-  const imagesData: ImagesStore | undefined = await getJsonFile(getPath('image', 'data'))
+  const imagesData: ImagesStore | undefined = await getJsonFile(getPath('image', 'data'), false)
 
   if (imagesData === undefined) {
     return ''
@@ -57,7 +57,7 @@ const FeedNode: Feed = async (args, data) => {
 
   /* Feed posts */
 
-  data = data === undefined ? await getJsonFile(getPath('instagramFeed', 'store')) : data
+  data = data === undefined ? await getJsonFile('instagramFeed') : data
 
   if (data === undefined) {
     return ''
@@ -75,7 +75,8 @@ const FeedNode: Feed = async (args, data) => {
             args: {
               image: imagesData[src],
               aspectRatio: '1:1',
-              source: 'static'
+              source: 'static',
+              maxWidth: 500
             }
           })}
         </a>

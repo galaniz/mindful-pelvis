@@ -120,6 +120,7 @@ const _Card = async ({
                 image: heroImageMinimal,
                 containerClasses: 'l-wd-full l-z-index--1 l-mt-auto',
                 imageContainerClasses: 'l-mw-5xl l-mr-auto l-ml-auto',
+                maxWidth: 600,
                 background
               })
             }

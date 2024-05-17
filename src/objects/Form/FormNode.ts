@@ -86,6 +86,14 @@ const FormNode: FormPropsFilter = async (props) => {
     script: 'FormBrowser'
   })
 
+  configNodeVars.css.safelist.push(
+    'l-gap-5xs',
+    'l-wd-2xs',
+    'l-ht-2xs',
+    't-s',
+    't-ht-snug'
+  )
+
   /* Output */
 
   args.errorSummary = errorSummary

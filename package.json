@@ -27,7 +27,7 @@
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.1",
     "@alanizcreative/formation": "^5.1.0-beta.7",
-    "@alanizcreative/static-site-formation": "^1.3.0-beta.10",
+    "@alanizcreative/static-site-formation": "^1.3.0-beta.11",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@miniflare/tre": "^3.0.0-next.14",
     "@types/html-minifier": "^4.0.5",
