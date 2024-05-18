@@ -16,12 +16,14 @@ import { configNodeVars } from '../../config/configNode'
 const ContainerNode: ContainerPropsFilter = async (props) => {
   /* Props */
 
-  const {
+  let {
     args,
     parents
   } = props // Skip check as filter always passes object
 
   /* Args */
+
+  args = isObjectStrict(args) ? { ...args } : {}
 
   let {
     tag = 'Div',
@@ -38,7 +40,7 @@ const ContainerNode: ContainerPropsFilter = async (props) => {
     classes = '',
     attr = '',
     nest = false
-  } = isObjectStrict(args) ? args : {}
+  } = args
 
   /* Normalize options */
 
@@ -127,6 +129,8 @@ const ContainerNode: ContainerPropsFilter = async (props) => {
   args.classes = classes
   args.attr = attr
   args.nest = nest
+
+  props.args = args
 
   return props
 }

@@ -105,7 +105,8 @@ const _MediaText = async ({ item, headingLevel, contentType }: MediaTextArgs): P
               renderType: 'fragment',
               content: await ImageMinimalNode({
                 image: heroImageMinimal,
-                containerClasses: 'l-wd-full l-z-index--1'
+                containerClasses: 'l-wd-full l-z-index--1',
+                maxWidth: 700
               })
             }
           ]

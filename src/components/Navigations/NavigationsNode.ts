@@ -153,7 +153,7 @@ const NavigationsNode: NavigationsNodeObj = (args) => {
           if (_isButtonDropdown(item, depth)) {
             collapsibleId = uuid()
             newLinkAttr = `aria-expanded="false" aria-controls="${collapsibleId}"`
-            newLinkClass += ' o-collapsible__toggle e-trans'
+            newLinkClass += ' o-collapsible__toggle e-trans outline-snug'
             newListType = 'cta'
             newItemAttr.push('data-cta')
           }

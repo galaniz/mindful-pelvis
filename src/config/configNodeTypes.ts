@@ -101,6 +101,7 @@ export interface ConfigOptions {
  * @prop {string} css.out
  * @prop {string} css.head
  * @prop {string} css.cache
+ * @prop {string[]} css.safelist
  * @prop {GenericStrings} css.static
  * @prop {object} js
  * @prop {string} js.in
@@ -124,6 +125,7 @@ export interface ConfigVars {
     out: string
     head: string
     cache: string
+    safelist: string[]
     static: GenericStrings
   }
   js: {

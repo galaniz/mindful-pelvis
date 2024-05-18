@@ -14,7 +14,9 @@ import { configNodeVars } from '../../config/configNode'
  * @type {ColumnPropsFilter}
  */
 const ColumnNode: ColumnPropsFilter = async (props) => {
-  const { args } = props // Skip check as filter always passes object
+  let { args } = props // Skip check as filter always passes object
+
+  args = isObjectStrict(args) ? { ...args } : {}
 
   let {
     tag = 'Div',
@@ -27,7 +29,7 @@ const ColumnNode: ColumnPropsFilter = async (props) => {
     order = 'Default',
     grow = false,
     classes = ''
-  } = isObjectStrict(args) ? args : {}
+  } = args
 
   /* Normalize options */
 
@@ -85,6 +87,8 @@ const ColumnNode: ColumnPropsFilter = async (props) => {
   args.justify = jst ? `l-justify-${justify}` : ''
   args.align = aln ? `l-align-${align}` : ''
   args.classes = classesArr.join(' ')
+
+  props.args = args
 
   return props
 }

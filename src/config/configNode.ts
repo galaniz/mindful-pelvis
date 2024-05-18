@@ -64,6 +64,7 @@ const configNodeVars: ConfigVars = {
     out: 'css/global/global',
     head: '',
     cache: '',
+    safelist: [],
     static: {
       'css/global/globalNoJs': 'src/global/globalNoJs.scss',
       'css/global/globalGapFallback': 'src/global/globalGapFallback.scss'
@@ -410,7 +411,46 @@ const configNode: Config = setConfig({
     richTextProps: RichTextNode,
     richTextOutput: RichTextOutputNode,
     richTextContentItem: RichTextContentItemNode,
-    richTextContent: RichTextContentNode
+    richTextContent: RichTextContentNode,
+    storeData: async (data, type) => {
+      if (type === 'archiveMeta') {
+        // @ts-expect-error
+        const { default: archiveMeta } = await import('../store/archive-meta.json')
+        return archiveMeta
+      }
+
+      if (type === 'formMeta') {
+        // @ts-expect-error
+        const { default: formMeta } = await import('../store/form-meta.json')
+        return formMeta
+      }
+
+      if (type === 'navigationItems') {
+        // @ts-expect-error
+        const { default: navigationItems } = await import('../store/navigation-items.json')
+        return navigationItems
+      }
+
+      if (type === 'navigations') {
+        // @ts-expect-error
+        const { default: navigations } = await import('../store/navigations.json')
+        return navigations
+      }
+
+      if (type === 'parents') {
+        // @ts-expect-error
+        const { default: parents } = await import('../store/parents.json')
+        return parents
+      }
+
+      if (type === 'slugs') {
+        // @ts-expect-error
+        const { default: slugs } = await import('../store/slugs.json')
+        return slugs
+      }
+
+      return data
+    }
   },
   actions: {
     renderItemStart: async ({ pageData }) => {

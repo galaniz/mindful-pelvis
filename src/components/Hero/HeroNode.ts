@@ -64,7 +64,8 @@ const HeroNode = async (args: HeroArgs): Promise<string> => {
       assetClasses: 'l-m-auto',
       assetContainerClasses: 'l-pb-xs l-pb-s-m',
       imageContainerClasses: 'c-hero-figure l-pb-s l-pb-m-m l-m-auto',
-      includeTheme: true
+      includeTheme: true,
+      maxWidth: 720
     })
   }
 

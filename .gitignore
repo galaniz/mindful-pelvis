@@ -3,7 +3,7 @@ package-lock.json
 site/
 functions/
 data/*.js
-src/json/**/*.json
+src/store/**/*.json
 src/**/*.js
 src/assets/img/instagram-feed/
 .DS_Store

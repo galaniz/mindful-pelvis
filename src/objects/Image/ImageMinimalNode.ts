@@ -5,7 +5,7 @@
 /* Imports */
 
 import type { ImageMinimal, ImageProps } from './ImageNodeTypes'
-import { isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
+import { isNumber, isObjectStrict, isStringStrict } from '@alanizcreative/static-site-formation/iop/utils/utils'
 import { configNodeVars } from '../../config/configNode'
 import { ImageNode } from './ImageNode'
 
@@ -32,7 +32,8 @@ const ImageMinimalNode: ImageMinimal = async (args) => {
     imageContainerClasses,
     assetContainerClasses,
     includeTheme = false,
-    parents
+    parents,
+    maxWidth
   } = args
 
   let {
@@ -126,6 +127,12 @@ const ImageMinimalNode: ImageMinimal = async (args) => {
 
   if (innerClasses.length > 0) {
     props.args.classes = innerClasses.join(' ')
+  }
+
+  /* Max width */
+
+  if (isNumber(maxWidth)) {
+    props.args.maxWidth = maxWidth
   }
 
   /* Output */
